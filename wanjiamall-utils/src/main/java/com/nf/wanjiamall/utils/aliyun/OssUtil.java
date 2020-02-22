@@ -30,7 +30,7 @@ public class OssUtil {
 
     private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-");
     /**
-     * 获取OSS连接
+     * 获取OSS连接对象
      * @return
      */
     public OSSClient getOSSClient(){
