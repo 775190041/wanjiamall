@@ -92,10 +92,10 @@ public class OssUtil {
         return filename;
     }
 //    下列为测试代码
-//    public static void main(String[] args) throws IOException {
-//        File f = new File("E:\\qqbrowser\\QQ浏览器截图20200222111338.png");
-//        FileInputStream inputStream = new FileInputStream(f);
-//        MultipartFile multipartFile = new MockMultipartFile("QQ浏览器截图20200222111338.png","QQ浏览器截图20200222111338.png","png",inputStream);
-//        new OssUtil().uploadDocument(multipartFile,"imgs");
-//    }
+    public static void main(String[] args) throws IOException {
+        File f = new File("E:\\qqbrowser\\QQ浏览器截图20200222111338.png");
+        FileInputStream inputStream = new FileInputStream(f);
+        MultipartFile multipartFile = new MockMultipartFile("QQ浏览器截图20200222111338.png","QQ浏览器截图20200222111338.png","png",inputStream);
+        new OssUtil().uploadDocument(multipartFile,"imgs");
+    }
 }
