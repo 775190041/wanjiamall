@@ -93,7 +93,7 @@ public class OssUtil {
     }
 //    下列为测试代码
     public static void main(String[] args) throws IOException {
-        File f = new File("E:\\qqbrowser\\QQ浏览器截图20200222111338.png");
+        File f = new File("C:\\Users\\黑夜\\Pictures\\Camera Roll\\WIN_20190909_11_19_05_Pro.jpg");
         FileInputStream inputStream = new FileInputStream(f);
         MultipartFile multipartFile = new MockMultipartFile("QQ浏览器截图20200222111338.png","QQ浏览器截图20200222111338.png","png",inputStream);
         new OssUtil().uploadDocument(multipartFile,"imgs");
