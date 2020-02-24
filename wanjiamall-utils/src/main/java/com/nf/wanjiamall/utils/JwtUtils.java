@@ -1,4 +1,4 @@
-package com.nf.wanjiamall.utils.aliyun;
+package com.nf.wanjiamall.utils;
 
 import io.jsonwebtoken.*;
 
