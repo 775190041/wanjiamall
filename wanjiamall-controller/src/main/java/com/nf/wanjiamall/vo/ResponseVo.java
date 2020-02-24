@@ -1,6 +1,8 @@
 package com.nf.wanjiamall.vo;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 
 public class ResponseVo<T> {
     @ApiModelProperty("状态码 0失败 1成功 2未登录 3没有权限")
