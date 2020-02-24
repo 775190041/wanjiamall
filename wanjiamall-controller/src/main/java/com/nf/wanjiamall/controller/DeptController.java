@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author lzn
  */
 @Controller
-@Api(tags = "dept123")
+@Api(tags = "表名，dept ")
 public class DeptController {
 
     @Autowired
