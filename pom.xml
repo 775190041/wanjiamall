@@ -32,6 +32,13 @@
         <pagehelper.version>1.2.3</pagehelper.version>
         <swagger2.version>2.9.2</swagger2.version>
         <swagger2-ui.version>1.9.1</swagger2-ui.version>
+        <oss.version>2.2.1</oss.version>
+        <oas.version>0.2.5</oas.version>
+        <java-sdk-core.version>2.4.2</java-sdk-core.version>
+        <java-sdk-dysmsapi.version>1.0.0</java-sdk-dysmsapi.version>
+        <commons-lang3.version>3.6</commons-lang3.version>
+        <commons-configuration.version>1.10</commons-configuration.version>
+        <commons-io.version>2.5</commons-io.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -70,6 +77,55 @@
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>swagger-bootstrap-ui</artifactId>
                 <version>${swagger2-ui.version}</version>
+            </dependency>
+            <!--阿里云oss上传-->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>2.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun.oas</groupId>
+                <artifactId>aliyun-oas</artifactId>
+                <version>${oas.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${java-sdk-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+                <version>${java-sdk-dysmsapi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-configuration</groupId>
+                <artifactId>commons-configuration</artifactId>
+                <version>${commons-configuration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <!-- java开发jwt的依赖jar包，可以减化我们的操作 -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>0.9.1</version>
+            </dependency>
+
+            <!-- jwt核心依赖 -->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>3.3.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
