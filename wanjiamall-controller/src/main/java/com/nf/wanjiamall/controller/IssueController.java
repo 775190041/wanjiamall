@@ -22,7 +22,7 @@ import java.util.List;
 @Api(tags = "wanjia_issue")
 @RequestMapping("/api")
 public class IssueController {
-    //private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     @Autowired
     private IssueServiceImpl issueService;
 
