@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * mvc全局配置
+ * mvc全局配置！
  * @author sam
  */
 @Configuration
