@@ -1,8 +1,10 @@
 package com.nf.wanjiamall;
 
+import com.nf.wanjiamall.dao.DeptDao;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 /**
  * @author lzn
@@ -12,6 +14,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WanjiaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WanjiaApplication.class, args);
+        ApplicationContext context = SpringApplication.run(WanjiaApplication.class, args);
     }
 }
