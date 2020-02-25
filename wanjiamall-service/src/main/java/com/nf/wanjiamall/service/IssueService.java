@@ -11,7 +11,7 @@ import java.util.List;
 public interface IssueService {
     List<IssueEntity> issueEntities(int pageNum, int pageSize);
     IssueEntity getById(int id);
-    void insert(IssueEntity issueEntity);
+    boolean insert(IssueEntity issueEntity);
     boolean update(IssueEntity issueEntity);
-    void delete(int id);
+    boolean delete(int id);
 }

@@ -44,20 +44,25 @@ public class IssueController {
     @PostMapping("/issue")
     @ApiOperation("添加常见问题表")
     public ResponseVo issueInsert(IssueEntity issueEntity) throws ParseException {
-       /* issueEntity.setQuestion("111");
-        issueEntity.setAnswer("222");
-        issueEntity.setUpdateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-02-25"));
-        issueEntity.setAddTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-02-20"));*/
-        issueService.insert(issueEntity);
-        return new ResponseVo(1,"添加成功",true);
+       boolean result = issueService.insert(issueEntity);
+       if(result != false){
+           return new ResponseVo(1,"添加成功",true);
+       }else {
+           return new ResponseVo(0,"添加失败",false);
+       }
     }
 
 
     @PutMapping("/issue")
     @ApiOperation("修改常见问题表,传一个常见问题表的id过来")
     public ResponseVo issueUpdate(IssueEntity issueEntity){
-        boolean bool = issueService.update(issueEntity);
-        return new ResponseVo(1,"修改成功",true);
+        boolean result = issueService.update(issueEntity);
+        if(result != false){
+            return new ResponseVo(1,"修改成功",true);
+        }else {
+            return new ResponseVo(0,"修改失败",false);
+        }
+
     }
 
 
@@ -66,8 +71,13 @@ public class IssueController {
     @DeleteMapping("/issue")
     @ApiOperation("删除常见问题表")
     public ResponseVo issueDelete(int id){
-       issueService.delete(id);
-       return new ResponseVo(1,"删除成功",true);
+       boolean result = issueService.delete(id);
+       if (result != false){
+           return new ResponseVo(1,"删除成功",true);
+       }
+       else {
+           return new ResponseVo(0,"删除失败",false);
+       }
     }
 
 

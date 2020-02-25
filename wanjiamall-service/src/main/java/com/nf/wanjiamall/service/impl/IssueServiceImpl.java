@@ -19,8 +19,6 @@ public class IssueServiceImpl implements IssueService {
     @Autowired
     private IssueDao issueDao;
 
-
-
     @Override
     public List<IssueEntity> issueEntities(int pageNum, int pageSize) {
         List<IssueEntity> issueEntities = issueDao.issueEntities(pageNum, pageSize);
@@ -37,19 +35,18 @@ public class IssueServiceImpl implements IssueService {
 
 
     @Override
-    public void insert(IssueEntity issueEntity){
-        issueDao.insert(issueEntity);
+    public boolean insert(IssueEntity issueEntity){
+        return issueDao.insert(issueEntity) > 0 ? true:false;
     }
 
     @Override
     public boolean update(IssueEntity issueEntity) {
         return issueDao.update(issueEntity) > 0 ? true:false;
-
     }
 
     @Override
-    public void delete(int id) {
-        issueDao.delete(id);
+    public boolean delete(int id) {
+        return issueDao.delete(id) > 0 ? true:false;
     }
 
 }

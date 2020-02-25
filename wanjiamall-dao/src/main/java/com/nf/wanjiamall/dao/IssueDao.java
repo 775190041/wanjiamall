@@ -12,7 +12,7 @@ public interface IssueDao {
     List<IssueEntity> issueEntities(@Param("pageNum") int pageNum,
                                     @Param("pageSize") int pageSize);
     IssueEntity getById(int id);
-    void insert(IssueEntity issueEntity);
+    int insert(IssueEntity issueEntity);
     int update(IssueEntity issueEntity);
-    void delete(int id);
+    int delete(int id);
 }
