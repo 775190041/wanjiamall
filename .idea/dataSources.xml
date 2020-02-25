@@ -4,7 +4,7 @@
     <data-source source="LOCAL" name="dmldb@localhost" uuid="957e99c4-5f98-4ab7-b6be-ef4db50885d9">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/dmldb</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
@@ -15,10 +15,10 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="wanjiamall@localhost" uuid="0e89dfa1-b2c9-408c-9799-de62dcf9e63b">
+    <data-source source="LOCAL" name="wanjiamall@localhost" uuid="6aac3cb0-c760-446e-9de9-cd5e02e25fdf">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/wanjiamall</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
