@@ -5,7 +5,7 @@ import lombok.Data;
 
 
 public class ResponseVo<T> {
-    @ApiModelProperty("状态码 0失败 1成功 2未登录 3没有权限")
+    @ApiModelProperty("状态码 0失败 1成功 2未登录 3没有权限 ")
     private Integer code;
     @ApiModelProperty("返回信息")
     private String msg;
