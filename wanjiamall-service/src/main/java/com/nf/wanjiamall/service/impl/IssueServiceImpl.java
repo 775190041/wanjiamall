@@ -23,7 +23,7 @@ public class IssueServiceImpl implements IssueService {
     public List<IssueEntity> issueEntities(int pageNum, int pageSize) {
         List<IssueEntity> issueEntities = issueDao.issueEntities(pageNum, pageSize);
         for (IssueEntity issueEntity : issueEntities) {
-            log.debug("值"+issueEntities);
+            log.debug("值"+issueEntity);
         }
         return issueEntities;
     }

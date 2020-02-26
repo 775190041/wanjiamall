@@ -17,5 +17,5 @@ public class KeywordEntity {
     private String isNot;
     private Timestamp updateTime;
     private Timestamp addTime;
-    private String deleted;
+    private String delted;
 }

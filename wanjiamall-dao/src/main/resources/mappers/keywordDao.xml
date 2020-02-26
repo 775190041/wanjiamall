@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.KeywordDao">
+
+    <resultMap id="keywordResultMap" type="com.nf.wanjiamall.entity.KeywordEntity">
+        <id property="id" column="id"></id>
+        <result property="keyword" column="keyword"></result>
+        <result property="url" column="url"></result>
+        <result property="isNot" column="is_not"></result>
+        <result property="addTime" column="add_time"></result>
+        <result property="updateTime" column="update_time"></result>
+        <result property="delted" column="delted"></result>
+    </resultMap>
+
+    <select id="getKeywordList" resultMap="keywordResultMap">
+        select id,keyword,url,is_not,add_time,update_time,delted
+        from wanjia_keyword where delted = 0
+    </select>
+
+    <select id="getByKeyword" resultMap="keywordResultMap">
+        select id,keyword,url,is_not,add_time,update_time,delted
+        from wanjia_keyword where delted = 0 and keyword = #{keyword}
+    </select>
+
+    <insert id="keywordInsert">
+        insert into wanjia_keyword(keyword, url, is_not, add_time, update_time, delted) values
+        (#{keyword},#{url},#{isNot},#{addTime},#{updateTime},#{delted})
+    </insert>
+
+    <update id="keywordUpdate">
+        update wanjia_keyword set
+        keyword = #{keyword},
+        url = #{url},
+        is_not = #{isNot},
+        add_time = #{addTime},
+        update_time = #{updateTime},
+        delted = #{delted}
+        where id = #{id}
+    </update>
+
+    <delete id="keywordDelete" parameterType="int">
+        update wanjia_keyword set delted = 1
+        where id = #{id}
+    </delete>
+</mapper>

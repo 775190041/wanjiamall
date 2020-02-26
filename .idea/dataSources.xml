@@ -15,7 +15,7 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="wanjiamall@localhost" uuid="6aac3cb0-c760-446e-9de9-cd5e02e25fdf">
+    <data-source source="LOCAL" name="wanjiamall@localhost" uuid="26d4bf0c-8803-42b8-b53e-0b7daa2c186b">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
