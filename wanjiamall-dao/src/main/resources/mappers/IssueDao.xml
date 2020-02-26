@@ -13,7 +13,7 @@
         <result property="delted" column="delted"></result>
     </resultMap>
     
-    <select id="issueEntities" resultMap="issueResultMap">
+    <select id="getIssueList" resultMap="issueResultMap">
         select id, question, answer, update_time, add_time, delted from wanjia_issue
         where delted = 0
         <!--<if test="question !=''">
@@ -26,12 +26,12 @@
         where id = #{id} and delted = 0
     </select>
 
-    <insert id="insert">
+    <insert id="issueInsert">
         insert into wanjia_issue(question,answer,update_time,add_time,delted)
         values(#{question},#{answer},#{updateTime},#{addTime},#{delted})
     </insert>
 
-    <update id="update">
+    <update id="issueUpdate">
         update wanjia_issue set
          question = #{question},
         answer = #{answer},
@@ -41,7 +41,7 @@
         where id = #{id}
     </update>
 
-    <delete id="delete" parameterType="int">
+    <delete id="issueDelete" parameterType="int">
         update wanjia_issue set delted = 1
         where id = #{id}
     </delete>

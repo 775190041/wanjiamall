@@ -9,10 +9,10 @@ import java.util.List;
  * @author 南八
         */
 public interface IssueDao {
-    List<IssueEntity> issueEntities(@Param("pageNum") int pageNum,
+    List<IssueEntity> getIssueList(@Param("pageNum") int pageNum,
                                     @Param("pageSize") int pageSize);
     IssueEntity getById(int id);
-    int insert(IssueEntity issueEntity);
-    int update(IssueEntity issueEntity);
-    int delete(int id);
+    int issueInsert(IssueEntity issueEntity);
+    int issueUpdate(IssueEntity issueEntity);
+    int issueDelete(int id);
 }

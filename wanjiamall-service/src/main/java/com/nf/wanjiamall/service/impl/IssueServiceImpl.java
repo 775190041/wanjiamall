@@ -20,8 +20,8 @@ public class IssueServiceImpl implements IssueService {
     private IssueDao issueDao;
 
     @Override
-    public List<IssueEntity> issueEntities(int pageNum, int pageSize) {
-        List<IssueEntity> issueEntities = issueDao.issueEntities(pageNum, pageSize);
+    public List<IssueEntity> getIssueList(int pageNum, int pageSize) {
+        List<IssueEntity> issueEntities = issueDao.getIssueList(pageNum, pageSize);
         for (IssueEntity issueEntity : issueEntities) {
             log.debug("值"+issueEntity);
         }
@@ -35,18 +35,18 @@ public class IssueServiceImpl implements IssueService {
 
 
     @Override
-    public boolean insert(IssueEntity issueEntity){
-        return issueDao.insert(issueEntity) > 0 ? true:false;
+    public boolean issueInsert(IssueEntity issueEntity){
+        return issueDao.issueInsert(issueEntity) > 0 ? true:false;
     }
 
     @Override
-    public boolean update(IssueEntity issueEntity) {
-        return issueDao.update(issueEntity) > 0 ? true:false;
+    public boolean issueUpdate(IssueEntity issueEntity) {
+        return issueDao.issueUpdate(issueEntity) > 0 ? true:false;
     }
 
     @Override
-    public boolean delete(int id) {
-        return issueDao.delete(id) > 0 ? true:false;
+    public boolean issueDelete(int id) {
+        return issueDao.issueDelete(id) > 0 ? true:false;
     }
 
 }

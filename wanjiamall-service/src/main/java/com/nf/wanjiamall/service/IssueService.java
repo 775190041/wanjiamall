@@ -9,9 +9,9 @@ import java.util.List;
  * @author 南八
  */
 public interface IssueService {
-    List<IssueEntity> issueEntities(int pageNum, int pageSize);
+    List<IssueEntity> getIssueList(int pageNum, int pageSize);
     IssueEntity getById(int id);
-    boolean insert(IssueEntity issueEntity);
-    boolean update(IssueEntity issueEntity);
-    boolean delete(int id);
+    boolean issueInsert(IssueEntity issueEntity);
+    boolean issueUpdate(IssueEntity issueEntity);
+    boolean issueDelete(int id);
 }

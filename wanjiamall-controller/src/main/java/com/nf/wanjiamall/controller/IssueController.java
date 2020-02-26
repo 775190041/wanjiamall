@@ -28,9 +28,9 @@ public class IssueController {
 
    @ApiOperation("查询常见问题表")
    @GetMapping("/issue/{pageNum}-{pageSize}")
-   public ResponseVo issueList(@PathVariable(required = false) int pageNum,
+   public ResponseVo getIssueList(@PathVariable(required = false) int pageNum,
                                @PathVariable(required = false) int pageSize){
-       List<IssueEntity> issueEntityList = issueService.issueEntities(pageNum, pageSize);
+       List<IssueEntity> issueEntityList = issueService.getIssueList(pageNum, pageSize);
        ResponseVo responseVo = new ResponseVo(1,"查询成功",issueEntityList);
        return responseVo;
    }
@@ -44,7 +44,7 @@ public class IssueController {
     @PostMapping("/issue")
     @ApiOperation("添加常见问题表")
     public ResponseVo issueInsert(IssueEntity issueEntity) throws ParseException {
-       boolean result = issueService.insert(issueEntity);
+       boolean result = issueService.issueInsert(issueEntity);
        if(result != false){
            return new ResponseVo(1,"添加成功",true);
        }else {
@@ -56,7 +56,7 @@ public class IssueController {
     @PutMapping("/issue")
     @ApiOperation("修改常见问题表,传一个常见问题表的id过来")
     public ResponseVo issueUpdate(IssueEntity issueEntity){
-        boolean result = issueService.update(issueEntity);
+        boolean result = issueService.issueUpdate(issueEntity);
         if(result != false){
             return new ResponseVo(1,"修改成功",true);
         }else {
@@ -71,7 +71,7 @@ public class IssueController {
     @DeleteMapping("/issue")
     @ApiOperation("删除常见问题表")
     public ResponseVo issueDelete(int id){
-       boolean result = issueService.delete(id);
+       boolean result = issueService.issueDelete(id);
        if (result != false){
            return new ResponseVo(1,"删除成功",true);
        }
