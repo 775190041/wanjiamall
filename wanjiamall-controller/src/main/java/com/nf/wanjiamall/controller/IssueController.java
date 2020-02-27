@@ -34,13 +34,13 @@ public class IssueController {
        ResponseVo responseVo = new ResponseVo(1,"查询成功",issueEntityList);
        return responseVo;
    }
-    @ApiOperation("按question模糊查询常见问题表")
-    @GetMapping("/issue")
-    public ResponseVo getByQuestion(String question){
-        List<IssueEntity> issueEntityList = issueService.getByQuestion(question);
-        ResponseVo responseVo = new ResponseVo(1,"查询成功",issueEntityList);
-        return responseVo;
-    }
+//    @ApiOperation("按question模糊查询常见问题表")
+//    @GetMapping("/issue")
+//    public ResponseVo getByQuestion(String question){
+//        List<IssueEntity> issueEntityList = issueService.getByQuestion(question);
+//        ResponseVo responseVo = new ResponseVo(1,"查询成功",issueEntityList);
+//        return responseVo;
+//    }
     @PostMapping("/issue")
     @ApiOperation("添加常见问题表")
     public ResponseVo issueInsert(IssueEntity issueEntity) throws ParseException {
@@ -53,10 +53,10 @@ public class IssueController {
     }
 
 
-    @PutMapping("/issue")
+    @PutMapping("/issue/{id}")
     @ApiOperation("修改常见问题表,传一个常见问题表的id过来")
-    public ResponseVo issueUpdate(IssueEntity issueEntity){
-        boolean result = issueService.issueUpdate(issueEntity);
+    public ResponseVo issueUpdate(@PathVariable("id") int id,IssueEntity issueEntity){
+        boolean result = issueService.issueUpdate(id,issueEntity);
         if(result != false){
             return new ResponseVo(1,"修改成功",true);
         }else {
@@ -68,9 +68,9 @@ public class IssueController {
 
 
 
-    @DeleteMapping("/issue")
+    @DeleteMapping("/issue/{id}")
     @ApiOperation("删除常见问题表")
-    public ResponseVo issueDelete(int id){
+    public ResponseVo issueDelete(@PathVariable("id") int id){
        boolean result = issueService.issueDelete(id);
        if (result != false){
            return new ResponseVo(1,"删除成功",true);

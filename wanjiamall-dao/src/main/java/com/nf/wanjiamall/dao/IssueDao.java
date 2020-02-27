@@ -13,6 +13,6 @@ public interface IssueDao {
                                     @Param("pageSize") int pageSize);
     List<IssueEntity> getByQuestion(String question);
     int issueInsert(IssueEntity issueEntity);
-    int issueUpdate(IssueEntity issueEntity);
+    int issueUpdate(@Param("id") int id,IssueEntity issueEntity);
     int issueDelete(int id);
 }

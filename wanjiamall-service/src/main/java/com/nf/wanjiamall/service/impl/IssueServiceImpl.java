@@ -45,8 +45,8 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public boolean issueUpdate(IssueEntity issueEntity) {
-        return issueDao.issueUpdate(issueEntity) > 0 ? true:false;
+    public boolean issueUpdate(int id,IssueEntity issueEntity) {
+        return issueDao.issueUpdate(id,issueEntity) > 0 ? true:false;
     }
 
     @Override
