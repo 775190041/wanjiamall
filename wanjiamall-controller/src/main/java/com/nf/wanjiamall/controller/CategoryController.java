@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @author lzn123
+ * @author lzn
  */
 @RestController
 @Api(tags = "wanjia_category")
