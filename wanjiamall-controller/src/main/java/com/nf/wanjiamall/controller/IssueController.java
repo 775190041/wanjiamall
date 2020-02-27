@@ -34,11 +34,11 @@ public class IssueController {
        ResponseVo responseVo = new ResponseVo(1,"查询成功",issueEntityList);
        return responseVo;
    }
-    @ApiOperation("按id查询常见问题表")
+    @ApiOperation("按question模糊查询常见问题表")
     @GetMapping("/issue")
-    public ResponseVo issueById(int id){
-        IssueEntity issueEntity = issueService.getById(id);
-        ResponseVo responseVo = new ResponseVo(1,"查询成功",issueEntity);
+    public ResponseVo getByQuestion(String question){
+        List<IssueEntity> issueEntityList = issueService.getByQuestion(question);
+        ResponseVo responseVo = new ResponseVo(1,"查询成功",issueEntityList);
         return responseVo;
     }
     @PostMapping("/issue")

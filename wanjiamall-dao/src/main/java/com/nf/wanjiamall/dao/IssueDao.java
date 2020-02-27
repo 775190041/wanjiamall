@@ -11,7 +11,7 @@ import java.util.List;
 public interface IssueDao {
     List<IssueEntity> getIssueList(@Param("pageNum") int pageNum,
                                     @Param("pageSize") int pageSize);
-    IssueEntity getById(int id);
+    List<IssueEntity> getByQuestion(String question);
     int issueInsert(IssueEntity issueEntity);
     int issueUpdate(IssueEntity issueEntity);
     int issueDelete(int id);

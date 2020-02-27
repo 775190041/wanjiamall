@@ -29,10 +29,15 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public IssueEntity getById(int id) {
-        return issueDao.getById(id);
+    public List<IssueEntity> getByQuestion(String question) {
+        return issueDao.getByQuestion(question);
     }
 
+  /*  @Override
+    public IssueEntity getByQuestion(String question) {
+        return issueDao.getByQuestion(question);
+    }
+*/
 
     @Override
     public boolean issueInsert(IssueEntity issueEntity){

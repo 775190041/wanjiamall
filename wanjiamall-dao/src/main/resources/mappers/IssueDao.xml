@@ -16,14 +16,11 @@
     <select id="getIssueList" resultMap="issueResultMap">
         select id, question, answer, update_time, add_time, delted from wanjia_issue
         where delted = 0
-        <!--<if test="question !=''">
-            where question = #{question} and delted = 0
-        </if>-->
     </select>
 
-    <select id="getById" resultMap="issueResultMap">
+    <select id="getByQuestion" resultMap="issueResultMap">
         select id, question, answer, update_time, add_time, delted from wanjia_issue
-        where id = #{id} and delted = 0
+        where question like CONCAT('%', #{question}, '%') and delted = 0
     </select>
 
     <insert id="issueInsert">
