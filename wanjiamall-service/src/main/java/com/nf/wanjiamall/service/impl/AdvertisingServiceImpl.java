@@ -1,9 +1,9 @@
-package com.nf.wanjiamall.service.advertising.impl;
+package com.nf.wanjiamall.service.impl;
 
 
-import com.nf.wanjiamall.dao.advertising.AdvertisingDao;
+import com.nf.wanjiamall.dao.AdvertisingDao;
 import com.nf.wanjiamall.entity.AdvertisingEntity;
-import com.nf.wanjiamall.service.advertising.AdvertisingService;
+import com.nf.wanjiamall.service.AdvertisingService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +30,18 @@ public class AdvertisingServiceImpl implements AdvertisingService {
     }
 
     @Override
+    public void insertAd(AdvertisingEntity advertisingEntity) {
+        advertisingDao.insertAd(advertisingEntity);
+    }
+
+    @Override
     public void updateAd(AdvertisingEntity advertisingEntity, Integer id) {
         advertisingDao.updateAd(advertisingEntity,id);
+    }
+
+    @Override
+    public Integer deletedAdId(Integer id) {
+        return advertisingDao.deletedAdId(id);
     }
 
 }
