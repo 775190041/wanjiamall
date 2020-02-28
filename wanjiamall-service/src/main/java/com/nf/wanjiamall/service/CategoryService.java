@@ -9,9 +9,13 @@ import java.util.List;
  * @author lzn
  */
 public interface CategoryService {
-    List<CategoryEntity> getCateAll(Integer pageNum, Integer pageSize);
+    List<CategoryEntity> getFirstCate();
 
-    void insertByLevelFirst(CategoryEntity categoryEntity);
+    List<CategoryEntity> getSecondCate(Integer pid);
+
+    void insertByLevel(CategoryEntity categoryEntity);
 
     void updateById(CategoryEntity categoryEntity,Integer id);
+
+    void deleteById(Integer id);
 }

@@ -1,13 +1,11 @@
 package com.nf.wanjiamall.service.impl;
 
-
 import com.nf.wanjiamall.dao.CategoryDao;
 import com.nf.wanjiamall.entity.CategoryEntity;
 import com.nf.wanjiamall.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,29 +19,53 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryDao categoryDao;
 
+
     @Override
-    public List<CategoryEntity> getCateAll(Integer pageNum, Integer pageSize){
-        List<CategoryEntity> categoryLists=categoryDao.getCateAll(pageNum,pageSize);
-        for (CategoryEntity categoryList : categoryLists) {
-            log.debug("---------"+categoryList);
+    public List<CategoryEntity> getFirstCate() {
+        return categoryDao.getFirstCate();
+    }
+
+    @Override
+    public List<CategoryEntity> getSecondCate(Integer pid) {
+        return categoryDao.getSecondCate(pid);
+    }
+
+    /**
+     * 选择父目录进行添加
+     */
+    @Override
+    public void insertByLevel(CategoryEntity categoryEntity) {
+        if (Integer.valueOf(categoryEntity.getLevel()) == 1) {
+            categoryDao.insertByLevelFirst(categoryEntity);
+        } else if (Integer.valueOf(categoryEntity.getLevel()) == 2) {
+            categoryDao.getFirstCate();
+            categoryDao.insertByLevelFirst(categoryEntity);
         }
-        return categoryLists;
-    }
-
-    @Override
-    public void insertByLevelFirst(CategoryEntity categoryEntity) {
-        categoryDao.insertByLevelFirst(categoryEntity);
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public void insertByLevelSecond(CategoryEntity categoryEntity) {
-        categoryDao.getFirstCate();
-        categoryDao.insertByLevelFirst(categoryEntity);
     }
 
     @Override
     public void updateById(CategoryEntity categoryEntity, Integer id) {
+        categoryDao.getById(id);
         categoryDao.updateById(categoryEntity,id);
     }
+
+
+
+    @Override
+    public void deleteById(Integer id) {
+        Integer level=categoryDao.getIdByLevel(id);
+        if (level==1){
+            Integer secondCateNum=categoryDao.getSecondCateCount(id);
+            if (secondCateNum==0){
+                categoryDao.deleteById(id);
+            }
+        }else {
+            Integer secondCateProductNum=categoryDao.getProductBySecondCateCount(id);
+            if (secondCateProductNum==0){
+                categoryDao.deleteById(id);
+            }
+        }
+    }
+
 
 }

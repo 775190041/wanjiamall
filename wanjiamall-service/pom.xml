@@ -17,6 +17,7 @@
             <artifactId>wanjiamall-dao</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
         <!-- 测试模块 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -29,6 +30,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
     </dependencies>
 
 </project>
