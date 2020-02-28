@@ -1,19 +1,19 @@
 package com.nf.wanjiamall;
 
-import com.nf.wanjiamall.dao.DeptDao;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
- * @author lzn
+ * @author lrc
  */
-@SpringBootApplication
-@MapperScan("com.nf.wanjiamall.dao")
+@SpringBootApplication(scanBasePackages="com.nf.wanjiamall.controller")
+@MapperScan(basePackages = {"com.nf.wanjiamall.dao"})
+@ComponentScan(basePackages = {"com.nf.*"})
 public class WanjiaApplication {
 
     public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(WanjiaApplication.class, args);
+       SpringApplication.run(WanjiaApplication.class, args);
     }
 }
