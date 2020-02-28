@@ -30,17 +30,10 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.getSecondCate(pid);
     }
 
-    /**
-     * 选择父目录进行添加
-     */
+
     @Override
     public void insertByLevel(CategoryEntity categoryEntity) {
-        if (Integer.valueOf(categoryEntity.getLevel()) == 1) {
             categoryDao.insertByLevelFirst(categoryEntity);
-        } else if (Integer.valueOf(categoryEntity.getLevel()) == 2) {
-            categoryDao.getFirstCate();
-            categoryDao.insertByLevelFirst(categoryEntity);
-        }
     }
 
     @Override

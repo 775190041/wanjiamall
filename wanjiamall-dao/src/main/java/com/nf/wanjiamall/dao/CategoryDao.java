@@ -20,11 +20,12 @@ public interface CategoryDao {
     List<CategoryEntity> getSecondCate(Integer pid);
 
     /**
-     * 根据类目级别进行添加
+     * 添加类目
      */
     void insertByLevelFirst(CategoryEntity categoryEntity);
 
     List<CategoryEntity> getById(Integer id);
+
     void updateById(@Param("cate") CategoryEntity categoryEntity,Integer id);
 
     /**

@@ -23,11 +23,16 @@ public class CategoryController {
     @Autowired
     private CategoryServiceImpl categoryService;
 
+    //查询一级目录
+    private List<CategoryEntity> queryFirstCategory(){
+        List<CategoryEntity> cateFirstLists = categoryService.getFirstCate();
+        return cateFirstLists;
+    }
+
     @ApiOperation("查询商品父类目信息")
     @GetMapping("/category")
     public ResponseVo getFirstCategory() {
-        List<CategoryEntity> cateFirstLists = categoryService.getFirstCate();
-        return ResponseVo.getSuccess("ok",cateFirstLists);
+        return ResponseVo.getSuccess("ok",queryFirstCategory());
     }
 
     @ApiImplicitParams({
@@ -87,6 +92,21 @@ public class CategoryController {
     public ResponseVo deleteFirstCategory(@PathVariable Integer id) {
         categoryService.deleteById(id);
         return ResponseVo.getSuccess("ok","执行成功");
+    }
+
+
+
+    @ApiImplicitParams({
+    @ApiImplicitParam(name = "level", dataType = "Integer", value = "类目等级，传1返回null，传2返回所有的一级目录", required = false),
+    })
+    @ApiOperation("查询所有一级目录")
+    @GetMapping("/category/level")
+    public ResponseVo getCategory(@RequestParam(value = "level" ,required = false)int level) {
+        if (level==1){
+            return ResponseVo.getSuccess("ok",null);
+        }else {
+            return ResponseVo.getSuccess("ok",queryFirstCategory());
+        }
     }
 
 
