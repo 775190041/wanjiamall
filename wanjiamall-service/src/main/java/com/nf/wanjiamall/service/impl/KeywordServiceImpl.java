@@ -18,8 +18,8 @@ public class KeywordServiceImpl implements KeywordService {
     @Autowired
     private KeywordDao keywordDao;
     @Override
-    public List<KeywordEntity> getKeywordList(int pageNum, int pageSize) {
-        List<KeywordEntity> keywordEntities = keywordDao.getKeywordList(pageNum, pageSize);
+    public List<KeywordEntity> getKeywordList(int pageNum, int pageSize,String keyword) {
+        List<KeywordEntity> keywordEntities = keywordDao.getKeywordList(pageNum, pageSize,keyword);
         for (KeywordEntity keywordEntity : keywordEntities) {
             log.debug("值"+keywordEntity);
         }
@@ -27,18 +27,13 @@ public class KeywordServiceImpl implements KeywordService {
     }
 
     @Override
-    public KeywordEntity getByKeyword(String keyword) {
-        return keywordDao.getByKeyword(keyword);
+    public boolean keywordInsert(KeywordEntity keywordEntity) {
+        return keywordDao.keywordInsert(keywordEntity) > 0 ? true:false;
     }
 
     @Override
-    public boolean keywordInsert(KeywordEntity issueEntity) {
-        return keywordDao.keywordInsert(issueEntity) > 0 ? true:false;
-    }
-
-    @Override
-    public boolean keywordUpdate(KeywordEntity issueEntity) {
-        return keywordDao.keywordUpdate(issueEntity) > 0 ? true:false;
+    public boolean keywordUpdate(int id,KeywordEntity keywordEntity) {
+        return keywordDao.keywordUpdate(id,keywordEntity) > 0 ? true:false;
     }
 
     @Override

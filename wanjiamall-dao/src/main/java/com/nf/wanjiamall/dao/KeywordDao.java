@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface KeywordDao {
     List<KeywordEntity> getKeywordList(@Param("pageNum") int pageNum,
-                                      @Param("pageSize") int pageSize);
-    KeywordEntity getByKeyword(String keyword);
-    int keywordInsert(KeywordEntity issueEntity);
-    int keywordUpdate(KeywordEntity issueEntity);
+                                       @Param("pageSize") int pageSize,
+                                       @Param("keyword") String keyword);
+    int keywordInsert(@Param("keywordEntity") KeywordEntity keywordEntity);
+    int keywordUpdate(@Param("id") int id,KeywordEntity keywordEntity);
     int keywordDelete(int id);
 }

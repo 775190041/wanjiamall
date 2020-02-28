@@ -40,7 +40,7 @@ public class IssueController {
    @GetMapping("/issue/{pageNum}-{pageSize}")
    public ResponseVo getIssueList(@PathVariable(required = false) int pageNum,
                                   @PathVariable(required = false) int pageSize,
-                                  @RequestParam( value = "question",required = false,defaultValue = "") String question){
+                                  @RequestParam(value = "question",required = false,defaultValue = "") String question){
        List<IssueEntity> issueEntityList = issueService.getIssueList(pageNum, pageSize,question);
        ResponseVo responseVo = new ResponseVo(1,"查询成功",issueEntityList);
        return responseVo;
