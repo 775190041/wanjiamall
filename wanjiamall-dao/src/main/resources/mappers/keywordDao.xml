@@ -40,7 +40,7 @@
                 ,url = #{keywordEntity.url}
             </if>
         </set>
-        where id = #{id}
+        where delted = 0 and id = #{id}
     </update>
 
     <delete id="keywordDelete" parameterType="int">

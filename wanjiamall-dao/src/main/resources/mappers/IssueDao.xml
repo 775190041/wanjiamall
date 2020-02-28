@@ -41,7 +41,7 @@
                 ,answer = #{issueEntity.answer}
             </if>
         </set>
-        where id = #{id}
+        where delted = 0 and id = #{id}
     </update>
 
     <update id="issueDelete" parameterType="int">

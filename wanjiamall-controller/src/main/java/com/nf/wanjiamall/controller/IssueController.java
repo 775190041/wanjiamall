@@ -55,7 +55,7 @@ public class IssueController {
     })
 
     @PostMapping("/issue")
-    @ApiOperation("添加常见问题表,传一个issue表集合")
+    @ApiOperation("添加常见问题表")
     public ResponseVo issueInsert(IssueEntity issueEntity) {
        boolean result = issueService.issueInsert(issueEntity);
        if(result != false){
