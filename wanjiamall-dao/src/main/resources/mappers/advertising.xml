@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.advertising.AdvertisingDao">
+    <select id="getAll" resultType="com.nf.wanjiamall.entity.AdvertisingEntity">
+        select * from wanjia_ad where deleted = 0
+    </select>
+
+    <update id="updateAd">
+        update wanjia_ad set name =#{name},link=#{link},url=#{url},position=#{position},content=#{content},
+        enabled=#{enabled},update_time=default where deleted = 0 and id=#{id}
+    </update>
+</mapper>
