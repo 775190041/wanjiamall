@@ -6,7 +6,71 @@
 
 <!-- 上架商品  -->
     <insert id="insert">
-
+    insert into wanjia_goods(goods_sn, name, category_id
+    , brand_id, gallery, keywords, brief, is_on_sale
+    , is_new, is_hot, unit, counter_price, retail_price
+    , detail, add_time, update_time, delted)
+    values(#{goodsEntity.goodsSn},#{goodsEntity.name},#{goodsEntity.categoryId}
+    ,#{goodsEntity.brandId},#{goodsEntity.gallery},#{goodsEntity.keywords}
+    ,#{goodsEntity.brief},#{goodsEntity.isOnSale},#{goodsEntity.isNew}
+    ,#{goodsEntity.isHot},#{goodsEntity.unit},#{goodsEntity.counterPrice}
+    ,#{goodsEntity.retailPrice},#{goodsEntity.detail},default,default,default)
     </insert>
+
+<!--    修改商品信息-->
+    <update id="update">
+        update wanjia_goods
+        <set>
+            <if test="goods.goodsSn != null">
+                goods_sn = #{goods.goodsSn},
+            </if>
+            <if test="goods.name != null">
+                'name' = #{goods.name},
+            </if>
+            <if test="goods.categoryId != null">
+                category_id = #{goods.categoryId},
+            </if>
+            <if test="goods.brandId != null">
+                brand_id = #{goods.brandId },
+            </if>
+            <if test="goods.gallery != null">
+                gallery = #{goods.gallery},
+            </if>
+            <if test="goods.keywords != null">
+                keywords = #{goods.keywords},
+            </if>
+            <if test="goods.brief != null">
+                brief = #{goods.brief},
+            </if>
+            <if test="goods.isOnSale != null">
+                is_on_sale = #{goods.isOnSale},
+            </if>
+            <if test="goods.isNew != null">
+                is_new = #{goods.isNew},
+            </if>
+            <if test="goods.isHot != null">
+                is_hot = #{goods.isHot},
+            </if>
+            <if test="goods.unit != null">
+                unit = #{goods.unit},
+            </if>
+            <if test="goods.counterPrice != null">
+                counterPrice = #{goods.counterPrice},
+            </if>
+            <if test="goods.retailPrice != null">
+                retailPrice = #{goods.retailPrice},
+            </if>
+            <if test="goods.detail != null">
+                retailPrice = #{goods.detail},
+            </if>
+        </set>
+        where id = # {goods.id}
+    </update>
+
+<!--    删除商品信息 -->
+    <update id="delete">
+        update wanjia_goods set delted = 1
+        where id = #{id}
+    </update>
 
 </mapper>

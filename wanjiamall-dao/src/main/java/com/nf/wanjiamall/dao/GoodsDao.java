@@ -7,6 +7,16 @@ public interface GoodsDao {
     /**
      * 上架商品，
      */
-    int insert(@Param("goods") GoodsEntity goodsEntity);
+    int insert( GoodsEntity goodsEntity);
+
+    /**
+     * 修改商品
+     */
+    int update(@Param("goods") GoodsEntity goodsEntity);
+
+    /**
+     * 删除商品
+     */
+    int delete(int id);
 
 }

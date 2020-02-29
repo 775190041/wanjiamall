@@ -21,7 +21,7 @@ public class GoodsAttributeEntity {
     /**
      * 商品参数值
      */
-    private String value;
+    private String attributeValue;
     /**
      * 修改时间
      */
