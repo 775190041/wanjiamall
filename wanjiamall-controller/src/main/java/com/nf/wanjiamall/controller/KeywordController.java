@@ -1,5 +1,6 @@
 package com.nf.wanjiamall.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.nf.wanjiamall.entity.KeywordEntity;
 import com.nf.wanjiamall.service.impl.KeywordServiceImpl;
 import com.nf.wanjiamall.vo.ResponseVo;
@@ -35,7 +36,8 @@ public class KeywordController {
                                      @PathVariable(required = false) int pageSize,
                                      @RequestParam(value = "keyword",required = false,defaultValue = "") String keyword){
         List<KeywordEntity> keywordEntityList = keywordService.getKeywordList(pageNum, pageSize,keyword);
-        ResponseVo responseVo = new ResponseVo(1,"查询成功",keywordEntityList);
+        PageInfo<KeywordEntity> pageInfo = new PageInfo<KeywordEntity>(keywordEntityList,pageSize);
+        ResponseVo responseVo = new ResponseVo(1,"查询成功",pageInfo);
         return responseVo;
     }
 
@@ -44,10 +46,7 @@ public class KeywordController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "keyword", dataType = "String", value = "关键字，非必须", required = false),
             @ApiImplicitParam(name = "url", dataType = "String", value = "关键字跳转地址，非必须", required = false),
-            @ApiImplicitParam(name = "is_not", dataType = "String", value = "是否为热门关键字，非必须", required = false),
-            @ApiImplicitParam(name = "add_time", dataType = "Timestamp", value = "创建时间，非必须", required = false),
-            @ApiImplicitParam(name = "update_time", dataType = "Timestamp", value = "修改时间，非必须", required = false),
-            @ApiImplicitParam(name = "delted", value = "逻辑删除，非必须", required = false)
+            @ApiImplicitParam(name = "is_not", dataType = "String", value = "是否为热门关键字，非必须", required = false)
     })
     @PostMapping("/keyword")
     @ApiOperation("添加关键字表")

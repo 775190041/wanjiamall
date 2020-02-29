@@ -27,7 +27,7 @@
 
     <insert id="keywordInsert">
         insert into wanjia_keyword(keyword, url, is_not, add_time, update_time, delted) values
-        (#{keywordEntity.keyword},#{keywordEntity.url},default,default,default,default)
+        (#{keywordEntity.keyword},#{keywordEntity.url},#{keywordEntity.isNot},default,default,default)
     </insert>
 
     <update id="keywordUpdate">
@@ -38,6 +38,9 @@
             </if>
             <if test="keywordEntity.url != null">
                 ,url = #{keywordEntity.url}
+            </if>
+            <if test="keywordEntity.url != null">
+                ,is_not = #{keywordEntity.isNot}
             </if>
         </set>
         where delted = 0 and id = #{id}

@@ -1,5 +1,6 @@
 package com.nf.wanjiamall.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.nf.wanjiamall.entity.IssueEntity;
 import com.nf.wanjiamall.service.impl.IssueServiceImpl;
 import com.nf.wanjiamall.vo.ResponseVo;
@@ -42,7 +43,8 @@ public class IssueController {
                                   @PathVariable(required = false) int pageSize,
                                   @RequestParam(value = "question",required = false,defaultValue = "") String question){
        List<IssueEntity> issueEntityList = issueService.getIssueList(pageNum, pageSize,question);
-       ResponseVo responseVo = new ResponseVo(1,"查询成功",issueEntityList);
+        PageInfo<IssueEntity> pageInfo = new PageInfo<>(issueEntityList,pageSize);
+       ResponseVo responseVo = new ResponseVo(1,"查询成功",pageInfo);
        return responseVo;
    }
 
