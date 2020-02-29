@@ -2,6 +2,7 @@ package com.nf.wanjiamall.entity;
 
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -69,11 +70,13 @@ public class GoodsEntity {
     /**
      * 修改时间
      */
-    private Date updateTime;
+
+    private Timestamp updateTime;
     /**
      * 创建时间
      */
-    private Date addTime;
+    private Timestamp addTime;
+
     /**
      * 逻辑删除
      */
