@@ -22,7 +22,7 @@ public class GoodsSpecificationEntity {
     /**
      * 商品规格值
      */
-    private String SpecificationValue;
+    private String specificationValue;
     /**
      * 商品规格图片
      */

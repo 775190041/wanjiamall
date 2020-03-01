@@ -11,4 +11,39 @@
         (#{goodsProductEntity.goodsId},#{goodsProductEntity.specifications},#{goodsProductEntity.price}
         ,#{goodsProductEntity.number},#{goodsProductEntity.url},default,default,default)
     </insert>
+<!--    商品货物修改-->
+    <update id="update">
+        update wanjia_goods_product
+        <set>
+            <if test="goodsProductEntity.specifications != null">
+                specifications = #{goodsProductEntity.specifications},
+            </if>
+            <if test="goodsProductEntity.price != null ">
+                price = #{goodsProductEntity.price},
+            </if>
+            <if test="goodsProductEntity.number != null">
+                number = #{goodsProductEntity.number},
+            </if>
+            <if test="goodsProductEntity.url != null">
+                url = #{goodsProductEntity.url},
+            </if>
+        </set>
+            where id = #{goodsProductEntity.id}
+    </update>
+
+
+
+
+<!--    商品货物删除-->
+    <update id="delete">
+        update wanjia_goods_product set delted = 1 where goods_id = #{id}
+    </update>
+
+
+<!--    根据商品id查询-->
+    <select id="listByGoodsId" resultType="com.nf.wanjiamall.entity.GoodsProductEntity">
+        select id, goods_id, specifications, price, number, url, add_time, update_time, delted from wanjia_goods_product
+        where delted = 0 and goods_id = #{id}
+    </select>
+
 </mapper>

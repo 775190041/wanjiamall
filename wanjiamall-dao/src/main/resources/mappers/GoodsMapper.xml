@@ -73,4 +73,23 @@
         where id = #{id}
     </update>
 
+<!--    搜索-->
+    <select id="listGoods" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery, keywords, brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price, detail, add_time, update_time, delted from wanjia_goods
+            <where>
+                delted = 0
+                <if test="id != null">
+                    and id like '%' #{id} '%'
+                </if>
+                <if test="goodsSn != null">
+                    and goods_sn like '%' #{goodsSn} '%'
+                </if>
+                <if test="name != null">
+                    and name like '%' #{name} '%'
+                </if>
+            </where>
+
+    </select>
+
+
 </mapper>

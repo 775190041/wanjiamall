@@ -3,6 +3,8 @@ package com.nf.wanjiamall.dao;
 import com.nf.wanjiamall.entity.GoodsSpecificationEntity;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface GoodsSpecificationDao {
     /**
      * 商品规格添加
@@ -17,8 +19,12 @@ public interface GoodsSpecificationDao {
     int update(@Param("goodsSpec") GoodsSpecificationEntity goodsSpecificationEntity);
 
     /**
-     * 商品规格删除
+     * 删除
+     * @param id
+     * @return
      */
-    int delete(int id);
+    int delete(@Param("id") int id);
+
+    List<GoodsSpecificationEntity> listGoodsById(@Param("id") int id);
 
 }

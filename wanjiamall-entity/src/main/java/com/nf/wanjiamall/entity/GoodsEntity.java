@@ -81,4 +81,6 @@ public class GoodsEntity {
      * 逻辑删除
      */
     private String delted;
+
+
 }
