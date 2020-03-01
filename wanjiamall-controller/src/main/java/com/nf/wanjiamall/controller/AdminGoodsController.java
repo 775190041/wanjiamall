@@ -20,7 +20,8 @@ public class AdminGoodsController {
     @ApiOperation("上架商品，以json格式传过来")
     @PostMapping("/goods")
     public Object AddGoods (@RequestBody AddGoodsVo addGoodsVo){
-     return goodsService.AddGoods(addGoodsVo);
+
+        return goodsService.AddGoods(addGoodsVo);
     }
 
     @ApiOperation("编辑商品，以json格式传过来,不用通过路径传id，只要把商品id放在json里面")
