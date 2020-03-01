@@ -1,16 +1,27 @@
 package com.nf.wanjiamall.service;
 
-import com.nf.wanjiamall.entity.GoodsAttributeEntity;
-import com.nf.wanjiamall.entity.GoodsEntity;
-import com.nf.wanjiamall.entity.GoodsProductEntity;
-import com.nf.wanjiamall.entity.GoodsSpecificationEntity;
+import com.nf.wanjiamall.vo.AddGoodsVo;
 
 public interface GoodsService {
 
 /**
  * 商品上架
  */
-    boolean AddGoods(GoodsEntity goodsEntity, GoodsSpecificationEntity goodsSpecificationEntity
-                    , GoodsProductEntity goodsProductEntity,GoodsAttributeEntity goodsAttributeEntity);
+    Object AddGoods(AddGoodsVo addGoodsVo);
+
+    /**
+     *编辑商品
+     */
+    Object updateGoods(AddGoodsVo addGoodsVo);
+
+    /**
+     * 商品删除
+     */
+    Object delete(int id);
+
+    /**
+     * 查询所有商品
+     */
+    Object listGoods(int pageNum,int pageSize,int id,String goodsSn,String name);
 
 }

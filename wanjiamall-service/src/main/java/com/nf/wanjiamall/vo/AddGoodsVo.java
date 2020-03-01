@@ -8,10 +8,8 @@ import lombok.Data;
 
 @Data
 public class AddGoodsVo {
-
     GoodsEntity goodsEntity;
     GoodsSpecificationEntity[] goodsSpecificationEntity;
     GoodsProductEntity[] goodsProductEntities;
     GoodsAttributeEntity[] goodsAttributeEntity;
-
 }
