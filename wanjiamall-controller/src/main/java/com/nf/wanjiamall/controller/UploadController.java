@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * @author sam
+ */
 @RestController
 @Api(tags = "文件上传服务")
 @RequestMapping("/api")
