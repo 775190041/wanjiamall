@@ -51,6 +51,8 @@ public class CategoryServiceImpl implements CategoryService {
             Integer secondCateNum=categoryDao.getSecondCateCount(id);
             if (secondCateNum==0){
                 categoryDao.deleteById(id);
+            }else{
+                throw  new RuntimeException("无法删除");
             }
         }else {
             Integer secondCateProductNum=categoryDao.getProductBySecondCateCount(id);

@@ -2,6 +2,7 @@ package com.nf.wanjiamall.controller;
 
 import com.nf.wanjiamall.entity.CategoryEntity;
 import com.nf.wanjiamall.service.impl.CategoryServiceImpl;
+import com.nf.wanjiamall.vo.CategoryVo;
 import com.nf.wanjiamall.vo.ResponseVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -10,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,15 +26,43 @@ public class CategoryController {
     private CategoryServiceImpl categoryService;
 
     //查询一级目录
+    @ApiOperation("查询商品父类目信息")
+    @GetMapping("/category/l1")
     private List<CategoryEntity> queryFirstCategory(){
         List<CategoryEntity> cateFirstLists = categoryService.getFirstCate();
         return cateFirstLists;
     }
 
-    @ApiOperation("查询商品父类目信息")
+    @ApiOperation("查询商品类目信息")
     @GetMapping("/category")
     public ResponseVo getFirstCategory() {
-        return ResponseVo.getSuccess("ok",queryFirstCategory());
+        List<CategoryVo> categoryVoList = new ArrayList<>();
+        List<CategoryEntity> cateFirstLists = categoryService.getFirstCate();
+        for (CategoryEntity category : cateFirstLists) {
+            CategoryVo categoryVO = new CategoryVo();
+            categoryVO.setId(category.getId());
+            categoryVO.setCategoryDesc(category.getCategoryDesc());
+            categoryVO.setIconUrl(category.getIconUrl());
+            categoryVO.setPicUrl(category.getPicUrl());
+            categoryVO.setName(category.getName());
+            categoryVO.setLevel(category.getLevel());
+
+            List<CategoryVo> children = new ArrayList<>();
+            List<CategoryEntity> subCategoryList = categoryService.getSecondCate(category.getId());
+            for (CategoryEntity categoryEntity : subCategoryList) {
+                CategoryVo subCategoryVo = new CategoryVo();
+                subCategoryVo.setId(categoryEntity.getId());
+                subCategoryVo.setCategoryDesc(categoryEntity.getCategoryDesc());
+                subCategoryVo.setIconUrl(categoryEntity.getIconUrl());
+                subCategoryVo.setPicUrl(categoryEntity.getPicUrl());
+                subCategoryVo.setName(categoryEntity.getName());
+                subCategoryVo.setLevel(categoryEntity.getLevel());
+                children.add(subCategoryVo);
+            }
+            categoryVO.setChildren(children);
+            categoryVoList.add(categoryVO);
+        }
+        return ResponseVo.getSuccess("ok",categoryVoList);
     }
 
     @ApiImplicitParams({

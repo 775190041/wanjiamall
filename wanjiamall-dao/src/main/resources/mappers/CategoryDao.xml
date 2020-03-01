@@ -17,7 +17,7 @@
     <insert id="insertByLevelFirst">
         insert into wanjiamall_category(name, category_desc, pid,icon_url, pic_url,
          level, update_time, add_time, delted) values (#{name},#{categoryDesc},#{pid},
-         #{iconUrl},#{picUrl},#{level},#{updateTime},#{addTime},#{delted})
+         #{iconUrl},#{picUrl},#{level},#{updateTime},#{addTime},default)
     </insert>
 
     <select id="getById" resultType="com.nf.wanjiamall.entity.CategoryEntity">

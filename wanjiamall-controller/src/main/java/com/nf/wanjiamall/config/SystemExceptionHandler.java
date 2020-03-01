@@ -1,6 +1,8 @@
 package com.nf.wanjiamall.config;
 
 
+import com.nf.wanjiamall.vo.ResponseVo;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
@@ -9,4 +11,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @RestControllerAdvice
 public class SystemExceptionHandler {
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseVo updateDelete(RuntimeException r){
+        return  ResponseVo.getFailed(r.getMessage());
+    }
+
 }
