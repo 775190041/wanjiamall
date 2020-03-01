@@ -2,8 +2,7 @@ package com.nf.wanjiamall.controller;
 
 import com.nf.wanjiamall.entity.CategoryEntity;
 import com.nf.wanjiamall.service.CategoryService;
-import com.nf.wanjiamall.vo.CategoryVo;
-import com.nf.wanjiamall.vo.ResponseVo;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

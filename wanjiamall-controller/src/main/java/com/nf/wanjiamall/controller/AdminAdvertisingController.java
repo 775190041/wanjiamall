@@ -2,7 +2,7 @@ package com.nf.wanjiamall.controller;
 
 import com.nf.wanjiamall.entity.AdvertisingEntity;
 import com.nf.wanjiamall.service.AdvertisingService;
-import com.nf.wanjiamall.vo.ResponseVo;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
