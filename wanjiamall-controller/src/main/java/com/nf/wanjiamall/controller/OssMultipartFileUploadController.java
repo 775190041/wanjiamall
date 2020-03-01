@@ -2,6 +2,7 @@ package com.nf.wanjiamall.controller;
 
 
 import com.nf.wanjiamall.utils.aliyun.OssUtil;
+import com.nf.wanjiamall.vo.ResponseVo;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api")
 public class OssMultipartFileUploadController {
     @RequestMapping("/upload")
-    public String upload(MultipartFile file){
-        return new OssUtil().uploadDocument(file,"imgs");
+    public ResponseVo upload(MultipartFile file){
+
+        return ResponseVo.getSuccess("ok",new OssUtil().uploadDocument(file,"imgs"));
     }
 }
