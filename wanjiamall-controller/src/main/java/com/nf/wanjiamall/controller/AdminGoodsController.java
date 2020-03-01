@@ -43,7 +43,6 @@ public class AdminGoodsController {
                             @RequestParam(value = "id",required = false,defaultValue = "") Integer id,
                             @RequestParam(value = "goodsSn",required = false,defaultValue = "") String goodsSn,
                             @RequestParam(value = "name",required = false,defaultValue = "") String name){
-
             return goodsService.listGoods(pageNum,pageSize,id,goodsSn,name);
     }
     @ApiOperation("查询某个商品的商品详情信息,传商品id")

@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -135,8 +137,15 @@ public class GoodsServiceImpl implements GoodsService {
      */
     @Override
     public Object queryGoodsDetail(int id) {
-
-
-        return null;
+        GoodsEntity goodsEntity = goodsDao.GoodsById(id);
+        List<GoodsSpecificationEntity> goodsSpecificationEntities = goodsSpecificationDao.listGoodsById(id);
+        List<GoodsProductEntity> goodsProductEntities = goodsProductDao.listByGoodsId(id);
+        List<GoodsAttributeEntity> goodsAttributeEntities = goodsAttributeDao.listGoodsById(id);
+        Map<String, Object> data = new HashMap<>();
+        data.put("goods",goodsEntity);
+        data.put("goodsSpec",goodsSpecificationEntities);
+        data.put("goodsProduct",goodsProductEntities);
+        data.put("goodsAttribute",goodsAttributeEntities);
+        return ResponseUtil.ok(data);
     }
 }
