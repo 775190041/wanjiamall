@@ -3,5 +3,42 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nf.wanjiamall.dao.GoodsSpecificationDao">
+<!--商品规格添加-->
+    <insert id="insert">
+        insert into wanjia_goods_specification(goods_id, specification, specification_value, pic_url
+        , add_time, update_time, delted) values
+        (#{goodsSpecificationEntity.goodsId},#{goodsSpecificationEntity.specification}
+        ,#{goodsSpecificationEntity.specificationValue}
+        ,#{goodsSpecificationEntity.picUrl},default,default,default)
+    </insert>
+
+<!--    商品规格修改-->
+    <update id="update">
+        update wanjia_goods_specification
+        <set>
+            <if test="goodsSpec.specification != null">
+                specification = #{goodsSpec.specification},
+            </if>
+            <if test="goodsSpec.specificationValue != null">
+                specification_value = #{goodsSpec.specificationValue},
+            </if>
+            <if test="goodsSpec.picUrl != null">
+                pic_url = #{goodsSpec.picUrl},
+            </if>
+        </set>
+        where id = #{goodsSpec.id}
+    </update>
+
+
+<!--    商品规格删除-->
+    <update id="delete">
+        update wanjia_goods_specification set delted = 1 where goods_id = #{id}
+    </update>
+
+<!--    通过商品id查询-->
+    <select id="listGoodsById" resultType="com.nf.wanjiamall.entity.GoodsSpecificationEntity">
+        select id, goods_id, specification, specification_value, pic_url, add_time, update_time, delted from wanjia_goods_specification
+        where delted = 0 and goods_id = #{id}
+    </select>
 
 </mapper>
