@@ -8,9 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  * @author lrc
  */
-@SpringBootApplication(scanBasePackages="com.nf.wanjiamall.controller")
+@SpringBootApplication
 @MapperScan(basePackages = {"com.nf.wanjiamall.dao"})
-@ComponentScan(basePackages = {"com.nf.*"})
 public class WanjiaApplication {
 
     public static void main(String[] args) {
