@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.IssueDao">
+    
+    <resultMap id="issueResultMap" type="com.nf.wanjiamall.entity.IssueEntity">
+        <id property="id" column="id"></id>
+        <result property="question" column="question"></result>
+        <result property="answer" column="answer"></result>
+        <result property="updateTime" column="update_time"></result>
+        <result property="addTime" column="add_time"></result>
+        <result property="delted" column="delted"></result>
+    </resultMap>
+    
+    <select id="getIssueList" resultMap="issueResultMap">
+        select id, question, answer, update_time, add_time, delted from wanjia_issue
+        <where>
+            delted = 0
+            <if test="question != ''">
+                and question like '%' #{question} '%'
+            </if>
+        </where>
+
+
+    </select>
+
+
+    <insert id="issueInsert">
+        insert into wanjia_issue(question,answer,update_time,add_time,delted)
+        values(#{issueEntity.question},#{issueEntity.answer},default,default,default)
+    </insert>
+
+    <update id="issueUpdate">
+        update wanjia_issue
+       <set>
+            <if test="issueEntity.question != null">
+                question = #{issueEntity.question}
+            </if>
+            <if test="issueEntity.answer != null">
+                ,answer = #{issueEntity.answer}
+            </if>
+        </set>
+        where delted = 0 and id = #{id}
+    </update>
+
+    <update id="issueDelete" parameterType="int">
+        update wanjia_issue set delted = 1
+        where id = #{issueEntity.id}
+    </update>
+</mapper>

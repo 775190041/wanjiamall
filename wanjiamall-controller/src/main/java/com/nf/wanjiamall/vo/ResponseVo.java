@@ -4,6 +4,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 
+/**
+ * @author 南八
+ */
 public class ResponseVo<T> {
     @ApiModelProperty("状态码 0失败 1成功 2未登录 3没有权限 ")
     private Integer code;

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.KeywordDao">
+
+    <resultMap id="keywordResultMap" type="com.nf.wanjiamall.entity.KeywordEntity">
+        <id property="id" column="id"></id>
+        <result property="keyword" column="keyword"></result>
+        <result property="url" column="url"></result>
+        <result property="isNot" column="is_not"></result>
+        <result property="addTime" column="add_time"></result>
+        <result property="updateTime" column="update_time"></result>
+        <result property="delted" column="delted"></result>
+    </resultMap>
+
+    <select id="getKeywordList" resultMap="keywordResultMap">
+        select id,keyword,url,is_not,add_time,update_time,delted
+        from wanjia_keyword
+        <where>
+            delted = 0
+            <if test="keyword != ''">
+                and keyword like '%' #{keyword} '%'
+            </if>
+        </where>
+    </select>
+
+    <insert id="keywordInsert">
+        insert into wanjia_keyword(keyword, url, is_not, add_time, update_time, delted) values
+        (#{keywordEntity.keyword},#{keywordEntity.url},#{keywordEntity.isNot},default,default,default)
+    </insert>
+
+    <update id="keywordUpdate">
+        update wanjia_keyword
+        <set>
+            <if test="keywordEntity.keyword != null">
+                keyword = #{keywordEntity.keyword}
+            </if>
+            <if test="keywordEntity.url != null">
+                ,url = #{keywordEntity.url}
+            </if>
+            <if test="keywordEntity.url != null">
+                ,is_not = #{keywordEntity.isNot}
+            </if>
+        </set>
+        where delted = 0 and id = #{id}
+    </update>
+
+    <delete id="keywordDelete" parameterType="int">
+        update wanjia_keyword set delted = 1
+        where id = #{keywordEntity.id}
+    </delete>
+</mapper>
