@@ -24,4 +24,9 @@ public interface GoodsService {
      */
     Object listGoods(int pageNum,int pageSize,int id,String goodsSn,String name);
 
+    /**
+     * 查询某个商品的详细信息
+     */
+    Object queryGoodsDetail(int id);
+
 }
