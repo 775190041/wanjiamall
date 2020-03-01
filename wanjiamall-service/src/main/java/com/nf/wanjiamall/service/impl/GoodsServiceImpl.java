@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,16 +47,19 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsSpecificationEntity[] goodsSpecificationEntities = addGoodsVo.getGoodsSpecificationEntity();
         GoodsProductEntity[] goodsProductEntities = addGoodsVo.getGoodsProductEntities();
         GoodsAttributeEntity[] goodsAttributeEntities = addGoodsVo.getGoodsAttributeEntity();
+        goodsEntity.setGallerys(Arrays.toString(goodsEntity.getGallery()));
         //商品基本信息表
         goodsDao.insert(goodsEntity);
         //商品规格表
         for (GoodsSpecificationEntity goodsSpecificationEntity : goodsSpecificationEntities) {
             goodsSpecificationEntity.setGoodsId(goodsEntity.getId());
+
             goodsSpecificationDao.insert(goodsSpecificationEntity);
         }
         //商品货物表
         for (GoodsProductEntity goodsProductEntity : goodsProductEntities) {
             goodsProductEntity.setGoodsId(goodsEntity.getId());
+            goodsProductEntity.setSpecification(Arrays.toString(goodsProductEntity.getSpecifications()));
             goodsProductDao.insert(goodsProductEntity);
         }
         //参数表

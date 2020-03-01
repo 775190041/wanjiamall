@@ -8,7 +8,7 @@
     <insert id="insert">
         insert into wanjia_goods_product(goods_id, specifications, price, number,
         url, add_time, update_time, delted) values
-        (#{goodsProductEntity.goodsId},#{goodsProductEntity.specifications},#{goodsProductEntity.price}
+        (#{goodsProductEntity.goodsId},#{goodsProductEntity.specification},#{goodsProductEntity.price}
         ,#{goodsProductEntity.number},#{goodsProductEntity.url},default,default,default)
     </insert>
 <!--    商品货物修改-->

@@ -10,7 +10,7 @@ public interface GoodsSpecificationDao {
      * 商品规格添加
      */
 
-    int insert(GoodsSpecificationEntity goodsSpecificationEntity);
+    int insert(@Param("goodsSpecificationEntity") GoodsSpecificationEntity goodsSpecificationEntity);
 
     /**
      * 商品规格修改
