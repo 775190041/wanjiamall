@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @Api(tags = "广告管理")
 @RequestMapping("/api")
-public class AdvertisingController {
+public class AdminAdvertisingController {
     @Autowired
     private AdvertisingService advertisingService;
 
@@ -25,9 +25,8 @@ public class AdvertisingController {
             @ApiImplicitParam(name = "pageSize", value = "显示数据行多少，必须",required = false, dataType = "Integer")
     })
     @GetMapping("/ad/{pageNum}-{pageSize}")
-    public ResponseVo getAll(@PathVariable Integer pageNum,@PathVariable Integer pageSize){
-        List<AdvertisingEntity> list = advertisingService.getAll(pageNum,pageSize);
-        return ResponseVo.getSuccess("ok",list);
+    public Object getAll(@PathVariable Integer pageNum,@PathVariable Integer pageSize){
+        return advertisingService.getAll(pageNum,pageSize);
     }
 
     @ApiOperation(value = "insertAd",notes = "添加广告信息")
@@ -39,9 +38,9 @@ public class AdvertisingController {
             @ApiImplicitParam(name = "content", value = "广告内容",required = false, dataType = "String"),
     })
     @PostMapping("/ad")
-    public ResponseVo insertAd(AdvertisingEntity advertisingEntity){
-        advertisingService.insertAd(advertisingEntity);
-        return ResponseVo.getSuccess("ok","添加成功！");
+    public Object insertAd(AdvertisingEntity advertisingEntity){
+        return advertisingService.insertAd(advertisingEntity);
+
     }
 
     @ApiOperation(value = "updateAd",notes = "修改广告信息")
@@ -57,9 +56,8 @@ public class AdvertisingController {
             @ApiImplicitParam(name = "deleted", value = "是否删除",required = false, dataType = "Integer")
     })
     @PutMapping("/ad/{id}")
-    public ResponseVo updateAd(AdvertisingEntity advertisingEntity, @PathVariable Integer id){
-        advertisingService.updateAd(advertisingEntity, id);
-        return ResponseVo.getSuccess("ok","修改成功！");
+    public Object updateAd(AdvertisingEntity advertisingEntity, @PathVariable Integer id){
+        return advertisingService.updateAd(advertisingEntity, id);
     }
 
 
@@ -68,9 +66,8 @@ public class AdvertisingController {
             @ApiImplicitParam(name = "id", value = "广告Id",required = false, dataType = "Integer")
     })
     @DeleteMapping("/ad/{id}")
-    public ResponseVo deletedAdId(@PathVariable Integer id){
-        advertisingService.deletedAdId(id);
-        return ResponseVo.getSuccess("ok","删除成功");
+    public Object deletedAdId(@PathVariable Integer id){
+        return advertisingService.deletedAdId(id);
     }
 
 }

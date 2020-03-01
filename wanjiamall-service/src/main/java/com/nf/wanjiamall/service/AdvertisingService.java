@@ -11,11 +11,11 @@ import java.util.List;
  */
 
 public interface AdvertisingService {
-    List<AdvertisingEntity> getAll(Integer pageNum, Integer pageSize);
+    Object getAll(Integer pageNum, Integer pageSize);
 
-    void insertAd(AdvertisingEntity advertisingEntity);
+    Object insertAd(AdvertisingEntity advertisingEntity);
 
-    void updateAd(AdvertisingEntity advertisingEntity, Integer id);
+    Object updateAd(AdvertisingEntity advertisingEntity, Integer id);
 
-    Integer deletedAdId(Integer id);
+    Object deletedAdId(Integer id);
 }

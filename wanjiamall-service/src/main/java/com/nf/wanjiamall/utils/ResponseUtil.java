@@ -88,12 +88,10 @@ public class ResponseUtil {
     public static Object okList(List list) {
         Map<String, Object> data = new HashMap<String, Object>();
         PageInfo pageInfo = new PageInfo(list,10);
-        data.put("list", list);
+        data.put("pageInfo", pageInfo);
         return ok(data);
     }
-//    public static Object okList(){
-//
-//    }
+
 
     public static Object badArgument() {
         return fail(401, "参数不对");

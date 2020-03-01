@@ -4,6 +4,7 @@ package com.nf.wanjiamall.service.impl;
 import com.nf.wanjiamall.dao.AdvertisingDao;
 import com.nf.wanjiamall.entity.AdvertisingEntity;
 import com.nf.wanjiamall.service.AdvertisingService;
+import com.nf.wanjiamall.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,30 +19,29 @@ public class AdvertisingServiceImpl implements AdvertisingService {
 
     @Autowired
     private AdvertisingDao advertisingDao;
-
-    private static final Logger log = LoggerFactory.getLogger(AdvertisingServiceImpl.class);
     @Override
-    public List<AdvertisingEntity> getAll(Integer pageNum ,Integer pageSize) {
+    public Object getAll(Integer pageNum ,Integer pageSize) {
         List<AdvertisingEntity> list =  advertisingDao.getAll(pageNum,pageSize);
-        for (AdvertisingEntity advertisingEntity : list) {
-            log.debug("值"+advertisingEntity);
-        }
-        return list;
+        return ResponseUtil.okList(list);
     }
 
     @Override
-    public void insertAd(AdvertisingEntity advertisingEntity) {
+    public Object insertAd(AdvertisingEntity advertisingEntity) {
         advertisingDao.insertAd(advertisingEntity);
+        return ResponseUtil.ok();
+
     }
 
     @Override
-    public void updateAd(AdvertisingEntity advertisingEntity, Integer id) {
+    public Object updateAd(AdvertisingEntity advertisingEntity, Integer id) {
         advertisingDao.updateAd(advertisingEntity,id);
+        return ResponseUtil.ok();
     }
 
     @Override
-    public Integer deletedAdId(Integer id) {
-        return advertisingDao.deletedAdId(id);
+    public Object deletedAdId(Integer id) {
+        advertisingDao.deletedAdId(id);
+        return ResponseUtil.ok();
     }
 
 }

@@ -1,7 +1,7 @@
 package com.nf.wanjiamall.controller;
 
 import com.nf.wanjiamall.entity.CategoryEntity;
-import com.nf.wanjiamall.service.impl.CategoryServiceImpl;
+import com.nf.wanjiamall.service.CategoryService;
 import com.nf.wanjiamall.vo.CategoryVo;
 import com.nf.wanjiamall.vo.ResponseVo;
 import io.swagger.annotations.Api;
@@ -20,61 +20,19 @@ import java.util.List;
 @RestController
 @Api(tags = "wanjia_category")
 @RequestMapping("/api")
-public class CategoryController {
+public class AdminCategoryController {
 
     @Autowired
-    private CategoryServiceImpl categoryService;
+    private CategoryService categoryService;
 
-    //查询一级目录
-    @ApiOperation("查询商品父类目信息")
-    @GetMapping("/category/l1")
-    private List<CategoryEntity> queryFirstCategory(){
-        List<CategoryEntity> cateFirstLists = categoryService.getFirstCate();
-        return cateFirstLists;
-    }
+
 
     @ApiOperation("查询商品类目信息")
     @GetMapping("/category")
-    public ResponseVo getFirstCategory() {
-        List<CategoryVo> categoryVoList = new ArrayList<>();
-        List<CategoryEntity> cateFirstLists = categoryService.getFirstCate();
-        for (CategoryEntity category : cateFirstLists) {
-            CategoryVo categoryVO = new CategoryVo();
-            categoryVO.setId(category.getId());
-            categoryVO.setCategoryDesc(category.getCategoryDesc());
-            categoryVO.setIconUrl(category.getIconUrl());
-            categoryVO.setPicUrl(category.getPicUrl());
-            categoryVO.setName(category.getName());
-            categoryVO.setLevel(category.getLevel());
-
-            List<CategoryVo> children = new ArrayList<>();
-            List<CategoryEntity> subCategoryList = categoryService.getSecondCate(category.getId());
-            for (CategoryEntity categoryEntity : subCategoryList) {
-                CategoryVo subCategoryVo = new CategoryVo();
-                subCategoryVo.setId(categoryEntity.getId());
-                subCategoryVo.setCategoryDesc(categoryEntity.getCategoryDesc());
-                subCategoryVo.setIconUrl(categoryEntity.getIconUrl());
-                subCategoryVo.setPicUrl(categoryEntity.getPicUrl());
-                subCategoryVo.setName(categoryEntity.getName());
-                subCategoryVo.setLevel(categoryEntity.getLevel());
-                children.add(subCategoryVo);
-            }
-            categoryVO.setChildren(children);
-            categoryVoList.add(categoryVO);
-        }
-        return ResponseVo.getSuccess("ok",categoryVoList);
+    public Object getAllCategory() {
+       return categoryService.getAllCategory();
     }
 
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pid", dataType = "Integer", value = "获取当前父类目的id，必须", required = false)
-    })
-
-    @ApiOperation("查询商品二级类目信息")
-    @GetMapping("/category/{pid}")
-    public ResponseVo getCategory(@PathVariable Integer pid) {
-        List<CategoryEntity> cateSecondLists = categoryService.getSecondCate(pid);
-        return ResponseVo.getSuccess("ok",cateSecondLists);
-    }
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", dataType = "String", value = "类目名称，非必须", required = false),
@@ -90,9 +48,8 @@ public class CategoryController {
 
     @ApiOperation("添加商品类目表信息")
     @PostMapping("/category")
-    public ResponseVo insertCategory(CategoryEntity categoryEntity) {
-        categoryService.insertByLevel(categoryEntity);
-        return ResponseVo.getSuccess("ok","添加成功！");
+    public Object insertCategory(CategoryEntity categoryEntity) {
+        return categoryService.insertByLevel(categoryEntity);
     }
 
     @ApiImplicitParams({
@@ -108,9 +65,9 @@ public class CategoryController {
 
     @ApiOperation("修改商品类目表信息")
     @PutMapping("/category/{id}")
-    public ResponseVo updateCategory(@PathVariable Integer id,CategoryEntity categoryEntity) {
-        categoryService.updateById(categoryEntity,id);
-        return ResponseVo.getSuccess("ok","修改成功");
+    public Object updateCategory(@PathVariable Integer id,CategoryEntity categoryEntity) {
+        return categoryService.updateById(categoryEntity,id);
+
     }
 
     @ApiImplicitParams({
@@ -119,24 +76,17 @@ public class CategoryController {
 
     @ApiOperation("删除商品类目表的信息")
     @DeleteMapping("/category/{id}")
-    public ResponseVo deleteFirstCategory(@PathVariable Integer id) {
-        categoryService.deleteById(id);
-        return ResponseVo.getSuccess("ok","执行成功");
+    public Object deleteFirstCategory(@PathVariable Integer id) {
+        return categoryService.deleteById(id);
     }
-
-
 
     @ApiImplicitParams({
     @ApiImplicitParam(name = "level", dataType = "Integer", value = "类目等级，传1返回null，传2返回所有的一级目录", required = false),
     })
     @ApiOperation("查询所有一级目录")
     @GetMapping("/category/level")
-    public ResponseVo getCategory(@RequestParam(value = "level" ,required = false)int level) {
-        if (level==1){
-            return ResponseVo.getSuccess("ok",null);
-        }else {
-            return ResponseVo.getSuccess("ok",queryFirstCategory());
-        }
+    public Object getDemandCategory(@RequestParam(value = "level" ,required = false)int level) {
+        return categoryService.getDemandCategory(level);
     }
 
 

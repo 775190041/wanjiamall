@@ -2,6 +2,7 @@ package com.nf.wanjiamall.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.nf.wanjiamall.entity.IssueEntity;
+import com.nf.wanjiamall.service.IssueService;
 import com.nf.wanjiamall.service.impl.IssueServiceImpl;
 import com.nf.wanjiamall.vo.ResponseVo;
 import io.swagger.annotations.Api;
@@ -25,11 +26,10 @@ import java.util.List;
 @RestController
 @Api(tags = "wanjia_issue")
 @RequestMapping("/api")
-public class IssueController {
+public class AdminIssueController {
 
     @Autowired
-    private IssueServiceImpl issueService;
-
+    private IssueService issueService;
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", dataType = "Integer", value = "当前页码，必须", required = false),
             @ApiImplicitParam(name = "pageSize", dataType = "Integer", value = "分页大小，必须", required = false),
@@ -39,13 +39,10 @@ public class IssueController {
 
    @ApiOperation("查询常见问题表")
    @GetMapping("/issue/{pageNum}-{pageSize}")
-   public ResponseVo getIssueList(@PathVariable(required = false) int pageNum,
+   public Object getIssueList(@PathVariable(required = false) int pageNum,
                                   @PathVariable(required = false) int pageSize,
                                   @RequestParam(value = "question",required = false,defaultValue = "") String question){
-       List<IssueEntity> issueEntityList = issueService.getIssueList(pageNum, pageSize,question);
-        PageInfo<IssueEntity> pageInfo = new PageInfo<>(issueEntityList,pageSize);
-       ResponseVo responseVo = new ResponseVo(1,"查询成功",pageInfo);
-       return responseVo;
+       return issueService.getIssueList(pageNum, pageSize,question);
    }
 
     @ApiImplicitParams({
@@ -58,13 +55,8 @@ public class IssueController {
 
     @PostMapping("/issue")
     @ApiOperation("添加常见问题表")
-    public ResponseVo issueInsert(IssueEntity issueEntity) {
-       boolean result = issueService.issueInsert(issueEntity);
-       if(result != false){
-           return new ResponseVo(1,"添加成功",true);
-       }else {
-           return new ResponseVo(0,"添加失败",false);
-       }
+    public Object issueInsert(IssueEntity issueEntity) {
+        return issueService.issueInsert(issueEntity);
     }
 
     @ApiImplicitParams({
@@ -77,15 +69,8 @@ public class IssueController {
     })
     @PutMapping("/issue/{id}")
     @ApiOperation("修改常见问题表,传一个常见问题表的id过来")
-    public ResponseVo issueUpdate(@PathVariable("id") int id,IssueEntity issueEntity){
-        System.out.println("============"+issueEntity);
-        boolean result = issueService.issueUpdate(id,issueEntity);
-        if(result != false){
-            return new ResponseVo(1,"修改成功",true);
-        }else {
-            return new ResponseVo(0,"修改失败",false);
-        }
-
+    public Object issueUpdate(@PathVariable("id") int id,IssueEntity issueEntity){
+        return issueService.issueUpdate(id,issueEntity);
     }
 
 
@@ -95,14 +80,8 @@ public class IssueController {
     })
     @DeleteMapping("/issue/{id}")
     @ApiOperation("删除常见问题表")
-    public ResponseVo issueDelete(@PathVariable("id") int id){
-       boolean result = issueService.issueDelete(id);
-       if (result != false){
-           return new ResponseVo(1,"删除成功",true);
-       }
-       else {
-           return new ResponseVo(0,"删除失败",false);
-       }
+    public Object issueDelete(@PathVariable("id") int id){
+        return issueService.issueDelete(id);
     }
 
 
