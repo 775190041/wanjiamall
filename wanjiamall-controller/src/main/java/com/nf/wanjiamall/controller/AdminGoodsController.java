@@ -47,8 +47,11 @@ public class AdminGoodsController {
 
             return goodsService.listGoods(pageNum,pageSize,id,goodsSn,name);
     }
-
-
+    @ApiOperation("查询某个商品的商品详情信息,传商品id")
+    @GetMapping("/goods/{id}")
+    public Object queryGoodsDetail(@PathVariable(required = false) int id){
+        return goodsService.queryGoodsDetail(id);
+    }
 
 
 

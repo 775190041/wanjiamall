@@ -9,6 +9,7 @@ import com.nf.wanjiamall.entity.GoodsEntity;
 import com.nf.wanjiamall.entity.GoodsProductEntity;
 import com.nf.wanjiamall.entity.GoodsSpecificationEntity;
 import com.nf.wanjiamall.service.GoodsService;
+import com.nf.wanjiamall.utils.ResponseCode;
 import com.nf.wanjiamall.utils.ResponseUtil;
 import com.nf.wanjiamall.vo.AddGoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class GoodsServiceImpl implements GoodsService {
      * @param addGoodsVo
      * @return
      */
+
     @Transactional
     @Override
     public Object AddGoods(AddGoodsVo addGoodsVo) {
@@ -61,7 +63,6 @@ public class GoodsServiceImpl implements GoodsService {
         }
         return ResponseUtil.ok();
     }
-
     /**
      * 编辑商品
      * 这里修改商品是有问题的（待定）
@@ -104,6 +105,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Transactional
     @Override
     public Object delete(int id) {
+
         goodsDao.delete(id);
         goodsSpecificationDao.delete(id);
         goodsProductDao.delete(id);
@@ -124,5 +126,17 @@ public class GoodsServiceImpl implements GoodsService {
     public Object listGoods(int pageNum, int pageSize, int id, String goodsSn, String name) {
         List<GoodsEntity> goodsEntities = goodsDao.listGoods(pageNum,pageSize,id,goodsSn,name);
         return ResponseUtil.okList(goodsEntities);
+    }
+
+    /**
+     * 查询某个商品详细信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Object queryGoodsDetail(int id) {
+
+
+        return null;
     }
 }
