@@ -21,7 +21,6 @@ public class ResponseVo<T> {
     public static <T> ResponseVo getSuccess(String msg) {
         return new ResponseVo(1, msg);
     }
-
     public static <T> ResponseVo getSuccess(String msg, T data) {
         return new ResponseVo(1, msg, data);
     }

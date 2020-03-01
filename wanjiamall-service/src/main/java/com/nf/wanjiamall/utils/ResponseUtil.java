@@ -91,6 +91,9 @@ public class ResponseUtil {
         data.put("list", list);
         return ok(data);
     }
+//    public static Object okList(){
+//
+//    }
 
     public static Object badArgument() {
         return fail(401, "参数不对");
