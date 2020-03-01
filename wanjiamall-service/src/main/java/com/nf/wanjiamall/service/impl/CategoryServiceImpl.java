@@ -2,7 +2,6 @@ package com.nf.wanjiamall.service.impl;
 
 import com.nf.wanjiamall.dao.CategoryDao;
 import com.nf.wanjiamall.entity.CategoryEntity;
-import com.nf.wanjiamall.exception.AppException;
 import com.nf.wanjiamall.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +51,6 @@ public class CategoryServiceImpl implements CategoryService {
             Integer secondCateNum=categoryDao.getSecondCateCount(id);
             if (secondCateNum==0){
                 categoryDao.deleteById(id);
-            }else{
-                throw  new AppException("无法删除");
             }
         }else {
             Integer secondCateProductNum=categoryDao.getProductBySecondCateCount(id);

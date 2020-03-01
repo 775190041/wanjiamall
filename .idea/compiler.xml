@@ -11,9 +11,11 @@
         <module name="wanjiamall-controller" />
         <module name="wanjiamall-utils" />
         <module name="wanjiamall-service" />
-        <module name="wanjiamall-exception" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="wanjiamall-exception" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
