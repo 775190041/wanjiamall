@@ -2,6 +2,7 @@ package com.nf.wanjiamall.entity;
 
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -29,7 +30,10 @@ public class GoodsEntity {
     /**
      * 商品宣传图片列表 ，采用JSON数组格式
      */
-    private String gallery;
+    private String[] gallery;
+
+
+    private String gallerys;
     /**
      * 商品关键字 ，采用逗号分隔
      */
@@ -69,13 +73,17 @@ public class GoodsEntity {
     /**
      * 修改时间
      */
-    private Date updateTime;
+
+    private Timestamp updateTime;
     /**
      * 创建时间
      */
-    private Date addTime;
+    private Timestamp addTime;
+
     /**
      * 逻辑删除
      */
     private String delted;
+
+
 }

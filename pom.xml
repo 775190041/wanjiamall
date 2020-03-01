@@ -15,7 +15,6 @@
         <module>wanjiamall-dao</module>
         <module>wanjiamall-service</module>
         <module>wanjiamall-utils</module>
-        <module>wanjiamall-exception</module>
     </modules>
 
     <parent>

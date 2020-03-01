@@ -18,7 +18,10 @@ public class GoodsProductEntity {
     /**
      * 商品规格值列表 ，采用JSON数字
      */
-    private String specifications;
+    private String[] specifications;
+
+    private String specification;
+
     /**
      * 商品货品价格 ，就是这种规格的商品价格
      */

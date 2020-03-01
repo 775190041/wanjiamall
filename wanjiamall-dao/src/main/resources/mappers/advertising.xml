@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.AdvertisingDao">
+    <select id="getAll" resultType="com.nf.wanjiamall.entity.AdvertisingEntity">
+        select * from wanjia_ad where deleted = 0
+    </select>
+
+    <insert id="insertAd">
+        insert into wanjia_ad(name,link,url,position,content,enabled)
+        value(#{ad.name},#{ad.link},#{ad.url},#{ad.position},#{ad.content},#{ad.enabled})
+    </insert>
+
+    <update id="updateAd">
+        update wanjia_ad
+        <set>
+            <if test="ad.name!=null">
+                name =#{ad.name},
+            </if>
+            <if test="ad.link!=null">
+                link=#{ad.link},
+            </if>
+            <if test="ad.url!=null">
+                url=#{ad.url},
+            </if>
+            <if test="ad.position!=null">
+                position=#{ad.position},
+            </if>
+            <if test="ad.content!=null">
+                content=#{ad.content},
+            </if>
+            <if test="ad.enabled!=null">
+                enabled=#{ad.enabled}
+            </if>
+        </set>
+         where deleted = 0 and id=#{id}
+    </update>
+
+
+    <delete id="deletedAdId">
+        update wanjia_ad set deleted =1 where deleted=0 and id = #{id}
+    </delete>
+</mapper>
