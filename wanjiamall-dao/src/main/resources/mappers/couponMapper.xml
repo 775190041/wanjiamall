@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.CouponDao">
+    <select id="getAll" resultType="com.nf.wanjiamall.entity.CouponEntity">
+        select * from wanjia_coupon where deleted = 0
+    </select>
+
+    <select id="getByCoupon" resultType="com.nf.wanjiamall.entity.CouponEntity">
+        select * from wanjia_coupon where deleted = 0 and name like CONCAT('%',#{couponName},'%') and
+        type like CONCAT('%',#{couponType},'%') and status like CONCAT('%',#{couponStatus},'%')
+    </select>
+
+    <insert id="insertCoupon">
+        insert into wanjia_coupon(name,coupon_desc,tag,total,discount,min,coupon_limit,type,time_type,days,start_time,end_time)
+        value (#{coupon.name},#{coupon.couponDesc},#{coupon.tag},#{coupon.total},#{coupon.discount},
+               #{coupon.min},#{coupon.couponLimit},#{coupon.type},#{coupon.timeType},
+                <if test="#{coupon.timeType}==0">
+                    #{days},
+                </if>
+               <if test="#{coupon.timeType}==1">
+                   #{coupon.startTime},#{coupon.endTime}
+               </if>)
+    </insert>
+
+    <update id="updateCoupon">
+        update wanjia_coupon
+        <set>
+            <if test="ad.name!=null">
+                name =#{ad.name},
+            </if>
+            <if test="ad.link!=null">
+                link=#{ad.link},
+            </if>
+            <if test="ad.url!=null">
+                url=#{ad.url},
+            </if>
+            <if test="ad.position!=null">
+                position=#{ad.position},
+            </if>
+            <if test="ad.content!=null">
+                content=#{ad.content},
+            </if>
+            <if test="ad.enabled!=null">
+                enabled=#{ad.enabled}
+            </if>
+        </set>
+        where deleted = 0 and id=#{id}
+    </update>
+
+
+    <delete id="deletedCouponId">
+        update wanjia_coupon set deleted =1 where deleted=0 and id = #{id}
+    </delete>
+</mapper>

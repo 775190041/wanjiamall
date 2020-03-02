@@ -36,7 +36,7 @@ public class AdminAdvertisingController {
             @ApiImplicitParam(name = "name", value = "广告标题",required = false, dataType = "String"),
             @ApiImplicitParam(name = "content", value = "广告内容",required = false, dataType = "String")
     })
-    @GetMapping("/ad/by/{pageNum}-{pageSize}")
+    @GetMapping("/ad/by/{pageNum}/{pageSize}")
     public Object getByAd(@PathVariable Integer pageNum,@PathVariable Integer pageSize,String name,String content){
         return advertisingService.getByAd(pageNum,pageSize,name,content);
     }
