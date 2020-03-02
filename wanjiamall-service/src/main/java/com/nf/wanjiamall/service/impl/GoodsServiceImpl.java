@@ -9,6 +9,7 @@ import com.nf.wanjiamall.entity.GoodsEntity;
 import com.nf.wanjiamall.entity.GoodsProductEntity;
 import com.nf.wanjiamall.entity.GoodsSpecificationEntity;
 import com.nf.wanjiamall.service.GoodsService;
+import com.nf.wanjiamall.utils.ArrayUtils;
 import com.nf.wanjiamall.utils.ResponseCode;
 import com.nf.wanjiamall.utils.ResponseUtil;
 import com.nf.wanjiamall.vo.AddGoodsVo;
@@ -47,8 +48,10 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsSpecificationEntity[] goodsSpecificationEntities = addGoodsVo.getGoodsSpecificationEntity();
         GoodsProductEntity[] goodsProductEntities = addGoodsVo.getGoodsProductEntities();
         GoodsAttributeEntity[] goodsAttributeEntities = addGoodsVo.getGoodsAttributeEntity();
-        //把数组转变为字符串
-        goodsEntity.setGallerys(Arrays.toString(goodsEntity.getGallery()));
+        //把数组转变为字符串加双引号
+        String gallery = ArrayUtils.addDouble( goodsEntity.getGallery());
+
+         goodsEntity.setGallerys(gallery);
         //商品基本信息表
         goodsDao.insert(goodsEntity);
         //商品规格表
@@ -60,7 +63,8 @@ public class GoodsServiceImpl implements GoodsService {
         for (GoodsProductEntity goodsProductEntity : goodsProductEntities) {
             goodsProductEntity.setGoodsId(goodsEntity.getId());
             //把数组转变为字符串
-            goodsProductEntity.setSpecification(Arrays.toString(goodsProductEntity.getSpecifications()));
+            String specifications = ArrayUtils.addDouble(goodsProductEntity.getSpecifications());
+            goodsProductEntity.setSpecification(specifications);
             goodsProductDao.insert(goodsProductEntity);
         }
         //参数表
@@ -84,7 +88,8 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsProductEntity[] goodsProductEntities = addGoodsVo.getGoodsProductEntities();
         GoodsAttributeEntity[] goodsAttributeEntities = addGoodsVo.getGoodsAttributeEntity();
         //把数组转变为字符串
-        goodsEntity.setGallerys(Arrays.toString(goodsEntity.getGallery()));
+        String gallery = ArrayUtils.addDouble( goodsEntity.getGallery());
+        goodsEntity.setGallerys(gallery);
         //商品基本信息表
         goodsDao.update(goodsEntity);
         //商品规格表
@@ -94,7 +99,8 @@ public class GoodsServiceImpl implements GoodsService {
         //商品货物表
         for (GoodsProductEntity goodsProductEntity : goodsProductEntities) {
             //把数组转变为字符串
-            goodsProductEntity.setSpecification(Arrays.toString(goodsProductEntity.getSpecifications()));
+            String specifications = ArrayUtils.addDouble(goodsProductEntity.getSpecifications());
+            goodsProductEntity.setSpecification(specifications);
             goodsProductDao.update(goodsProductEntity);
         }
         //参数表

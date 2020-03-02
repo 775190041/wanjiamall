@@ -11,7 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @MapperScan(basePackages = {"com.nf.wanjiamall.dao"})
 public class WanjiaApplication {
-
     public static void main(String[] args) {
        SpringApplication.run(WanjiaApplication.class, args);
     }
