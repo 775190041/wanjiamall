@@ -27,7 +27,7 @@ public class AdminUserController{
 
     })
     @ApiOperation("查询用户表")
-    @GetMapping("/user/{pageNum}-{pageSize}")
+    @GetMapping("/user/{pageNum}/{pageSize}")
     public Object getIssueList(@PathVariable(required = false) int pageNum,
                                @PathVariable(required = false) int pageSize,
                                @RequestParam(value = "username",required = false,defaultValue = "") String username,

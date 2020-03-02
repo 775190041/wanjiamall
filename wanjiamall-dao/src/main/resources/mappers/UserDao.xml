@@ -29,10 +29,12 @@
         <where>
             deleted = 0
             <if test="username != ''">
-                and username like '%' #{username} '%'
+            <bind name="pattern" value="'%'+_parameter.username+'%'"/>
+                and username like  #{pattern}
             </if>
-            <if test="mobile != ''">
-                and mobile like '%' #{mobile} '%'
+                <if test="mobile != ''">
+                <bind name="pattern2" value="'%'+_parameter.mobile+'%'"/>
+                and mobile like #{pattern2}
             </if>
         </where>
     </select>
