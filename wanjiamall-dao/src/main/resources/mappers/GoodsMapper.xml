@@ -6,15 +6,15 @@
 
 <!-- 上架商品  -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-    insert into wanjia_goods(goods_sn, name, category_id
+    insert into wanjia_goods(goods_sn, name, category_id,
     , brand_id, gallery, keywords, brief, is_on_sale
     , is_new, is_hot, unit, counter_price, retail_price
-    , detail, add_time, update_time, delted)
+    , detail, add_time, update_time, delted,pic_url)
     values(#{goodsEntity.goodsSn},#{goodsEntity.name},#{goodsEntity.categoryId}
     ,#{goodsEntity.brandId},#{goodsEntity.gallerys},#{goodsEntity.keywords}
     ,#{goodsEntity.brief},#{goodsEntity.isOnSale},#{goodsEntity.isNew}
     ,#{goodsEntity.isHot},#{goodsEntity.unit},#{goodsEntity.counterPrice}
-    ,#{goodsEntity.retailPrice},#{goodsEntity.detail},default,default,default)
+    ,#{goodsEntity.retailPrice},#{goodsEntity.detail},default,default,default,#{goodsEntity.picUrl})
     </insert>
 
 <!--    修改商品信息-->
@@ -25,7 +25,7 @@
                 goods_sn = #{goods.goodsSn},
             </if>
             <if test="goods.name != null">
-                'name' = #{goods.name},
+                name = #{goods.name},
             </if>
             <if test="goods.categoryId != null">
                 category_id = #{goods.categoryId},
@@ -61,7 +61,10 @@
                 retailPrice = #{goods.retailPrice},
             </if>
             <if test="goods.detail != null">
-                retailPrice = #{goods.detail},
+                detail = #{goods.detail},
+            </if>
+            <if test="goods.picUrl != null">
+                pic_url = #{goods.picUrl},
             </if>
         </set>
         where id = # {goods.id}
@@ -74,7 +77,7 @@
     </update>
     <resultMap id="goodsEntityResultMap" type="com.nf.wanjiamall.entity.GoodsEntity">
         <id column="id" property="id"/>
-        <result column="gallery" property="gallery"  typeHandler="com.nf.wanjiamall.dao.utlis.JsonStringArrayTypeHandler"/>
+        <result column="gallery"  property="gallery"  typeHandler="com.nf.wanjiamall.dao.utlis.JsonStringArrayTypeHandler"/>
     </resultMap>
 <!--    搜索-->
     <select id="listGoods" resultMap="goodsEntityResultMap">
