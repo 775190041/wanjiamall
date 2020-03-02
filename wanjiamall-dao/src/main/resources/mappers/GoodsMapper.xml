@@ -34,7 +34,7 @@
                 brand_id = #{goods.brandId },
             </if>
             <if test="goods.gallery != null">
-                gallery = #{goods.gallery},
+                gallery = #{goods.gallerys},
             </if>
             <if test="goods.keywords != null">
                 keywords = #{goods.keywords},

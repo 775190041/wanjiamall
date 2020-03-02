@@ -16,7 +16,7 @@
         update wanjia_goods_product
         <set>
             <if test="goodsProductEntity.specifications != null">
-                specifications = #{goodsProductEntity.specifications},
+                specifications = #{goodsProductEntity.specification},
             </if>
             <if test="goodsProductEntity.price != null ">
                 price = #{goodsProductEntity.price},

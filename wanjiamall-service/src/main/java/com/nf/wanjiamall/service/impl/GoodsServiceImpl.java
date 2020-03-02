@@ -47,18 +47,19 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsSpecificationEntity[] goodsSpecificationEntities = addGoodsVo.getGoodsSpecificationEntity();
         GoodsProductEntity[] goodsProductEntities = addGoodsVo.getGoodsProductEntities();
         GoodsAttributeEntity[] goodsAttributeEntities = addGoodsVo.getGoodsAttributeEntity();
+        //把数组转变为字符串
         goodsEntity.setGallerys(Arrays.toString(goodsEntity.getGallery()));
         //商品基本信息表
         goodsDao.insert(goodsEntity);
         //商品规格表
         for (GoodsSpecificationEntity goodsSpecificationEntity : goodsSpecificationEntities) {
             goodsSpecificationEntity.setGoodsId(goodsEntity.getId());
-
             goodsSpecificationDao.insert(goodsSpecificationEntity);
         }
         //商品货物表
         for (GoodsProductEntity goodsProductEntity : goodsProductEntities) {
             goodsProductEntity.setGoodsId(goodsEntity.getId());
+            //把数组转变为字符串
             goodsProductEntity.setSpecification(Arrays.toString(goodsProductEntity.getSpecifications()));
             goodsProductDao.insert(goodsProductEntity);
         }
@@ -82,21 +83,22 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsSpecificationEntity[] goodsSpecificationEntities = addGoodsVo.getGoodsSpecificationEntity();
         GoodsProductEntity[] goodsProductEntities = addGoodsVo.getGoodsProductEntities();
         GoodsAttributeEntity[] goodsAttributeEntities = addGoodsVo.getGoodsAttributeEntity();
+        //把数组转变为字符串
+        goodsEntity.setGallerys(Arrays.toString(goodsEntity.getGallery()));
         //商品基本信息表
         goodsDao.update(goodsEntity);
         //商品规格表
         for (GoodsSpecificationEntity goodsSpecificationEntity : goodsSpecificationEntities) {
-
             goodsSpecificationDao.update(goodsSpecificationEntity);
         }
         //商品货物表
         for (GoodsProductEntity goodsProductEntity : goodsProductEntities) {
-
+            //把数组转变为字符串
+            goodsProductEntity.setSpecification(Arrays.toString(goodsProductEntity.getSpecifications()));
             goodsProductDao.update(goodsProductEntity);
         }
         //参数表
         for (GoodsAttributeEntity goodsAttributeEntity : goodsAttributeEntities) {
-
             goodsAttributeDao.update(goodsAttributeEntity);
         }
         return ResponseUtil.ok();
