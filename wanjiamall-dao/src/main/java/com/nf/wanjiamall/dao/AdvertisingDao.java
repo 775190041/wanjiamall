@@ -13,7 +13,7 @@ public interface AdvertisingDao {
 
     void insertAd(@Param("ad") AdvertisingEntity advertisingEntity);
 
-    void updateAd(@Param("ad") AdvertisingEntity advertisingEntity, @Param("id") Integer id);
+    int updateAd(@Param("ad") AdvertisingEntity advertisingEntity, @Param("id") Integer id);
 
     Integer deletedAdId(@Param("id")Integer id);
 }
