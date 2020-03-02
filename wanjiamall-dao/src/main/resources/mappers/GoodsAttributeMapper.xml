@@ -27,7 +27,7 @@
     </update>
 
     <update id="delete" >
-        update wanjia_goods_attribute set delted = 1 where id = #{goodsAttr.id}
+        update wanjia_goods_attribute set delted = 1 where id = #{id}
     </update>
 
     <select id="listGoodsById" resultType="com.nf.wanjiamall.entity.GoodsAttributeEntity">
