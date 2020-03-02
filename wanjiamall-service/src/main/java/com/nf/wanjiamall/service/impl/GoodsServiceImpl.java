@@ -48,7 +48,8 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsProductEntity[] goodsProductEntities = addGoodsVo.getGoodsProductEntities();
         GoodsAttributeEntity[] goodsAttributeEntities = addGoodsVo.getGoodsAttributeEntity();
         //把数组转变为字符串
-        goodsEntity.setGallerys(Arrays.toString(goodsEntity.getGallery()));
+        String gallery = Arrays.toString(goodsEntity.getGallery());
+         goodsEntity.setGallerys(gallery);
         //商品基本信息表
         goodsDao.insert(goodsEntity);
         //商品规格表
