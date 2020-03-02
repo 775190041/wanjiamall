@@ -129,7 +129,7 @@ public class GoodsServiceImpl implements GoodsService {
      * @return
      */
     @Override
-    public Object listGoods(int pageNum, int pageSize, int id, String goodsSn, String name) {
+    public Object listGoods(int pageNum, int pageSize, Integer id, String goodsSn, String name) {
         List<GoodsEntity> goodsEntities = goodsDao.listGoods(pageNum,pageSize,id,goodsSn,name);
         return ResponseUtil.okList(goodsEntities);
     }
