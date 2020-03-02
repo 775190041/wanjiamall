@@ -1,7 +1,5 @@
 package com.nf.wanjiamall.vo;
 
-
-import com.nf.wanjiamall.entity.CategoryEntity;
 import lombok.Data;
 
 import java.util.List;

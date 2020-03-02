@@ -14,7 +14,7 @@
         update_time, delted from wanjiamall_category where delted=0 and level=2 and pid=#{pid}
     </select>
 
-    <insert id="insertByLevelFirst">
+    <insert id="insertByLevel">
         insert into wanjiamall_category(name, category_desc, pid,icon_url, pic_url,
          level, update_time, add_time, delted) values (#{name},#{categoryDesc},#{pid},
          #{iconUrl},#{picUrl},#{level},#{updateTime},#{addTime},default)

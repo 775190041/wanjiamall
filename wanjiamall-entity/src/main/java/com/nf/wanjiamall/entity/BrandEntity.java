@@ -1,6 +1,8 @@
 package com.nf.wanjiamall.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
@@ -8,6 +10,8 @@ import java.sql.Timestamp;
  * @author lzn
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BrandEntity {
     private Integer id;
     private String name;

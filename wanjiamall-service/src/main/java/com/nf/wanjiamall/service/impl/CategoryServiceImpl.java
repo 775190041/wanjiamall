@@ -79,12 +79,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 
-
-
-
     @Override
     public Object insertByLevel(CategoryEntity categoryEntity) {
-        if (  categoryDao.insertByLevelFirst(categoryEntity) >0){
+        if (  categoryDao.insertByLevel(categoryEntity) >0){
            return ResponseUtil.ok();
         }else {
            return ResponseUtil.fail(505,"添加失败");
