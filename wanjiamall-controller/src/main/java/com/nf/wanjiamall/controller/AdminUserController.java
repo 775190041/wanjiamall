@@ -26,7 +26,7 @@ public class AdminUserController{
             @ApiImplicitParam(name = "mobile", dataType = "String", value = "手机号，非必须", required = false)
 
     })
-    @ApiOperation("查询常见问题表")
+    @ApiOperation("查询用户表")
     @GetMapping("/user/{pageNum}-{pageSize}")
     public Object getIssueList(@PathVariable(required = false) int pageNum,
                                @PathVariable(required = false) int pageSize,
