@@ -79,7 +79,7 @@
             <where>
                 delted = 0
                 <if test="id != null">
-                    and id like '%' #{id} '%'
+                    and id = #{id}
                 </if>
                 <if test="goodsSn != null">
                     and goods_sn like '%' #{goodsSn} '%'
