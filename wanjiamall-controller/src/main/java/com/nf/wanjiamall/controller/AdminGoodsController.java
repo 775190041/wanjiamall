@@ -17,18 +17,20 @@ public class AdminGoodsController {
     @Autowired
     private GoodsService goodsService;
 
+
     @ApiOperation("上架商品，以json格式传过来")
     @PostMapping("/goods")
     public Object AddGoods (@RequestBody AddGoodsVo addGoodsVo){
-
         return goodsService.AddGoods(addGoodsVo);
     }
+
 
     @ApiOperation("编辑商品，以json格式传过来,不用通过路径传id，只要把商品id放在json里面")
     @PutMapping("/goods")
     public Object updateGoods(@RequestBody AddGoodsVo addGoodsVo){
         return goodsService.updateGoods(addGoodsVo);
     }
+
 
     @ApiOperation("删除商品")
     @DeleteMapping("/goods/{id}")
@@ -46,6 +48,7 @@ public class AdminGoodsController {
                             @RequestParam(value = "name",required = false,defaultValue = "") String name){
             return goodsService.listGoods(pageNum,pageSize,id,goodsSn,name);
     }
+
     @ApiOperation("查询某个商品的商品详情信息,传商品id")
     @GetMapping("/goods/{id}")
     public Object queryGoodsDetail(@PathVariable(required = false) int id){

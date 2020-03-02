@@ -22,7 +22,7 @@ public interface GoodsService {
     /**
      * 查询所有商品
      */
-    Object listGoods(int pageNum,int pageSize,int id,String goodsSn,String name);
+    Object listGoods(int pageNum,int pageSize,Integer id,String goodsSn,String name);
 
     /**
      * 查询某个商品的详细信息
