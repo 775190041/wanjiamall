@@ -20,7 +20,7 @@ public interface CategoryService {
      * @return
      */
 
-    Object getDemandCategory(int level);
+    Object getDemandCategory();
 
     //删除
     List<CategoryEntity> getFirstCate();
