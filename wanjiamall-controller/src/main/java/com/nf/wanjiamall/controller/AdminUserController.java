@@ -28,8 +28,8 @@ public class AdminUserController{
     })
     @ApiOperation("查询用户表")
     @GetMapping("/user/{pageNum}/{pageSize}")
-    public Object getIssueList(@PathVariable(required = false) int pageNum,
-                               @PathVariable(required = false) int pageSize,
+    public Object getIssueList(@PathVariable(required = false) Integer pageNum,
+                               @PathVariable(required = false) Integer pageSize,
                                @RequestParam(value = "username",required = false,defaultValue = "") String username,
                                @RequestParam(value = "mobile",required = false,defaultValue = "") String mobile){
         return userService.getUserList(pageNum, pageSize, username, mobile);

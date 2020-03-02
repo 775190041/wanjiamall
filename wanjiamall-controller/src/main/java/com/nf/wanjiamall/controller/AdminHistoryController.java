@@ -26,8 +26,8 @@ public class AdminHistoryController {
     })
     @ApiOperation("查询搜索历史表")
     @GetMapping("/searchHistory/{pageNum}/{pageSize}")
-    public Object getIssueList(@PathVariable(required = false) int pageNum,
-                               @PathVariable(required = false) int pageSize,
+    public Object getIssueList(@PathVariable(required = false) Integer pageNum,
+                               @PathVariable(required = false) Integer pageSize,
                                SearchHistoryEntity searchHistoryEntity){
         return searchHistoryService.getSearchHistoryList(pageNum, pageSize, searchHistoryEntity);
     }

@@ -7,5 +7,5 @@ import org.apache.ibatis.annotations.Param;
  * @author 南八
  */
 public interface SearchHistoryService {
-   Object getSearchHistoryList(int pageNum, int pageSize, SearchHistoryEntity searchHistoryEntity);
+   Object getSearchHistoryList(Integer pageNum, Integer pageSize, SearchHistoryEntity searchHistoryEntity);
 }

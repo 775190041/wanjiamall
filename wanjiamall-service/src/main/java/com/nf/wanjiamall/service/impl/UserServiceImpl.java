@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public Object getUserList(int pageNum, int pageSize, String username, String mobile) {
+    public Object getUserList(Integer pageNum, Integer pageSize, String username, String mobile) {
         List<UserEntity> userEntities = userDao.getUserList(pageNum, pageSize, username, mobile);
         return ResponseUtil.okList(userEntities);
     }

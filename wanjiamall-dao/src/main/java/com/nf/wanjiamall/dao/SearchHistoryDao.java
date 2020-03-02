@@ -9,6 +9,6 @@ import java.util.List;
  * @author 南八
  */
 public interface SearchHistoryDao {
-    List<SearchHistoryEntity> getSearchHistoryList(@Param("pageNum") int pageNum, @Param("pageSize") int pageSize,
+    List<SearchHistoryEntity> getSearchHistoryList(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,
                                                    @Param("searchHistory") SearchHistoryEntity searchHistoryEntity);
 }

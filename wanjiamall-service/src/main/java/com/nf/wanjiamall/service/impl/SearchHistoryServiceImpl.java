@@ -20,7 +20,7 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
     @Autowired
     private SearchHistoryDao searchHistoryDao;
     @Override
-    public Object getSearchHistoryList(int pageNum, int pageSize,SearchHistoryEntity searchHistoryEntity) {
+    public Object getSearchHistoryList(Integer pageNum, Integer pageSize,SearchHistoryEntity searchHistoryEntity) {
         List<SearchHistoryEntity> searchHistoryEntities = searchHistoryDao.getSearchHistoryList(pageNum, pageSize, searchHistoryEntity);
         return ResponseUtil.okList(searchHistoryEntities);
     }

@@ -9,6 +9,6 @@ import java.util.List;
  * @author 南八
  */
 public interface UserDao {
-    List<UserEntity> getUserList(@Param("pageNum") int pageNum,@Param("pageSize") int pageSize,
+    List<UserEntity> getUserList(@Param("pageNum") Integer pageNum,@Param("pageSize") Integer pageSize,
                                  @Param("username") String username,@Param("mobile") String mobile);
 }
