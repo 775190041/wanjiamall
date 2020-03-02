@@ -38,7 +38,7 @@ public class AdminGoodsController {
 
 
     @ApiOperation("查询所有商品数据,")
-    @GetMapping("/goods/{pageNum}-{pageSize}")
+    @GetMapping("/goods/{pageNum}/{pageSize}")
     public Object listGoods(@PathVariable(required = false) int pageNum,
                             @PathVariable(required = false) int pageSize,
                             @RequestParam(value = "id",required = false,defaultValue = "") Integer id,

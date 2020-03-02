@@ -36,7 +36,7 @@ public class AdminIssueController {
     })
 
    @ApiOperation("查询常见问题表")
-   @GetMapping("/issue/{pageNum}-{pageSize}")
+   @GetMapping("/issue/{pageNum}/{pageSize}")
    public Object getIssueList(@PathVariable(required = false) int pageNum,
                                   @PathVariable(required = false) int pageSize,
                                   @RequestParam(value = "question",required = false,defaultValue = "") String question){

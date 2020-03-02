@@ -24,7 +24,7 @@ public class AdminAdvertisingController {
             @ApiImplicitParam(name = "pageNum", value = "当前页码，必须",required = false, dataType = "Integer"),
             @ApiImplicitParam(name = "pageSize", value = "显示数据行多少，必须",required = false, dataType = "Integer")
     })
-    @GetMapping("/ad/{pageNum}-{pageSize}")
+    @GetMapping("/ad/{pageNum}/{pageSize}")
     public Object getAll(@PathVariable Integer pageNum,@PathVariable Integer pageSize){
         return advertisingService.getAll(pageNum,pageSize);
     }
