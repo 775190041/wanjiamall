@@ -30,7 +30,7 @@ public class AdminKeywordController {
 
     })
     @ApiOperation("查询关键字表")
-    @GetMapping("/keyword/{pageNum}-{pageSize}")
+    @GetMapping("/keyword/{pageNum}/{pageSize}")
     public Object getKeywordList(@PathVariable(required = false) int pageNum,
                                      @PathVariable(required = false) int pageSize,
                                      @RequestParam(value = "keyword",required = false,defaultValue = "") String keyword){
