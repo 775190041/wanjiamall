@@ -74,7 +74,7 @@
     </update>
     <resultMap id="goodsEntityResultMap" type="com.nf.wanjiamall.entity.GoodsEntity">
         <id column="id" property="id"/>
-        <result column="gallery" javaType="VARCHAR" property="gallery"  typeHandler="com.nf.wanjiamall.dao.utlis.JsonStringArrayTypeHandler"/>
+        <result column="gallery" property="gallery"  typeHandler="com.nf.wanjiamall.dao.utlis.JsonStringArrayTypeHandler"/>
     </resultMap>
 <!--    搜索-->
     <select id="listGoods" resultMap="goodsEntityResultMap">
