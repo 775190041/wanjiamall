@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="wanjiamall-entity" />
-        <module name="wanjiamall-dao" />
         <module name="wanjiamall-controller" />
         <module name="wanjiamall-utils" />
+        <module name="wanjiamall-entity" />
         <module name="wanjiamall-service" />
+        <module name="wanjiamall-dao" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

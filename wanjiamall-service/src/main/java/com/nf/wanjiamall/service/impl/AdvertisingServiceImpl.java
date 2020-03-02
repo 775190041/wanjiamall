@@ -26,6 +26,12 @@ public class AdvertisingServiceImpl implements AdvertisingService {
     }
 
     @Override
+    public Object getByAd(Integer pageNum, Integer pageSize, String name, String content) {
+        List<AdvertisingEntity> list =  advertisingDao.getByAd(pageNum,pageSize,name,content);
+        return ResponseUtil.okList(list);
+    }
+
+    @Override
     public Object insertAd(AdvertisingEntity advertisingEntity) {
         advertisingDao.insertAd(advertisingEntity);
         return ResponseUtil.ok();

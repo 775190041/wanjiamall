@@ -7,6 +7,11 @@
         select * from wanjia_ad where deleted = 0
     </select>
 
+    <select id="getByAd" resultType="com.nf.wanjiamall.entity.AdvertisingEntity">
+        select * from wanjia_ad where deleted = 0 and name like CONCAT('%',#{adName},'%') and
+        content like CONCAT('%',#{adContent},'%')
+    </select>
+
     <insert id="insertAd">
         insert into wanjia_ad(name,link,url,position,content,enabled)
         value(#{ad.name},#{ad.link},#{ad.url},#{ad.position},#{ad.content},#{ad.enabled})
