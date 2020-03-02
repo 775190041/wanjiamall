@@ -22,11 +22,11 @@ public interface CategoryDao {
     /**
      * 添加类目
      */
-    void insertByLevelFirst(CategoryEntity categoryEntity);
+    int insertByLevelFirst(CategoryEntity categoryEntity);
 
     List<CategoryEntity> getById(Integer id);
 
-    void updateById(@Param("cate") CategoryEntity categoryEntity,Integer id);
+    int updateById(@Param("cate") CategoryEntity categoryEntity,Integer id);
 
     /**
      * 先判断选中的id值为一级类目还是二级类目

@@ -3,6 +3,7 @@ package com.nf.wanjiamall.service.impl;
 import com.nf.wanjiamall.dao.IssueDao;
 import com.nf.wanjiamall.entity.IssueEntity;
 import com.nf.wanjiamall.service.IssueService;
+import com.nf.wanjiamall.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,29 +21,40 @@ public class IssueServiceImpl implements IssueService {
     private IssueDao issueDao;
 
     @Override
-    public List<IssueEntity> getIssueList(int pageNum, int pageSize,String question) {
+    public Object getIssueList(int pageNum, int pageSize,String question) {
         List<IssueEntity> issueEntities = issueDao.getIssueList(pageNum, pageSize,question);
-        for (IssueEntity issueEntity : issueEntities) {
-            log.debug("值"+issueEntity);
+        return ResponseUtil.okList(issueEntities);
+    }
+
+
+
+    @Override
+    public Object issueInsert(IssueEntity issueEntity){
+        if (issueDao.issueInsert(issueEntity) > 0){
+            return ResponseUtil.ok();
+        }else {
+            return ResponseUtil.fail(505,"添加失败");
         }
-        return issueEntities;
-    }
-
-
-
-    @Override
-    public boolean issueInsert(IssueEntity issueEntity){
-        return issueDao.issueInsert(issueEntity) > 0 ? true:false;
     }
 
     @Override
-    public boolean issueUpdate(int id,IssueEntity issueEntity) {
-        return issueDao.issueUpdate(id, issueEntity) > 0 ? true:false;
+    public Object issueUpdate(int id,IssueEntity issueEntity) {
+        if (issueDao.issueUpdate(id, issueEntity) > 0){
+            return ResponseUtil.ok();
+        }else {
+            return ResponseUtil.fail(505,"修改失败");
+        }
+
     }
 
     @Override
-    public boolean issueDelete(int id) {
-        return issueDao.issueDelete(id) > 0 ? true:false;
+    public Object issueDelete(int id) {
+        if (issueDao.issueDelete(id) > 0){
+            return ResponseUtil.ok();
+        }else {
+            return ResponseUtil.fail(505,"删除失败");
+        }
+
     }
 
 }

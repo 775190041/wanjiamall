@@ -1,9 +1,8 @@
 package com.nf.wanjiamall.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.nf.wanjiamall.entity.KeywordEntity;
-import com.nf.wanjiamall.service.impl.KeywordServiceImpl;
-import com.nf.wanjiamall.vo.ResponseVo;
+import com.nf.wanjiamall.service.KeywordService;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -20,9 +19,9 @@ import java.util.List;
 @RestController
 @Api(tags = "wanjia_keyword")
 @RequestMapping("/api")
-public class KeywordController {
+public class AdminKeywordController {
     @Autowired
-    private KeywordServiceImpl keywordService;
+    private KeywordService keywordService;
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", dataType = "Integer", value = "当前页码，必须", required = false),
@@ -32,13 +31,10 @@ public class KeywordController {
     })
     @ApiOperation("查询关键字表")
     @GetMapping("/keyword/{pageNum}-{pageSize}")
-    public ResponseVo getKeywordList(@PathVariable(required = false) int pageNum,
+    public Object getKeywordList(@PathVariable(required = false) int pageNum,
                                      @PathVariable(required = false) int pageSize,
                                      @RequestParam(value = "keyword",required = false,defaultValue = "") String keyword){
-        List<KeywordEntity> keywordEntityList = keywordService.getKeywordList(pageNum, pageSize,keyword);
-        PageInfo<KeywordEntity> pageInfo = new PageInfo<KeywordEntity>(keywordEntityList,pageSize);
-        ResponseVo responseVo = new ResponseVo(1,"查询成功",pageInfo);
-        return responseVo;
+        return keywordService.getKeywordList(pageNum, pageSize,keyword);
     }
 
 
@@ -50,13 +46,8 @@ public class KeywordController {
     })
     @PostMapping("/keyword")
     @ApiOperation("添加关键字表")
-    public ResponseVo keywordInsert(KeywordEntity keywordEntity) throws ParseException {
-        boolean result = keywordService.keywordInsert(keywordEntity);
-        if(result != false){
-            return new ResponseVo(1,"添加成功",true);
-        }else {
-            return new ResponseVo(0,"添加失败",false);
-        }
+    public Object keywordInsert(KeywordEntity keywordEntity) throws ParseException {
+       return keywordService.keywordInsert(keywordEntity);
     }
 
 
@@ -72,14 +63,8 @@ public class KeywordController {
     })
     @PutMapping("/keyword/{id}")
     @ApiOperation("修改关键字表,传一个关键字表的id过来")
-    public ResponseVo keywordUpdate(@PathVariable("id") int id,KeywordEntity keywordEntity){
-        boolean result = keywordService.keywordUpdate(id,keywordEntity);
-        if(result != false){
-            return new ResponseVo(1,"修改成功",true);
-        }else {
-            return new ResponseVo(0,"修改失败",false);
-        }
-
+    public Object keywordUpdate(@PathVariable("id") int id,KeywordEntity keywordEntity){
+        return keywordService.keywordUpdate(id,keywordEntity);
     }
 
 
@@ -89,14 +74,8 @@ public class KeywordController {
     })
     @DeleteMapping("/keyword/{id}")
     @ApiOperation("删除常见问题表")
-    public ResponseVo keywordDelete(@PathVariable("id") int id){
-        boolean result = keywordService.keywordDelete(id);
-        if (result != false){
-            return new ResponseVo(1,"删除成功",true);
-        }
-        else {
-            return new ResponseVo(0,"删除失败",false);
-        }
+    public Object keywordDelete(@PathVariable("id") int id){
+        return keywordService.keywordDelete(id);
     }
 
 }
