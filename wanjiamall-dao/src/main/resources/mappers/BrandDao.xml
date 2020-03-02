@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.BrandDao">
+    <select id="getAll" resultType="com.nf.wanjiamall.entity.BrandEntity">
+        select id, name, brand_desc, pic_url, floor_price, add_time, update_time,
+        delted from wanjia_brand where delted=0
+    </select>
+
+    <select id="getByConditions" resultType="com.nf.wanjiamall.entity.BrandEntity">
+        select id, name, brand_desc, pic_url, floor_price, add_time, update_time,
+        delted from wanjia_brand
+        where delted=0
+        <if test="brand.id!=null">
+            and id=#{brand.id}
+        </if>
+        <if test="brand.name!=null">
+            and name=#{brand.name}
+        </if>
+        order by id
+    </select>
+
+    <insert id="insert">
+        insert into wanjia_brand(name, brand_desc, pic_url, floor_price, add_time,
+        update_time, delted) values (#{name},#{brandDesc},#{picUrl},#{floorPrice},
+        #{addTime},#{updateTime},#{delted})
+    </insert>
+
+    <update id="updateById">
+        update wanjia_brand
+        <set>
+            <if test="brand.name!=null">
+                name=#{brand.name},
+            </if>
+            <if test="brand.brandDesc!=null">
+                brand_desc=#{brand.brandDesc},
+            </if>
+            <if test="brand.picUrl!=null">
+                pic_url=#{brand.picUrl},
+            </if>
+            <if test="brand.floorPrice!=null">
+                floor_price=#{brand.floorPrice}
+            </if>
+        </set>
+        where delted=0 and id=#{id};
+    </update>
+
+    <select id="getProductByBrandCount" resultType="int">
+        select count(brand_id) from wanjia_goods where delted=0 and brand_id=#{id};
+    </select>
+
+    <delete id="deleteById">
+        update wanjia_brand set delted=1 where delted=0 and id=#{id}
+    </delete>
+
+</mapper>
