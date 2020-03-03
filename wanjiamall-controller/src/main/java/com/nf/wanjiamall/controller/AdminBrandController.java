@@ -27,7 +27,7 @@ public class AdminBrandController {
     })
 
     @ApiOperation("查询品牌表的信息")
-    @GetMapping("/brand/{pageNum}-{pageSize}")
+    @GetMapping("/brand/{pageNum}/{pageSize}")
     public Object getBrand(@PathVariable Integer pageNum, @PathVariable Integer pageSize,BrandEntity brandEntity) {
         return brandService.getByConditions(pageNum,pageSize,brandEntity);
     }
