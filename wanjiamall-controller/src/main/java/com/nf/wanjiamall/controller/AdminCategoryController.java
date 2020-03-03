@@ -82,9 +82,9 @@ public class AdminCategoryController {
         @ApiImplicitParam(name = "level", dataType = "Integer", value = "类目等级，传1返回null，传2返回所有的一级目录", required = false),
     })
     @ApiOperation("查询所有一级目录")
-    @GetMapping("/category/level")
-    public Object getDemandCategory(@RequestParam(value = "level" ,required = false)int level) {
-        return categoryService.getDemandCategory(level);
+    @GetMapping("/category/l1")
+    public Object getDemandCategory() {
+        return categoryService.getDemandCategory();
     }
 
 }

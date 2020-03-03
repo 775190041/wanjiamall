@@ -60,16 +60,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     /**
      * 根据需求查询目录
-     * @param level
      * @return
      */
     @Override
-    public Object getDemandCategory(int level) {
-        if (level==1){
-            return ResponseUtil.ok(null);
-        }else {
-            return ResponseUtil.ok(categoryDao.getFirstCate());
-        }
+    public Object getDemandCategory() {
+       return ResponseUtil.ok(categoryDao.getFirstCate());
     }
 
 
