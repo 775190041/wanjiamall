@@ -24,7 +24,7 @@
     <insert id="insert">
         insert into wanjia_brand(name, brand_desc, pic_url, floor_price, add_time,
         update_time, delted) values (#{name},#{brandDesc},#{picUrl},#{floorPrice},
-        #{addTime},#{updateTime},#{delted})
+        #{addTime},#{updateTime},default)
     </insert>
 
     <update id="updateById">
