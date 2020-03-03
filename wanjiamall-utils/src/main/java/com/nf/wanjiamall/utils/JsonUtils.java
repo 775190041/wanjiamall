@@ -1,5 +1,6 @@
 package com.nf.wanjiamall.utils;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -68,9 +69,19 @@ public class JsonUtils {
             return bean;
         }
 
-    public static void main(String[] args) {
-        Map<String,String> masp = new HashMap<>();
-        masp.put("key","12");
-        System.out.println(JsonUtils.getJsonString(masp));
-    }
+    /**
+     * 将json字符串转为Map
+     * @param data
+     * @return
+     */
+    public static Map<String, String> toMap(String data) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                return objectMapper.readValue(data, new TypeReference<Map<String, String>>() {
+                });
+            } catch (IOException e) {
+                System.out.println("json转Mapper集合失败！");
+            }
+            return null;
+        }
 }
