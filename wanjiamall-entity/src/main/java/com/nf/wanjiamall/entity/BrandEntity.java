@@ -22,5 +22,4 @@ public class BrandEntity {
     private Timestamp updateTime;
     private String delted;
 
-
 }
