@@ -20,5 +20,5 @@ public interface BrandDao {
     int updateById(@Param("brand") BrandEntity entity,Integer id);
 
     Integer getProductByBrandCount(Integer id);
-    void deleteById(Integer id);
+    int deleteById(Integer id);
 }

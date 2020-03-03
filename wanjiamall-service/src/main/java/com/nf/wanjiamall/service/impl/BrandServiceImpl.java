@@ -42,8 +42,8 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Object updateById(BrandEntity brandEntity, Integer id) {
-        if (brandDao.updateById(brandEntity,id) >0){
-            brandDao.updateById(brandEntity,id);
+        Integer count = brandDao.updateById(brandEntity,id);
+        if (count >0 ){
             return ResponseUtil.ok();
         }else {
             return ResponseUtil.fail(505,"修改失败");
@@ -54,8 +54,12 @@ public class BrandServiceImpl implements BrandService {
     public Object deleteById(Integer id) {
         Integer num=brandDao.getProductByBrandCount(id);
         if (num==0){
-            brandDao.deleteById(id);
-            return ResponseUtil.ok();
+            Integer count = brandDao.deleteById(id);
+            if (count > 0 ){
+                return ResponseUtil.ok();
+            }else {
+                return ResponseUtil.fail(505,"删除失败");
+            }
         }else {
             return ResponseUtil.fail(505,"有商品绑定，无法删除");
         }
