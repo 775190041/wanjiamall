@@ -6,6 +6,7 @@ import com.nf.wanjiamall.dao.GoodsDao;
 import com.nf.wanjiamall.entity.AdvertisingEntity;
 import com.nf.wanjiamall.entity.BrandEntity;
 import com.nf.wanjiamall.entity.GoodsEntity;
+import com.nf.wanjiamall.service.CategoryService;
 import com.nf.wanjiamall.service.impl.CategoryServiceImpl;
 import com.nf.wanjiamall.service.wx.WxHomeService;
 import com.nf.wanjiamall.utils.ResponseUtil;
@@ -29,10 +30,11 @@ public class WxHomeServiceImpl implements WxHomeService {
     private BrandDao brandDao;
     @Autowired
     private GoodsDao goodsDao;
+    @Autowired
+    CategoryServiceImpl categoryService;
 
     @Override
     public Object getHomeData(Integer pageNum,Integer pageSize) {
-        CategoryServiceImpl categoryService=new CategoryServiceImpl();
         List<AdvertisingEntity> advertisingEntities=advertisingDao.getAll(pageNum,pageSize);
         List<CategoryVo> categoryEntities= categoryService.getAll();
         List<BrandEntity> brandEntities=brandDao.getAll();
