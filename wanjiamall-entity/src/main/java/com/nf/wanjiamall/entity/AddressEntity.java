@@ -52,7 +52,7 @@ public class AddressEntity {
     /**
      * 是否默认地址 1表示默认地址
      */
-    private Integer isDefault;
+    private boolean isDefault;
     /**
      * 创建时间
      */

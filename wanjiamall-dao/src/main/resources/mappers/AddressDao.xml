@@ -13,7 +13,7 @@
         <result property="areaCode" column="area_code"></result>
         <result property="postalCode" column="postal_code"></result>
         <result property="tel" column="tel"></result>
-        <result property="isDefault" column="is_default"></result>
+
         <result property="addTime" column="add_time"></result>
         <result property="updateTime" column="update_time"></result>
         <result property="deleted" column="deleted"></result>
