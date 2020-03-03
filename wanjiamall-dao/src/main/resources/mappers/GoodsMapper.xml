@@ -17,7 +17,7 @@
     ,#{goodsEntity.retailPrice},#{goodsEntity.detail},default,default,default,#{goodsEntity.picUrl})
     </insert>
 
-<!--    修改商品信息-->
+<!--    修改商品信息 -->
     <update id="update">
         update wanjia_goods
         <set>
