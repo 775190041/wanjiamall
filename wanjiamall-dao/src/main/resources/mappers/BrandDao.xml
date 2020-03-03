@@ -15,10 +15,10 @@
         <if test="brand.id!=null">
             and id=#{brand.id}
         </if>
-        <if test="brand.name!=null">
+        <if test="brand.name!=null and brand.name!='' ">
             and name=#{brand.name}
         </if>
-        order by id
+        order by add_time desc
     </select>
 
     <insert id="insert">
