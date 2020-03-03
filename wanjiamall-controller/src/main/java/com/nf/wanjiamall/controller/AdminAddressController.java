@@ -27,7 +27,7 @@ public class AdminAddressController {
             @ApiImplicitParam(name = "pageSize", dataType = "Integer", value = "分页大小，必须", required = false),
             @ApiImplicitParam(name = "addressEntity", dataType = "AddressEntity", value = "收货地址实体类对象(userId,name)，非必须", required = false)
     })
-    @ApiOperation("查询搜索历史表")
+    @ApiOperation("查询收货地址表")
     @GetMapping("/address/{pageNum}/{pageSize}")
     public Object getAddressList(@PathVariable(required = false) Integer pageNum,
                                  @PathVariable(required = false) Integer pageSize,

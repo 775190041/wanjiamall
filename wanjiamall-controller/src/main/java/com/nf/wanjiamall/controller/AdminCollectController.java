@@ -30,7 +30,7 @@ public class AdminCollectController {
             @ApiImplicitParam(name = "pageSize", dataType = "Integer", value = "分页大小，必须", required = false),
             @ApiImplicitParam(name = "collectEntity", dataType = "collectEntity", value = "收藏表实体类对象(userId,goodsId,goodsName-即商品名称)，非必须", required = false)
     })
-    @ApiOperation("查询搜索历史表")
+    @ApiOperation("查询收藏表")
     @GetMapping("/collect/{pageNum}/{pageSize}")
     public Object getCollectList(@PathVariable(required = false) Integer pageNum,
                                  @PathVariable(required = false) Integer pageSize,
