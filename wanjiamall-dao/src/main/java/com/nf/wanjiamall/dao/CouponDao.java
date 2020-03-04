@@ -10,7 +10,9 @@ import java.util.List;
  * @author lrc
  */
 public interface CouponDao {
-    List<CouponEntity> getAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,@Param("coupon") CouponEntity couponEntity);
+    List<CouponEntity> getAll();
+
+    List<CouponEntity> getCouponAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,@Param("coupon") CouponEntity couponEntity);
 
     Integer insertCoupon(@Param("coupon") CouponEntity couponEntity);
 

@@ -25,8 +25,8 @@ public class AdvertisingServiceImpl implements AdvertisingService {
     private AdvertisingDao advertisingDao;
 
     @Override
-    public Object getAll(Integer pageNum ,Integer pageSize,AdvertisingEntity advertisingEntity) {
-        List<AdvertisingEntity> list =  advertisingDao.getAll(pageNum,pageSize,advertisingEntity);
+    public Object getAdAll(Integer pageNum ,Integer pageSize,AdvertisingEntity advertisingEntity) {
+        List<AdvertisingEntity> list =  advertisingDao.getAdAll(pageNum,pageSize,advertisingEntity);
         return ResponseUtil.okList(list);
     }
 

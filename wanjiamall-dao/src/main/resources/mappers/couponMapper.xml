@@ -5,6 +5,10 @@
 <mapper namespace="com.nf.wanjiamall.dao.CouponDao">
     <select id="getAll" resultType="com.nf.wanjiamall.entity.CouponEntity">
         select * from wanjia_coupon where deleted = 0
+    </select>
+
+    <select id="getCouponAll" resultType="com.nf.wanjiamall.entity.CouponEntity">
+        select * from wanjia_coupon where deleted = 0
         <if test="coupon.name !=null and coupon.name != ''">
             and name like CONCAT('%',#{coupon.name},'%')
         </if>

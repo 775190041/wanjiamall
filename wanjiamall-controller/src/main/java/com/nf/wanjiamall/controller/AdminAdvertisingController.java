@@ -32,7 +32,7 @@ public class AdminAdvertisingController {
     })
     @GetMapping("/ad/{pageNum}/{pageSize}")
     public Object getAll(@PathVariable Integer pageNum,@PathVariable Integer pageSize,AdvertisingEntity advertisingEntity){
-        return advertisingService.getAll(pageNum,pageSize,advertisingEntity);
+        return advertisingService.getAdAll(pageNum,pageSize,advertisingEntity);
     }
     @ApiOperation(value = "insertAd",notes = "添加广告信息")
     @ApiImplicitParams({

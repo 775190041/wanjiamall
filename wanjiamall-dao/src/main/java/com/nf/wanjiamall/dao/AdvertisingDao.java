@@ -9,24 +9,15 @@ import java.util.List;
  * @author lrc
  */
 public interface AdvertisingDao {
-    /**
-     * 查询所有的广告信息
-     * @param pageNum
-     * @param pageSize
-     * @return
-     */
-    List<AdvertisingEntity> getAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,@Param("ad")AdvertisingEntity advertisingEntity);
+
 
     /**
-     * 通过广告标题，广告内容查相应的广告信息
-     * @param pageNum
-     * @param pageSize
-     * @param name
-     * @param content
+     * 查询所有的广告信息
      * @return
      */
-    List<AdvertisingEntity> getByAd(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,
-                                    @Param("adName")String name,@Param("adContent")String content);
+    List<AdvertisingEntity> getAll();
+    List<AdvertisingEntity> getAdAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,@Param("ad")AdvertisingEntity advertisingEntity);
+
 
     /**
      * 添加广告信息

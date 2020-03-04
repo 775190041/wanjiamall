@@ -7,7 +7,7 @@ import com.nf.wanjiamall.entity.TopicEntity;
  */
 
 public interface TopicService {
-    Object getAll(Integer pageNum, Integer pageSize, TopicEntity topicEntity);
+    Object getTopicAll(Integer pageNum, Integer pageSize, TopicEntity topicEntity);
 
 
 //    Object insertAd(AdvertisingEntity advertisingEntity);

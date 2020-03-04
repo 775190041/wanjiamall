@@ -21,8 +21,8 @@ public class CouponServiceImpl implements CouponService {
     private CouponDao couponDao;
 
     @Override
-    public Object getAll(Integer pageNum, Integer pageSize,CouponEntity couponEntity) {
-        List<CouponEntity> list = couponDao.getAll(pageNum,pageSize,couponEntity);
+    public Object getCouponAll(Integer pageNum, Integer pageSize,CouponEntity couponEntity) {
+        List<CouponEntity> list = couponDao.getCouponAll(pageNum,pageSize,couponEntity);
         return ResponseUtil.okList(list);
     }
 

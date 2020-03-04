@@ -7,7 +7,7 @@ import java.util.List;
  * @author lrc
  */
 public interface CouponService {
-    Object getAll(Integer pageNum, Integer pageSize,CouponEntity couponEntity);
+    Object getCouponAll(Integer pageNum, Integer pageSize,CouponEntity couponEntity);
 
     Object insertCoupon(CouponEntity couponEntity);
 

@@ -6,6 +6,10 @@
 
     <select id="getAll" resultType="com.nf.wanjiamall.entity.AdvertisingEntity">
         select * from wanjia_ad where deleted = 0
+    </select>
+
+    <select id="getAdAll" resultType="com.nf.wanjiamall.entity.AdvertisingEntity">
+        select * from wanjia_ad where deleted = 0
         <if test="ad.name !=null and ad.name != ''">
             and name like CONCAT('%',#{ad.name},'%')
         </if>

@@ -5,6 +5,10 @@
 <mapper namespace="com.nf.wanjiamall.dao.TopicDao">
     <select id="getAll" resultType="com.nf.wanjiamall.entity.TopicEntity">
         select * from wanjia_topic where deleted = 0
+    </select>
+
+    <select id="getTopicAll" resultType="com.nf.wanjiamall.entity.TopicEntity">
+        select * from wanjia_topic where deleted = 0
         <if test="topic.title !=null and topic.title != ''">
             and title like CONCAT('%',#{topic.title},'%')
         </if>

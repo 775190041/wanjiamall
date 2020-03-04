@@ -27,7 +27,7 @@ public class AdminCouponController {
     })
     @GetMapping("/coupon/{pageNum}/{pageSize}")
     public Object getAll(@PathVariable Integer pageNum,@PathVariable Integer pageSize,CouponEntity couponEntity){
-        return couponService.getAll(pageNum,pageSize,couponEntity);
+        return couponService.getCouponAll(pageNum,pageSize,couponEntity);
     }
 
 

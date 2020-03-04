@@ -32,7 +32,7 @@ public class AdminTopicController {
     })
     @GetMapping("/topic/{pageNum}/{pageSize}")
     public Object getAll(@PathVariable Integer pageNum, @PathVariable Integer pageSize, TopicEntity topicEntity){
-        return topicService.getAll(pageNum,pageSize,topicEntity);
+        return topicService.getTopicAll(pageNum,pageSize,topicEntity);
     }
 
 }

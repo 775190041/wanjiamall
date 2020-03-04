@@ -18,8 +18,8 @@ public class TopicServiceImpl implements TopicService {
     private TopicDao topicDao;
 
     @Override
-    public Object getAll(Integer pageNum, Integer pageSize, TopicEntity topicEntity) {
-        return topicDao.getAll(pageNum,pageSize,topicEntity);
+    public Object getTopicAll(Integer pageNum, Integer pageSize, TopicEntity topicEntity) {
+        return topicDao.getTopicAll(pageNum,pageSize,topicEntity);
     }
 
 
