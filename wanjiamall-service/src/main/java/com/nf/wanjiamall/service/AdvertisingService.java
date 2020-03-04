@@ -13,6 +13,8 @@ import java.util.List;
 public interface AdvertisingService {
     Object getAll(Integer pageNum, Integer pageSize);
 
+    Object getByAd(Integer pageNum, Integer pageSize,String name,String content);
+
     Object insertAd(AdvertisingEntity advertisingEntity);
 
     Object updateAd(AdvertisingEntity advertisingEntity, Integer id);

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.TopicDao">
+    <select id="getAll" resultType="com.nf.wanjiamall.entity.TopicEntity">
+        select * from wanjia_topic where deleted = 0
+    </select>
+
+    <select id="getByTopic" resultType="com.nf.wanjiamall.entity.TopicEntity">
+        select * from wanjia_topic
+        <trim prefix="where" suffixOverrides="and">
+            deleted = 0
+            <if test="topicTitle !=null and topicTitle !=''">
+                <bind name="title" value="'%'+_parameter.topicTitle+'%'" />
+                and title like #{title}
+            </if>
+            <if test="topicSubtitle !=null and topicSubtitle !=''">
+                <bind name="subtitle" value="'%'+_parameter.topicSubtitle+'%'" />
+                and subtitle like #{subtitle}
+            </if>
+            <if test="topicSort == 0">
+                order by sort_order
+            </if>
+            <if test="topicSort == 1">
+                order by add_time
+            </if>
+            <if test="topicSort == 2">
+                order by price
+            </if>
+        </trim>
+    </select>
+</mapper>

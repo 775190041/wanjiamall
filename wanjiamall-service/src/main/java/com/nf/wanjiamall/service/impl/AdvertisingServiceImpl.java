@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author lrc
+ */
 @Slf4j
 @Service
 public class AdvertisingServiceImpl implements AdvertisingService {
@@ -22,6 +25,12 @@ public class AdvertisingServiceImpl implements AdvertisingService {
     @Override
     public Object getAll(Integer pageNum ,Integer pageSize) {
         List<AdvertisingEntity> list =  advertisingDao.getAll(pageNum,pageSize);
+        return ResponseUtil.okList(list);
+    }
+
+    @Override
+    public Object getByAd(Integer pageNum, Integer pageSize, String name, String content) {
+        List<AdvertisingEntity> list =  advertisingDao.getByAd(pageNum,pageSize,name,content);
         return ResponseUtil.okList(list);
     }
 
