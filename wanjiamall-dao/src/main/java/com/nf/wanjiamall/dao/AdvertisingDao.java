@@ -31,15 +31,17 @@ public interface AdvertisingDao {
     /**
      * 添加广告信息
      * @param advertisingEntity
+     * @return
      */
-    void insertAd(@Param("ad") AdvertisingEntity advertisingEntity);
+    Integer insertAd(@Param("ad") AdvertisingEntity advertisingEntity);
 
     /**
      * 修改广告信息
      * @param advertisingEntity
      * @param id
+     * @return
      */
-    void updateAd(@Param("ad") AdvertisingEntity advertisingEntity, @Param("id") Integer id);
+    Integer updateAd(@Param("ad") AdvertisingEntity advertisingEntity, @Param("id") Integer id);
 
     /**
      * 通过选中的广告Id删除相对应的广告信息
