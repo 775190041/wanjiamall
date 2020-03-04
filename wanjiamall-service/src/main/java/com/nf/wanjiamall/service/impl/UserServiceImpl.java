@@ -24,4 +24,14 @@ public class UserServiceImpl implements UserService {
         List<UserEntity> userEntities = userDao.getUserList(pageNum, pageSize, username, mobile);
         return ResponseUtil.okList(userEntities);
     }
+
+    @Override
+    public Object userUpdate(int id, UserEntity userEntity) {
+        if (userDao.userUpdate(id, userEntity) > 0){
+            return ResponseUtil.ok();
+        }else {
+            return ResponseUtil.fail(505,"修改失败");
+        }
+
+    }
 }

@@ -39,4 +39,8 @@
         </where>
     </select>
 
+    <update id="userUpdate">
+        update wanjia_user set status = #{userEntity.status}
+        where deleted = 0 and  id = #{id}
+    </update>
 </mapper>
