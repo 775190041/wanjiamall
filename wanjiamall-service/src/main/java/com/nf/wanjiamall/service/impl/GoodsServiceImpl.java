@@ -1,9 +1,6 @@
 package com.nf.wanjiamall.service.impl;
 
-import com.nf.wanjiamall.dao.GoodsAttributeDao;
-import com.nf.wanjiamall.dao.GoodsDao;
-import com.nf.wanjiamall.dao.GoodsProductDao;
-import com.nf.wanjiamall.dao.GoodsSpecificationDao;
+import com.nf.wanjiamall.dao.*;
 import com.nf.wanjiamall.entity.GoodsAttributeEntity;
 import com.nf.wanjiamall.entity.GoodsEntity;
 import com.nf.wanjiamall.entity.GoodsProductEntity;
@@ -33,6 +30,11 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsProductDao goodsProductDao;
     @Autowired
     private GoodsAttributeDao goodsAttributeDao;
+    @Autowired
+    private CategoryDao categoryDao;
+    @Autowired
+    private BrandDao brandDao;
+
 
     /**
      * 上架商品
@@ -87,6 +89,9 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsSpecificationEntity[] goodsSpecificationEntities = addGoodsVo.getGoodsSpecificationEntity();
         GoodsProductEntity[] goodsProductEntities = addGoodsVo.getGoodsProductEntities();
         GoodsAttributeEntity[] goodsAttributeEntities = addGoodsVo.getGoodsAttributeEntity();
+
+
+
         //把数组转变为字符串
         String gallery = ArrayUtils.addDouble( goodsEntity.getGallery());
         goodsEntity.setGallerys(gallery);
@@ -159,5 +164,18 @@ public class GoodsServiceImpl implements GoodsService {
         data.put("goodsProduct",goodsProductEntities);
         data.put("goodsAttribute",goodsAttributeEntities);
         return ResponseUtil.ok(data);
+    }
+
+    /**
+     * 查询品牌商品和类目
+     * @return
+     */
+    @Override
+    public Object listBrandCategory() {
+
+
+
+
+        return ResponseUtil.ok();
     }
 }

@@ -34,12 +34,17 @@ public class AdvertisingServiceImpl implements AdvertisingService {
 
     @Override
     public Object updateAd(AdvertisingEntity advertisingEntity, Integer id) {
-        advertisingDao.updateAd(advertisingEntity,id);
-        return ResponseUtil.ok();
+        if (advertisingDao.updateAd(advertisingEntity,id)>0){
+            return ResponseUtil.ok();
+        }else {
+            return ResponseUtil.fail(505,"删除失败");
+        }
     }
 
     @Override
     public Object deletedAdId(Integer id) {
+
+
         advertisingDao.deletedAdId(id);
         return ResponseUtil.ok();
     }
