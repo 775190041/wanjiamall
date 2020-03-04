@@ -50,7 +50,6 @@ public class AdminIssueController {
             @ApiImplicitParam(name = "update_time", dataType = "Timestamp", value = "修改时间，非必须", required = false),
             @ApiImplicitParam(name = "delted", value = "逻辑删除，非必须", required = false)
     })
-
     @PostMapping("/issue")
     @ApiOperation("添加常见问题表")
     public Object issueInsert(IssueEntity issueEntity) {

@@ -16,67 +16,25 @@
         select id, key_name, key_value, update_time, add_time, delted from wanjia_system
     </select>
 
-    <update id="updateFreight">
+    <update id="updateAll">
         update wanjia_system
         <set>
+            <if test="systemEntity.keyName != null">
+                key_name = #{systemEntity.keyName}
+            </if>
             <if test="systemEntity.keyValue != null">
                 ,key_value = #{systemEntity.keyValue}
             </if>
             <if test="systemEntity.updateTime != null">
                 ,update_time = #{systemEntity.updateTime}
             </if>
+            <if test="systemEntity.addTime != null">
+                ,add_time = #{systemEntity.addTime}
+             </if>
+            <if test="systemEntity.addTime != null">
+                ,delted = #{systemEntity.delted}
+            </if>
         </set>
         where key_name = #{systemEntity.keyName}
-    </update>
-
-
-
-
-
-
-
-    <update id="updateOrder">
-        update wanjia_system
-        <set>
-            <if test="keyName != null">
-                key_name = #{keyName}
-            </if>
-            <if test="keyValue != null">
-                ,key_value = #{keyValue}
-            </if>
-            <if test="addTime != null">
-                ,add_time = #{addTime},
-            </if>
-            <if test="updateTime != null">
-                ,update_time = #{updateTime}
-            </if>
-            <if test="deleted != null">
-                ,deleted = #{deleted}
-            </if>
-        </set>
-        where delted = 0 and id = #{id}
-    </update>
-
-
-    <update id="updateApplet"  >
-        update wanjia_system
-        <set>
-            <if test="keyName != null">
-                key_name = #{keyName},
-            </if>
-            <if test="keyValue != null">
-                key_value = #{keyValue},
-            </if>
-            <if test="addTime != null">
-                add_time = #{addTime},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime},
-            </if>
-            <if test="deleted != null">
-                deleted = #{deleted},
-            </if>
-        </set>
-        where delted = 0 and id = #{id}
     </update>
 </mapper>
