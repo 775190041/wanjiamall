@@ -6,6 +6,9 @@ import com.nf.wanjiamall.entity.GoodsProductEntity;
 import com.nf.wanjiamall.entity.GoodsSpecificationEntity;
 import lombok.Data;
 
+/**
+ * @author lzn
+ */
 @Data
 public class AddGoodsVo {
     GoodsEntity goodsEntity;
