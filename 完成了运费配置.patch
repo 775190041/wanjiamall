@@ -1,0 +1,109 @@
+Index: wanjiamall-service/src/main/java/com/nf/wanjiamall/service/impl/SystemServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- wanjiamall-service/src/main/java/com/nf/wanjiamall/service/impl/SystemServiceImpl.java	(date 1583333742000)
++++ wanjiamall-service/src/main/java/com/nf/wanjiamall/service/impl/SystemServiceImpl.java	(date 1583333953406)
+@@ -23,8 +23,8 @@
+     private SystemDao systemDao;
+ 
+     @Override
+-    public Object selectByFreightValue() {
+-        return systemDao.selectByFreightValue();
++    public Object selectValue() {
++        return systemDao.selectValue();
+     }
+ 
+     @Override
+Index: wanjiamall-service/src/main/java/com/nf/wanjiamall/service/SystemService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- wanjiamall-service/src/main/java/com/nf/wanjiamall/service/SystemService.java	(date 1583333742000)
++++ wanjiamall-service/src/main/java/com/nf/wanjiamall/service/SystemService.java	(date 1583333976159)
+@@ -7,10 +7,14 @@
+ 
+ public interface SystemService {
+ 
++
++    Object selectValue();
++
++
+     /**
+      * 运费配置
+      */
+-    Object selectByFreightValue();
++
+     Object updateFreight(String  systemFreight);
+ 
+     /**
+Index: wanjiamall-dao/src/main/resources/mappers/SystemMapper.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- wanjiamall-dao/src/main/resources/mappers/SystemMapper.xml	(date 1583333742000)
++++ wanjiamall-dao/src/main/resources/mappers/SystemMapper.xml	(date 1583333923896)
+@@ -12,8 +12,8 @@
+     <result column="delted"  property="delted" />
+ </resultMap>
+ 
+-    <select id="selectByFreightValue" resultMap="BaseResultMap">
+-        select key_value from wanjia_system where id in (6,8)
++    <select id="selectValue" resultMap="BaseResultMap">
++        select id, key_name, key_value, update_time, add_time, delted from wanjia_system
+     </select>
+ 
+     <update id="updateFreight">
+@@ -35,10 +35,6 @@
+ 
+ 
+ 
+-    <select id="selectByOrderValue" resultMap="BaseResultMap">
+-        select key_value from wanjia_system where id in(1,4,11)
+-    </select>
+-
+     <update id="updateOrder">
+         update wanjia_system
+         <set>
+@@ -61,9 +57,6 @@
+         where delted = 0 and id = #{id}
+     </update>
+ 
+-    <select id="selectByAppletValue" resultMap="BaseResultMap">
+-        select key_value from wanjia_system where id in(2,5,10,12,15,17,18)
+-    </select>
+ 
+     <update id="updateApplet"  >
+         update wanjia_system
+Index: wanjiamall-controller/src/main/java/com/nf/wanjiamall/controller/AdminSystemController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- wanjiamall-controller/src/main/java/com/nf/wanjiamall/controller/AdminSystemController.java	(date 1583333742000)
++++ wanjiamall-controller/src/main/java/com/nf/wanjiamall/controller/AdminSystemController.java	(date 1583334009572)
+@@ -19,9 +19,9 @@
+     @Autowired
+     private SystemService systemService;
+ 
+-    @GetMapping("/systemFreight")
++    @GetMapping("/systemValue")
+     public Object systemFreightQuery(){
+-        return systemService.selectByFreightValue();
++        return systemService.selectValue();
+     }
+ 
+     @PutMapping("/systemFreight")
+@@ -29,9 +29,6 @@
+         return  systemService.updateFreight(systemFreight);
+     }
+ 
+-
+-
+-
+     /*
+     @ApiImplicitParams({
+             @ApiImplicitParam(name = "id", dataType = "int", value = "id，必须", required = true),
