@@ -7,10 +7,14 @@ import java.util.Map;
 
 public interface SystemService {
 
+
+    Object selectValue();
+
+
     /**
      * 运费配置
      */
-    Object selectByFreightValue();
+
     Object updateFreight(String  systemFreight);
 
     /**
