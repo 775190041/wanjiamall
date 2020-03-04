@@ -34,7 +34,7 @@
                 brand_id = #{goods.brandId },
             </if>
             <if test="goods.gallery != null">
-                gallery = #{goods.gallery},
+                gallery = #{goods.gallerys},
             </if>
             <if test="goods.keywords != null">
                 keywords = #{goods.keywords},
@@ -79,7 +79,7 @@
             <where>
                 delted = 0
                 <if test="id != null">
-                    and id like '%' #{id} '%'
+                    and id = #{id}
                 </if>
                 <if test="goodsSn != null">
                     and goods_sn like '%' #{goodsSn} '%'
@@ -89,6 +89,12 @@
                 </if>
             </where>
 
+    </select>
+
+    <select id="getAll" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery, keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted from wanjia_goods
     </select>
 
     <select id="GoodsById" resultType="com.nf.wanjiamall.entity.GoodsEntity">

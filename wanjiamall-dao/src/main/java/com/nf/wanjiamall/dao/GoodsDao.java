@@ -30,7 +30,9 @@ public interface GoodsDao {
      * @param name
      * @return
      */
-    List<GoodsEntity> listGoods(@Param("pageNum") int pageNum,@Param("pageSize") int pageSize,@Param("id") int id,@Param("goodsSn") String goodsSn, @Param("name") String name);
+    List<GoodsEntity> listGoods(@Param("pageNum") int pageNum,@Param("pageSize") int pageSize,@Param("id") Integer id,@Param("goodsSn") String goodsSn, @Param("name") String name);
+
+    List<GoodsEntity> getAll();
 
     /**
      * 根据商品id查询商品信息

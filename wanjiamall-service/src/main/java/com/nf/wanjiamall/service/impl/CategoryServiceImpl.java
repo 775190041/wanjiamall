@@ -22,16 +22,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryDao categoryDao;
 
-    /**
-     * 查询所有的目录
-     * @return
-     */
-    @Override
-    public Object getAllCategory() {
-
+    public List<CategoryVo> getAll(){
         List<CategoryVo> categoryVoList = new ArrayList<>();
         List<CategoryEntity> cateFirstLists = categoryDao.getFirstCate();
         for (CategoryEntity category : cateFirstLists) {
+            System.out.println("category = " + category);
             CategoryVo categoryVO = new CategoryVo();
             categoryVO.setId(category.getId());
             categoryVO.setCategoryDesc(category.getCategoryDesc());
@@ -54,7 +49,16 @@ public class CategoryServiceImpl implements CategoryService {
             categoryVO.setChildren(children);
             categoryVoList.add(categoryVO);
         }
-        return ResponseUtil.ok(categoryVoList);
+        return categoryVoList;
+    }
+
+    /**
+     * 查询所有的目录
+     * @return
+     */
+    @Override
+    public Object getAllCategory() {
+        return ResponseUtil.ok(getAll());
     }
 
 
@@ -79,12 +83,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 
-
-
-
     @Override
     public Object insertByLevel(CategoryEntity categoryEntity) {
-        if (  categoryDao.insertByLevelFirst(categoryEntity) >0){
+        if (  categoryDao.insertByLevel(categoryEntity) >0){
            return ResponseUtil.ok();
         }else {
            return ResponseUtil.fail(505,"添加失败");

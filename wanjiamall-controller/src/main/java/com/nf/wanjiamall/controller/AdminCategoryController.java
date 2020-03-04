@@ -25,7 +25,6 @@ public class AdminCategoryController {
     private CategoryService categoryService;
 
 
-
     @ApiOperation("查询商品类目信息")
     @GetMapping("/category")
     public Object getAllCategory() {
@@ -80,14 +79,12 @@ public class AdminCategoryController {
     }
 
     @ApiImplicitParams({
-    @ApiImplicitParam(name = "level", dataType = "Integer", value = "类目等级，传1返回null，传2返回所有的一级目录", required = false),
+        @ApiImplicitParam(name = "level", dataType = "Integer", value = "类目等级，传1返回null，传2返回所有的一级目录", required = false),
     })
     @ApiOperation("查询所有一级目录")
     @GetMapping("/category/l1")
     public Object getDemandCategory() {
         return categoryService.getDemandCategory();
     }
-
-
 
 }

@@ -22,7 +22,7 @@ public interface CategoryDao {
     /**
      * 添加类目
      */
-    int insertByLevelFirst(CategoryEntity categoryEntity);
+    int insertByLevel(CategoryEntity categoryEntity);
 
     List<CategoryEntity> getById(Integer id);
 
