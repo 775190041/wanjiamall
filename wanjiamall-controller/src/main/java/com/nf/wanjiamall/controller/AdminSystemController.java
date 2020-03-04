@@ -39,5 +39,4 @@ public class AdminSystemController {
         return  systemService.updateFreight(system);
     }
 
-     */
 }
