@@ -1,6 +1,7 @@
 package com.nf.wanjiamall.controller;
 
 import com.nf.wanjiamall.entity.KeywordEntity;
+import com.nf.wanjiamall.entity.SystemEntity;
 import com.nf.wanjiamall.service.KeywordService;
 
 import io.swagger.annotations.Api;
@@ -77,5 +78,8 @@ public class AdminKeywordController {
     public Object keywordDelete(@PathVariable("id") int id){
         return keywordService.keywordDelete(id);
     }
+
+
+
 
 }

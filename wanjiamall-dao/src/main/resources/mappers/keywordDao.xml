@@ -30,6 +30,7 @@
         (#{keywordEntity.keyword},#{keywordEntity.url},#{keywordEntity.isNot},default,default,default)
     </insert>
 
+
     <update id="keywordUpdate">
         update wanjia_keyword
         <set>
