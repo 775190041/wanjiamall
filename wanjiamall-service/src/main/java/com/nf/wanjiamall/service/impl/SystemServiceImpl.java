@@ -29,7 +29,6 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public Object updateFreight(String  systemFreight) {
-        System.err.println("systemFreight = " + systemFreight);
         Map<String,String> map = JacksonUtil.toMap(systemFreight);
         int row = 0;
             for (Map.Entry<String, String> entry: map.entrySet()) {
@@ -39,46 +38,15 @@ public class SystemServiceImpl implements SystemService {
                     systemEntity.setKeyName(entry.getKey());
                     systemEntity.setKeyValue(entry.getValue());
                     systemEntity.setUpdateTime(new Date());
-                    System.err.println("systemEntity = " + systemEntity);
-                    row = systemDao.updateFreight(systemEntity);
+                    row = systemDao.updateAll(systemEntity);
                 } else {
                     updateFreight(string);
                 }
             }
-        System.out.println("row = " + row);
         if(row > 0){
             return ResponseUtil.ok();
         }else{
-            return ResponseUtil.fail(505,"添加失败");
+            return ResponseUtil.fail(505,"修改失败");
         }
-    }
-
-/*
-                    SystemEntity systemEntity = new SystemEntity();
-                    systemEntity.setKeyName(entry.getKey());
-                    systemEntity.setKeyValue(entry.getValue().toString());
-                    systemEntity.setUpdateTime(new Date());
-                    System.err.println("systemEntity = " + systemEntity);
-                    row = systemDao.updateFreight(systemEntity);
- */
-
-    @Override
-    public Object selectByOrderValue() {
-        return null;
-    }
-
-    @Override
-    public Object updateOrder(SystemEntity systemOrder) {
-        return null;
-    }
-
-    @Override
-    public Object selectByAppletValue() {
-        return null;
-    }
-
-    @Override
-    public Object updateApplet(SystemEntity systemApplet) {
-        return null;
     }
 }

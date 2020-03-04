@@ -8,24 +8,16 @@ import java.util.Map;
 public interface SystemService {
 
 
+    /**
+     * 查询所有配置信息
+     */
     Object selectValue();
 
 
     /**
-     * 运费配置
+     * 运费配置  订单配置 小程序配置
      */
+    Object updateFreight(String  system);
 
-    Object updateFreight(String  systemFreight);
 
-    /**
-     * 订单配置
-     */
-    Object selectByOrderValue();
-    Object updateOrder(SystemEntity systemOrder);
-
-    /**
-     * 小程序配置
-     */
-    Object selectByAppletValue();
-    Object updateApplet( SystemEntity systemApplet);
 }
