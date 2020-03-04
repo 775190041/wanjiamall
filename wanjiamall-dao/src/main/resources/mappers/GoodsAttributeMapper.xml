@@ -23,7 +23,7 @@
                 attribute_value = #{goodsAttr.attributeValue},
             </if>
         </set>
-        where goods_id = #{goodsAttr.goodsId}
+        where goods_id = #{goodsAttr.Id}
     </update>
 
     <update id="delete" >

@@ -88,7 +88,7 @@ public class GoodsServiceImpl implements GoodsService {
 
 
         //把数组转变为字符串
-        String gallery = ArrayUtils.addDouble( goodsEntity.getGallery());
+        String gallery = ArrayUtils.addDouble(goodsEntity.getGallery());
         goodsEntity.setGallerys(gallery);
         //商品基本信息表
         goodsDao.update(goodsEntity);
