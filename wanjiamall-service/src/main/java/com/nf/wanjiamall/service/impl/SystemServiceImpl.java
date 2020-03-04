@@ -23,8 +23,8 @@ public class SystemServiceImpl implements SystemService {
     private SystemDao systemDao;
 
     @Override
-    public Object selectByFreightValue() {
-        return systemDao.selectByFreightValue();
+    public Object selectValue() {
+        return systemDao.selectValue();
     }
 
     @Override

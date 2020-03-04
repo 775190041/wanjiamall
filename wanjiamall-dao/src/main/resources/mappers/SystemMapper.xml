@@ -12,8 +12,8 @@
     <result column="delted"  property="delted" />
 </resultMap>
 
-    <select id="selectByFreightValue" resultMap="BaseResultMap">
-        select key_value from wanjia_system where id in (6,8)
+    <select id="selectValue" resultMap="BaseResultMap">
+        select id, key_name, key_value, update_time, add_time, delted from wanjia_system
     </select>
 
     <update id="updateFreight">
@@ -34,10 +34,6 @@
 
 
 
-
-    <select id="selectByOrderValue" resultMap="BaseResultMap">
-        select key_value from wanjia_system where id in(1,4,11)
-    </select>
 
     <update id="updateOrder">
         update wanjia_system
@@ -61,9 +57,6 @@
         where delted = 0 and id = #{id}
     </update>
 
-    <select id="selectByAppletValue" resultMap="BaseResultMap">
-        select key_value from wanjia_system where id in(2,5,10,12,15,17,18)
-    </select>
 
     <update id="updateApplet"  >
         update wanjia_system
