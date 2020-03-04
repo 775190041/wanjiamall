@@ -153,11 +153,22 @@ public class GoodsServiceImpl implements GoodsService {
         List<GoodsSpecificationEntity> goodsSpecificationEntities = goodsSpecificationDao.listGoodsById(id);
         List<GoodsProductEntity> goodsProductEntities = goodsProductDao.listByGoodsId(id);
         List<GoodsAttributeEntity> goodsAttributeEntities = goodsAttributeDao.listGoodsById(id);
+        //查询类目表的的id
+        CategoryEntity categoryEntity = categoryDao.getByIdDetail(goodsEntity.getCategoryId());
+
+
+
         Map<String, Object> data = new HashMap<>();
         data.put("goods",goodsEntity);
         data.put("goodsSpec",goodsSpecificationEntities);
         data.put("goodsProduct",goodsProductEntities);
         data.put("goodsAttribute",goodsAttributeEntities);
+        //子id
+        data.put("childId",categoryEntity.getId());
+        //父id
+        data.put("parentId",categoryEntity.getPid());
+
+
         return ResponseUtil.ok(data);
     }
 
