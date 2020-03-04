@@ -3,14 +3,9 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wanjiamall-controller" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/wanjiamall-controller/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wanjiamall-dao" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/wanjiamall-dao/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wanjiamall-entity" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/wanjiamall-entity/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wanjiamall-service" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/wanjiamall-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wanjiamall-utils" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/wanjiamall-utils/src/main/java" charset="UTF-8" />
   </component>
 </project>
