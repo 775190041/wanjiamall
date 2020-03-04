@@ -6,8 +6,8 @@
 
 <!-- 上架商品  -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-    insert into wanjia_goods(goods_sn, name, category_id,
-     brand_id, gallery, keywords, brief, is_on_sale
+    insert into wanjia_goods(goods_sn, name, category_id
+    , brand_id, gallery, keywords, brief, is_on_sale
     , is_new, is_hot, unit, counter_price, retail_price
     , detail, add_time, update_time, delted,pic_url)
     values(#{goodsEntity.goodsSn},#{goodsEntity.name},#{goodsEntity.categoryId}
@@ -104,7 +104,7 @@
     </select>
 
     <select id="GoodsById" resultType="com.nf.wanjiamall.entity.GoodsEntity">
-        select id, goods_sn, name, category_id, brand_id, gallery,pic_url, keywords, brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price, detail, add_time, update_time, delted from wanjia_goods
+        select id, goods_sn, name, category_id, brand_id, gallery, keywords, brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price, detail, add_time, update_time, delted from wanjia_goods
        where delted = 0 and id = #{id}
     </select>
 
