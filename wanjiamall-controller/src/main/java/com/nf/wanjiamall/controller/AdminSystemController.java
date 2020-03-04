@@ -19,18 +19,15 @@ public class AdminSystemController {
     @Autowired
     private SystemService systemService;
 
-    @GetMapping("/systemFreight")
+    @GetMapping("/systemValue")
     public Object systemFreightQuery(){
-        return systemService.selectByFreightValue();
+        return systemService.selectValue();
     }
 
     @PutMapping("/systemFreight")
     public Object systemFreightUpdate(@RequestBody String systemFreight){
         return  systemService.updateFreight(systemFreight);
     }
-
-
-
 
     /*
     @ApiImplicitParams({
