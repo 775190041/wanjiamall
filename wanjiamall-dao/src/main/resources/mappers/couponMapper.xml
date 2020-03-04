@@ -16,10 +16,10 @@
         insert into wanjia_coupon(name,coupon_desc,tag,total,discount,min,coupon_limit,type,time_type,days,start_time,end_time)
         value (#{coupon.name},#{coupon.couponDesc},#{coupon.tag},#{coupon.total},#{coupon.discount},
                #{coupon.min},#{coupon.couponLimit},#{coupon.type},#{coupon.timeType},
-                <if test="#{coupon.timeType}==0">
+                <if test="coupon.timeType==0">
                     #{days},
                 </if>
-               <if test="#{coupon.timeType}==1">
+               <if test="#coupon.timeType==1">
                    #{coupon.startTime},#{coupon.endTime}
                </if>)
     </insert>
