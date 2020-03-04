@@ -7,10 +7,9 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @Api(tags = "wanjia_system")
@@ -20,10 +19,16 @@ public class AdminSystemController {
     @Autowired
     private SystemService systemService;
 
-    @PutMapping("/systemFreight")
-    public Object aa(@PathVariable("systemFreight") SystemEntity systemFreight){
-
+    @GetMapping("/systemFreight")
+    public Object systemFreightQuery(){
+        return systemService.selectByFreightValue();
     }
+
+    @PutMapping("/systemFreight")
+    public Object systemFreightUpdate(@RequestBody String systemFreight){
+        return  systemService.updateFreight(systemFreight);
+    }
+
 
 
 
