@@ -29,4 +29,10 @@ public interface GoodsService {
      */
     Object queryGoodsDetail(int id);
 
+
+    /**
+     * 查询品牌商和类目
+     */
+    Object listBrandCategory();
+
 }

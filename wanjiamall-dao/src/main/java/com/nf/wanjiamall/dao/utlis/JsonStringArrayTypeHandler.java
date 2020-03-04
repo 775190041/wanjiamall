@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /*
+    这个类是用来读取数据库数组用到 的
    <columnOverride column="urls" javaType="java.lang.String[]" typeHandler="JsonStringArrayTypeHandler"/>
  */
 public class JsonStringArrayTypeHandler extends BaseTypeHandler<String[]> {
