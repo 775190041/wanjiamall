@@ -20,16 +20,13 @@
         update wanjia_system
         <set>
             <if test="systemEntity.keyValue != null">
-                key_value = #{systemEntity.keyValue},
-            </if>
-            <if test="systemEntity.addTime != null">
-                ,add_time = #{systemEntity.addTime},
+                ,key_value = #{systemEntity.keyValue}
             </if>
             <if test="systemEntity.updateTime != null">
                 ,update_time = #{systemEntity.updateTime}
             </if>
         </set>
-        where  id = #{id}
+        where key_name = #{systemEntity.keyName}
     </update>
 
 

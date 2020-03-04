@@ -3,23 +3,25 @@ package com.nf.wanjiamall.service;
 import com.nf.wanjiamall.entity.SystemEntity;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Map;
+
 public interface SystemService {
 
     /**
      * 运费配置
      */
     Object selectByFreightValue();
-    Object updateFreight( int id, SystemEntity systemEntity);
+    Object updateFreight(String  systemFreight);
 
     /**
      * 订单配置
      */
     Object selectByOrderValue();
-    Object updateOrder( int id, SystemEntity systemEntity);
+    Object updateOrder(SystemEntity systemOrder);
 
     /**
      * 小程序配置
      */
     Object selectByAppletValue();
-    Object updateApplet(int id, SystemEntity systemEntity);
+    Object updateApplet( SystemEntity systemApplet);
 }
