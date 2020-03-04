@@ -23,15 +23,10 @@ public class AdvertisingServiceImpl implements AdvertisingService {
 
     @Autowired
     private AdvertisingDao advertisingDao;
-    @Override
-    public Object getAll(Integer pageNum ,Integer pageSize) {
-        List<AdvertisingEntity> list =  advertisingDao.getAll(pageNum,pageSize);
-        return ResponseUtil.okList(list);
-    }
 
     @Override
-    public Object getByAd(Integer pageNum, Integer pageSize, String name, String content) {
-        List<AdvertisingEntity> list =  advertisingDao.getByAd(pageNum,pageSize,name,content);
+    public Object getAll(Integer pageNum ,Integer pageSize,AdvertisingEntity advertisingEntity) {
+        List<AdvertisingEntity> list =  advertisingDao.getAll(pageNum,pageSize,advertisingEntity);
         return ResponseUtil.okList(list);
     }
 

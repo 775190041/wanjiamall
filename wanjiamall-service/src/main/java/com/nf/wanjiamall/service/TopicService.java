@@ -1,13 +1,14 @@
 package com.nf.wanjiamall.service;
 
+import com.nf.wanjiamall.entity.TopicEntity;
+
 /**
  * @author lrc
  */
 
 public interface TopicService {
-    Object getAll(Integer pageNum, Integer pageSize);
+    Object getAll(Integer pageNum, Integer pageSize, TopicEntity topicEntity);
 
-    Object getByTopic(Integer pageNum, Integer pageSize,String title,String subtitle,Integer sort);
 
 //    Object insertAd(AdvertisingEntity advertisingEntity);
 //

@@ -15,7 +15,7 @@ public interface AdvertisingDao {
      * @param pageSize
      * @return
      */
-    List<AdvertisingEntity> getAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize);
+    List<AdvertisingEntity> getAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,@Param("ad")AdvertisingEntity advertisingEntity);
 
     /**
      * 通过广告标题，广告内容查相应的广告信息

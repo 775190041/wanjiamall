@@ -3,13 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nf.wanjiamall.dao.AdvertisingDao">
+
     <select id="getAll" resultType="com.nf.wanjiamall.entity.AdvertisingEntity">
         select * from wanjia_ad where deleted = 0
-    </select>
-
-    <select id="getByAd" resultType="com.nf.wanjiamall.entity.AdvertisingEntity">
-        select * from wanjia_ad where deleted = 0 and name like CONCAT('%',#{adName},'%') and
-        content like CONCAT('%',#{adContent},'%')
+        <if test="ad.name !=null and ad.name != ''">
+            and name like CONCAT('%',#{ad.name},'%')
+        </if>
+        <if test="ad.content !=null and ad.content != ''">
+            and content like CONCAT('%',#{ad.content},'%')
+        </if>
     </select>
 
     <insert id="insertAd">

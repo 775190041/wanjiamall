@@ -23,4 +23,5 @@ public class TopicEntity {
     Timestamp addTime;
     Timestamp updateTime;
     Boolean deleted;
+    Integer sort;
 }

@@ -21,21 +21,22 @@ public class CouponServiceImpl implements CouponService {
     private CouponDao couponDao;
 
     @Override
-    public Object getAll(Integer pageNum, Integer pageSize) {
-        List<CouponEntity> list = couponDao.getAll(pageNum,pageSize);
+    public Object getAll(Integer pageNum, Integer pageSize,CouponEntity couponEntity) {
+        List<CouponEntity> list = couponDao.getAll(pageNum,pageSize,couponEntity);
         return ResponseUtil.okList(list);
     }
 
-    @Override
-    public Object getByCoupon(Integer pageNum, Integer pageSize, String name, Integer type, Integer status) {
-        List<CouponEntity> list = couponDao.getByCoupon(pageNum,pageSize,name,type,status);
-        return ResponseUtil.okList(list);
-    }
 
     @Override
     public Object insertCoupon(CouponEntity couponEntity) {
-        couponDao.insertCoupon(couponEntity);
-        return ResponseUtil.ok();
+//        if (couponEntity.getTimeType())
+        Integer count = couponDao.insertCoupon(couponEntity);
+        if (count >0){
+            return ResponseUtil.ok();
+        }else {
+            return ResponseUtil.fail(505,"添加失败！");
+        }
+
     }
 
     @Override

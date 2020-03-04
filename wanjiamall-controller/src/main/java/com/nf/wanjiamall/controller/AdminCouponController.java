@@ -20,26 +20,16 @@ public class AdminCouponController {
     @ApiOperation(value = "getAll",notes = "获取优惠卷信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "当前页码，必须",required = false, dataType = "Integer"),
-            @ApiImplicitParam(name = "pageSize", value = "显示数据行多少，必须",required = false, dataType = "Integer")
-    })
-    @GetMapping("/coupon/{pageNum}-{pageSize}")
-    public Object getAll(@PathVariable Integer pageNum,@PathVariable Integer pageSize){
-        return couponService.getAll(pageNum,pageSize);
-    }
-
-    @ApiOperation(value = "getByCoupon",notes = "获取优惠卷信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageNum", value = "当前页码，必须",required = false, dataType = "Integer"),
             @ApiImplicitParam(name = "pageSize", value = "显示数据行多少，必须",required = false, dataType = "Integer"),
             @ApiImplicitParam(name = "name", value = "优惠卷名称",required = false, dataType = "String"),
             @ApiImplicitParam(name = "type", value = "优惠卷类型",required = false, dataType = "Integer"),
             @ApiImplicitParam(name = "status", value = "优惠卷状态",required = false, dataType = "Integer")
     })
-    @GetMapping("/coupon/by/{pageNum}/{pageSize}")
-    public Object getByCoupon(@PathVariable Integer pageNum, @PathVariable Integer pageSize,
-                              String name, Integer type, Integer status){
-        return couponService.getByCoupon(pageNum,pageSize,name,type,status);
+    @GetMapping("/coupon/{pageNum}/{pageSize}")
+    public Object getAll(@PathVariable Integer pageNum,@PathVariable Integer pageSize,CouponEntity couponEntity){
+        return couponService.getAll(pageNum,pageSize,couponEntity);
     }
+
 
     @ApiOperation(value = "insertCoupon",notes = "添加优惠卷信息")
     @ApiImplicitParams({

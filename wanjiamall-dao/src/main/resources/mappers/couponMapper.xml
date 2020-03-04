@@ -5,23 +5,28 @@
 <mapper namespace="com.nf.wanjiamall.dao.CouponDao">
     <select id="getAll" resultType="com.nf.wanjiamall.entity.CouponEntity">
         select * from wanjia_coupon where deleted = 0
+        <if test="coupon.name !=null and coupon.name != ''">
+            and name like CONCAT('%',#{coupon.name},'%')
+        </if>
+        <if test="coupon.type !=null and coupon.type != ''">
+            and type like CONCAT('%',#{coupon.type},'%')
+        </if>
+        <if test="coupon.status !=null and coupon.status != ''">
+            and status like CONCAT('%',#{coupon.status},'%')
+        </if>
     </select>
 
-    <select id="getByCoupon" resultType="com.nf.wanjiamall.entity.CouponEntity">
-        select * from wanjia_coupon where deleted = 0 and name like CONCAT('%',#{couponName},'%') and
-        type like CONCAT('%',#{couponType},'%') and status like CONCAT('%',#{couponStatus},'%')
-    </select>
+    <insert id="insertCouponDay">
+        insert into wanjia_coupon(name,coupon_desc,tag,total,discount,min,coupon_limit,type,time_type,days,deleted)
+        value (#{coupon.name},#{coupon.couponDesc},#{coupon.tag},#{coupon.total},#{coupon.discount},
+               #{coupon.min},#{coupon.couponLimit},#{coupon.type},#{coupon.timeType},#{days},default)
+    </insert>
 
-    <insert id="insertCoupon">
-        insert into wanjia_coupon(name,coupon_desc,tag,total,discount,min,coupon_limit,type,time_type,days,start_time,end_time)
+    <insert id="insertCouponTime">
+        insert into wanjia_coupon(name,coupon_desc,tag,total,discount,min,coupon_limit,type,time_type,start_time,end_time,deleted)
         value (#{coupon.name},#{coupon.couponDesc},#{coupon.tag},#{coupon.total},#{coupon.discount},
                #{coupon.min},#{coupon.couponLimit},#{coupon.type},#{coupon.timeType},
-                <if test="coupon.timeType==0">
-                    #{days},
-                </if>
-               <if test="#coupon.timeType==1">
-                   #{coupon.startTime},#{coupon.endTime}
-               </if>)
+               #{coupon.startTime},#{coupon.endTime},defaultv)
     </insert>
 
     <update id="updateCoupon">
