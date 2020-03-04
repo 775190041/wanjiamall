@@ -1,5 +1,7 @@
 package com.nf.wanjiamall.controller;
 
+import com.nf.wanjiamall.entity.IssueEntity;
+import com.nf.wanjiamall.entity.UserEntity;
 import com.nf.wanjiamall.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -33,5 +35,15 @@ public class AdminUserController{
                                @RequestParam(value = "username",required = false,defaultValue = "") String username,
                                @RequestParam(value = "mobile",required = false,defaultValue = "") String mobile){
         return userService.getUserList(pageNum, pageSize, username, mobile);
+    }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", dataType = "int", value = "id，必须", required = true),
+            @ApiImplicitParam(name = "status", dataType = "Integer", value = "用户状态，非必须", required = false)
+    })
+    @PutMapping("/user/{id}")
+    @ApiOperation("修改用户表的转台,传一个用户的id和status过来")
+    public Object userUpdate(@PathVariable("id") int id, UserEntity userEntity){
+        return userService.userUpdate(id,userEntity);
     }
 }
