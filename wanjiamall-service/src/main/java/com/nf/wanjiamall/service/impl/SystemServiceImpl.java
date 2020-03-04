@@ -3,10 +3,17 @@ package com.nf.wanjiamall.service.impl;
 import com.nf.wanjiamall.dao.SystemDao;
 import com.nf.wanjiamall.entity.SystemEntity;
 import com.nf.wanjiamall.service.SystemService;
+import com.nf.wanjiamall.utils.JacksonUtil;
 import com.nf.wanjiamall.utils.ResponseUtil;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -17,21 +24,43 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public Object selectByFreightValue() {
-        return null;
+        return systemDao.selectByFreightValue();
     }
 
     @Override
-    public Object updateFreight(int id, SystemEntity systemEntity) {
-               log.info("systemEntity = " + systemEntity.getKeyValue());
-        if (systemDao.updateFreight(id, systemEntity) > 0) {
-            log.info("ok------------------ = " + systemEntity.getKeyValue());
+    public Object updateFreight(String  systemFreight) {
+        System.err.println("systemFreight = " + systemFreight);
+        Map<String,String> map = JacksonUtil.toMap(systemFreight);
+        int row = 0;
+            for (Map.Entry<String, String> entry: map.entrySet()) {
+                String string = entry.getValue();
+                if(string instanceof String) {
+                    SystemEntity systemEntity = new SystemEntity();
+                    systemEntity.setKeyName(entry.getKey());
+                    systemEntity.setKeyValue(entry.getValue());
+                    systemEntity.setUpdateTime(new Date());
+                    System.err.println("systemEntity = " + systemEntity);
+                    row = systemDao.updateFreight(systemEntity);
+                } else {
+                    updateFreight(string);
+                }
+            }
+        System.out.println("row = " + row);
+        if(row > 0){
             return ResponseUtil.ok();
-        } else {
-            log.info("bok------------------ = " + systemEntity.getKeyValue());
-            return ResponseUtil.fail(505, "修改失败");
+        }else{
+            return ResponseUtil.fail(505,"添加失败");
         }
-
     }
+
+/*
+                    SystemEntity systemEntity = new SystemEntity();
+                    systemEntity.setKeyName(entry.getKey());
+                    systemEntity.setKeyValue(entry.getValue().toString());
+                    systemEntity.setUpdateTime(new Date());
+                    System.err.println("systemEntity = " + systemEntity);
+                    row = systemDao.updateFreight(systemEntity);
+ */
 
     @Override
     public Object selectByOrderValue() {
@@ -39,12 +68,8 @@ public class SystemServiceImpl implements SystemService {
     }
 
     @Override
-    public Object updateOrder(int id, SystemEntity systemEntity) {
-        if(systemDao.updateOrder(id,systemEntity) > 0){
-            return  ResponseUtil.ok();
-        }else{
-            return  ResponseUtil.fail(505,"修改失败");
-        }
+    public Object updateOrder(SystemEntity systemOrder) {
+        return null;
     }
 
     @Override
@@ -53,11 +78,7 @@ public class SystemServiceImpl implements SystemService {
     }
 
     @Override
-    public Object updateApplet(int id, SystemEntity systemEntity) {
-        if(systemDao.updateApplet(id,systemEntity) > 0){
-            return  ResponseUtil.ok();
-        }else{
-            return  ResponseUtil.fail(505,"修改失败");
-        }
+    public Object updateApplet(SystemEntity systemApplet) {
+        return null;
     }
 }
