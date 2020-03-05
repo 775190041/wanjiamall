@@ -33,11 +33,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     /**
      * 上架商品
-     * 还缺少校验的
      * @param addGoodsVo
      * @return
      */
-
     @Transactional
     @Override
     public Object AddGoods(AddGoodsVo addGoodsVo) {
@@ -47,7 +45,6 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsAttributeEntity[] goodsAttributeEntities = addGoodsVo.getGoodsAttributeEntity();
         //把数组转变为字符串加双引号
         String gallery = ArrayUtils.addDouble( goodsEntity.getGallery());
-
          goodsEntity.setGallerys(gallery);
         //商品基本信息表
         goodsDao.insert(goodsEntity);
@@ -164,11 +161,8 @@ public class GoodsServiceImpl implements GoodsService {
         data.put("goodsSpec",goodsSpecificationEntities);
         data.put("goodsProduct",goodsProductEntities);
         data.put("goodsAttribute",goodsAttributeEntities);
-        //子id
-        data.put("childId",categoryEntity.getId());
-        //父id
-        data.put("parentId",categoryEntity.getPid());
-
+        Integer[] integers = new Integer[]{categoryEntity.getPid(),categoryEntity.getId()};
+        data.put("categoryIds",integers);
 
         return ResponseUtil.ok(data);
     }

@@ -55,10 +55,10 @@
                 unit = #{goods.unit},
             </if>
             <if test="goods.counterPrice != null">
-                counterPrice = #{goods.counterPrice},
+                counter_price = #{goods.counterPrice},
             </if>
             <if test="goods.retailPrice != null">
-                retailPrice = #{goods.retailPrice},
+                retail_price = #{goods.retailPrice},
             </if>
             <if test="goods.detail != null">
                 detail = #{goods.detail},
@@ -67,7 +67,7 @@
                 pic_url = #{goods.picUrl},
             </if>
         </set>
-        where id = # {goods.id}
+        where id = #{goods.id}
     </update>
 
 <!--    删除商品信息 -->
