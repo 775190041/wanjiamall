@@ -24,6 +24,8 @@ public class KeywordServiceImpl implements KeywordService {
         return ResponseUtil.okList(keywordEntities);
     }
 
+
+
     @Override
     public Object keywordInsert(KeywordEntity keywordEntity) {
         if (keywordDao.keywordInsert(keywordEntity) > 0){
