@@ -19,8 +19,8 @@
     </select>
 
     <insert id="insertAd">
-        insert into wanjia_ad(name,link,url,position,content,enabled)
-        value(#{ad.name},#{ad.link},#{ad.url},#{ad.position},#{ad.content},#{ad.enabled})
+        insert into wanjia_ad(name,link,url,position,content,enabled,start_time,end_time)
+        value(#{ad.name},#{ad.link},#{ad.url},#{ad.position},#{ad.content},#{ad.enabled},#{ad.startTime},#{ad.endTime})
     </insert>
 
     <update id="updateAd">
