@@ -7,43 +7,231 @@
         select * from wanjia_coupon where deleted = 0
     </select>
 
-    <select id="getByCoupon" resultType="com.nf.wanjiamall.entity.CouponEntity">
-        select * from wanjia_coupon where deleted = 0 and name like CONCAT('%',#{couponName},'%') and
-        type like CONCAT('%',#{couponType},'%') and status like CONCAT('%',#{couponStatus},'%')
+    <select id="getCouponAll" resultType="com.nf.wanjiamall.entity.CouponEntity">
+        select * from wanjia_coupon where deleted = 0
+        <if test="coupon.name !=null and coupon.name != ''">
+            and name like CONCAT('%',#{coupon.name},'%')
+        </if>
+        <if test="coupon.type !=null and coupon.type != ''">
+            and type like CONCAT('%',#{coupon.type},'%')
+        </if>
+        <if test="coupon.status !=null and coupon.status != ''">
+            and status like CONCAT('%',#{coupon.status},'%')
+        </if>
     </select>
 
-    <insert id="insertCoupon">
-        insert into wanjia_coupon(name,coupon_desc,tag,total,discount,min,coupon_limit,type,time_type,days,start_time,end_time)
+    <insert id="insertCouponDay">
+        insert into wanjia_coupon(name,coupon_desc,tag,total,discount,min,coupon_limit,type,status,goods_type,time_type,days,deleted)
         value (#{coupon.name},#{coupon.couponDesc},#{coupon.tag},#{coupon.total},#{coupon.discount},
-               #{coupon.min},#{coupon.couponLimit},#{coupon.type},#{coupon.timeType},
-                <if test="coupon.timeType==0">
-                    #{days},
-                </if>
-               <if test="#coupon.timeType==1">
-                   #{coupon.startTime},#{coupon.endTime}
-               </if>)
+               #{coupon.min},#{coupon.couponLimit},#{coupon.type},0,#{coupon.goodsType},#{coupon.timeType},#{coupon.days},default)
     </insert>
 
-    <update id="updateCoupon">
+    <insert id="insertCouponTime">
+        insert into wanjia_coupon(name,coupon_desc,tag,total,discount,min,coupon_limit,type,status,goods_type,time_type,start_time,end_time,deleted)
+        value (#{coupon.name},#{coupon.couponDesc},#{coupon.tag},#{coupon.total},#{coupon.discount},
+               #{coupon.min},#{coupon.couponLimit},#{coupon.type},0,#{coupon.goodsType},#{coupon.timeType},
+               #{coupon.startTime},#{coupon.endTime},default)
+    </insert>
+
+    <insert id="insertCouponCodeDay">
+        insert into wanjia_coupon(name,coupon_desc,tag,total,discount,min,coupon_limit,type,status,goods_type,code,time_type,days,deleted)
+        value (#{coupon.name},#{coupon.couponDesc},#{coupon.tag},#{coupon.total},#{coupon.discount},
+               #{coupon.min},#{coupon.couponLimit},#{coupon.type},0,#{coupon.goodsType},#{coupon.code},#{coupon.timeType},#{coupon.days},default)
+    </insert>
+
+    <insert id="insertCouponCodeTime">
+        insert into wanjia_coupon(name,coupon_desc,tag,total,discount,min,coupon_limit,type,status,goods_type,code,time_type,start_time,end_time,deleted)
+        value (#{coupon.name},#{coupon.couponDesc},#{coupon.tag},#{coupon.total},#{coupon.discount},
+               #{coupon.min},#{coupon.couponLimit},#{coupon.type},0,#{coupon.goodsType},#{coupon.code},#{coupon.timeType},
+               #{coupon.startTime},#{coupon.endTime},default)
+    </insert>
+
+
+    <update id="updateCouponDay">
         update wanjia_coupon
         <set>
-            <if test="ad.name!=null">
-                name =#{ad.name},
+            <if test="coupon.name!=null">
+                name =#{coupon.name},
             </if>
-            <if test="ad.link!=null">
-                link=#{ad.link},
+            <if test="coupon.couponDesc!=null">
+                coupon_desc=#{coupon.couponDesc},
             </if>
-            <if test="ad.url!=null">
-                url=#{ad.url},
+            <if test="coupon.tag!=null">
+                tag=#{coupon.tag},
             </if>
-            <if test="ad.position!=null">
-                position=#{ad.position},
+            <if test="coupon.total!=null">
+                total=#{coupon.total},
             </if>
-            <if test="ad.content!=null">
-                content=#{ad.content},
+            <if test="coupon.discount!=null">
+                discount=#{coupon.discount},
             </if>
-            <if test="ad.enabled!=null">
-                enabled=#{ad.enabled}
+            <if test="coupon.min!=null">
+                min=#{coupon.min},
+            </if>
+            <if test="coupon.couponLimit!=null">
+                coupon_limit=#{coupon.couponLimit},
+            </if>
+            <if test="coupon.type!=null">
+                type=#{coupon.type},
+            </if>
+            <if test="coupon.status!=null">
+                status=#{coupon.status},
+            </if>
+            <if test="coupon.goodsType!=null">
+                goods_type=#{coupon.goodsType},
+            </if>
+            <if test="coupon.code!=null">
+                code=#{coupon.code} ,
+            </if>
+            <if test="coupon.timeType!=null">
+                time_type=#{coupon.timeType},
+            </if>
+            <if test="coupon.days!=null">
+                days=#{coupon.days}
+            </if>
+        </set>
+        where deleted = 0 and id=#{id}
+    </update>
+
+    <update id="updateCouponTime">
+        update wanjia_coupon
+        <set>
+            <if test="coupon.name!=null">
+                name =#{coupon.name},
+            </if>
+            <if test="coupon.couponDesc!=null">
+                coupon_desc=#{coupon.couponDesc},
+            </if>
+            <if test="coupon.tag!=null">
+                tag=#{coupon.tag},
+            </if>
+            <if test="coupon.total!=null">
+                total=#{coupon.total},
+            </if>
+            <if test="coupon.discount!=null">
+                discount=#{coupon.discount},
+            </if>
+            <if test="coupon.min!=null">
+                min=#{coupon.min},
+            </if>
+            <if test="coupon.couponLimit!=null">
+                coupon_limit=#{coupon.couponLimit},
+            </if>
+            <if test="coupon.type!=null">
+                type=#{coupon.type},
+            </if>
+            <if test="coupon.status!=null">
+                status=#{coupon.status},
+            </if>
+            <if test="coupon.goodsType!=null">
+                goods_type=#{coupon.goodsType},
+            </if>
+            <if test="coupon.code!=null">
+                code=#{coupon.code},
+            </if>
+            <if test="coupon.timeType!=null">
+                time_type=#{coupon.timeType},
+            </if>
+            <if test="coupon.startTime!=null">
+                start_Time=#{coupon.startTime},
+            </if>
+            <if test="coupon.endTime!=null">
+                end_Time=#{coupon.endTime}
+            </if>
+        </set>
+        where deleted = 0 and id=#{id}
+    </update>
+
+    <update id="updateCouponCodeDay">
+        update wanjia_coupon
+        <set>
+            <if test="coupon.name!=null">
+                name =#{coupon.name},
+            </if>
+            <if test="coupon.couponDesc!=null">
+                coupon_desc=#{coupon.couponDesc},
+            </if>
+            <if test="coupon.tag!=null">
+                tag=#{coupon.tag},
+            </if>
+            <if test="coupon.total!=null">
+                total=#{coupon.total},
+            </if>
+            <if test="coupon.discount!=null">
+                discount=#{coupon.discount},
+            </if>
+            <if test="coupon.min!=null">
+                min=#{coupon.min},
+            </if>
+            <if test="coupon.couponLimit!=null">
+                coupon_limit=#{coupon.couponLimit},
+            </if>
+            <if test="coupon.type!=null">
+                type=#{coupon.type},
+            </if>
+            <if test="coupon.status!=null">
+                status=#{coupon.status},
+            </if>
+            <if test="coupon.code!=null">
+                code=#{coupon.code},
+            </if>
+            <if test="coupon.goodsType!=null">
+                goods_type=#{coupon.goodsType},
+            </if>
+            <if test="coupon.timeType!=null">
+                time_type=#{coupon.timeType},
+            </if>
+            <if test="coupon.days!=null">
+                days=#{coupon.days}
+            </if>
+        </set>
+        where deleted = 0 and id=#{id}
+    </update>
+
+    <update id="updateCouponCodeTime">
+        update wanjia_coupon
+        <set>
+            <if test="coupon.name!=null">
+                name =#{coupon.name},
+            </if>
+            <if test="coupon.couponDesc!=null">
+                coupon_desc=#{coupon.couponDesc},
+            </if>
+            <if test="coupon.tag!=null">
+                tag=#{coupon.tag},
+            </if>
+            <if test="coupon.total!=null">
+                total=#{coupon.total},
+            </if>
+            <if test="coupon.discount!=null">
+                discount=#{coupon.discount},
+            </if>
+            <if test="coupon.min!=null">
+                min=#{coupon.min},
+            </if>
+            <if test="coupon.couponLimit!=null">
+                coupon_limit=#{coupon.couponLimit},
+            </if>
+            <if test="coupon.type!=null">
+                type=#{coupon.type},
+            </if>
+            <if test="coupon.status!=null">
+                status=#{coupon.status},
+            </if>
+            <if test="coupon.code!=null">
+                code=#{coupon.code},
+            </if>
+            <if test="coupon.goodsType!=null">
+                goods_type=#{coupon.goodsType},
+            </if>
+            <if test="coupon.timeType!=null">
+                time_type=#{coupon.timeType},
+            </if>
+            <if test="coupon.startTime!=null">
+                start_time=#{coupon.startTime},
+            </if>
+            <if test="coupon.endTime!=null">
+                end_Time=#{coupon.endTime}
             </if>
         </set>
         where deleted = 0 and id=#{id}

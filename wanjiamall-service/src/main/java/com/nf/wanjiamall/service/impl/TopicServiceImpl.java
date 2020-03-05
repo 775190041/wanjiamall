@@ -1,6 +1,7 @@
 package com.nf.wanjiamall.service.impl;
 
 import com.nf.wanjiamall.dao.TopicDao;
+import com.nf.wanjiamall.entity.TopicEntity;
 import com.nf.wanjiamall.service.TopicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,9 @@ public class TopicServiceImpl implements TopicService {
     private TopicDao topicDao;
 
     @Override
-    public Object getAll(Integer pageNum, Integer pageSize) {
-        return topicDao.getAll(pageNum,pageSize);
+    public Object getTopicAll(Integer pageNum, Integer pageSize, TopicEntity topicEntity) {
+        return topicDao.getTopicAll(pageNum,pageSize,topicEntity);
     }
 
-    @Override
-    public Object getByTopic(Integer pageNum, Integer pageSize, String title, String subtitle, Integer sort) {
-        return topicDao.getByTopic(pageNum,pageSize,title,subtitle,sort);
-    }
+
 }

@@ -9,9 +9,8 @@ import java.util.List;
  */
 
 public interface TopicDao {
-    List<TopicEntity> getAll(@Param("pageNum")Integer pageNum,@Param("pageSize")Integer pageSize);
+    List<TopicEntity> getAll();
 
-    List<TopicEntity> getByTopic(@Param("pageNum")Integer pageNum,@Param("pageSize")Integer pageSize,
-                                 @Param("topicTitle")String title,@Param("topicSubtitle")String subtitle,
-                                 @Param("topicSort")Integer sort);
+    List<TopicEntity> getTopicAll(@Param("pageNum")Integer pageNum,@Param("pageSize")Integer pageSize,@Param("topic")TopicEntity topicEntity);
+
 }

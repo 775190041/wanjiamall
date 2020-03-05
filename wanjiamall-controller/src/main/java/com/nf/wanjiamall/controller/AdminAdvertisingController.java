@@ -26,25 +26,14 @@ public class AdminAdvertisingController {
     @ApiOperation(value = "getAll",notes = "获取广告信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "当前页码，必须",required = false, dataType = "Integer"),
-            @ApiImplicitParam(name = "pageSize", value = "显示数据行多少，必须",required = false, dataType = "Integer")
-    })
-    @GetMapping("/ad/{pageNum}/{pageSize}")
-    public Object getAll(@PathVariable Integer pageNum,@PathVariable Integer pageSize){
-        return advertisingService.getAll(pageNum,pageSize);
-    }
-
-    @ApiOperation(value = "getByAd",notes = "根据条件查出相应的广告信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageNum", value = "当前页码，必须",required = false, dataType = "Integer"),
             @ApiImplicitParam(name = "pageSize", value = "显示数据行多少，必须",required = false, dataType = "Integer"),
             @ApiImplicitParam(name = "name", value = "广告标题",required = false, dataType = "String"),
             @ApiImplicitParam(name = "content", value = "广告内容",required = false, dataType = "String")
     })
-    @GetMapping("/ad/by/{pageNum}/{pageSize}")
-    public Object getByAd(@PathVariable Integer pageNum,@PathVariable Integer pageSize,String name,String content){
-        return advertisingService.getByAd(pageNum,pageSize,name,content);
+    @GetMapping("/ad/{pageNum}/{pageSize}")
+    public Object getAll(@PathVariable Integer pageNum,@PathVariable Integer pageSize,AdvertisingEntity advertisingEntity){
+        return advertisingService.getAdAll(pageNum,pageSize,advertisingEntity);
     }
-
     @ApiOperation(value = "insertAd",notes = "添加广告信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "广告标题",required = false, dataType = "String"),

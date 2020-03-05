@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="wanjiamall@localhost" uuid="06438865-063f-4bf9-965f-8006fea39206">
-      <driver-ref>mysql</driver-ref>
+    <data-source source="LOCAL" name="wanjiamall@localhost" uuid="3f25d04d-3b99-4843-a616-0de421cc36e5">
+      <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/wanjiamall</jdbc-url>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/wanjiamall?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8&amp;characterSetResults=utf8&amp;useSSL=false&amp;verifyServerCertificate=false&amp;autoReconnct=true&amp;autoReconnectForPools=true&amp;allowMultiQueries=true</jdbc-url>
     </data-source>
   </component>
 </project>

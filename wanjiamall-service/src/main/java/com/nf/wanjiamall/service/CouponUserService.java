@@ -1,13 +1,14 @@
 package com.nf.wanjiamall.service;
 
-import com.nf.wanjiamall.entity.TopicEntity;
+import com.nf.wanjiamall.entity.CouponUserEntity;
 
 /**
  * @author lrc
  */
 
-public interface TopicService {
-    Object getTopicAll(Integer pageNum, Integer pageSize, TopicEntity topicEntity);
+public interface CouponUserService {
+    Object getCouponUserAll(Integer pageNum, Integer pageSize,
+                            CouponUserEntity couponUserEntity);
 
 
 //    Object insertAd(AdvertisingEntity advertisingEntity);

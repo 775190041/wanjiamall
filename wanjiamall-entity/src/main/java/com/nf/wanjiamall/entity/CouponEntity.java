@@ -15,6 +15,7 @@ public class CouponEntity {
     String name;
     String couponDesc;
     String tag;
+    Integer total;
     BigDecimal discount;
     BigDecimal min;
     Integer couponLimit;
