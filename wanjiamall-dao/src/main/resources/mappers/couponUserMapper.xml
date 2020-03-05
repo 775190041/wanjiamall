@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.CouponUserDao">
+
+    <select id="getCouponUserByAll" resultType="com.nf.wanjiamall.entity.CouponUserEntity">
+        select * from wanjia_coupon_user where deleted = 0
+        <if test="couponUser.userId !=null and couponUser.userId != ''">
+            and user_id like CONCAT('%',#{couponUser.userId},'%')
+        </if>
+        <if test="couponUser.status == 0">
+            and status = 0
+        </if>
+        <if test="couponUser.status == 1">
+            and status = 1
+        </if>
+        <if test="couponUser.status == 2">
+            and status = 2
+        </if>
+        <if test="couponUser.status == 3">
+            and status = 3
+        </if>
+        and id = #{id}
+    </select>
+
+    <select id="getCouponUserAll" resultType="com.nf.wanjiamall.entity.CouponUserEntity">
+        select * from wanjia_coupon_user where deleted = 0
+        and id = #{id}
+    </select>
+</mapper>

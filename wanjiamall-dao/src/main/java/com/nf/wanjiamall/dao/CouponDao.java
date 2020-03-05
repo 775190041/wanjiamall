@@ -14,9 +14,15 @@ public interface CouponDao {
 
     List<CouponEntity> getCouponAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,@Param("coupon") CouponEntity couponEntity);
 
-    Integer insertCoupon(@Param("coupon") CouponEntity couponEntity);
+    Integer insertCouponDay(@Param("coupon") CouponEntity couponEntity);
+    Integer insertCouponTime(@Param("coupon") CouponEntity couponEntity);
+    Integer insertCouponCodeDay(@Param("coupon") CouponEntity couponEntity);
+    Integer insertCouponCodeTime(@Param("coupon") CouponEntity couponEntity);
 
-    Integer updateCoupon(@Param("coupon") CouponEntity couponEntity, @Param("id") Integer id);
+    Integer updateCouponDay(@Param("coupon") CouponEntity couponEntity, @Param("id") Integer id);
+    Integer updateCouponTime(@Param("coupon") CouponEntity couponEntity, @Param("id") Integer id);
+    Integer updateCouponCodeDay(@Param("coupon") CouponEntity couponEntity, @Param("id") Integer id);
+    Integer updateCouponCodeTime(@Param("coupon") CouponEntity couponEntity, @Param("id") Integer id);
 
     Integer deletedCouponId(@Param("id") Integer id);
 }

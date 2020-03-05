@@ -26,18 +26,5 @@
         </if>
     </select>
 
-    <select id="getByTopic" resultType="com.nf.wanjiamall.entity.TopicEntity">
-        select * from wanjia_topic
-        <trim prefix="where" suffixOverrides="and">
-            deleted = 0
-            <if test="topicTitle !=null and topicTitle !=''">
-                <bind name="title" value="'%'+_parameter.topicTitle+'%'" />
-                and title like #{title}
-            </if>
-            <if test="topicSubtitle !=null and topicSubtitle !=''">
-                <bind name="subtitle" value="'%'+_parameter.topicSubtitle+'%'" />
-                and subtitle like #{subtitle}
-            </if>
-        </trim>
-    </select>
+
 </mapper>
