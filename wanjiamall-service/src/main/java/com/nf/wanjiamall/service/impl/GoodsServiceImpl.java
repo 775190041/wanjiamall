@@ -73,7 +73,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
     /**
      * 编辑商品
-     * 这里修改商品是有问题的（待定）
+
      * @param addGoodsVo
      * @return
      */
@@ -105,7 +105,14 @@ public class GoodsServiceImpl implements GoodsService {
         }
         //参数表
         for (GoodsAttributeEntity goodsAttributeEntity : goodsAttributeEntities) {
-            goodsAttributeDao.update(goodsAttributeEntity);
+            if (goodsAttributeEntity.getId() == null){
+                goodsAttributeDao.insert(goodsAttributeEntity);
+            }else {
+                goodsAttributeDao.update(goodsAttributeEntity);
+            }
+
+
+
         }
         return ResponseUtil.ok();
     }

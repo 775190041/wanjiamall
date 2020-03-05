@@ -33,7 +33,7 @@
             <if test="goods.brandId != null">
                 brand_id = #{goods.brandId },
             </if>
-            <if test="goods.gallery != null">
+            <if test="goods.gallerys != null">
                 gallery = #{goods.gallerys},
             </if>
             <if test="goods.keywords != null">
