@@ -17,17 +17,17 @@ import java.util.*;
 @Service
 public class GoodsServiceImpl implements GoodsService {
 
-    @Autowired
+    @Autowired(required = false)
     private GoodsDao goodsDao;
-    @Autowired
+    @Autowired(required = false)
     private GoodsSpecificationDao goodsSpecificationDao;
-    @Autowired
+    @Autowired(required = false)
     private GoodsProductDao goodsProductDao;
-    @Autowired
+    @Autowired(required = false)
     private GoodsAttributeDao goodsAttributeDao;
-    @Autowired
+    @Autowired(required = false)
     private CategoryDao categoryDao;
-    @Autowired
+    @Autowired(required = false)
     private BrandDao brandDao;
 
 
@@ -73,7 +73,6 @@ public class GoodsServiceImpl implements GoodsService {
     }
     /**
      * 编辑商品
-
      * @param addGoodsVo
      * @return
      */
@@ -84,9 +83,6 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsSpecificationEntity[] goodsSpecificationEntities = addGoodsVo.getGoodsSpecificationEntity();
         GoodsProductEntity[] goodsProductEntities = addGoodsVo.getGoodsProductEntities();
         GoodsAttributeEntity[] goodsAttributeEntities = addGoodsVo.getGoodsAttributeEntity();
-
-
-
         //把数组转变为字符串
         String gallery = ArrayUtils.addDouble(goodsEntity.getGallery());
         goodsEntity.setGallerys(gallery);
@@ -106,13 +102,11 @@ public class GoodsServiceImpl implements GoodsService {
         //参数表
         for (GoodsAttributeEntity goodsAttributeEntity : goodsAttributeEntities) {
             if (goodsAttributeEntity.getId() == null){
+                goodsAttributeEntity.setGoodsId(goodsEntity.getId());
                 goodsAttributeDao.insert(goodsAttributeEntity);
             }else {
                 goodsAttributeDao.update(goodsAttributeEntity);
             }
-
-
-
         }
         return ResponseUtil.ok();
     }
