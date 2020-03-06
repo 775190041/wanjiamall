@@ -5,4 +5,6 @@ package com.nf.wanjiamall.service.wx;
  */
 public interface WxHomeService {
     Object getHomeData();
+
+    Object getCateData(Integer pid);
 }
