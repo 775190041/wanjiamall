@@ -18,11 +18,16 @@ public class WxHomeVo {
     //广告表信息
     private List<AdvertisingEntity> advertise;
     //商品类目表
-    private List<CategoryVo> category;
+    //一级类目
+    private List<CategoryEntity> firstCate;
+    //二级类目
+    private List<CategoryEntity> secondCate;
     //品牌表
     private List<BrandEntity> brand;
-    //商品表
-    private List<GoodsEntity> goods;
+    //新品
+    private List<GoodsEntity> newGoods;
+    //热气推荐
+    private List<GoodsEntity> hotGoods;
     //优惠劵表
     private List<CouponEntity> coupon;
     //专题表
