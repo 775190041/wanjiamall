@@ -30,8 +30,7 @@ public class WxFootprintController {
 
     @DeleteMapping("/footprint/{userId}/{ids}")
     public Object deleteBatchUserFootprint(@PathVariable("userId") Integer userId,@PathVariable("ids") Integer[] ids){
-        System.err.println("userId = " + userId);
-        System.err.println("ids = " + ids);
+
         return wxFootprintService.deleteBatchUserFootprint(userId,ids);
     }
 }
