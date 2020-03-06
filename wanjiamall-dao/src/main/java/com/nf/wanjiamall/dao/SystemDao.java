@@ -4,9 +4,11 @@ package com.nf.wanjiamall.dao;
 import com.nf.wanjiamall.entity.SystemEntity;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface SystemDao {
 
-    SystemEntity selectValue();
+    List<SystemEntity> selectValue();
 
     int updateAll(@Param("systemEntity") SystemEntity systemEntity);
 
