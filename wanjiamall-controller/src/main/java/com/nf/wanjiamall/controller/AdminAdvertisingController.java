@@ -44,7 +44,7 @@ public class AdminAdvertisingController {
             @ApiImplicitParam(name = "content", value = "广告内容",required = false, dataType = "String"),
     })
     @PostMapping("/ad")
-    public Object insertAd(AdvertisingEntity advertisingEntity){
+    public Object insertAd(@RequestBody AdvertisingEntity advertisingEntity){
         return advertisingService.insertAd(advertisingEntity);
 
     }
@@ -62,7 +62,7 @@ public class AdminAdvertisingController {
             @ApiImplicitParam(name = "deleted", value = "是否删除",required = false, dataType = "Integer")
     })
     @PutMapping("/ad/{id}")
-    public Object updateAd(AdvertisingEntity advertisingEntity, @PathVariable Integer id){
+    public Object updateAd(@RequestBody AdvertisingEntity advertisingEntity, @PathVariable Integer id){
         return advertisingService.updateAd(advertisingEntity, id);
     }
 

@@ -42,7 +42,15 @@
                 content=#{ad.content},
             </if>
             <if test="ad.enabled!=null">
-                enabled=#{ad.enabled}
+                enabled=#{ad.enabled},
+            </if>
+
+            <if test="ad.startTime!=null">
+                start_time=#{ad.startTime},
+            </if>
+
+            <if test="ad.endTime!=null">
+                end_time=#{ad.endTime}
             </if>
         </set>
          where deleted = 0 and id=#{id}
