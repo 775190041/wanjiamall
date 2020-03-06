@@ -50,7 +50,7 @@ public class AdminCouponController {
             @ApiImplicitParam(name = "end_time", value = "使用卷截至时间",required = false, dataType = "datetime")
     })
     @PostMapping("/coupon")
-    public Object insertCoupon(CouponEntity couponEntity){
+    public Object insertCoupon(@RequestBody CouponEntity couponEntity){
         return couponService.insertCoupon(couponEntity);
     }
 
@@ -67,7 +67,7 @@ public class AdminCouponController {
             @ApiImplicitParam(name = "deleted", value = "是否删除",required = false, dataType = "Integer")
     })
     @PutMapping("/coupon/{id}")
-    public Object updateCoupon(CouponEntity couponEntity, @PathVariable Integer id){
+    public Object updateCoupon(@RequestBody CouponEntity couponEntity, @PathVariable Integer id){
         return couponService.updateCoupon(couponEntity, id);
     }
 

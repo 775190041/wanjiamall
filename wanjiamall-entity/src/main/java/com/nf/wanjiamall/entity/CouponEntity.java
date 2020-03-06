@@ -22,7 +22,7 @@ public class CouponEntity {
     Integer type;
     Integer status;
     Integer goodsType;
-    String goodsValue;
+    String[] goodsValue;
     String code;
     Integer timeType;
     Integer days;
