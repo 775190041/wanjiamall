@@ -17,20 +17,16 @@ public class WxFootprintController {
     @Autowired
     private WxFootprintService wxFootprintService;
 
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageNum", dataType = "Integer", value = "当前页码，必须", required = false),
-            @ApiImplicitParam(name = "pageSize", dataType = "Integer", value = "分页大小，必须", required = false),
-            @ApiImplicitParam(name = "addressEntity", dataType = "AddressEntity", value = "收货地址实体类对象(userId,name)，非必须", required = false)
-    })
+
     @ApiOperation("根据用户Id查询用户足迹的所有信息")
     @GetMapping("/footprint/{userId}")
     public Object getUserIdSelectUserFootprint(@PathVariable("userId") Integer userId){
         return  wxFootprintService.getUserIdSelectUserFootprint(userId);
     }
 
+    @ApiOperation("根据用户Id批量删除用户足迹表Id")
     @DeleteMapping("/footprint/{userId}/{ids}")
     public Object deleteBatchUserFootprint(@PathVariable("userId") Integer userId,@PathVariable("ids") Integer[] ids){
-
         return wxFootprintService.deleteBatchUserFootprint(userId,ids);
     }
 }
