@@ -11,6 +11,6 @@ import java.util.List;
  */
 @Data
 public class CouponVO {
-    List<CouponEntity> coupon;
+    Object coupon;
     List<CouponUserEntity> couponUser;
 }
