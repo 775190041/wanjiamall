@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.SearchHistoryDao">
+    <resultMap id="userResultMap" type="com.nf.wanjiamall.entity.SearchHistoryEntity">
+        <id property="id" column="id"></id>
+        <result property="userId" column="user_id"></result>
+        <result property="keyword" column="keyword"></result>
+        <result property="historyFrom" column="history_from"></result>
+        <result property="addTime" column="add_time"></result>
+        <result property="updateTime" column="update_time"></result>
+        <result property="deleted" column="deleted"></result>
+    </resultMap>
+
+    <select id="getSearchHistoryList" resultMap="userResultMap">
+       select id,user_id,keyword,history_from,add_time,update_time,deleted
+       from wanjia_search_history
+       where deleted = 0
+       <if test="searchHistory != null">
+           <if test="searchHistory.keyword != null and searchHistory.keyword != ''">
+               <bind name="pattern" value="'%'+_parameter.searchHistory.keyword+'%'"/>
+               and keyword like #{pattern}
+           </if>
+           <if test="searchHistory.userId != null and searchHistory.userId != ''">
+               and user_id = #{searchHistory.userId }
+           </if>
+       </if>
+    </select>
+</mapper>

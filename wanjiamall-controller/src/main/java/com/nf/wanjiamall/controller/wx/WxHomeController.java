@@ -26,9 +26,8 @@ public class WxHomeController {
 
     @ApiOperation("查询主页所有数据")
     @GetMapping("/home")
-    public Object getHomeData(@RequestParam(value = "pageNum",required = false,defaultValue = "1") Integer pageNum,
-                              @RequestParam(value = "pageNum",required = false,defaultValue = "1000")Integer pageSize){
-        return wxHomeService.getHomeData(pageNum,pageSize);
+    public Object getHomeData(){
+        return wxHomeService.getHomeData();
     }
 
 }

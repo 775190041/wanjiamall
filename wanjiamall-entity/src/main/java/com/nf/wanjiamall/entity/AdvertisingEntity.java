@@ -1,6 +1,8 @@
 package com.nf.wanjiamall.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -16,9 +18,12 @@ public class AdvertisingEntity {
     String url;
     Integer position;
     String content;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     Date startTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     Date endTime;
-    Integer enabled;
+    Boolean enabled;
     Timestamp addTime;
     Timestamp updateTime;
     Integer deleted;

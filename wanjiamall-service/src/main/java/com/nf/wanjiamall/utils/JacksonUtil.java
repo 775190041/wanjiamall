@@ -23,9 +23,8 @@ public class JacksonUtil {
         try {
             node = mapper.readTree(body);
             JsonNode leaf = node.get(field);
-            if (leaf != null) {
+            if (leaf != null)
                 return leaf.asText();
-            }
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
@@ -39,12 +38,10 @@ public class JacksonUtil {
         try {
             node = mapper.readTree(body);
             JsonNode leaf = node.get(field);
-            if (leaf != null){
-                return  mapper.convertValue(leaf, new TypeReference<List<String>>() {
 
+            if (leaf != null)
+                return mapper.convertValue(leaf, new TypeReference<List<String>>() {
                 });
-            }
-
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
@@ -57,9 +54,8 @@ public class JacksonUtil {
         try {
             node = mapper.readTree(body);
             JsonNode leaf = node.get(field);
-            if (leaf != null) {
+            if (leaf != null)
                 return leaf.asInt();
-            }
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
@@ -74,10 +70,8 @@ public class JacksonUtil {
             JsonNode leaf = node.get(field);
 
             if (leaf != null)
-            {
                 return mapper.convertValue(leaf, new TypeReference<List<Integer>>() {
-                 });
-            }
+                });
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
@@ -91,9 +85,8 @@ public class JacksonUtil {
         try {
             node = mapper.readTree(body);
             JsonNode leaf = node.get(field);
-            if (leaf != null) {
+            if (leaf != null)
                 return leaf.asBoolean();
-            }
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
@@ -161,7 +154,6 @@ public class JacksonUtil {
     }
 
     public static Map<String, String> toMap(String data) {
-        System.err.println("data = " + data);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(data, new TypeReference<Map<String, String>>() {

@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public interface AdvertisingService {
-    Object getAll(Integer pageNum, Integer pageSize);
+    Object getAdAll(Integer pageNum, Integer pageSize,AdvertisingEntity advertisingEntity);
 
     Object insertAd(AdvertisingEntity advertisingEntity);
 

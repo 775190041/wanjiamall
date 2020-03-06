@@ -9,10 +9,14 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author lrc
+ */
 @RestController
 @Api(tags = "广告管理")
 @RequestMapping("/api")
@@ -23,13 +27,14 @@ public class AdminAdvertisingController {
     @ApiOperation(value = "getAll",notes = "获取广告信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "当前页码，必须",required = false, dataType = "Integer"),
-            @ApiImplicitParam(name = "pageSize", value = "显示数据行多少，必须",required = false, dataType = "Integer")
+            @ApiImplicitParam(name = "pageSize", value = "显示数据行多少，必须",required = false, dataType = "Integer"),
+            @ApiImplicitParam(name = "name", value = "广告标题",required = false, dataType = "String"),
+            @ApiImplicitParam(name = "content", value = "广告内容",required = false, dataType = "String")
     })
     @GetMapping("/ad/{pageNum}/{pageSize}")
-    public Object getAll(@PathVariable Integer pageNum,@PathVariable Integer pageSize){
-        return advertisingService.getAll(pageNum,pageSize);
+    public Object getAll(@PathVariable Integer pageNum,@PathVariable Integer pageSize,AdvertisingEntity advertisingEntity){
+        return advertisingService.getAdAll(pageNum,pageSize,advertisingEntity);
     }
-
     @ApiOperation(value = "insertAd",notes = "添加广告信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "广告标题",required = false, dataType = "String"),
@@ -39,7 +44,7 @@ public class AdminAdvertisingController {
             @ApiImplicitParam(name = "content", value = "广告内容",required = false, dataType = "String"),
     })
     @PostMapping("/ad")
-    public Object insertAd(AdvertisingEntity advertisingEntity){
+    public Object insertAd(@RequestBody AdvertisingEntity advertisingEntity){
         return advertisingService.insertAd(advertisingEntity);
 
     }
@@ -57,7 +62,7 @@ public class AdminAdvertisingController {
             @ApiImplicitParam(name = "deleted", value = "是否删除",required = false, dataType = "Integer")
     })
     @PutMapping("/ad/{id}")
-    public Object updateAd(AdvertisingEntity advertisingEntity, @PathVariable Integer id){
+    public Object updateAd(@RequestBody AdvertisingEntity advertisingEntity, @PathVariable Integer id){
         return advertisingService.updateAd(advertisingEntity, id);
     }
 

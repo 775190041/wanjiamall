@@ -40,8 +40,15 @@
     </update>
 
 
+
+    <resultMap id="GoodsProductEntityMap" type="com.nf.wanjiamall.entity.GoodsProductEntity">
+        <id column="id" property="id"/>
+        <result column="specifications"  property="specifications"  typeHandler="com.nf.wanjiamall.dao.utlis.JsonStringArrayTypeHandler"/>
+    </resultMap>
+
+
 <!--    根据商品id查询-->
-    <select id="listByGoodsId" resultType="com.nf.wanjiamall.entity.GoodsProductEntity">
+    <select id="listByGoodsId" resultMap="GoodsProductEntityMap">
         select id, goods_id, specifications, price, number, url, add_time, update_time, delted from wanjia_goods_product
         where delted = 0 and goods_id = #{id}
     </select>

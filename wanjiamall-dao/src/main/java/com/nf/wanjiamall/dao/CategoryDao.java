@@ -26,6 +26,15 @@ public interface CategoryDao {
 
     List<CategoryEntity> getById(Integer id);
 
+    /**
+     * 通过id，查询全部信息
+     * @param id
+     * @return
+     */
+    CategoryEntity getByIdDetail(Integer id);
+
+
+
     int updateById(@Param("cate") CategoryEntity categoryEntity,Integer id);
 
     /**

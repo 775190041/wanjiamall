@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.FootprintDao">
+    <resultMap id="footprintResultMap" type="com.nf.wanjiamall.entity.FootprintEntity">
+        <id property="id" column="id"></id>
+        <result property="userId" column="user_id"></result>
+        <result property="goodsId" column="goods_id"></result>
+        <result property="addTime" column="add_time"></result>
+        <result property="updateTime" column="update_time"></result>
+        <result property="deleted" column="deleted"></result>
+        <result property="goodsName" column="name"></result>
+    </resultMap>
+<select id="getFootprintList" resultMap="footprintResultMap">
+    select wf.id,wf.user_id,wf.goods_id,wf.add_time,
+    wf.update_time,wf.deleted,wg.name
+    from wanjia_footprint wf join wanjia_goods wg where
+    wf.deleted = 0 and wf.goods_id = wg.id
+    <if test="footprintEntity != null">
+        <if test="footprintEntity.userId != null and footprintEntity.userId != ''">
+            and wf.user_id = #{footprintEntity.userId}
+        </if>
+        <if test="footprintEntity.goodsId != null and footprintEntity.goodsId != ''">
+            and wf.goods_id = #{footprintEntity.goodsId}
+        </if>
+        <if test="footprintEntity.goodsName != null and footprintEntity.goodsName != ''">
+            <bind name="pattern" value="'%'+_parameter.footprintEntity.goodsName+'%'"/>
+            and wg.name like #{pattern}
+        </if>
+    </if>
+
+</select>
+
+
+</mapper>

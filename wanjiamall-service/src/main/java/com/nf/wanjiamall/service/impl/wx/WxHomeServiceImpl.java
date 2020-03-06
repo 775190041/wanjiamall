@@ -1,12 +1,10 @@
 package com.nf.wanjiamall.service.impl.wx;
 
-import com.nf.wanjiamall.dao.AdvertisingDao;
-import com.nf.wanjiamall.dao.BrandDao;
-import com.nf.wanjiamall.dao.GoodsDao;
-import com.nf.wanjiamall.entity.AdvertisingEntity;
-import com.nf.wanjiamall.entity.BrandEntity;
-import com.nf.wanjiamall.entity.GoodsEntity;
+import com.nf.wanjiamall.dao.*;
+import com.nf.wanjiamall.entity.*;
 import com.nf.wanjiamall.service.CategoryService;
+import com.nf.wanjiamall.service.CouponService;
+import com.nf.wanjiamall.service.TopicService;
 import com.nf.wanjiamall.service.impl.CategoryServiceImpl;
 import com.nf.wanjiamall.service.wx.WxHomeService;
 import com.nf.wanjiamall.utils.ResponseUtil;
@@ -32,19 +30,27 @@ public class WxHomeServiceImpl implements WxHomeService {
     private GoodsDao goodsDao;
     @Autowired
     CategoryServiceImpl categoryService;
+    @Autowired
+    private CouponDao couponDao;
+    @Autowired
+    private TopicDao topicDao;
 
     @Override
-    public Object getHomeData(Integer pageNum,Integer pageSize) {
-        List<AdvertisingEntity> advertisingEntities=advertisingDao.getAll(pageNum,pageSize);
+    public Object getHomeData() {
+        List<AdvertisingEntity> advertisingEntities=advertisingDao.getAll();
         List<CategoryVo> categoryEntities= categoryService.getAll();
         List<BrandEntity> brandEntities=brandDao.getAll();
         List<GoodsEntity> goodsEntities=goodsDao.getAll();
+        List<CouponEntity> couponEntities=couponDao.getAll();
+        List<TopicEntity> topicEntities=topicDao.getAll();
 
-        WxHomeVo vo = new WxHomeVo();
+        WxHomeVo vo =new WxHomeVo();
         vo.setAdvertise(advertisingEntities);
         vo.setCategory(categoryEntities);
         vo.setBrand(brandEntities);
         vo.setGoods(goodsEntities);
+        vo.setCoupon(couponEntities);
+        vo.setTopic(topicEntities);
 
         return ResponseUtil.ok(vo);
     }
