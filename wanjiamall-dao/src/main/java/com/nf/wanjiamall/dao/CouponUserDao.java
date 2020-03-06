@@ -15,6 +15,5 @@ public interface CouponUserDao {
                                               @Param("couponUser") CouponUserEntity couponUserEntity,
                                               @Param("id") Integer id);
 
-    List<CouponUserEntity> getCouponUserAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,@Param("id") Integer id);
 
 }

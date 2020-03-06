@@ -10,9 +10,11 @@ public interface TopicService {
     Object getTopicAll(Integer pageNum, Integer pageSize, TopicEntity topicEntity);
 
 
-//    Object insertAd(AdvertisingEntity advertisingEntity);
-//
-//    Object updateAd(AdvertisingEntity advertisingEntity, Integer id);
-//
-//    Object deletedAdId(Integer id);
+    Object insertTopic(TopicEntity topicEntity);
+
+    Object updateTopic(TopicEntity topicEntity, Integer id);
+
+    Object deleteTopicId(Integer id);
+
+    Object deleteTopicBatchId(Integer[] id);
 }

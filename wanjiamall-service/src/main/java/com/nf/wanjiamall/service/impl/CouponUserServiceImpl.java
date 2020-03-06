@@ -19,11 +19,6 @@ public class CouponUserServiceImpl implements CouponUserService {
 
     @Override
     public Object getCouponUserAll(Integer pageNum, Integer pageSize, CouponUserEntity couponUserEntity) {
-        List<CouponEntity> list = couponDao.getAll();
-        List<CouponUserEntity> couponUser= null;
-        for (CouponEntity couponEntity : list) {
-            couponUser = couponUserDao.getCouponUserByAll(pageNum, pageSize, couponUserEntity,couponEntity.getId());
-        }
-        return ResponseUtil.ok(couponUser);
+       return null;
     }
 }

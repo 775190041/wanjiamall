@@ -24,8 +24,4 @@
         and id = #{id}
     </select>
 
-    <select id="getCouponUserAll" resultType="com.nf.wanjiamall.entity.CouponUserEntity">
-        select * from wanjia_coupon_user where deleted = 0
-        and id = #{id}
-    </select>
 </mapper>

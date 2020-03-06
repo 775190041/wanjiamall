@@ -19,9 +19,11 @@ public class TopicEntity {
     Integer readCount;
     String picUrl;
     Integer sortOrder;
-    String goods;
+    String[] goods;
+    String goodes;
     Timestamp addTime;
     Timestamp updateTime;
     Boolean deleted;
     Integer sort;
+
 }
