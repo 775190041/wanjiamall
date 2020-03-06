@@ -1,13 +1,7 @@
 package com.nf.wanjiamall.vo.wx;
-
-<<<<<<< HEAD
 import com.nf.wanjiamall.entity.AdvertisingEntity;
 import com.nf.wanjiamall.entity.BrandEntity;
-import com.nf.wanjiamall.entity.CategoryEntity;
-import com.nf.wanjiamall.entity.GoodsEntity;
-=======
 import com.nf.wanjiamall.entity.*;
->>>>>>> review
 import com.nf.wanjiamall.vo.CategoryVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,4 +28,5 @@ public class WxHomeVo {
     private List<CouponEntity> coupon;
     //专题表
     private List<TopicEntity> topic;
+
 }

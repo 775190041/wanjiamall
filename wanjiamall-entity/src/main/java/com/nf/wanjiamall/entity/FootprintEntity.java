@@ -3,6 +3,7 @@ package com.nf.wanjiamall.entity;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 南八
@@ -38,4 +39,6 @@ public class FootprintEntity {
      * 商品名称
      */
     private String  goodsName;
+
+
 }
