@@ -25,6 +25,7 @@
         </where>
     </select>
 
+
     <insert id="keywordInsert">
         insert into wanjia_keyword(keyword, url, is_not, add_time, update_time, delted) values
         (#{keywordEntity.keyword},#{keywordEntity.url},#{keywordEntity.isNot},default,default,default)

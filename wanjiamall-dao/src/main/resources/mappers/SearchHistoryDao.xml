@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nf.wanjiamall.dao.SearchHistoryDao">
-    <resultMap id="userResultMap" type="com.nf.wanjiamall.entity.SearchHistoryEntity">
+    <resultMap id="searchHistoryResultMap" type="com.nf.wanjiamall.entity.SearchHistoryEntity">
         <id property="id" column="id"></id>
         <result property="userId" column="user_id"></result>
         <result property="keyword" column="keyword"></result>
@@ -13,7 +13,7 @@
         <result property="deleted" column="deleted"></result>
     </resultMap>
 
-    <select id="getSearchHistoryList" resultMap="userResultMap">
+    <select id="getSearchHistoryList" resultMap="searchHistoryResultMap">
        select id,user_id,keyword,history_from,add_time,update_time,deleted
        from wanjia_search_history
        where deleted = 0
@@ -27,4 +27,14 @@
            </if>
        </if>
     </select>
+
+    <select id="getSearchHistoryByUserId" resultMap="searchHistoryResultMap">
+         select id,user_id,keyword,history_from,add_time,update_time,deleted
+       from wanjia_search_history
+       where deleted = 0 and user_id = #{userId}
+    </select>
+
+    <delete id="searchHistoryDelete" parameterType="int">
+        delete from wanjia_search_history where user_id = #{userId}
+    </delete>
 </mapper>

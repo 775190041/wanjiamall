@@ -24,4 +24,19 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
         List<SearchHistoryEntity> searchHistoryEntities = searchHistoryDao.getSearchHistoryList(pageNum, pageSize, searchHistoryEntity);
         return ResponseUtil.okList(searchHistoryEntities);
     }
+
+    @Override
+    public Object getSearchHistoryByUserId(Integer pageNum, Integer pageSize,Integer userId) {
+        List<SearchHistoryEntity> searchHistoryEntities = searchHistoryDao.getSearchHistoryByUserId(pageNum, pageSize, userId);
+        return ResponseUtil.ok(searchHistoryEntities);
+    }
+
+    @Override
+    public Object searchHistoryDelete(Integer userId) {
+        if (searchHistoryDao.searchHistoryDelete(userId) > 0){
+            return ResponseUtil.ok();
+        }else {
+            return ResponseUtil.fail(505,"删除失败");
+        }
+    }
 }
