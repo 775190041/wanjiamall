@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.SystemDao">
+<resultMap id="BaseResultMap" type="com.nf.wanjiamall.entity.SystemEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="key_name"  property="keyName" />
+    <result column="key_value" property="keyValue" />
+    <result column="add_time"  property="addTime" />
+    <result column="update_time"  property="updateTime" />
+    <result column="delted"  property="delted" />
+</resultMap>
+
+    <select id="selectValue" resultMap="BaseResultMap">
+        select id, key_name, key_value, update_time, add_time, delted from wanjia_system
+    </select>
+
+    <update id="updateAll">
+        update wanjia_system
+        <set>
+            <if test="systemEntity.keyName != null">
+                key_name = #{systemEntity.keyName}
+            </if>
+            <if test="systemEntity.keyValue != null">
+                ,key_value = #{systemEntity.keyValue}
+            </if>
+            <if test="systemEntity.updateTime != null">
+                ,update_time = #{systemEntity.updateTime}
+            </if>
+            <if test="systemEntity.addTime != null">
+                ,add_time = #{systemEntity.addTime}
+             </if>
+            <if test="systemEntity.addTime != null">
+                ,delted = #{systemEntity.delted}
+            </if>
+        </set>
+        where key_name = #{systemEntity.keyName}
+    </update>
+</mapper>

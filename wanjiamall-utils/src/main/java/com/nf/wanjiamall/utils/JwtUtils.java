@@ -11,7 +11,7 @@ import java.util.Date;
  * 验证token令牌
  * @author Sam
  */
-public class JwtUtils {
+public class  JwtUtils {
     //服务器的key,用于做加解密的数据，如果可以使用客户端生成的key的话，当前可以不使用
     private static final String JWT_SELECT = "jwt_secert";
     //token过期

@@ -15,6 +15,7 @@ public class JwtSubject {
     private String username;
 
     public JwtSubject() {
+
     }
 
     public JwtSubject(String username) {
