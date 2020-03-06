@@ -28,7 +28,7 @@
        </if>
     </select>
 
-    <select id="getSearchHistoryById" resultMap="searchHistoryResultMap">
+    <select id="getSearchHistoryByUserId" resultMap="searchHistoryResultMap">
          select id,user_id,keyword,history_from,add_time,update_time,deleted
        from wanjia_search_history
        where deleted = 0 and user_id = #{userId}

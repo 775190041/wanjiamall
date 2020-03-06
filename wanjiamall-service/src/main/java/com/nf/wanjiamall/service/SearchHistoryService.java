@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface SearchHistoryService {
    Object getSearchHistoryList(Integer pageNum, Integer pageSize, SearchHistoryEntity searchHistoryEntity);
-   Object getSearchHistoryById(Integer pageNum, Integer pageSize,Integer userId);
+   Object getSearchHistoryByUserId(Integer pageNum, Integer pageSize,Integer userId);
    Object searchHistoryDelete(Integer userId);
 }

@@ -26,8 +26,8 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
     }
 
     @Override
-    public Object getSearchHistoryById(Integer pageNum, Integer pageSize,Integer userId) {
-        List<SearchHistoryEntity> searchHistoryEntities = searchHistoryDao.getSearchHistoryById(pageNum, pageSize, userId);
+    public Object getSearchHistoryByUserId(Integer pageNum, Integer pageSize,Integer userId) {
+        List<SearchHistoryEntity> searchHistoryEntities = searchHistoryDao.getSearchHistoryByUserId(pageNum, pageSize, userId);
         return ResponseUtil.ok(searchHistoryEntities);
     }
 

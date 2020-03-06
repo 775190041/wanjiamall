@@ -30,7 +30,7 @@ public class WxSearchController {
             @ApiImplicitParam(name = "keyword", dataType = "String", value = "关键字，非必须", required = false)
 
     })
-    @ApiOperation("查询关键字表")
+    @ApiOperation("微信端:查询关键字表")
     @GetMapping("/wx_keyword/{pageNum}/{pageSize}")
     public Object getKeywordList(@PathVariable(required = false) int pageNum,
                                  @PathVariable(required = false) int pageSize,
@@ -44,12 +44,12 @@ public class WxSearchController {
             @ApiImplicitParam(name = "pageSize", dataType = "Integer", value = "分页大小，必须", required = false),
             @ApiImplicitParam(name = "userId", dataType = "Integer", value = "搜索历史表的用户id，必须", required = false)
     })
-    @ApiOperation("按用户id查询搜索历史表")
+    @ApiOperation("微信端:按用户id查询搜索历史表")
     @GetMapping("/wx_searchHistory/{pageNum}/{pageSize}")
-    public Object getIssueList(@PathVariable(required = false) int pageNum,
+    public Object getSearchHistoryByUserId(@PathVariable(required = false) int pageNum,
                                @PathVariable(required = false) int pageSize,
                                @RequestParam("userId") int userId){
-        return searchHistoryService.getSearchHistoryById(pageNum,pageSize,userId);
+        return searchHistoryService.getSearchHistoryByUserId(pageNum,pageSize,userId);
     }
 
 
@@ -57,8 +57,8 @@ public class WxSearchController {
             @ApiImplicitParam(name = "userId", dataType = "Integer", value = "搜索历史表的用户id，必须", required = true)
     })
     @DeleteMapping("/wx_searchHistory/{userId}")
-    @ApiOperation("按用户id删除搜索历史表")
-    public Object issueDelete(@PathVariable("userId") Integer userId){
+    @ApiOperation("微信端:按用户id删除搜索历史表")
+    public Object searchHistoryDelete(@PathVariable("userId") Integer userId){
         return searchHistoryService.searchHistoryDelete(userId);
     }
 
