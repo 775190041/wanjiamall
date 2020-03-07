@@ -34,4 +34,79 @@
         </if>
     </select>
 
+    <select id="getAddressByUserId" resultMap="addressResultMap">
+
+        select wa.id, wa.name, wa.user_id,
+        a.name as province,b.name as city,c.name as county,wa.address_detail, wa.area_code,
+        wa.postal_code,wa.tel,wa.is_default,wa.add_time,wa.update_time,wa.deleted
+        from wanjia_address wa join wanjia_region as a
+        on wa.province = a.id
+        left join wanjia_region as b
+        on a.id = b.pid
+        left join wanjia_region as  c
+        on b.id = c.pid
+        where c.id = wa.county
+        and wa.user_id = #{userId}
+        and wa.deleted = 0
+    </select>
+
+    <select id="getAddressByIdAndUserId" resultMap="addressResultMap">
+        select id, name, user_id, province, city, county, address_detail, area_code, postal_code, tel, is_default, add_time, update_time, deleted
+        from wanjia_address
+        where deleted = 0
+        and id = #{id}
+        and user_id = #{userId}
+    </select>
+
+
+
+    <insert id="addressInsert">
+        insert into wanjia_address
+        (name, user_id, province, city, county, address_detail, area_code,
+         postal_code, tel, is_default, add_time, update_time, deleted) VALUES
+        (#{addressEntity.name},#{addressEntity.userId},#{addressEntity.province},#{addressEntity.city},#{addressEntity.county},#{addressEntity.addressDetail},
+        #{addressEntity.areaCode},#{addressEntity.postalCode},#{addressEntity.tel},#{addressEntity.isDefault},default,default,default)
+    </insert>
+
+    <update id="addressUpdate">
+        update wanjia_address
+        <set>
+            <if test="addressEntity.name != null">
+                name  = #{addressEntity.name }
+            </if>
+            <if test="addressEntity.province != null">
+                ,province = #{addressEntity.province}
+            </if>
+            <if test="addressEntity.city != null">
+                ,city  = #{addressEntity.city }
+            </if>
+            <if test="addressEntity.county != null">
+                ,county = #{addressEntity.county}
+            </if>
+            <if test="addressEntity.addressDetail != null">
+                ,address_detail  = #{addressEntity.addressDetail }
+            </if>
+            <if test="addressEntity.areaCode != null">
+                ,area_code = #{addressEntity.areaCode}
+            </if>
+            <if test="addressEntity.postalCode != null">
+                ,postal_code = #{addressEntity.postalCode}
+            </if>
+            <if test="addressEntity.tel != null">
+                ,tel  = #{addressEntity.tel }
+            </if>
+            <if test="addressEntity.isDefault != null">
+                ,is_default = #{addressEntity.isDefault}
+            </if>
+        </set>
+        where deleted = 0
+        and id = #{id}
+        and user_id = #{userId}
+    </update>
+
+    <update id="addressDelete" >
+        update wanjia_address set deleted = 1
+        where  user_id = #{userId}
+        and id = #{id}
+    </update>
 </mapper>
