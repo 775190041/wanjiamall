@@ -21,8 +21,6 @@
                 and question like '%' #{question} '%'
             </if>
         </where>
-
-
     </select>
 
 

@@ -28,6 +28,9 @@
         <if test="topic.sort == 2">
             order by price
         </if>
+        <if test="topic.sort !=0 and  topic.sort !=1  and topic.sort !=2">
+            order by update_time  desc
+        </if>
     </select>
 
 
@@ -74,10 +77,11 @@
     </delete>
 
     <delete id="deleteTopicBatchId">
-        update wanjia_topic set deleted = 1 where deleted=0
-        <foreach collection="array" item="id" separator= "or">
-            and id = #{id}
+        update wanjia_topic set deleted = 1 where id in
+        <foreach collection="array" item="id" separator= "," open="(" close=")">
+            #{id}
         </foreach>
+--         deleted=0
     </delete>
 
 

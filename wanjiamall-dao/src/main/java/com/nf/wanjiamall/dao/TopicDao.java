@@ -19,7 +19,7 @@ public interface TopicDao {
 
     Integer deleteTopicId(@Param("id")Integer id);
 
-    Integer deleteTopicBatchId(@Param("id")Integer[] id);
+    Integer deleteTopicBatchId(Integer[] id);
 
 
 }
