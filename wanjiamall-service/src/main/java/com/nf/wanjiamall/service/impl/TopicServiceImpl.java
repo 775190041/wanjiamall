@@ -42,7 +42,8 @@ public class TopicServiceImpl implements TopicService {
         topicEntity.setGoodes(goods);
         Integer count = topicDao.updateTopic(topicEntity,id);
         if (count>0){
-            return ResponseUtil.ok();
+            TopicEntity topic = topicDao.getById(id);
+            return ResponseUtil.ok(topic);
         }else {
             return ResponseUtil.fail(505,"修改失败！");
         }

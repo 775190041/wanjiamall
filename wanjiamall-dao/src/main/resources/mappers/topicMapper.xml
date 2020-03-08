@@ -33,6 +33,14 @@
         </if>
     </select>
 
+    <resultMap id="TopicIdMap" type="com.nf.wanjiamall.entity.TopicEntity">
+        <id column="id" property="id"/>
+        <result column="goods"  property="goods"  typeHandler="com.nf.wanjiamall.dao.utlis.JsonStringArrayTypeHandler"/>
+    </resultMap>
+    <select id="getById" resultMap="TopicIdMap">
+        select * from wanjia_topic where deleted = 0 where id = #{id}
+    </select>
+
 
     <insert id="insertTopic">
         insert into wanjia_topic(title,subtitle,content,price,read_count,pic_url,goods,deleted)

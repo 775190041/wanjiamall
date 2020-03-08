@@ -51,7 +51,7 @@ public class AdminTopicController {
         return topicService.insertTopic(topicEntity);
     }
 
-    @ApiOperation(value = "insertTopic",notes = "添加专题信息")
+    @ApiOperation(value = "updateTopic",notes = "修改专题信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "title", value = "专题标题",required = false, dataType = "String"),
             @ApiImplicitParam(name = "subtitle", value = "专题子标题",required = false, dataType = "String"),

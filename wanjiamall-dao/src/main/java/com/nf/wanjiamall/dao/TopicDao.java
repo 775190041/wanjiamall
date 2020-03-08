@@ -13,6 +13,8 @@ public interface TopicDao {
 
     List<TopicEntity> getTopicAll(@Param("pageNum")Integer pageNum,@Param("pageSize")Integer pageSize,@Param("topic")TopicEntity topicEntity);
 
+    TopicEntity getById(@Param("id")Integer id);
+
     Integer insertTopic(@Param("topic")TopicEntity topicEntity);
 
     Integer updateTopic(@Param("topic")TopicEntity topicEntity,@Param("id")Integer id);
