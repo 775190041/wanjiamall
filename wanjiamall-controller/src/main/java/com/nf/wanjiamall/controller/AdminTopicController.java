@@ -82,7 +82,7 @@ public class AdminTopicController {
             @ApiImplicitParam(name = "id", value = "专题Id",required = false, dataType = "Integer")
     })
     @DeleteMapping("/topic")
-    public Object deleteTopicBatchId(@RequestBody Integer[] id){
-        return topicService.deleteTopicBatchId(id);
+    public Object deleteTopicBatchId(Integer[] ids){
+        return topicService.deleteTopicBatchId(ids);
     }
 }
