@@ -7,7 +7,11 @@
         select * from wanjia_topic where deleted = 0
     </select>
 
-    <select id="getTopicAll" resultType="com.nf.wanjiamall.entity.TopicEntity">
+    <resultMap id="TopicAllMap" type="com.nf.wanjiamall.entity.TopicEntity">
+        <id column="id" property="id"/>
+        <result column="goods"  property="goods"  typeHandler="com.nf.wanjiamall.dao.utlis.JsonStringArrayTypeHandler"/>
+    </resultMap>
+    <select id="getTopicAll" resultMap="TopicAllMap">
         select * from wanjia_topic where deleted = 0
         <if test="topic.title !=null and topic.title != ''">
             and title like CONCAT('%',#{topic.title},'%')
@@ -25,6 +29,56 @@
             order by price
         </if>
     </select>
+
+
+    <insert id="insertTopic">
+        insert into wanjia_topic(title,subtitle,content,price,read_count,pic_url,goods,deleted)
+        value(#{topic.title},#{topic.subtitle},#{topic.content},#{topic.price},
+              #{topic.readCount},#{topic.picUrl},#{topic.goodes},default)
+    </insert>
+
+    <update id="updateTopic">
+        update wanjia_topic
+        <set>
+            <if test="topic.title!=null">
+                title =#{topic.title},
+            </if>
+            <if test="topic.subtitle!=null">
+                subtitle=#{topic.subtitle},
+            </if>
+            <if test="topic.picUrl!=null">
+                pic_url=#{topic.picUrl},
+            </if>
+            <if test="topic.content!=null">
+                content=#{topic.content},
+            </if>
+            <if test="topic.price!=null">
+                price=#{topic.price},
+            </if>
+            <if test="topic.readCount!=null">
+                read_count=#{topic.readCount},
+            </if>
+            <if test="topic.goodes!=null">
+                goods=#{topic.goodes},
+            </if>
+            <if test="topic.updateTime!=null">
+                update_time=#{topic.updateTime},
+            </if>
+        </set>
+        where deleted = 0 and id=#{id}
+    </update>
+
+
+    <delete id="deleteTopicId">
+        update wanjia_topic set deleted = 1 where deleted=0 and id = #{id}
+    </delete>
+
+    <delete id="deleteTopicBatchId">
+        update wanjia_topic set deleted = 1 where deleted=0
+        <foreach collection="array" item="id" separator= "or">
+            and id = #{id}
+        </foreach>
+    </delete>
 
 
 </mapper>

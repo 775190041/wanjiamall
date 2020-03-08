@@ -1,6 +1,7 @@
 package com.nf.wanjiamall.controller;
 
 import com.nf.wanjiamall.entity.CouponEntity;
+import com.nf.wanjiamall.entity.CouponUserEntity;
 import com.nf.wanjiamall.service.CouponService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -28,6 +29,29 @@ public class AdminCouponController {
     @GetMapping("/coupon/{pageNum}/{pageSize}")
     public Object getAll(@PathVariable Integer pageNum,@PathVariable Integer pageSize,CouponEntity couponEntity){
         return couponService.getCouponAll(pageNum,pageSize,couponEntity);
+    }
+
+    @ApiOperation(value = "getById",notes = "获取优惠卷的详细信息信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "优惠卷名称",required = false, dataType = "String"),
+            @ApiImplicitParam(name = "coupon_Desc", value = "优惠卷介绍",required = false, dataType = "String"),
+            @ApiImplicitParam(name = "tag", value = "优惠卷标签",required = false, dataType = "String"),
+            @ApiImplicitParam(name = "total", value = "优惠卷数量",required = false, dataType = "Integer"),
+            @ApiImplicitParam(name = "discount", value = "优惠卷金额",required = false, dataType = "BigDecimal"),
+            @ApiImplicitParam(name = "min", value = "最低消费",required = false, dataType = "BigDecimal"),
+            @ApiImplicitParam(name = "coupon_limit", value = "用户领卷限制数量",required = false, dataType = "Integer"),
+            @ApiImplicitParam(name = "type", value = "优惠卷赠送类型",required = false, dataType = "Integer"),
+            @ApiImplicitParam(name = "status", value = "优惠卷状态",required = false, dataType = "Integer"),
+            @ApiImplicitParam(name = "goods_type", value = "商品限制类型",required = false, dataType = "Integer"),
+            @ApiImplicitParam(name = "code", value = "优惠卷兑换码",required = false, dataType = "String"),
+            @ApiImplicitParam(name = "time_type", value = "有效时间限制",required = false, dataType = "Integer"),
+            @ApiImplicitParam(name = "days", value = "使用卷有效天数",required = false, dataType = "Integer"),
+            @ApiImplicitParam(name = "start_time", value = "使用卷开始时间",required = false, dataType = "datetime"),
+            @ApiImplicitParam(name = "end_time", value = "使用卷截至时间",required = false, dataType = "datetime")
+    })
+    @GetMapping("/coupon/{pageNum}/{pageSize}/{id}")
+    public Object getById(@PathVariable Integer pageNum, @PathVariable Integer pageSize, @PathVariable Integer id, CouponUserEntity couponUserEntity){
+        return couponService.getCouponById(pageNum,pageSize,id,couponUserEntity);
     }
 
 
