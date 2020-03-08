@@ -47,6 +47,7 @@ public class AdminTopicController {
     })
     @PostMapping("/topic")
     public Object insertTopic(@RequestBody TopicEntity topicEntity){
+
         return topicService.insertTopic(topicEntity);
     }
 

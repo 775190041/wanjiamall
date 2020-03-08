@@ -39,8 +39,8 @@ public class CouponServiceImpl implements CouponService {
                 couponUserDao.getCouponUserByAll(pageNum,pageSize,couponUserEntity,id);
         CouponVO vo = new CouponVO();
         vo.setCoupon(couponEntity);
-        vo.setCouponUser(couponUserEntities);
-        return ResponseUtil.ok(vo);
+        vo.setCouponUser(ResponseUtil.okList(couponUserEntities));
+        return vo;
     }
 
 

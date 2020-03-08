@@ -21,7 +21,7 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public Object getTopicAll(Integer pageNum, Integer pageSize, TopicEntity topicEntity) {
-        return topicDao.getTopicAll(pageNum,pageSize,topicEntity);
+        return ResponseUtil.okList(topicDao.getTopicAll(pageNum,pageSize,topicEntity));
     }
 
     @Override

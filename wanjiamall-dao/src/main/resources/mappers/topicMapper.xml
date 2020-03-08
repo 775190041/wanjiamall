@@ -28,6 +28,9 @@
         <if test="topic.sort == 2">
             order by price
         </if>
+        <if test="topic.sort !=0 and  topic.sort !=1  and topic.sort !=2">
+            order by update_time  desc
+        </if>
     </select>
 
 
