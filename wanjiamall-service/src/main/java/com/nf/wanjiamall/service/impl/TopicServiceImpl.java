@@ -80,12 +80,13 @@ public class TopicServiceImpl implements TopicService {
     public Object getById(Integer id) {
         TopicEntity topic = topicDao.getById(id);
         String[] goods = topic.getGoods();
-        GoodsEntity goodsEntity = null;
-        for (String good : goods) {
-           goodsEntity = goodsDao.GoodsById(Integer.valueOf(good));
-        }
+
         List<GoodsEntity> list = new ArrayList<>();
-        list.add(goodsEntity);
+
+        for (String good : goods) {
+            GoodsEntity goodsEntity = goodsDao.GoodsById(Integer.valueOf(good));
+           list.add(goodsEntity);
+        }
 
         TopicGoodVo vo = new TopicGoodVo();
         vo.setTopic(topic);

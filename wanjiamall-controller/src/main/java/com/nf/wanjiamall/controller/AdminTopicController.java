@@ -61,7 +61,7 @@ public class AdminTopicController {
             @ApiImplicitParam(name = "pic_url", value = "专题图片",required = false, dataType = "String"),
             @ApiImplicitParam(name = "goods", value = "专题商品",required = false, dataType = "String")
     })
-    @PostMapping("/topic/{id}")
+    @PutMapping("/topic/{id}")
     public Object updateTopic(@RequestBody TopicEntity topicEntity, @PathVariable Integer id){
         return topicService.updateTopic(topicEntity,id);
     }
