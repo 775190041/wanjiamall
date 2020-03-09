@@ -35,8 +35,8 @@ public class WxHomeServiceImpl implements WxHomeService {
         List<AdvertisingEntity> advertisingEntities=advertisingDao.getAll();
         List<CategoryEntity> firstCate= categoryDao.getFirstCate(pageNum, pageSize);
         List<BrandEntity> brandEntities=brandDao.getAll();
-        List<GoodsEntity> newGoods=goodsDao.getNewGoods();
-        List<GoodsEntity> hotGoods=goodsDao.getHotGoods();
+        List<GoodsEntity> newGoods=goodsDao.getNewGoods(1,6);
+        List<GoodsEntity> hotGoods=goodsDao.getHotGoods(1,6);
         List<CouponEntity> couponEntities=couponDao.getAll();
         List<TopicEntity> topicEntities=topicDao.getAll();
 
