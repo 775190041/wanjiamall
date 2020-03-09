@@ -46,7 +46,7 @@ public class AdminCategoryController {
 
     @ApiOperation("添加商品类目表信息")
     @PostMapping("/category")
-    public Object insertCategory(CategoryEntity categoryEntity) {
+    public Object insertCategory(@RequestBody CategoryEntity categoryEntity) {
         return categoryService.insertByLevel(categoryEntity);
     }
 
@@ -63,7 +63,7 @@ public class AdminCategoryController {
 
     @ApiOperation("修改商品类目表信息")
     @PutMapping("/category/{id}")
-    public Object updateCategory(@PathVariable Integer id,CategoryEntity categoryEntity) {
+    public Object updateCategory(@PathVariable Integer id,@RequestBody CategoryEntity categoryEntity) {
         return categoryService.updateById(categoryEntity,id);
 
     }

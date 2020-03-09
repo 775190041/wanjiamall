@@ -52,7 +52,7 @@ public class AdminIssueController {
     })
     @PostMapping("/issue")
     @ApiOperation("添加常见问题表")
-    public Object issueInsert(IssueEntity issueEntity) {
+    public Object issueInsert(@RequestBody IssueEntity issueEntity) {
         return issueService.issueInsert(issueEntity);
     }
 
@@ -66,7 +66,7 @@ public class AdminIssueController {
     })
     @PutMapping("/issue/{id}")
     @ApiOperation("修改常见问题表,传一个常见问题表的id过来")
-    public Object issueUpdate(@PathVariable("id") int id,IssueEntity issueEntity){
+    public Object issueUpdate(@PathVariable("id") int id,@RequestBody IssueEntity issueEntity){
         return issueService.issueUpdate(id,issueEntity);
     }
 
