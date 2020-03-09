@@ -38,7 +38,7 @@
         <result column="goods"  property="goods"  typeHandler="com.nf.wanjiamall.dao.utlis.JsonStringArrayTypeHandler"/>
     </resultMap>
     <select id="getById" resultMap="TopicIdMap">
-        select * from wanjia_topic where deleted = 0 where id = #{id}
+        select * from wanjia_topic where deleted = 0 and id = #{id}
     </select>
 
 

@@ -17,4 +17,7 @@ public interface TopicService {
     Object deleteTopicId(Integer id);
 
     Object deleteTopicBatchId(Integer[] id);
+
+
+    Object getById(Integer id);
 }

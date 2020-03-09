@@ -69,5 +69,10 @@ public class TopicServiceImpl implements TopicService {
         }
     }
 
+    @Override
+    public Object getById(Integer id) {
+        return ResponseUtil.ok(topicDao.getById(id));
+    }
+
 
 }

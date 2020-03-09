@@ -85,4 +85,10 @@ public class AdminTopicController {
     public Object deleteTopicBatchId(Integer[] ids){
         return topicService.deleteTopicBatchId(ids);
     }
+
+
+    @GetMapping("/topic/{id}")
+    public Object getById(@PathVariable("id")Integer id){
+        return topicService.getById(id);
+    }
 }
