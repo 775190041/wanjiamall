@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -48,6 +49,9 @@ public class TopicServiceImpl implements TopicService {
     public Object updateTopic(TopicEntity topicEntity, Integer id) {
         String  goods = ArrayUtils.addDouble(topicEntity.getGoods());
         topicEntity.setGoodes(goods);
+        topicEntity.setId(id);
+        Date date = new Date();
+        topicEntity.setUpdateTime(new Date());
         Integer count = topicDao.updateTopic(topicEntity,id);
         if (count>0){
             return ResponseUtil.ok();
