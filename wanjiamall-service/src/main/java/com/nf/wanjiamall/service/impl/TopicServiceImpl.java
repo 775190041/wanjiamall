@@ -1,13 +1,19 @@
 package com.nf.wanjiamall.service.impl;
 
+import com.nf.wanjiamall.dao.GoodsDao;
 import com.nf.wanjiamall.dao.TopicDao;
+import com.nf.wanjiamall.entity.GoodsEntity;
 import com.nf.wanjiamall.entity.TopicEntity;
 import com.nf.wanjiamall.service.TopicService;
 import com.nf.wanjiamall.utils.ArrayUtils;
 import com.nf.wanjiamall.utils.ResponseUtil;
+import com.nf.wanjiamall.vo.TopicGoodVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author lrc
@@ -18,6 +24,8 @@ public class TopicServiceImpl implements TopicService {
 
     @Autowired
     private TopicDao topicDao;
+    @Autowired
+    private GoodsDao goodsDao;
 
     @Override
     public Object getTopicAll(Integer pageNum, Integer pageSize, TopicEntity topicEntity) {
@@ -42,8 +50,7 @@ public class TopicServiceImpl implements TopicService {
         topicEntity.setGoodes(goods);
         Integer count = topicDao.updateTopic(topicEntity,id);
         if (count>0){
-            TopicEntity topic = topicDao.getById(id);
-            return ResponseUtil.ok(topic);
+            return ResponseUtil.ok();
         }else {
             return ResponseUtil.fail(505,"修改失败！");
         }
@@ -71,7 +78,20 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public Object getById(Integer id) {
-        return ResponseUtil.ok(topicDao.getById(id));
+        TopicEntity topic = topicDao.getById(id);
+        String[] goods = topic.getGoods();
+        GoodsEntity goodsEntity = null;
+        for (String good : goods) {
+           goodsEntity = goodsDao.GoodsById(Integer.valueOf(good));
+        }
+        List<GoodsEntity> list = new ArrayList<>();
+        list.add(goodsEntity);
+
+        TopicGoodVo vo = new TopicGoodVo();
+        vo.setTopic(topic);
+        vo.setGoods(list);
+
+        return ResponseUtil.ok(vo);
     }
 
 
