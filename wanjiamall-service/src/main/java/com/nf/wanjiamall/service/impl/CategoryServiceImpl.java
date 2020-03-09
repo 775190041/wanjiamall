@@ -22,9 +22,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryDao categoryDao;
 
-    public List<CategoryVo> getAll(){
+    public List<CategoryVo> getAll(Integer pageNum,Integer pageSize){
         List<CategoryVo> categoryVoList = new ArrayList<>();
-        List<CategoryEntity> cateFirstLists = categoryDao.getFirstCate();
+        List<CategoryEntity> cateFirstLists = categoryDao.getFirstCate(pageNum, pageSize);
         for (CategoryEntity category : cateFirstLists) {
             System.out.println("category = " + category);
             CategoryVo categoryVO = new CategoryVo();
@@ -57,8 +57,8 @@ public class CategoryServiceImpl implements CategoryService {
      * @return
      */
     @Override
-    public Object getAllCategory() {
-        return ResponseUtil.ok(getAll());
+    public Object getAllCategory(Integer pageNum,Integer pageSize) {
+        return ResponseUtil.ok(getAll(pageNum, pageSize));
     }
 
 
@@ -67,14 +67,14 @@ public class CategoryServiceImpl implements CategoryService {
      * @return
      */
     @Override
-    public Object getDemandCategory() {
-       return ResponseUtil.ok(categoryDao.getFirstCate());
+    public Object getDemandCategory(Integer pageNum,Integer pageSize) {
+       return ResponseUtil.ok(categoryDao.getFirstCate(pageNum,pageSize));
     }
 
 
     @Override
-    public List<CategoryEntity> getFirstCate() {
-        return categoryDao.getFirstCate();
+    public List<CategoryEntity> getFirstCate(Integer pageNum,Integer pageSize) {
+        return categoryDao.getFirstCate(pageNum, pageSize);
     }
 
     @Override

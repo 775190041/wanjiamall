@@ -16,7 +16,8 @@
             and id=#{brand.id}
         </if>
         <if test="brand.name!=null and brand.name!='' ">
-            and name=#{brand.name}
+            <bind name="name" value="'%'+_parameter.brand.name+'%'"/>
+            and name like #{name}
         </if>
         order by add_time desc
     </select>

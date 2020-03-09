@@ -31,9 +31,9 @@ public class WxHomeServiceImpl implements WxHomeService {
     private TopicDao topicDao;
 
     @Override
-    public Object getHomeData() {
+    public Object getHomeData(Integer pageNum,Integer pageSize) {
         List<AdvertisingEntity> advertisingEntities=advertisingDao.getAll();
-        List<CategoryEntity> firstCate= categoryDao.getFirstCate();
+        List<CategoryEntity> firstCate= categoryDao.getFirstCate(pageNum, pageSize);
         List<BrandEntity> brandEntities=brandDao.getAll();
         List<GoodsEntity> newGoods=goodsDao.getNewGoods();
         List<GoodsEntity> hotGoods=goodsDao.getHotGoods();
@@ -53,11 +53,22 @@ public class WxHomeServiceImpl implements WxHomeService {
     }
 
     @Override
-    public Object getCateData(Integer pid) {
-        List<CategoryEntity> secondCate= categoryDao.getSecondCate(pid);
+    public Object getCateData(Integer pageNum,Integer pageSize,Integer cateId) {
+        List<GoodsEntity> firstCateGoods=goodsDao.getByCateId(pageNum, pageSize, cateId);
+        List<CategoryEntity> secondCate= categoryDao.getSecondCate(cateId);
 
         WxHomeVo vo =new WxHomeVo();
+        vo.setFirstCateGoods(firstCateGoods);
         vo.setSecondCate(secondCate);
+        return ResponseUtil.ok(vo);
+    }
+
+    @Override
+    public Object getGoodsData(Integer pageNum,Integer pageSize,Integer cateId) {
+        List<GoodsEntity> secondCateGoods= goodsDao.getGoodsById(pageNum, pageSize, cateId);
+
+        WxHomeVo vo =new WxHomeVo();
+        vo.setSecondCateGoods(secondCateGoods);
         return ResponseUtil.ok(vo);
     }
 }

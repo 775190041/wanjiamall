@@ -12,7 +12,7 @@ public interface CategoryService {
     /**
      * 查询目录所有信息
      */
-    Object getAllCategory();
+    Object getAllCategory(Integer pageNum,Integer pageSize);
 
 
     /**
@@ -20,10 +20,10 @@ public interface CategoryService {
      * @return
      */
 
-    Object getDemandCategory();
+    Object getDemandCategory(Integer pageNum,Integer pageSize);
 
     //删除
-    List<CategoryEntity> getFirstCate();
+    List<CategoryEntity> getFirstCate(Integer pageNum,Integer pageSize);
     //删除
     List<CategoryEntity> getSecondCate(Integer pid);
 
