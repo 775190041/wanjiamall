@@ -31,9 +31,9 @@ public class WxHomeServiceImpl implements WxHomeService {
     private TopicDao topicDao;
 
     @Override
-    public Object getHomeData() {
+    public Object getHomeData(Integer pageNum,Integer pageSize) {
         List<AdvertisingEntity> advertisingEntities=advertisingDao.getAll();
-        List<CategoryEntity> firstCate= categoryDao.getFirstCate();
+        List<CategoryEntity> firstCate= categoryDao.getFirstCate(pageNum, pageSize);
         List<BrandEntity> brandEntities=brandDao.getAll();
         List<GoodsEntity> newGoods=goodsDao.getNewGoods();
         List<GoodsEntity> hotGoods=goodsDao.getHotGoods();
