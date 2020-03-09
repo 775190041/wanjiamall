@@ -42,10 +42,8 @@ public class WxFootprintServiceImpl implements WxFootprintService {
         }{
             /**查询当前用户所有足迹*/
             List<FootprintGoodsVo> footprintEntityList = footprintDao.getUserIdSelectUserFootprint(userId);
-
             /** 用户浏览过多少样商品 */
             List<Object> footprintGoods = new ArrayList<>(footprintEntityList.size());
-
             /**循环所有用户足迹*/
             for (FootprintGoodsVo list : footprintEntityList){
                 /**
@@ -84,7 +82,5 @@ public class WxFootprintServiceImpl implements WxFootprintService {
         }else{
             return ResponseUtil.fail(501,"请登录!");
         }
-
-
     }
 }
