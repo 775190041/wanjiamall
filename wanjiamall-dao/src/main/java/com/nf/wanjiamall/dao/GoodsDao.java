@@ -35,12 +35,14 @@ public interface GoodsDao {
     /**
      *  新品
      */
-    List<GoodsEntity> getNewGoods();
+    List<GoodsEntity> getNewGoods(@Param("pageNum") Integer pageNum,
+                                  @Param("pageSize") Integer pageSize);
 
     /**
      *  人气
      */
-    List<GoodsEntity> getHotGoods();
+    List<GoodsEntity> getHotGoods(@Param("pageNum") Integer pageNum,
+                                  @Param("pageSize") Integer pageSize);
 
     /**
      * 获取一级类目下的所有商品信息

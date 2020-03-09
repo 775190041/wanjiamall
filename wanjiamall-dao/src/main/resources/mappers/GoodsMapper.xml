@@ -101,7 +101,7 @@
          g.brief, g.is_on_sale, g.is_new, g.is_hot, unit, g.counter_price, g.retail_price,
           g.detail, g.add_time, g.update_time, g.delted, p.url from wanjia_goods g
            join wanjia_goods_product p on g.id=p.goods_id
-           where is_new=1 limit 1,6
+           where is_new=1 order by g.add_time
     </select>
 
     <select id="getHotGoods" resultType="com.nf.wanjiamall.entity.GoodsEntity">
@@ -109,7 +109,7 @@
          g.brief, g.is_on_sale, g.is_new, g.is_hot, unit, g.counter_price, g.retail_price,
           g.detail, g.add_time, g.update_time, g.delted, p.url from wanjia_goods g
            join wanjia_goods_product p on g.id=p.goods_id
-           where is_hot=1 limit 1,6
+           where is_hot=1 order by g.add_time
     </select>
 
     <select id="getByCateId" resultType="com.nf.wanjiamall.entity.GoodsEntity">
