@@ -23,6 +23,7 @@
                 and keyword like '%' #{keyword} '%'
             </if>
         </where>
+        order by add_time desc
     </select>
 
 

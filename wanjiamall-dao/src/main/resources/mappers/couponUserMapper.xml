@@ -21,7 +21,7 @@
         <if test="couponUser.status == 3">
             and status = 3
         </if>
-        and id = #{id}
+        and id = #{id} order by add_time desc
     </select>
 
 </mapper>

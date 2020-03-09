@@ -5,7 +5,7 @@
 <mapper namespace="com.nf.wanjiamall.dao.BrandDao">
     <select id="getAll" resultType="com.nf.wanjiamall.entity.BrandEntity">
         select id, name, brand_desc, pic_url, floor_price, add_time, update_time,
-        delted from wanjia_brand where delted=0
+        delted from wanjia_brand where delted=0 order by add_time desc
     </select>
 
     <select id="getByConditions" resultType="com.nf.wanjiamall.entity.BrandEntity">

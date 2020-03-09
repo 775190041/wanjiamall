@@ -5,7 +5,7 @@
 <mapper namespace="com.nf.wanjiamall.dao.AdvertisingDao">
 
     <select id="getAll" resultType="com.nf.wanjiamall.entity.AdvertisingEntity">
-        select * from wanjia_ad where deleted = 0
+        select * from wanjia_ad where deleted = 0 order by add_time desc
     </select>
 
     <select id="getAdAll" resultType="com.nf.wanjiamall.entity.AdvertisingEntity">
@@ -16,6 +16,7 @@
         <if test="ad.content !=null and ad.content != ''">
             and content like CONCAT('%',#{ad.content},'%')
         </if>
+        order by add_time desc
     </select>
 
     <insert id="insertAd">

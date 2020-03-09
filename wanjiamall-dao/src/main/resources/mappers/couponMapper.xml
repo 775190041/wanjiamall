@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nf.wanjiamall.dao.CouponDao">
     <select id="getAll" resultType="com.nf.wanjiamall.entity.CouponEntity">
-        select * from wanjia_coupon where deleted = 0
+        select * from wanjia_coupon where deleted = 0 order by add_time desc
     </select>
 
     <select id="getCouponAll" resultType="com.nf.wanjiamall.entity.CouponEntity">
@@ -18,6 +18,7 @@
         <if test="coupon.status !=null and coupon.status != ''">
             and status like CONCAT('%',#{coupon.status},'%')
         </if>
+        order by add_time desc
     </select>
 
     <select id="getCouponById" resultType="com.nf.wanjiamall.entity.CouponEntity">
