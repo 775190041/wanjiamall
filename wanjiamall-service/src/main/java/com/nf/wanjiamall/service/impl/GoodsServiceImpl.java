@@ -174,7 +174,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Object listBrandCategory() {
         //类目查询放入CatVo类
-        List<CategoryEntity> l1categoryEntities =categoryDao.getFirstCate();
+        List<CategoryEntity> l1categoryEntities =categoryDao.getFirstCate(1,Integer.MAX_VALUE);
         List<CatVo> categoryList = new ArrayList<>(l1categoryEntities.size());
         for (CategoryEntity categoryEntity : l1categoryEntities) {
             CatVo l1CatVo = new CatVo();
