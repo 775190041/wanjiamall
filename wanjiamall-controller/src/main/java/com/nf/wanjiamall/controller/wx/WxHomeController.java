@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author lzn123
+ * @author lzn
  */
 @RestController
 @Api(tags = "wanjia_category")
