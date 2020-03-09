@@ -42,7 +42,28 @@ public interface GoodsDao {
      */
     List<GoodsEntity> getHotGoods();
 
-    List<GoodsEntity> getByCateId(Integer cateId);
+    /**
+     * 获取一级类目下的所有商品信息
+     * @param pageNum
+     * @param pageSize
+     * @param cateId
+     * @return
+     */
+    List<GoodsEntity> getByCateId(@Param("pageNum") Integer pageNum,
+                                  @Param("pageSize") Integer pageSize,
+                                  @Param("cateId") Integer cateId);
+
+    /**
+     * 获取二级类目下的所有商品信息
+     * @param pageNum
+     * @param pageSize
+     * @param cateId
+     * @return
+     */
+    List<GoodsEntity> getGoodsById(@Param("pageNum") Integer pageNum,
+                                  @Param("pageSize") Integer pageSize,
+                                  @Param("cateId") Integer cateId);
+
 
     /**
      * 根据商品id查询商品信息

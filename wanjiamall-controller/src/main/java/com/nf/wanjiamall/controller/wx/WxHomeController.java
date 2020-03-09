@@ -32,13 +32,27 @@ public class WxHomeController {
     }
 
     @ApiImplicitParams(
-            @ApiImplicitParam(name = "pid", dataType = "Integer", value = "父类目ID，必须", required = false)
+            @ApiImplicitParam(name = "id", dataType = "Integer", value = "父类目ID，必须", required = false)
     )
 
-    @ApiOperation("查询二级类目及该类目的商品信息")
+    @ApiOperation("查询一级类目下的所有商品信息和二级类目信息")
     @GetMapping("/home/{id}")
-    public Object getCateData(@PathVariable Integer pid){
-        return wxHomeService.getCateData(pid);
+    public Object getCateData(@RequestParam(name = "pageNum",required = false,defaultValue = "1") Integer pageNum,
+                              @RequestParam(name = "pageSize",required = false,defaultValue = "4") Integer pageSize,
+                              @PathVariable Integer id){
+        return wxHomeService.getCateData(pageNum,pageSize,id);
+    }
+
+    @ApiImplicitParams(
+            @ApiImplicitParam(name = "id", dataType = "Integer", value = "二级类目ID，必须", required = false)
+    )
+
+    @ApiOperation("查询二级类目下的所有商品信息")
+    @GetMapping("/home/cate/{id}")
+    public Object getGoodsData(@RequestParam(name = "pageNum",required = false,defaultValue = "1") Integer pageNum,
+                              @RequestParam(name = "pageSize",required = false,defaultValue = "10") Integer pageSize,
+                              @PathVariable Integer id){
+        return wxHomeService.getGoodsData(pageNum,pageSize,id);
     }
 
 }

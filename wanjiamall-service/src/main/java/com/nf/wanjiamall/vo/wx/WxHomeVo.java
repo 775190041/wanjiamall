@@ -20,8 +20,12 @@ public class WxHomeVo {
     //商品类目表
     //一级类目
     private List<CategoryEntity> firstCate;
+    //一级类目下的所有商品
+    private List<GoodsEntity> firstCateGoods;
     //二级类目
     private List<CategoryEntity> secondCate;
+    //一级类目下的所有商品
+    private List<GoodsEntity> secondCateGoods;
     //品牌表
     private List<BrandEntity> brand;
     //新品

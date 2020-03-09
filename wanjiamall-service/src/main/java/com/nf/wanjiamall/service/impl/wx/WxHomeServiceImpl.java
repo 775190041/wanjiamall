@@ -53,11 +53,22 @@ public class WxHomeServiceImpl implements WxHomeService {
     }
 
     @Override
-    public Object getCateData(Integer pid) {
-        List<CategoryEntity> secondCate= categoryDao.getSecondCate(pid);
+    public Object getCateData(Integer pageNum,Integer pageSize,Integer cateId) {
+        List<GoodsEntity> firstCateGoods=goodsDao.getByCateId(pageNum, pageSize, cateId);
+        List<CategoryEntity> secondCate= categoryDao.getSecondCate(cateId);
 
         WxHomeVo vo =new WxHomeVo();
+        vo.setFirstCateGoods(firstCateGoods);
         vo.setSecondCate(secondCate);
+        return ResponseUtil.ok(vo);
+    }
+
+    @Override
+    public Object getGoodsData(Integer pageNum,Integer pageSize,Integer cateId) {
+        List<GoodsEntity> secondCateGoods= goodsDao.getGoodsById(pageNum, pageSize, cateId);
+
+        WxHomeVo vo =new WxHomeVo();
+        vo.setSecondCateGoods(secondCateGoods);
         return ResponseUtil.ok(vo);
     }
 }
