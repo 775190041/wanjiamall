@@ -85,5 +85,10 @@ public class GoodsEntity {
      */
     private String delted;
 
+    /**
+     * 商品货品图片
+     */
+    private String url;
+
 
 }

@@ -30,6 +30,8 @@ public class WxHomeServiceImpl implements WxHomeService {
     @Autowired
     private TopicDao topicDao;
 
+    WxHomeVo vo =new WxHomeVo();
+
     @Override
     public Object getHomeData(Integer pageNum,Integer pageSize) {
         List<AdvertisingEntity> advertisingEntities=advertisingDao.getAll();
@@ -40,7 +42,6 @@ public class WxHomeServiceImpl implements WxHomeService {
         List<CouponEntity> couponEntities=couponDao.getAll();
         List<TopicEntity> topicEntities=topicDao.getAll();
 
-        WxHomeVo vo =new WxHomeVo();
         vo.setAdvertise(advertisingEntities);
         vo.setFirstCate(firstCate);
         vo.setBrand(brandEntities);
@@ -57,7 +58,6 @@ public class WxHomeServiceImpl implements WxHomeService {
         List<GoodsEntity> firstCateGoods=goodsDao.getByCateId(pageNum, pageSize, cateId);
         List<CategoryEntity> secondCate= categoryDao.getSecondCate(cateId);
 
-        WxHomeVo vo =new WxHomeVo();
         vo.setFirstCateGoods(firstCateGoods);
         vo.setSecondCate(secondCate);
         return ResponseUtil.ok(vo);
@@ -67,7 +67,6 @@ public class WxHomeServiceImpl implements WxHomeService {
     public Object getGoodsData(Integer pageNum,Integer pageSize,Integer cateId) {
         List<GoodsEntity> secondCateGoods= goodsDao.getGoodsById(pageNum, pageSize, cateId);
 
-        WxHomeVo vo =new WxHomeVo();
         vo.setSecondCateGoods(secondCateGoods);
         return ResponseUtil.ok(vo);
     }
