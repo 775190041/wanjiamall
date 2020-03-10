@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * @author lzn
+ * @author lzn123
  */
 @Data
 public class GoodsEntity {
