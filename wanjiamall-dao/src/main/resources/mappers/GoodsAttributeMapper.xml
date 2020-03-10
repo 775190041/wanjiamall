@@ -35,5 +35,9 @@
         where delted = 0 and goods_id = #{id}
     </select>
 
+    <update id="deleteAttribute">
+        update wanjia_goods_attribute set delted = 1 where id = #{id}
+    </update>
+
 
 </mapper>

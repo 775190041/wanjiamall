@@ -28,4 +28,9 @@ public interface GoodsAttributeDao {
      */
     List<GoodsAttributeEntity> listGoodsById(@Param("id") int id);
 
+    /**
+     * 删除参数
+     */
+
+    int deleteAttribute(@Param("id") Integer id);
 }

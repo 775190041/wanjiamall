@@ -35,4 +35,11 @@ public interface GoodsService {
      */
     Object listBrandCategory();
 
+
+    /**
+     *
+     *删除参数
+     */
+    Object deleteAttribute(Integer id);
+
 }
