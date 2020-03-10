@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @Api(tags = "wanjia_collect")
-@RequestMapping("/api")
+@RequestMapping("/wx")
 public class WxCollectController {
     @Autowired
     private CollectService collectService;
@@ -24,7 +24,7 @@ public class WxCollectController {
             @ApiImplicitParam(name = "userId", dataType = "Integer", value = "用户id，必须", required = false)
     })
     @ApiOperation("查询收藏表")
-    @GetMapping("/wx_collect/{pageNum}/{pageSize}")
+    @GetMapping("/collect/{pageNum}/{pageSize}")
     public Object getCollecByUserId(@PathVariable(required = false) Integer pageNum,
                                  @PathVariable(required = false) Integer pageSize,
                                  @RequestParam("userId") int userId){
@@ -37,7 +37,7 @@ public class WxCollectController {
             @ApiImplicitParam(name = "goodsId", dataType = "Integer", value = "商品id，必须", required = false)
     })
     @ApiOperation("给收藏表添加或删除某个商品")
-    @GetMapping("/wx_collect_add_del")
+    @GetMapping("/collectAddDel")
     public Object getCollectInsertAndDelete(@RequestParam("userId") int userId,
                                             @RequestParam("goodsId") int goodsId){
             return collectService.getCollectInsertAndDelete(userId,goodsId);

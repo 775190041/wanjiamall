@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @Api(tags = "wanjia_address")
-@RequestMapping("/api")
+@RequestMapping("/wx")
 public class WxAddressController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class WxAddressController {
             @ApiImplicitParam(name = "userId", dataType = "Integer", value = "用户id,必须", required = false)
     })
 
-    @GetMapping("/wx_address/{pageNum}/{pageSize}")
+    @GetMapping("/address/{pageNum}/{pageSize}")
     @ApiOperation("按用户id查询该用户所有收货地址")
     public Object getAddressByUserId(@PathVariable(required = false) Integer pageNum,
                                      @PathVariable(required = false) Integer pageSize,
@@ -40,7 +40,7 @@ public class WxAddressController {
             @ApiImplicitParam(name = "userId", dataType = "Integer", value = "用户id,必须", required = false)
     })
 
-    @GetMapping("/wx_address")
+    @GetMapping("/address")
     @ApiOperation("按用户id和收货地址id查询详细地址")
     public Object getAddressByIdAndUserId(@RequestParam("id") Integer id,
                                           @RequestParam("userId") int userId) {
@@ -65,7 +65,7 @@ public class WxAddressController {
             @ApiImplicitParam(name = "delted", value = "逻辑删除，非必须", required = false)
     })
 
-    @PostMapping("/wx_address")
+    @PostMapping("/address")
     @ApiOperation("添加收货地址表")
     public Object addressInsert(@RequestBody AddressEntity addressEntity) {
         return addressService.addressInsert(addressEntity);
@@ -91,7 +91,7 @@ public class WxAddressController {
     })
 
 
-    @PutMapping("/wx_address/{id}/{userId}")
+    @PutMapping("/address/{id}/{userId}")
     @ApiOperation("修改收货地址表,传一个id和userId过来")
     public Object addressUpdate(@PathVariable("id") Integer id,
                                 @PathVariable("userId") Integer userId,
@@ -105,7 +105,7 @@ public class WxAddressController {
             @ApiImplicitParam(name = "userId", dataType = "Integer", value = "用户表的用户ID，必须", required = false),
     })
 
-    @DeleteMapping("/wx_address/{id}/{userId}")
+    @DeleteMapping("/address/{id}/{userId}")
     @ApiOperation("删除收货地址表,传一个id和userId过来")
     public Object addressDelete(@PathVariable("id") Integer id,
                                 @PathVariable("userId") Integer userId) {
