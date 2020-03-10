@@ -9,12 +9,12 @@
     insert into wanjia_goods(goods_sn, name, category_id
     , brand_id, gallery, keywords, brief, is_on_sale
     , is_new, is_hot, unit, counter_price, retail_price
-    , detail, add_time, update_time, delted)
+    , detail, add_time, update_time, delted,pic_url)
     values(#{goodsEntity.goodsSn},#{goodsEntity.name},#{goodsEntity.categoryId}
     ,#{goodsEntity.brandId},#{goodsEntity.gallerys},#{goodsEntity.keywords}
     ,#{goodsEntity.brief},#{goodsEntity.isOnSale},#{goodsEntity.isNew}
     ,#{goodsEntity.isHot},#{goodsEntity.unit},#{goodsEntity.counterPrice}
-    ,#{goodsEntity.retailPrice},#{goodsEntity.detail},default,default,default)
+    ,#{goodsEntity.retailPrice},#{goodsEntity.detail},default,default,default,#{goodsEntity.picUrl})
     </insert>
 
 <!--    修改商品信息-->
@@ -25,7 +25,7 @@
                 goods_sn = #{goods.goodsSn},
             </if>
             <if test="goods.name != null">
-                'name' = #{goods.name},
+                name = #{goods.name},
             </if>
             <if test="goods.categoryId != null">
                 category_id = #{goods.categoryId},
@@ -33,7 +33,7 @@
             <if test="goods.brandId != null">
                 brand_id = #{goods.brandId },
             </if>
-            <if test="goods.gallery != null">
+            <if test="goods.gallerys != null">
                 gallery = #{goods.gallerys},
             </if>
             <if test="goods.keywords != null">
@@ -55,16 +55,19 @@
                 unit = #{goods.unit},
             </if>
             <if test="goods.counterPrice != null">
-                counterPrice = #{goods.counterPrice},
+                counter_price = #{goods.counterPrice},
             </if>
             <if test="goods.retailPrice != null">
-                retailPrice = #{goods.retailPrice},
+                retail_price = #{goods.retailPrice},
             </if>
             <if test="goods.detail != null">
-                retailPrice = #{goods.detail},
+                detail = #{goods.detail},
+            </if>
+            <if test="goods.picUrl != null">
+                pic_url = #{goods.picUrl},
             </if>
         </set>
-        where id = # {goods.id}
+        where id = #{goods.id}
     </update>
 
 <!--    删除商品信息 -->
