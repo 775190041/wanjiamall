@@ -208,4 +208,15 @@ public class GoodsServiceImpl implements GoodsService {
         date.put("brandList",brandList);
         return ResponseUtil.ok(date);
     }
+
+    @Override
+    public Object deleteAttribute(Integer id) {
+        Integer count = goodsAttributeDao.deleteAttribute(id);
+        if (count>0){
+            return ResponseUtil.ok();
+        }else {
+            return ResponseUtil.fail(505,"参数删除失败");
+        }
+
+    }
 }
