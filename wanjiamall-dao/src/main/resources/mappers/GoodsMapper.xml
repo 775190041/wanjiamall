@@ -9,15 +9,15 @@
     insert into wanjia_goods(goods_sn, name, category_id
     , brand_id, gallery, keywords, brief, is_on_sale
     , is_new, is_hot, unit, counter_price, retail_price
-    , detail, add_time, update_time, delted,pic_url)
+    , detail, add_time, update_time, delted)
     values(#{goodsEntity.goodsSn},#{goodsEntity.name},#{goodsEntity.categoryId}
     ,#{goodsEntity.brandId},#{goodsEntity.gallerys},#{goodsEntity.keywords}
     ,#{goodsEntity.brief},#{goodsEntity.isOnSale},#{goodsEntity.isNew}
     ,#{goodsEntity.isHot},#{goodsEntity.unit},#{goodsEntity.counterPrice}
-    ,#{goodsEntity.retailPrice},#{goodsEntity.detail},default,default,default,#{goodsEntity.picUrl})
+    ,#{goodsEntity.retailPrice},#{goodsEntity.detail},default,default,default)
     </insert>
 
-<!--    修改商品信息 -->
+<!--    修改商品信息-->
     <update id="update">
         update wanjia_goods
         <set>
@@ -25,7 +25,7 @@
                 goods_sn = #{goods.goodsSn},
             </if>
             <if test="goods.name != null">
-                name = #{goods.name},
+                'name' = #{goods.name},
             </if>
             <if test="goods.categoryId != null">
                 category_id = #{goods.categoryId},
@@ -33,7 +33,7 @@
             <if test="goods.brandId != null">
                 brand_id = #{goods.brandId },
             </if>
-            <if test="goods.gallerys != null">
+            <if test="goods.gallery != null">
                 gallery = #{goods.gallerys},
             </if>
             <if test="goods.keywords != null">
@@ -55,19 +55,16 @@
                 unit = #{goods.unit},
             </if>
             <if test="goods.counterPrice != null">
-                counter_price = #{goods.counterPrice},
+                counterPrice = #{goods.counterPrice},
             </if>
             <if test="goods.retailPrice != null">
-                retail_price = #{goods.retailPrice},
+                retailPrice = #{goods.retailPrice},
             </if>
             <if test="goods.detail != null">
-                detail = #{goods.detail},
-            </if>
-            <if test="goods.picUrl != null">
-                pic_url = #{goods.picUrl},
+                retailPrice = #{goods.detail},
             </if>
         </set>
-        where id = #{goods.id}
+        where id = # {goods.id}
     </update>
 
 <!--    删除商品信息 -->
@@ -75,13 +72,15 @@
         update wanjia_goods set delted = 1
         where id = #{id}
     </update>
-    <resultMap id="goodsEntityResultMap" type="com.nf.wanjiamall.entity.GoodsEntity">
-        <id column="id" property="id"/>
-        <result column="gallery"  property="gallery"  typeHandler="com.nf.wanjiamall.dao.utlis.JsonStringArrayTypeHandler"/>
-    </resultMap>
-<!--    搜索   ，-->
-    <select id="listGoods" resultMap="goodsEntityResultMap">
-        select id, goods_sn, name, category_id, brand_id, gallery,pic_url, keywords, brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price, detail, add_time, update_time, delted from wanjia_goods
+
+<!--    <resultMap id="goodsEntityResultMap" type="com.nf.wanjiamall.entity.GoodsEntity">-->
+<!--        <id column="id" property="id"/>-->
+<!--        <result column="gallery"  property="gallery"  typeHandler="com.nf.wanjiamall.dao.utlis.JsonStringArrayTypeHandler"/>-->
+<!--    </resultMap>-->
+
+<!--    搜索-->
+    <select id="listGoods" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery, keywords, brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price, detail, add_time, update_time, delted from wanjia_goods
             <where>
                 delted = 0
                 <if test="id != null">
@@ -94,32 +93,42 @@
                     and name like '%' #{name} '%'
                 </if>
             </where>
-            order by update_time  desc
+
     </select>
 
     <select id="getNewGoods" resultType="com.nf.wanjiamall.entity.GoodsEntity">
-        select id, goods_sn, name, category_id, brand_id, gallery, keywords,
+        select id, goods_sn, name, category_id, brand_id, gallery,keywords,
          brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
-          detail, add_time, update_time, delted from wanjia_goods
-           where is_new=1 limit 1,6
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+           where is_new=1 order by add_time
     </select>
 
     <select id="getHotGoods" resultType="com.nf.wanjiamall.entity.GoodsEntity">
         select id, goods_sn, name, category_id, brand_id, gallery, keywords,
          brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
-          detail, add_time, update_time, delted from wanjia_goods
-           where is_hot=1 limit 1,6
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+           where is_hot=1 order by add_time
     </select>
 
     <select id="getByCateId" resultType="com.nf.wanjiamall.entity.GoodsEntity">
-        select id, goods_sn, name, category_id, brand_id, gallery, keywords,
-         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
-          detail, add_time, update_time, delted from wanjia_goods
-           where category_id=#{cate_id}
+        select g.id, g.goods_sn,  g.name, g.category_id, g.brand_id, g.gallery, g.keywords,
+       g.brief, g.is_on_sale, g.is_new, g.is_hot, unit, g.counter_price, g.retail_price,
+       g.detail, g.add_time, g.update_time, g.delted, p.url from wanjia_goods g
+       join wanjia_goods_product p on g.id=p.goods_id
+       join wanjiamall_category c on g.category_id=c.id
+        where c.pid=#{cateId} order by g.add_time DESC
     </select>
 
-    <select id="GoodsById" resultMap="goodsEntityResultMap">
-        select id, goods_sn, name, category_id, brand_id, pic_url,gallery, keywords,brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price, detail, add_time, update_time, delted from wanjia_goods
+    <select id="getGoodsById" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select g.id, g.goods_sn,  g.name, g.category_id, g.brand_id, g.gallery, g.keywords,
+       g.brief, g.is_on_sale, g.is_new, g.is_hot, unit, g.counter_price, g.retail_price,
+       g.detail, g.add_time, g.update_time, g.delted, p.url from wanjia_goods g
+       join wanjia_goods_product p on g.id=p.goods_id
+        where g.category_id=#{cateId} order by g.add_time DESC
+    </select>
+
+    <select id="GoodsById" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery, keywords, brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price, detail, add_time, update_time, delted from wanjia_goods
        where delted = 0 and id = #{id}
     </select>
 

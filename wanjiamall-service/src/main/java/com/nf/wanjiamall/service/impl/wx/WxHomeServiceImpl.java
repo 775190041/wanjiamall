@@ -9,7 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lzn
@@ -30,6 +32,8 @@ public class WxHomeServiceImpl implements WxHomeService {
     @Autowired
     private TopicDao topicDao;
 
+
+
     @Override
     public Object getHomeData(Integer pageNum,Integer pageSize) {
         List<AdvertisingEntity> advertisingEntities=advertisingDao.getAll();
@@ -40,6 +44,13 @@ public class WxHomeServiceImpl implements WxHomeService {
         List<CouponEntity> couponEntities=couponDao.getAll();
         List<TopicEntity> topicEntities=topicDao.getAll();
 
+        List<GoodsEntity> firstCateGoods=null;
+        Map<String,List<GoodsEntity>> firstCateGoodsMap=new HashMap<>();
+        for (CategoryEntity categoryEntity : firstCate) {
+            firstCateGoods=goodsDao.getByCateId(1, 4, categoryEntity.getId());
+            firstCateGoodsMap.put(categoryEntity.getName(),firstCateGoods);
+        }
+
         WxHomeVo vo =new WxHomeVo();
         vo.setAdvertise(advertisingEntities);
         vo.setFirstCate(firstCate);
@@ -48,27 +59,9 @@ public class WxHomeServiceImpl implements WxHomeService {
         vo.setHotGoods(hotGoods);
         vo.setCoupon(couponEntities);
         vo.setTopic(topicEntities);
+        vo.setFirstCateGoodsMap(firstCateGoodsMap);
 
-        return ResponseUtil.ok(vo);
-    }
 
-    @Override
-    public Object getCateData(Integer pageNum,Integer pageSize,Integer cateId) {
-        List<GoodsEntity> firstCateGoods=goodsDao.getByCateId(pageNum, pageSize, cateId);
-        List<CategoryEntity> secondCate= categoryDao.getSecondCate(cateId);
-
-        WxHomeVo vo =new WxHomeVo();
-        vo.setFirstCateGoods(firstCateGoods);
-        vo.setSecondCate(secondCate);
-        return ResponseUtil.ok(vo);
-    }
-
-    @Override
-    public Object getGoodsData(Integer pageNum,Integer pageSize,Integer cateId) {
-        List<GoodsEntity> secondCateGoods= goodsDao.getGoodsById(pageNum, pageSize, cateId);
-
-        WxHomeVo vo =new WxHomeVo();
-        vo.setSecondCateGoods(secondCateGoods);
         return ResponseUtil.ok(vo);
     }
 }

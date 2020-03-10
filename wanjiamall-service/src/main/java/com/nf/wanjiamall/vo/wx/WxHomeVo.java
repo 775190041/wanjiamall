@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lzn
@@ -18,15 +19,10 @@ import java.util.List;
 public class WxHomeVo {
     //广告表信息
     private List<AdvertisingEntity> advertise;
-    //商品类目表
     //一级类目
     private List<CategoryEntity> firstCate;
     //一级类目下的所有商品
-    private List<GoodsEntity> firstCateGoods;
-    //二级类目
-    private List<CategoryEntity> secondCate;
-    //一级类目下的所有商品
-    private List<GoodsEntity> secondCateGoods;
+    private Map<String,List<GoodsEntity>> firstCateGoodsMap;
     //品牌表
     private List<BrandEntity> brand;
     //新品
