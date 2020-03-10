@@ -15,6 +15,8 @@ public interface CategoryDao {
     List<CategoryEntity> getFirstCate(@Param("pageNum") Integer pageNum,
                                       @Param("pageSize") Integer pageSize);
 
+    List<CategoryEntity> cateEntity(Integer id);
+
     /**
      * 获取选中的父类目的二级类目信息
      */

@@ -20,7 +20,6 @@ public class WxHomeCateVo {
     private List<CategoryEntity> firstCate;
     //二级类目
     private List<CategoryEntity> secondCate;
-    //二级类目下的所有商品
-    private Map<String,List<GoodsEntity>> secondCateGoodsMap;
-
+    //根据当前id获得当前目录的详细信息
+    private List<CategoryEntity> cateEntities;
 }
