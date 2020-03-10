@@ -5,6 +5,9 @@ import lombok.Data;
 import java.sql.Timestamp;
 import java.util.Date;
 
+/**
+ * @author lzn
+ */
 @Data
 public class GoodsEntity {
     /**

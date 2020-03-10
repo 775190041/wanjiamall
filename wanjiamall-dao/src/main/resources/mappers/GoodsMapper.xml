@@ -97,19 +97,17 @@
     </select>
 
     <select id="getNewGoods" resultType="com.nf.wanjiamall.entity.GoodsEntity">
-        select g.id, g.goods_sn, g.name, g.category_id, g.brand_id, g.gallery,g.keywords,
-         g.brief, g.is_on_sale, g.is_new, g.is_hot, unit, g.counter_price, g.retail_price,
-          g.detail, g.add_time, g.update_time, g.delted, p.url from wanjia_goods g
-           join wanjia_goods_product p on g.id=p.goods_id
-           where is_new=1 order by g.add_time
+        select id, goods_sn, name, category_id, brand_id, gallery,keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+           where is_new=1 order by add_time
     </select>
 
     <select id="getHotGoods" resultType="com.nf.wanjiamall.entity.GoodsEntity">
-        select g.id, g.goods_sn, g.name, g.category_id, g.brand_id, g.gallery, g.keywords,
-         g.brief, g.is_on_sale, g.is_new, g.is_hot, unit, g.counter_price, g.retail_price,
-          g.detail, g.add_time, g.update_time, g.delted, p.url from wanjia_goods g
-           join wanjia_goods_product p on g.id=p.goods_id
-           where is_hot=1 order by g.add_time
+        select id, goods_sn, name, category_id, brand_id, gallery, keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+           where is_hot=1 order by add_time
     </select>
 
     <select id="getByCateId" resultType="com.nf.wanjiamall.entity.GoodsEntity">
