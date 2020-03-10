@@ -15,13 +15,14 @@ public class CouponEntity {
     String name;
     String couponDesc;
     String tag;
+    Integer total;
     BigDecimal discount;
     BigDecimal min;
     Integer couponLimit;
     Integer type;
     Integer status;
     Integer goodsType;
-    String goodsValue;
+    String[] goodsValue;
     String code;
     Integer timeType;
     Integer days;

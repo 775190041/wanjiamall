@@ -30,6 +30,13 @@
         select id, name, category_desc, pid, icon_url, pic_url, level, add_time,
         update_time, delted from wanjiamall_category where delted=0 and id=#{id}
     </select>
+
+    <select id="getByIdDetail" resultType="com.nf.wanjiamall.entity.CategoryEntity">
+        select id, name, category_desc, pid, icon_url, pic_url, level, add_time,
+        update_time, delted from wanjiamall_category where delted=0 and id=#{id}
+    </select>
+
+
     <update id="updateById">
         update wanjiamall_category
          <set>

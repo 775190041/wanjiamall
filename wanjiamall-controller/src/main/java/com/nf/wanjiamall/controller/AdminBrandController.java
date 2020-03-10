@@ -44,7 +44,7 @@ public class AdminBrandController {
 
     @ApiOperation("添加品牌表的信息")
     @PostMapping("/brand")
-    public Object insertBrand(BrandEntity brandEntity) {
+    public Object insertBrand(@RequestBody BrandEntity brandEntity) {
         return brandService.insert(brandEntity);
     }
 
@@ -58,7 +58,7 @@ public class AdminBrandController {
 
     @ApiOperation("修改品牌表的信息")
     @PutMapping("/brand/{id}")
-    public Object updateBrand(BrandEntity brandEntity,@PathVariable Integer id) {
+    public Object updateBrand(@RequestBody BrandEntity brandEntity,@PathVariable Integer id) {
         return brandService.updateById(brandEntity,id);
     }
 

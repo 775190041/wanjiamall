@@ -1,6 +1,7 @@
 package com.nf.wanjiamall.controller;
 
 import com.nf.wanjiamall.entity.KeywordEntity;
+import com.nf.wanjiamall.entity.SystemEntity;
 import com.nf.wanjiamall.service.KeywordService;
 
 import io.swagger.annotations.Api;
@@ -46,7 +47,7 @@ public class AdminKeywordController {
     })
     @PostMapping("/keyword")
     @ApiOperation("添加关键字表")
-    public Object keywordInsert(KeywordEntity keywordEntity) throws ParseException {
+    public Object keywordInsert(@RequestBody KeywordEntity keywordEntity) throws ParseException {
        return keywordService.keywordInsert(keywordEntity);
     }
 
@@ -63,7 +64,7 @@ public class AdminKeywordController {
     })
     @PutMapping("/keyword/{id}")
     @ApiOperation("修改关键字表,传一个关键字表的id过来")
-    public Object keywordUpdate(@PathVariable("id") int id,KeywordEntity keywordEntity){
+    public Object keywordUpdate(@PathVariable("id") int id,@RequestBody KeywordEntity keywordEntity){
         return keywordService.keywordUpdate(id,keywordEntity);
     }
 
@@ -77,5 +78,8 @@ public class AdminKeywordController {
     public Object keywordDelete(@PathVariable("id") int id){
         return keywordService.keywordDelete(id);
     }
+
+
+
 
 }

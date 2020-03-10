@@ -23,11 +23,11 @@
                 attribute_value = #{goodsAttr.attributeValue},
             </if>
         </set>
-        where goods_id = #{goodsAttr.goodsId}
+        where id = #{goodsAttr.id}
     </update>
 
     <update id="delete" >
-        update wanjia_goods_attribute set delted = 1 where id = #{goodsAttr.id}
+        update wanjia_goods_attribute set delted = 1 where id = #{id}
     </update>
 
     <select id="listGoodsById" resultType="com.nf.wanjiamall.entity.GoodsAttributeEntity">

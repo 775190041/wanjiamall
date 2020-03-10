@@ -45,15 +45,15 @@ public class GoodsEntity {
     /**
      * 是否上架
      */
-    private String isOnSale;
+    private Boolean isOnSale;
     /**
      * 是否新品首发 如果设置则可以在新品首发页面展示
      */
-    private String isNew;
+    private Boolean isNew;
     /**
      * 是否日期推荐 ，如果设置则可以在人气推荐推荐页面展示
      */
-    private String isHot;
+    private Boolean isHot;
     /**
      * 商品单位 ，例如盒，瓶
      */
@@ -86,9 +86,8 @@ public class GoodsEntity {
     private String delted;
 
     /**
-     * 商品货品图片
+     * 商品图片
      */
-    private String url;
-
+    private String picUrl;
 
 }

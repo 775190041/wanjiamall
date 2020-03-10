@@ -7,7 +7,11 @@
         select * from wanjia_topic where deleted = 0
     </select>
 
-    <select id="getTopicAll" resultType="com.nf.wanjiamall.entity.TopicEntity">
+    <resultMap id="TopicAllMap" type="com.nf.wanjiamall.entity.TopicEntity">
+        <id column="id" property="id"/>
+        <result column="goods"  property="goods"  typeHandler="com.nf.wanjiamall.dao.utlis.JsonStringArrayTypeHandler"/>
+    </resultMap>
+    <select id="getTopicAll" resultMap="TopicAllMap">
         select * from wanjia_topic where deleted = 0
         <if test="topic.title !=null and topic.title != ''">
             and title like CONCAT('%',#{topic.title},'%')
@@ -24,20 +28,65 @@
         <if test="topic.sort == 2">
             order by price
         </if>
+        <if test="topic.sort !=0 and  topic.sort !=1  and topic.sort !=2">
+            order by add_time  desc
+        </if>
     </select>
 
-    <select id="getByTopic" resultType="com.nf.wanjiamall.entity.TopicEntity">
-        select * from wanjia_topic
-        <trim prefix="where" suffixOverrides="and">
-            deleted = 0
-            <if test="topicTitle !=null and topicTitle !=''">
-                <bind name="title" value="'%'+_parameter.topicTitle+'%'" />
-                and title like #{title}
-            </if>
-            <if test="topicSubtitle !=null and topicSubtitle !=''">
-                <bind name="subtitle" value="'%'+_parameter.topicSubtitle+'%'" />
-                and subtitle like #{subtitle}
-            </if>
-        </trim>
+    <select id="getById" resultMap="TopicAllMap">
+        select * from wanjia_topic where deleted = 0 and id = #{id}
     </select>
+
+
+    <insert id="insertTopic">
+        insert into wanjia_topic(title,subtitle,content,price,read_count,pic_url,goods,deleted)
+        value(#{topic.title},#{topic.subtitle},#{topic.content},#{topic.price},
+              #{topic.readCount},#{topic.picUrl},#{topic.goodes},default)
+    </insert>
+
+    <update id="updateTopic">
+        update wanjia_topic
+        <set>
+            <if test="topic.title!=null">
+                title =#{topic.title},
+            </if>
+            <if test="topic.subtitle!=null">
+                subtitle=#{topic.subtitle},
+            </if>
+            <if test="topic.picUrl!=null">
+                pic_url=#{topic.picUrl},
+            </if>
+            <if test="topic.content!=null">
+                content=#{topic.content},
+            </if>
+            <if test="topic.price!=null">
+                price=#{topic.price},
+            </if>
+            <if test="topic.readCount!=null">
+                read_count=#{topic.readCount},
+            </if>
+            <if test="topic.goodes!=null">
+                goods=#{topic.goodes},
+            </if>
+            <if test="topic.updateTime!=null">
+                update_time=#{topic.updateTime},
+            </if>
+        </set>
+        where deleted = 0 and id=#{id}
+    </update>
+
+
+    <delete id="deleteTopicId">
+        update wanjia_topic set deleted = 1 where deleted=0 and id = #{id}
+    </delete>
+
+    <delete id="deleteTopicBatchId">
+        update wanjia_topic set deleted = 1 where id in
+        <foreach collection="array" item="id" separator= "," open="(" close=")">
+            #{id}
+        </foreach>
+--         deleted=0
+    </delete>
+
+
 </mapper>

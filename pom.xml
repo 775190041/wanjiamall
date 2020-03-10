@@ -41,6 +41,7 @@
         <commons-io.version>2.5</commons-io.version>
     </properties>
     <dependencyManagement>
+
         <dependencies>
             <dependency>
                 <groupId>org.hibernate.validator</groupId>

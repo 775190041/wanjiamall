@@ -3,6 +3,7 @@ package com.nf.wanjiamall.controller;
 
 import com.nf.wanjiamall.service.GoodsService;
 
+import com.nf.wanjiamall.utils.JacksonUtil;
 import com.nf.wanjiamall.vo.AddGoodsVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -49,12 +50,25 @@ public class AdminGoodsController {
             return goodsService.listGoods(pageNum,pageSize,id,goodsSn,name);
     }
 
+    
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     @ApiOperation("查询某个商品的商品详情信息,传商品id")
     @GetMapping("/goods/{id}")
     public Object queryGoodsDetail(@PathVariable(required = false) int id){
         return goodsService.queryGoodsDetail(id);
     }
 
+
+    @ApiOperation("查询品牌商和类目信息")
+    @GetMapping("/brand/category")
+    public Object listBrandCategory(){
+        return  goodsService.listBrandCategory();
+    }
 
 
 }

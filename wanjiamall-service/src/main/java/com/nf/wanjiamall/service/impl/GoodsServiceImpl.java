@@ -1,45 +1,41 @@
 package com.nf.wanjiamall.service.impl;
 
-import com.nf.wanjiamall.dao.GoodsAttributeDao;
-import com.nf.wanjiamall.dao.GoodsDao;
-import com.nf.wanjiamall.dao.GoodsProductDao;
-import com.nf.wanjiamall.dao.GoodsSpecificationDao;
-import com.nf.wanjiamall.entity.GoodsAttributeEntity;
-import com.nf.wanjiamall.entity.GoodsEntity;
-import com.nf.wanjiamall.entity.GoodsProductEntity;
-import com.nf.wanjiamall.entity.GoodsSpecificationEntity;
+import com.nf.wanjiamall.dao.*;
+import com.nf.wanjiamall.entity.*;
 import com.nf.wanjiamall.service.GoodsService;
+import com.nf.wanjiamall.utils.ArrayUtils;
 import com.nf.wanjiamall.utils.ResponseCode;
 import com.nf.wanjiamall.utils.ResponseUtil;
 import com.nf.wanjiamall.vo.AddGoodsVo;
+import com.nf.wanjiamall.vo.CatVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
 
-    @Autowired
+    @Autowired(required = false)
     private GoodsDao goodsDao;
-    @Autowired
+    @Autowired(required = false)
     private GoodsSpecificationDao goodsSpecificationDao;
-    @Autowired
+    @Autowired(required = false)
     private GoodsProductDao goodsProductDao;
-    @Autowired
+    @Autowired(required = false)
     private GoodsAttributeDao goodsAttributeDao;
+    @Autowired(required = false)
+    private CategoryDao categoryDao;
+    @Autowired(required = false)
+    private BrandDao brandDao;
+
 
     /**
      * 上架商品
-     * 还缺少校验的
      * @param addGoodsVo
      * @return
      */
-
     @Transactional
     @Override
     public Object AddGoods(AddGoodsVo addGoodsVo) {
@@ -47,8 +43,9 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsSpecificationEntity[] goodsSpecificationEntities = addGoodsVo.getGoodsSpecificationEntity();
         GoodsProductEntity[] goodsProductEntities = addGoodsVo.getGoodsProductEntities();
         GoodsAttributeEntity[] goodsAttributeEntities = addGoodsVo.getGoodsAttributeEntity();
-        //把数组转变为字符串
-        goodsEntity.setGallerys(Arrays.toString(goodsEntity.getGallery()));
+        //把数组转变为字符串加双引号
+        String gallery = ArrayUtils.addDouble( goodsEntity.getGallery());
+         goodsEntity.setGallerys(gallery);
         //商品基本信息表
         goodsDao.insert(goodsEntity);
         //商品规格表
@@ -60,7 +57,8 @@ public class GoodsServiceImpl implements GoodsService {
         for (GoodsProductEntity goodsProductEntity : goodsProductEntities) {
             goodsProductEntity.setGoodsId(goodsEntity.getId());
             //把数组转变为字符串
-            goodsProductEntity.setSpecification(Arrays.toString(goodsProductEntity.getSpecifications()));
+            String specifications = ArrayUtils.addDouble(goodsProductEntity.getSpecifications());
+            goodsProductEntity.setSpecification(specifications);
             goodsProductDao.insert(goodsProductEntity);
         }
         //参数表
@@ -72,7 +70,6 @@ public class GoodsServiceImpl implements GoodsService {
     }
     /**
      * 编辑商品
-     * 这里修改商品是有问题的（待定）
      * @param addGoodsVo
      * @return
      */
@@ -84,7 +81,8 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsProductEntity[] goodsProductEntities = addGoodsVo.getGoodsProductEntities();
         GoodsAttributeEntity[] goodsAttributeEntities = addGoodsVo.getGoodsAttributeEntity();
         //把数组转变为字符串
-        goodsEntity.setGallerys(Arrays.toString(goodsEntity.getGallery()));
+        String gallery = ArrayUtils.addDouble(goodsEntity.getGallery());
+        goodsEntity.setGallerys(gallery);
         //商品基本信息表
         goodsDao.update(goodsEntity);
         //商品规格表
@@ -94,12 +92,18 @@ public class GoodsServiceImpl implements GoodsService {
         //商品货物表
         for (GoodsProductEntity goodsProductEntity : goodsProductEntities) {
             //把数组转变为字符串
-            goodsProductEntity.setSpecification(Arrays.toString(goodsProductEntity.getSpecifications()));
+            String specifications = ArrayUtils.addDouble(goodsProductEntity.getSpecifications());
+            goodsProductEntity.setSpecification(specifications);
             goodsProductDao.update(goodsProductEntity);
         }
         //参数表
         for (GoodsAttributeEntity goodsAttributeEntity : goodsAttributeEntities) {
-            goodsAttributeDao.update(goodsAttributeEntity);
+            if (goodsAttributeEntity.getId() == null){
+                goodsAttributeEntity.setGoodsId(goodsEntity.getId());
+                goodsAttributeDao.insert(goodsAttributeEntity);
+            }else {
+                goodsAttributeDao.update(goodsAttributeEntity);
+            }
         }
         return ResponseUtil.ok();
     }
@@ -147,11 +151,61 @@ public class GoodsServiceImpl implements GoodsService {
         List<GoodsSpecificationEntity> goodsSpecificationEntities = goodsSpecificationDao.listGoodsById(id);
         List<GoodsProductEntity> goodsProductEntities = goodsProductDao.listByGoodsId(id);
         List<GoodsAttributeEntity> goodsAttributeEntities = goodsAttributeDao.listGoodsById(id);
+        //查询类目表的的id
+        CategoryEntity categoryEntity = categoryDao.getByIdDetail(goodsEntity.getCategoryId());
+
+
+
         Map<String, Object> data = new HashMap<>();
         data.put("goods",goodsEntity);
         data.put("goodsSpec",goodsSpecificationEntities);
         data.put("goodsProduct",goodsProductEntities);
         data.put("goodsAttribute",goodsAttributeEntities);
+        Integer[] integers = new Integer[]{categoryEntity.getPid(),categoryEntity.getId()};
+        data.put("categoryIds",integers);
+
         return ResponseUtil.ok(data);
+    }
+
+    /**
+     * 查询品牌商品和类目
+     * @return
+     */
+    @Override
+    public Object listBrandCategory() {
+        //类目查询放入CatVo类
+        List<CategoryEntity> l1categoryEntities =categoryDao.getFirstCate(1,Integer.MAX_VALUE);
+        List<CatVo> categoryList = new ArrayList<>(l1categoryEntities.size());
+        for (CategoryEntity categoryEntity : l1categoryEntities) {
+            CatVo l1CatVo = new CatVo();
+            l1CatVo.setValue(categoryEntity.getId());
+            l1CatVo.setLabel(categoryEntity.getName());
+
+
+            List<CategoryEntity> l2categoryEntities = categoryDao.getSecondCate(categoryEntity.getId());
+            List<CatVo> children = new ArrayList<>(l2categoryEntities.size());
+            for (CategoryEntity l2categoryEntity : l2categoryEntities) {
+                CatVo l2CatVo = new CatVo();
+                l2CatVo.setValue(l2categoryEntity.getId());
+                l2CatVo.setLabel(l2categoryEntity.getName());
+                children.add(l2CatVo);
+            }
+            l1CatVo.setChildren(children);
+            categoryList.add(l1CatVo);
+        }
+        //品牌查询放入CatVo类
+        List<BrandEntity> list = brandDao.getAll();
+        List<Map<String,Object>> brandList = new ArrayList<>(list.size());
+
+        for (BrandEntity brandEntity : list) {
+            Map<String,Object> brand = new HashMap<>(2);
+            brand.put("value",brandEntity.getId());
+            brand.put("label",brandEntity.getName());
+            brandList.add(brand);
+        }
+        Map<String,Object> date = new HashMap<>();
+        date.put("categoryList",categoryList);
+        date.put("brandList",brandList);
+        return ResponseUtil.ok(date);
     }
 }
