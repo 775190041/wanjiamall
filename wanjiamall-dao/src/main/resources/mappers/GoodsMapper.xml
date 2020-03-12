@@ -132,5 +132,17 @@
        where delted = 0 and id = #{id}
     </select>
 
+    <select id="checkExistByNameOrGoodsSn" resultType="integer">
+        select count(*) from wanjia_goods
+        <where>
+            <if test="name != null">
+                name = #{name} or
+            </if>
+            <if test="goodsSn != null">
+                goods_sn = #{goodsSn}
+            </if>
+        </where>
+    </select>
+
 
 </mapper>

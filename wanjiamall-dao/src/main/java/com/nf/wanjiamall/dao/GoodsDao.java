@@ -72,4 +72,10 @@ public interface GoodsDao {
      */
     GoodsEntity GoodsById(@Param("id") int id);
 
+
+    /**
+     * 判断商品编号和商品名称是否存在
+     */
+    Integer checkExistByNameOrGoodsSn(@Param("goodsSn") String goodsSn,@Param("name") String Name);
+
 }
