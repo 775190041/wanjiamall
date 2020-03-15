@@ -1,0 +1,19 @@
+package com.nf.wanjiamall.service;
+
+import com.nf.wanjiamall.entity.ResourceEntity;
+
+/**
+ * @author 黑夜
+ */
+public interface ResourceService {
+
+    Object listResource(Integer pageNum,Integer pageSize,Integer categoryId,String name,String url);
+
+    Object updateResource(ResourceEntity resourceEntity);
+
+    Object insertResource(ResourceEntity resourceEntity);
+
+    Object getByIdResource(Integer id);
+
+    Object deleteResource(Integer id);
+}
