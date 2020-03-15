@@ -27,12 +27,6 @@ public class AdminResourceController {
     }
 
 
-    @ApiOperation("编辑资源 ,把id放入实体类里面")
-    @PutMapping("/resource")
-    public Object updateResource(@RequestBody ResourceEntity resourceEntity){
-        return resourceService.updateResource(resourceEntity);
-    }
-
 
     @ApiOperation("根据id 查详细信息")
     @GetMapping("/resource/{id}")
@@ -40,10 +34,17 @@ public class AdminResourceController {
         return resourceService.getByIdResource(id);
     }
 
+
+    @ApiOperation("编辑资源 ,把id放入实体类里面")
+    @PutMapping("/resource")
+    public Object updateResource(@RequestBody ResourceEntity resourceEntity){
+        return resourceService.updateResource(resourceEntity);
+    }
+
+
     @ApiOperation("添加资源")
     @PostMapping("/resource")
     public Object insertResource(@RequestBody ResourceEntity resourceEntity){
-
         return resourceService.insertResource(resourceEntity);
     }
 
@@ -52,5 +53,4 @@ public class AdminResourceController {
     public Object deleteResource(@PathVariable Integer id){
         return resourceService.deleteResource(id);
     }
-
 }

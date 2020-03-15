@@ -1,35 +1,25 @@
 package com.nf.wanjiamall.entity;
 
-
 import lombok.Data;
 
 import java.util.Date;
 
-/**
- * @author 黑夜
- */
 @Data
-public class ResourceEntity {
-
+public class RoleEntity {
 
     private Integer id;
     /**
-     * 资源分类ID
-     */
-    private Integer categoryId;
-
-    /**
-     * 资源名称
+     * 角色名称
      */
     private String name;
     /**
-     * 资源URL
-     */
-    private String url;
-    /**
-     * 描述
+     * 角色描述
      */
     private String description;
+    /**
+     * 启用状态：0->禁用；1->启用
+     */
+    private Integer enabled;
     /**
      * 创建时间
      */
