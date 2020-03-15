@@ -20,5 +20,5 @@ public interface MenuDao {
 
     int deleteMenu(@Param("id") Integer id);
 
-    MenuEntity getByIdMenu(@Param("pid") Integer pid);
+    List<MenuEntity> getByIdMenu(@Param("pid") Integer pid);
 }
