@@ -16,13 +16,20 @@ public class AdminMenuController {
     private MenuService menuService;
 
 
-
-    @ApiOperation("查询菜单列表")
+    @ApiOperation("查询一级菜单列表")
     @GetMapping("/menu/{pageNum}/{pageSize}")
     public Object listMenu(@PathVariable(required = false) int pageNum,
                            @PathVariable(required = false) int pageSize){
         return menuService.listMenu(pageNum,pageSize);
     }
+
+    @ApiOperation("传父id，查详情")
+    @GetMapping("/menu/{pid}")
+    public Object getByIdMenu(@PathVariable("pid") Integer pid){
+        return menuService.getByIdMenu(pid);
+    }
+
+
 
     @ApiOperation("添加菜单")
     @PostMapping("/menu")
@@ -40,12 +47,6 @@ public class AdminMenuController {
     @DeleteMapping("/menu/{id}")
     public Object deleteMenu(@PathVariable("id") Integer id){
         return menuService.deleteMenu(id);
-    }
-
-    @ApiOperation("传一个菜单id，查详情")
-    @GetMapping("/menu/{id}")
-    public Object getByIdMenu(@PathVariable("id") Integer id){
-        return menuService.getByIdMenu(id);
     }
 
 }

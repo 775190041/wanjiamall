@@ -56,7 +56,7 @@ public class MenuServiceImpl implements MenuService  {
     }
 
     @Override
-    public Object getByIdMenu(Integer id) {
-        return ResponseUtil.ok(menuDao.getByIdMenu(id));
+    public Object getByIdMenu(Integer pid) {
+        return ResponseUtil.ok(menuDao.getByIdMenu(pid));
     }
 }

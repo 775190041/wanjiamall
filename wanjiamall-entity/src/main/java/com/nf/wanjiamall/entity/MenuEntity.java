@@ -21,10 +21,7 @@ public class MenuEntity {
      * 菜单级数
      */
     private Integer level;
-    /**
-     * 菜单排序
-     */
-    private Integer sort;
+
     /**
      * 前端名称
      */
@@ -33,10 +30,7 @@ public class MenuEntity {
      * 前端图标
      */
     private String icon;
-    /**
-     * 前端隐藏 1表示显示，0表示阴藏
-     */
-    private Integer hidden;
+
 
     /**
      * 创建时间

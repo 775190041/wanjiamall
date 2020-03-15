@@ -4,16 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nf.wanjiamall.dao.MenuDao">
     <select id="listMenu" resultType="com.nf.wanjiamall.entity.MenuEntity">
-            select id, parent_id, title, level, sort, name, icon, hidden, add_time, update_time, delted from
-            wanjia_menu where delted = 0
+            select id, parent_id, title, level,  name, icon, add_time, update_time, delted from
+            wanjia_menu where delted = 0  and level =1
     </select>
 
 
     <insert id="insertMenu">
-        insert into wanjia_menu (parent_id, title, level, sort, name, icon, hidden)
+        insert into wanjia_menu (parent_id, title, level,  name, icon)
          values (#{menuEntity.parentId},#{menuEntity.title}
-         ,#{menuEntity.level},#{menuEntity.sort},#{menuEntity.name}
-         ,#{menuEntity.icon},#{menuEntity.hidden})
+         ,#{menuEntity.level},#{menuEntity.name}
+         ,#{menuEntity.icon})
     </insert>
 
     <update id="updateMenu" >
@@ -28,18 +28,14 @@
             <if test="menuEntity.level != null">
                 level = #{menuEntity.level},
             </if>
-            <if test="menuEntity.sort != null">
-                sort = #{menuEntity.sort},
-            </if>
+
             <if test="menuEntity.name != null">
                 name = #{menuEntity.name},
             </if>
             <if test="menuEntity.icon != null">
                 icon = #{menuEntity.icon},
             </if>
-            <if test="menuEntity.hidden != null">
-                hidden = #{menuEntity.hidden}
-            </if>
+
         </set>
         where id = #{menuEntity.id}
     </update>
@@ -49,8 +45,8 @@
     </update>
 
     <select id="getByIdMenu" resultType="com.nf.wanjiamall.entity.MenuEntity">
-        select id, parent_id, title, level, sort, name, icon, hidden, add_time, update_time, delted
-         from wanjia_menu where id = #{id}
+        select id, parent_id, title, level,  name, icon, add_time, update_time, delted
+         from wanjia_menu where parent_id = #{pid}
     </select>
 
 </mapper>
