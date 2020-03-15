@@ -25,7 +25,6 @@
         </set>
         where id = #{goodsAttr.id}
     </update>
-
     <update id="delete" >
         update wanjia_goods_attribute set delted = 1 where id = #{id}
     </update>
