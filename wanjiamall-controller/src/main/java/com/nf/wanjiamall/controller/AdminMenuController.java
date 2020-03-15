@@ -29,6 +29,12 @@ public class AdminMenuController {
         return menuService.getByIdMenu(pid);
     }
 
+    @ApiOperation("按级别查询")
+    @GetMapping("/menu/level/{level}")
+    public Object getByLevelMenu(@PathVariable("level") Integer level){
+        return menuService.getByLevelMenu(level);
+    }
+
 
 
     @ApiOperation("添加菜单")

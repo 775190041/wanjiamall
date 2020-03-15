@@ -49,4 +49,9 @@
          from wanjia_menu where parent_id = #{pid}
     </select>
 
+    <select id="getByLevelMenu" resultType="com.nf.wanjiamall.entity.MenuEntity">
+        select id, parent_id, title, level, name, icon, add_time, update_time, delted
+        from wanjia_menu where level = #{level}
+    </select>
+
 </mapper>

@@ -59,4 +59,9 @@ public class MenuServiceImpl implements MenuService  {
     public Object getByIdMenu(Integer pid) {
         return ResponseUtil.ok(menuDao.getByIdMenu(pid));
     }
+
+    @Override
+    public Object getByLevelMenu(Integer level) {
+        return ResponseUtil.ok(menuDao.getByLevelMenu(level));
+    }
 }

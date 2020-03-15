@@ -13,4 +13,6 @@ public interface MenuService {
     Object deleteMenu(Integer id);
 
     Object getByIdMenu(Integer id);
+
+    Object getByLevelMenu(Integer level);
 }
