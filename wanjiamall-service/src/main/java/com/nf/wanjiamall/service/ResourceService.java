@@ -7,9 +7,10 @@ import com.nf.wanjiamall.entity.ResourceEntity;
  */
 public interface ResourceService {
 
-    Object listResource(Integer pageNum,Integer pageSize,Integer categoryId,String name,String url);
+    Object
+    listResource(Integer pageNum,Integer pageSize,Integer categoryId,String name,String url);
 
-    Object updateResource(ResourceEntity resourceEntity);
+    Object updateResource(Integer id,ResourceEntity resourceEntity);
 
     Object insertResource(ResourceEntity resourceEntity);
 

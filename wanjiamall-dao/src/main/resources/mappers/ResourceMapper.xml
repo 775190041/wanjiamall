@@ -6,17 +6,17 @@
 
 
     <select id="listResource" resultType="com.nf.wanjiamall.entity.ResourceEntity">
-        select id, category_id, create_time, name, url, description, add_time, update_time, delted
+        select id, category_id, name, url, description, add_time, update_time, delted
         from wanjia_resource
         <where>
             delted = 0
-            <if test="categoryId != null">
+            <if test="categoryId != null ">
                 and category_id = #{categoryId}
             </if>
-            <if test="name != null">
+            <if test="name != null and name!='' ">
                 and name = #{name}
             </if>
-            <if test="url != null">
+            <if test="url != null and url!='' ">
                 and url = #{url}
             </if>
         </where>
@@ -30,22 +30,22 @@
                 category_id = #{resourceEntity.categoryId},
             </if>
             <if test="resourceEntity.name != null">
-                name = #{resourceEntity.name}
+                name = #{resourceEntity.name},
             </if>
             <if test="resourceEntity.url != null">
-                url = #{resourceEntity.url}
+                url = #{resourceEntity.url},
             </if>
             <if test="resourceEntity.description != null">
                 description = #{resourceEntity.description}
             </if>
         </set>
-        where id = #{resourceEntity.id}
+        where id = #{id}
     </update>
 
     <insert id="insertResource" >
-        insert into wanjia_resource (category_id, create_time, name, url, description)
+        insert into wanjia_resource (category_id, name, url, description)
         values (#{resourceEntity.categoryId},#{resourceEntity.name}
-        ,#{resourceEntity})
+        ,#{resourceEntity.url},#{resourceEntity.description})
     </insert>
 
     <select id="getByIdResource" resultType="com.nf.wanjiamall.entity.ResourceEntity">
@@ -53,7 +53,7 @@
     </select>
 
     <update id="deleteResource" >
-        update wanjia_resource set delted = 0  where id = #{id}
+        update wanjia_resource set delted = 1  where id = #{id}
     </update>
 
 

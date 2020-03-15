@@ -17,7 +17,7 @@ public interface ResourceDao {
                                       @Param("url") String url);
 
 
-    int updateResource(@Param("resourceEntity") ResourceEntity resourceEntity);
+    int updateResource(@Param("id")Integer id,@Param("resourceEntity") ResourceEntity resourceEntity);
 
     int insertResource (@Param("resourceEntity") ResourceEntity resourceEntity);
 

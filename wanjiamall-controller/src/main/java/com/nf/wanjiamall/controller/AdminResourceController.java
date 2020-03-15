@@ -36,9 +36,9 @@ public class AdminResourceController {
 
 
     @ApiOperation("编辑资源 ,把id放入实体类里面")
-    @PutMapping("/resource")
-    public Object updateResource(@RequestBody ResourceEntity resourceEntity){
-        return resourceService.updateResource(resourceEntity);
+    @PutMapping("/resource/{id}")
+    public Object updateResource(@PathVariable Integer id,@RequestBody ResourceEntity resourceEntity){
+        return resourceService.updateResource(id,resourceEntity);
     }
 
 

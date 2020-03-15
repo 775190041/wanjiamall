@@ -33,8 +33,8 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public Object updateResource(ResourceEntity resourceEntity) {
-        Integer count =  resourceDao.updateResource(resourceEntity);
+    public Object updateResource(Integer id,ResourceEntity resourceEntity) {
+        Integer count =  resourceDao.updateResource(id,resourceEntity);
        if (count>0){
            return ResponseUtil.ok("修改成功");
        }else {
