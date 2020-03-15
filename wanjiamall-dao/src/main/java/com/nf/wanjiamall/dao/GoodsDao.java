@@ -38,6 +38,16 @@ public interface GoodsDao {
     List<GoodsEntity> getNewGoods(@Param("pageNum") Integer pageNum,
                                   @Param("pageSize") Integer pageSize);
 
+    List<GoodsEntity> newGoodsLowToUp(@Param("pageNum") Integer pageNum,
+                                      @Param("pageSize") Integer pageSize);
+
+    List<GoodsEntity> newGoodsUpToLow(@Param("pageNum") Integer pageNum,
+                                      @Param("pageSize") Integer pageSize);
+
+    List<GoodsEntity> newGoodsByCate(@Param("pageNum") Integer pageNum,
+                                     @Param("pageSize") Integer pageSize,
+                                     @Param("cateId") Integer cateId);
+
     /**
      *  人气
      */
@@ -60,12 +70,19 @@ public interface GoodsDao {
      * @param pageNum
      * @param pageSize
      * @param cateId
-     * @return
+     * @return1
      */
     List<GoodsEntity> getGoodsById(@Param("pageNum") Integer pageNum,
                                   @Param("pageSize") Integer pageSize,
                                   @Param("cateId") Integer cateId);
 
+    List<GoodsEntity> getByBrandId(@Param("pageNum") Integer pageNum,
+                                   @Param("pageSize") Integer pageSize,
+                                   @Param("brandId") Integer brandId);
+
+    List<GoodsEntity> getByKeywords(@Param("pageNum") Integer pageNum,
+                                      @Param("pageSize") Integer pageSize,
+                                    @Param("keyword") String keyword);
 
     /**
      * 根据商品id查询商品信息

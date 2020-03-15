@@ -50,5 +50,9 @@
         </foreach>
     </delete>
 
+    <insert id="insert">
+        insert into wanjia_footprint(user_id, goods_id, add_time, update_time, deleted)
+        values (#{userId},#{goodsId},#{addTime},#{updateTime},#{deleted})
+    </insert>
 
 </mapper>

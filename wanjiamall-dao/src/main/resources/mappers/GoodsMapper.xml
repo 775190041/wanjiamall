@@ -101,14 +101,36 @@
         select id, goods_sn, name, category_id, brand_id, gallery,keywords,
          brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
           detail, add_time, update_time, delted, pic_url from wanjia_goods
-           where is_new=1 order by add_time
+           where delted=0 and is_new=1 order by add_time DESC
     </select>
+
+    <select id="newGoodsLowToUp" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery,keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+           where delted=0 and is_new=1 order by retail_price ASC
+    </select>
+
+    <select id="newGoodsUpToLow" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery,keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+           where delted=0 and is_new=1 order by retail_price DESC
+    </select>
+
+    <select id="newGoodsByCate" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery,keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+           where delted=0 and is_new=1 and category_id=#{cateId} order by add_time DESC
+    </select>
+
 
     <select id="getHotGoods" resultType="com.nf.wanjiamall.entity.GoodsEntity">
         select id, goods_sn, name, category_id, brand_id, gallery, keywords,
          brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
           detail, add_time, update_time, delted, pic_url from wanjia_goods
-           where is_hot=1 order by add_time
+           where delted=0 and is_hot=1 order by add_time DESC
     </select>
 
     <select id="getByCateId" resultType="com.nf.wanjiamall.entity.GoodsEntity">
@@ -127,22 +149,23 @@
        join wanjia_goods_product p on g.id=p.goods_id
         where g.category_id=#{cateId} order by g.add_time DESC
     </select>
+
+    <select id="getByBrandId" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery, keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+           where delted =0 and brand_id=#{brandId} order by add_time Desc
+    </select>
+
+    <select id="getByKeywords" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery, keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+           where delted = 0 and keywords=#{keyword} order by add_time Desc
+    </select>
+
     <select id="GoodsById" resultMap="goodsEntityResultMap">
         select id, goods_sn, name, category_id, brand_id, pic_url,gallery, keywords,brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price, detail, add_time, update_time, delted from wanjia_goods
        where delted = 0 and id = #{id}
     </select>
-
-    <select id="checkExistByNameOrGoodsSn" resultType="integer">
-        select count(*) from wanjia_goods
-        <where>
-            <if test="name != null">
-                name = #{name} or
-            </if>
-            <if test="goodsSn != null">
-                goods_sn = #{goodsSn}
-            </if>
-        </where>
-    </select>
-
-
 </mapper>

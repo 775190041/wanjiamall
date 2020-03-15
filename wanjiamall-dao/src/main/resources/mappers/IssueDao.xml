@@ -47,4 +47,10 @@
         update wanjia_issue set delted = 1
         where id = #{issueEntity.id}
     </update>
+
+    <select id="getAll" resultMap="issueResultMap">
+        select id, question, answer, update_time, add_time, delted from wanjia_issue
+        where delted=0 order by add_time desc
+    </select>
+
 </mapper>

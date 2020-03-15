@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @author lzn
  */
 @RestController
-@Api(tags = "home_cate")
+@Api(tags = "wx_cate")
 @RequestMapping("/wx")
 public class WxHomeCateController {
     @Autowired

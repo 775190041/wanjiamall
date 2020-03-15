@@ -18,7 +18,7 @@ import java.util.Map;
  * @author lzn
  */
 @RestController
-@Api(tags = "home")
+@Api(tags = "wx_home")
 @RequestMapping("/wx")
 public class WxHomeController {
 

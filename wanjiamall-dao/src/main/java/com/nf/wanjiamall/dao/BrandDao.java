@@ -21,4 +21,6 @@ public interface BrandDao {
 
     Integer getProductByBrandCount(Integer id);
     int deleteById(Integer id);
+
+    BrandEntity getByGoodId(Integer goodId);
 }
