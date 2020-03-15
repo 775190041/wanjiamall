@@ -34,8 +34,8 @@ public class MenuServiceImpl implements MenuService  {
     }
 
     @Override
-    public Object updateMenu(MenuEntity menuEntity) {
-        Integer count = menuDao.updateMenu(menuEntity);
+    public Object updateMenu(Integer id,MenuEntity menuEntity) {
+        Integer count = menuDao.updateMenu(id,menuEntity);
         if (count >0){
             return ResponseUtil.ok("修改成功");
         }else {

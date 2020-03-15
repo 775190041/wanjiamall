@@ -16,7 +16,7 @@ public interface MenuDao {
 
     int insertMenu(@Param("menuEntity") MenuEntity menuEntity);
 
-    int updateMenu(@Param("menuEntity") MenuEntity menuEntity);
+    int updateMenu(@Param("id") Integer id,@Param("menuEntity") MenuEntity menuEntity);
 
     int deleteMenu(@Param("id") Integer id);
 

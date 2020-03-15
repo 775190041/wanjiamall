@@ -44,9 +44,9 @@ public class AdminMenuController {
     }
 
     @ApiOperation("编辑菜单")
-    @PutMapping("/menu")
-    public Object updateMenu(@RequestBody MenuEntity menuEntity){
-        return menuService.updateMenu(menuEntity);
+    @PutMapping("/menu/{id}")
+    public Object updateMenu(@PathVariable Integer id,@RequestBody MenuEntity menuEntity){
+        return menuService.updateMenu(id,menuEntity);
     }
 
     @ApiOperation("菜单删除")

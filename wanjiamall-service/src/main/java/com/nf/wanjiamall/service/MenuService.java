@@ -8,7 +8,7 @@ public interface MenuService {
 
     Object insertMenu(MenuEntity menuEntity);
 
-    Object updateMenu(MenuEntity menuEntity);
+    Object updateMenu(Integer id,MenuEntity menuEntity);
 
     Object deleteMenu(Integer id);
 
