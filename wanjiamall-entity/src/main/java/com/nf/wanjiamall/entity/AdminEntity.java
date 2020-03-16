@@ -40,9 +40,9 @@ public class AdminEntity {
      */
     private Date loginTime;
     /**
-     * 正常0，停用1
+     * 正常1，停用0
      */
-    private Integer deletedState;
+    private Boolean deletedState;
     /**
      * 创建时间
      */
