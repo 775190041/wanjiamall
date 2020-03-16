@@ -11,5 +11,5 @@ public interface RoleService {
 
     Object deleteRole(Integer id);
 
-    Object updateRoleStatus(Integer id,Integer status);
+    Object updateRoleStatus(Integer id,Boolean enabled);
 }

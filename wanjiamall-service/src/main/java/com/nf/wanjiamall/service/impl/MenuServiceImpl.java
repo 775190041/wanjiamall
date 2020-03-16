@@ -76,16 +76,16 @@ public class MenuServiceImpl implements MenuService  {
         for (MenuEntity menuEntity : menuEntities) {
             MenuNode menuNode = new MenuNode();
             menuNode.setId(menuEntity.getId());
-            menuNode.setPid(menuEntity.getParentId());
-            menuNode.setLabel(menuEntity.getTitle());
+//            menuNode.setPid(menuEntity.getParentId());
+            menuNode.setTitle(menuEntity.getTitle());
 
             List<MenuEntity> menuEntities1 = menuDao.getByIdMenu(menuEntity.getId());
             List<MenuNode> children = new ArrayList<>(menuEntities1.size());
             for (MenuEntity entity : menuEntities1) {
                 MenuNode menuNode1 = new MenuNode();
                 menuNode1.setId(entity.getId());
-                menuNode1.setPid(entity.getParentId());
-                menuNode1.setLabel(entity.getTitle());
+//                menuNode1.setPid(entity.getParentId());
+                menuNode1.setTitle(entity.getTitle());
                 children.add(menuNode1);
             }
             menuNode.setChildren(children);

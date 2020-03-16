@@ -55,8 +55,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Object updateRoleStatus(Integer id,Integer status) {
-        Integer count = roleDao.updateRoleStatus(id,status);
+    public Object updateRoleStatus(Integer id,Boolean enabled) {
+        Integer count = roleDao.updateRoleStatus(id,enabled);
 
         if(count>0){
             return ResponseUtil.ok("修改成功");

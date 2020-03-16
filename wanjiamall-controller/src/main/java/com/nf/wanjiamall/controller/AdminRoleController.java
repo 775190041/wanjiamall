@@ -39,8 +39,8 @@ public class AdminRoleController {
 
     @ApiOperation("修改角色状态")
     @PutMapping("/roleStatus/{id}")
-    public Object updateRoleStatus(@PathVariable Integer id, @RequestParam(value = "status") Integer status){
-        return roleService.updateRoleStatus(id,status);
+    public Object updateRoleStatus(@PathVariable Integer id, @RequestBody RoleEntity roleEntity){
+        return roleService.updateRoleStatus(id,roleEntity.getEnabled());
     }
 
 
