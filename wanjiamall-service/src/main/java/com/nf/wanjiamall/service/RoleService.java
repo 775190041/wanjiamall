@@ -7,5 +7,7 @@ public interface RoleService {
 
     Object insertRole(RoleEntity roleEntity);
 
-    Object updateRole(RoleEntity roleEntity);
+    Object updateRole(Integer id,RoleEntity roleEntity);
+
+    Object deleteRole(Integer id);
 }

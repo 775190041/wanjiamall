@@ -14,6 +14,32 @@
         </where>
     </select>
 
+    <insert id="insertRole">
+        insert into wanjia_role (name, description)
+        values (#{roleEntity.name},#{roleEntity.description})
+    </insert>
+
+    <update id="updateRole">
+        update wanjia_role
+        <set>
+            <if test="roleEntity.name != null">
+                    name = #{roleEntity.name},
+            </if>
+            <if test="roleEntity.description != null">
+                description  = #{roleEntity.description},
+            </if>
+            <if test="roleEntity.enabled != null">
+                enabled = #{roleEntity.enabled}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="deleteRole" >
+        update wanjia_role set delted = 1  where id = #{id}
+    </update>
+
 
 
 </mapper>

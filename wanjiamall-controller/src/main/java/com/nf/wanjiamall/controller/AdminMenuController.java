@@ -55,4 +55,12 @@ public class AdminMenuController {
         return menuService.deleteMenu(id);
     }
 
+
+
+
+    @ApiOperation("树形结构返回所有菜单列表")
+    @GetMapping("/treeList")
+    public Object TreeList(){
+            return menuService.treeList();
+    }
 }

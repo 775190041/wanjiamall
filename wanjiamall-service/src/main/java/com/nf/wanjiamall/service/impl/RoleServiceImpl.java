@@ -31,14 +31,26 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Object updateRole(RoleEntity roleEntity) {
-        Integer count = roleDao.updateRole(roleEntity);
+    public Object updateRole(Integer id,RoleEntity roleEntity) {
+        Integer count = roleDao.updateRole(id,roleEntity);
         if (count>0){
             return ResponseUtil.ok("修改成功");
         }else {
             return ResponseUtil.fail(505,"修改失败");
         }
 
+
+    }
+
+    @Override
+    public Object deleteRole(Integer id) {
+        Integer count = roleDao.deleteRole(id);
+
+        if (count > 0){
+            return ResponseUtil.ok("删除成功");
+        }else {
+            return ResponseUtil.fail(505,"删除失败");
+        }
 
     }
 }

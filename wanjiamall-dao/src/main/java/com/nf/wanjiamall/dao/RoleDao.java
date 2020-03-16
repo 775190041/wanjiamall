@@ -13,6 +13,8 @@ public interface RoleDao {
     int insertRole(@Param("roleEntity") RoleEntity roleEntity);
 
 
-    int updateRole(@Param("roleEntity") RoleEntity roleEntity);
+    int updateRole(@Param("id") Integer id,@Param("roleEntity") RoleEntity roleEntity);
+
+    int deleteRole(@Param("id") Integer id);
 
 }

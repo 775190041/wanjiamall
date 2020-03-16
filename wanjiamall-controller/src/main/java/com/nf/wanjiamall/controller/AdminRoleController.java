@@ -32,8 +32,18 @@ public class AdminRoleController {
     }
 
     @ApiOperation("编辑角色 ,把id放入实体类里面")
-    @PutMapping("/role")
-    public Object updateRole(@RequestBody RoleEntity roleEntity){
-        return roleService.updateRole(roleEntity);
+    @PutMapping("/role/{id}")
+    public Object updateRole(@PathVariable Integer id,@RequestBody RoleEntity roleEntity){
+        return roleService.updateRole(id,roleEntity);
     }
+
+    @ApiOperation("删除角色")
+    @DeleteMapping("/role/{id}")
+    public Object deleteRole(@PathVariable Integer id){
+        return roleService.deleteRole(id);
+    }
+
+
+
+
 }

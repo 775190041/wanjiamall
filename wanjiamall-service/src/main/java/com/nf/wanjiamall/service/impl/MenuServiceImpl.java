@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class MenuServiceImpl implements MenuService  {
-    @Autowired
+    @Autowired(required = false)
     private MenuDao menuDao;
 
     @Override
@@ -63,5 +63,12 @@ public class MenuServiceImpl implements MenuService  {
     @Override
     public Object getByLevelMenu(Integer level) {
         return ResponseUtil.ok(menuDao.getByLevelMenu(level));
+    }
+
+    @Override
+    public Object treeList() {
+
+
+        return null;
     }
 }

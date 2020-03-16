@@ -15,4 +15,6 @@ public interface MenuService {
     Object getByIdMenu(Integer id);
 
     Object getByLevelMenu(Integer level);
+
+    Object treeList();
 }
