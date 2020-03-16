@@ -62,7 +62,7 @@ public class AdminRoleController {
 
 
     @ApiOperation("给角色分配访问菜单,添加和修改都用这个路径 传id和一个菜单的数组")
-    @GetMapping("/role/resource/{roleId}")
+    @PostMapping("/role/menu/{roleId}")
     public Object RoleAllocationResource(@PathVariable Integer roleId, @RequestBody List<Integer> menuId){
             return roleService.RoleAllocationResource(roleId,menuId);
     }
