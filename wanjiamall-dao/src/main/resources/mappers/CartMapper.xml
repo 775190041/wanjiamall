@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.CartDao">
+
+    <!-- 根据用户Id查询购物车信息 -->
+    <select id="getUserIdQueryCart" resultType="com.nf.wanjiamall.entity.CartEntity">
+        select c.id,c.goods_name,c.price, c.number
+        from
+            wanjia_cart c left join wanjia_user u
+            on c.user_id = u.id
+        where c.user_id = #{userId}
+    </select>
+
+    <!--根据用户Id和购物车Id批量删除-->
+    <delete id="deleteBatchUserIdRoCartId">
+       DELETE c from
+            wanjia_cart as c
+        INNER JOIN
+            (SELECT id from wanjia_user where id =#{userId} ) as u
+            on c.user_id = u.id
+        where c.id in
+        <foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!--批量修改商品的勾选状态 -->
+    <update id="updateBatchCartChecked">
+        update wanjia_cart set
+            <if test="checked != null ">
+                checked = #{checked}
+            </if>
+        where id in
+        <foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--查询购物车勾选中的的物品数量并进行价格计算-->
+    <select id="getCartPriceSum" resultType="com.nf.wanjiamall.entity.CartEntity">
+        select price,number from wanjia_cart where checked = 0
+    </select>
+
+    <!--修改购物车物品的数量-->
+    <update id="updateNumber">
+        update wanjia_cart set
+            <if test="number != null">
+                number = #{number}
+            </if>
+            where id = #{id}
+    </update>
+
+     <!--加入购物车(购物车实体类添加)-->
+    <insert id="insertCart">
+        insert  into wanjia_cart
+            (id, user_id, goods_sn, goods_name, product_id, price,number, specification, checked, pic_url, add_time, update_time, delted)
+            values
+                (#{cartEntity.id},#{cartEntity.userId},#{cartEntity.goods_sn},#{cartEntity.goods_name}
+                ,#{cartEntity.product_id},#{cartEntity.price},#{cartEntity.number},#{cartEntity.specifications}
+                ,#{cartEntity.checked},#{cartEntity.picUrl},#{cartEntity.addTime},#{cartEntity.updateTime}
+                ,#{cartEntity.delted});
+    </insert>
+</mapper>

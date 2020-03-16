@@ -7,5 +7,6 @@
     <file url="file://$PROJECT_DIR$/wanjiamall-entity" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wanjiamall-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wanjiamall-utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wanjiamall-utils/src/main/java/com/nf/wanjiamall/utils/KdniaoTrackQueryAPI.java" charset="UTF-8" />
   </component>
 </project>
