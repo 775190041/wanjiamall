@@ -1,6 +1,7 @@
 package com.nf.wanjiamall.dao;
 
 import com.nf.wanjiamall.entity.AdminEntity;
+import com.nf.wanjiamall.entity.AdminRoleRelationEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -24,5 +25,8 @@ public interface AdminDao {
 
     int updateAdminStatus(@Param("id") Integer id
             ,@Param("adminEntity") AdminEntity adminEntity);
+
+    List<AdminRoleRelationEntity> getAdminRoleRelationByAdminId(Integer adminId);
+
 
 }
