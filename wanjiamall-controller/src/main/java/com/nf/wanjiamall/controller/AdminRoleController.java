@@ -57,4 +57,13 @@ public class AdminRoleController {
     public Object listByIdRoleMenu(@PathVariable Integer id){
         return roleService.listByIdRoleMenu(id);
     }
+
+
+    @ApiOperation("给角色分配访问资源 传id和一个菜单的数组")
+    @GetMapping("/role/resource/{id}")
+    public Object RoleAllocationResource(@PathVariable Integer id,@RequestBody Integer[] p){
+            return null;
+    }
+
+
 }

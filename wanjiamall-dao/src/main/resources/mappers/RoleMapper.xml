@@ -45,10 +45,13 @@
     </update>
 
     <select id="listByIdRoleMenu" resultType="com.nf.wanjiamall.entity.MenuEntity">
-        select wm.id as id
+        select wm.id as id,
+        wm.parent_id as parentId
         from wanjia_role_menu_relation wrmr left join
         wanjia_menu wm on wrmr.menu_id = wm.id
-        where wrmr.role_id = #{id}
+        where wrmr.role_id = #{id} and wm.id is not null
+        group by wm.id
+
     </select>
 
 
