@@ -19,7 +19,7 @@ public class RoleEntity {
     /**
      * 启用状态：0->禁用；1->启用
      */
-    private Integer enabled;
+    private Boolean enabled;
     /**
      * 创建时间
      */

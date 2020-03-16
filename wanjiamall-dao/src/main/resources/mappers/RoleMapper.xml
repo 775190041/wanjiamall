@@ -8,15 +8,15 @@
         select id, name, description, enabled, add_time, update_time, delted from wanjia_role
         <where>
             delted = 0
-            <if test="name != null">
+            <if test="name != null and name != '' ">
                 and name = #{name}
             </if>
         </where>
     </select>
 
     <insert id="insertRole">
-        insert into wanjia_role (name, description)
-        values (#{roleEntity.name},#{roleEntity.description})
+        insert into wanjia_role (name, description,enabled)
+        values (#{roleEntity.name},#{roleEntity.description},#{roleEntity.enabled})
     </insert>
 
     <update id="updateRole">
