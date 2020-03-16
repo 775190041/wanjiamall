@@ -8,8 +8,8 @@
         select id, username, password, nick_name, avatar, login_time
         , deleted_state, add_time, update_time, delted from wanjia_admin
         <where>
-            <if test="name ! = null or name ! = '' ">
-                username = #{name} or nick_name = #{name}
+            <if test="name != null and name != '' ">
+                username = #{name}
             </if>
         </where>
     </select>

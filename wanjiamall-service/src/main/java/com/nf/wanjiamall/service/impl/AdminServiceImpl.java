@@ -20,6 +20,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Object listAdmin(Integer pageNum, Integer pageSize, String name) {
+
         return ResponseUtil.okList(adminDao.listAdmin(pageNum,pageSize,name));
     }
 
