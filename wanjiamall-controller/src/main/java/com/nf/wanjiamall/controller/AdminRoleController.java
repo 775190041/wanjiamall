@@ -52,5 +52,9 @@ public class AdminRoleController {
     }
 
 
-
+    @ApiOperation("根据角色id， 查询该角色拥有的菜单列表")
+    @GetMapping("/role/menu/{id}")
+    public Object listByIdRoleMenu(@PathVariable Integer id){
+        return roleService.listByIdRoleMenu(id);
+    }
 }

@@ -1,12 +1,15 @@
 package com.nf.wanjiamall.service.impl;
 
 import com.nf.wanjiamall.dao.RoleDao;
+import com.nf.wanjiamall.entity.MenuEntity;
 import com.nf.wanjiamall.entity.RoleEntity;
 import com.nf.wanjiamall.service.RoleService;
 import com.nf.wanjiamall.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -63,5 +66,11 @@ public class RoleServiceImpl implements RoleService {
         }else {
             return ResponseUtil.fail(505,"修改失败");
         }
+    }
+
+
+    @Override
+    public Object listByIdRoleMenu(Integer id) {
+        return ResponseUtil.ok(roleDao.listByIdRoleMenu(id));
     }
 }

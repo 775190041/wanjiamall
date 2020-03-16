@@ -1,5 +1,6 @@
 package com.nf.wanjiamall.dao;
 
+import com.nf.wanjiamall.entity.MenuEntity;
 import com.nf.wanjiamall.entity.RoleEntity;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,5 +20,8 @@ public interface RoleDao {
 
 
     int updateRoleStatus(@Param("id") Integer id,@Param("enabled") Boolean enabled);
+
+
+    List<MenuEntity> listByIdRoleMenu(@Param("id") Integer id);
 
 }

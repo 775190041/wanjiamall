@@ -44,5 +44,12 @@
         update  wanjia_role set enabled = #{enabled} where id = #{id}
     </update>
 
+    <select id="listByIdRoleMenu" resultType="com.nf.wanjiamall.entity.MenuEntity">
+        select wm.id as id
+        from wanjia_role_menu_relation wrmr left join
+        wanjia_menu wm on wrmr.menu_id = wm.id
+        where wrmr.role_id = #{id}
+    </select>
+
 
 </mapper>

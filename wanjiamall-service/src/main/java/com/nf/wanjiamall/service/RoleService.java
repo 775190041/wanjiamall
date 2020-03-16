@@ -12,4 +12,6 @@ public interface RoleService {
     Object deleteRole(Integer id);
 
     Object updateRoleStatus(Integer id,Boolean enabled);
+
+    Object listByIdRoleMenu(Integer id);
 }
