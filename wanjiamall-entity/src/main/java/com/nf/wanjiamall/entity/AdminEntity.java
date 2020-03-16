@@ -12,7 +12,7 @@ public class AdminEntity {
     /**
      * 该管理员拥有几个角色
      */
-    private List<Integer> roleId;
+    private List<Integer> roleIds;
 
     private Integer id;
     /**

@@ -27,7 +27,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Object insertAdmin(AdminEntity adminEntity) {
         Integer count = adminDao.insertAdmin(adminEntity);
-        List<Integer> roleIds = adminEntity.getRoleId();
+        List<Integer> roleIds = adminEntity.getRoleIds();
         Integer adminId = adminEntity.getId();
         for (Integer roleId : roleIds) {
             adminDao.insertAdminRoleRelation(roleId,adminId);
