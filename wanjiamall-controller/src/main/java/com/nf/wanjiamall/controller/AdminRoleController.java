@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Api(tags = "wanjia_role")
 @RequestMapping("/api")
@@ -59,11 +61,10 @@ public class AdminRoleController {
     }
 
 
-    @ApiOperation("给角色分配访问资源 传id和一个菜单的数组")
-    @GetMapping("/role/resource/{id}")
-    public Object RoleAllocationResource(@PathVariable Integer id,@RequestBody Integer[] p){
-            return null;
+    @ApiOperation("给角色分配访问菜单,添加和修改都用这个路径 传id和一个菜单的数组")
+    @GetMapping("/role/resource/{roleId}")
+    public Object RoleAllocationResource(@PathVariable Integer roleId, @RequestBody List<Integer> menuId){
+            return roleService.RoleAllocationResource(roleId,menuId);
     }
-
 
 }

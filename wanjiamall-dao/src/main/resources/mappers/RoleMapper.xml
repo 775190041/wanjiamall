@@ -54,5 +54,13 @@
 
     </select>
 
+    <delete id="deleteRoleMenuByRoleId">
+        delete from wanjia_role_menu_relation where role_id = #{roleId}
+    </delete>
+
+    <insert id="insertRoleMenuRelation" >
+        insert into wanjia_role_menu_relation (role_id, menu_id) values (#{roleId},#{menuId});
+    </insert>
+
 
 </mapper>

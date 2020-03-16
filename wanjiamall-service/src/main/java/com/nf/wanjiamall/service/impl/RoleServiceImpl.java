@@ -8,6 +8,7 @@ import com.nf.wanjiamall.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -72,5 +73,22 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Object listByIdRoleMenu(Integer id) {
         return ResponseUtil.ok(roleDao.listByIdRoleMenu(id));
+    }
+
+    @Transactional
+    @Override
+    public Object RoleAllocationResource(Integer roleId, List<Integer> menuId) {
+        //先删除 RoleId  所有的菜单  然后才添加
+        roleDao.deleteRoleMenuByRoleId(roleId);
+        if (menuId.size() == 0){
+            return ResponseUtil.ok("成功");
+        }else {
+            for (Integer integer : menuId) {
+                roleDao.insertRoleMenuRelation(roleId,integer);
+            }
+            return ResponseUtil.ok("成功");
+        }
+
+
     }
 }

@@ -24,4 +24,8 @@ public interface RoleDao {
 
     List<MenuEntity> listByIdRoleMenu(@Param("id") Integer id);
 
+    int deleteRoleMenuByRoleId(Integer roleId);
+
+    int insertRoleMenuRelation(@Param("roleId") Integer roleId,@Param("menuId") Integer menuId);
+
 }
