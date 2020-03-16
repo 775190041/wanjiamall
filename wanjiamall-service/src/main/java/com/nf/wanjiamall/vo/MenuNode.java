@@ -6,6 +6,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class MenuNode extends MenuEntity {
+public class MenuNode  {
+    private Integer id;
+    private String label;
+    private Integer pid;
     private List<MenuNode> children;
 }

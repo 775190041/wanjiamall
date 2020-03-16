@@ -4,9 +4,13 @@ import com.nf.wanjiamall.dao.MenuDao;
 import com.nf.wanjiamall.entity.MenuEntity;
 import com.nf.wanjiamall.service.MenuService;
 import com.nf.wanjiamall.utils.ResponseUtil;
+import com.nf.wanjiamall.vo.MenuNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 黑夜
@@ -67,8 +71,26 @@ public class MenuServiceImpl implements MenuService  {
 
     @Override
     public Object treeList() {
+        List<MenuEntity> menuEntities = menuDao.getByLevelMenu(1);
+        List<MenuNode> menuNodes = new ArrayList<>(menuEntities.size());
+        for (MenuEntity menuEntity : menuEntities) {
+            MenuNode menuNode = new MenuNode();
+            menuNode.setId(menuEntity.getId());
+            menuNode.setPid(menuEntity.getParentId());
+            menuNode.setLabel(menuEntity.getTitle());
 
-
-        return null;
+            List<MenuEntity> menuEntities1 = menuDao.getByIdMenu(menuEntity.getId());
+            List<MenuNode> children = new ArrayList<>(menuEntities1.size());
+            for (MenuEntity entity : menuEntities1) {
+                MenuNode menuNode1 = new MenuNode();
+                menuNode1.setId(entity.getId());
+                menuNode1.setPid(entity.getParentId());
+                menuNode1.setLabel(entity.getTitle());
+                children.add(menuNode1);
+            }
+            menuNode.setChildren(children);
+            menuNodes.add(menuNode);
+        }
+        return ResponseUtil.ok(menuNodes);
     }
 }

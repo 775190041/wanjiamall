@@ -53,4 +53,15 @@ public class RoleServiceImpl implements RoleService {
         }
 
     }
+
+    @Override
+    public Object updateRoleStatus(Integer id,Integer status) {
+        Integer count = roleDao.updateRoleStatus(id,status);
+
+        if(count>0){
+            return ResponseUtil.ok("修改成功");
+        }else {
+            return ResponseUtil.fail(505,"修改失败");
+        }
+    }
 }

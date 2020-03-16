@@ -37,12 +37,19 @@ public class AdminRoleController {
         return roleService.updateRole(id,roleEntity);
     }
 
+    @ApiOperation("修改角色状态")
+    @PutMapping("/roleStatus/{id}")
+    public Object updateRoleStatus(@PathVariable Integer id, @RequestParam(value = "status") Integer status){
+        return roleService.updateRoleStatus(id,status);
+    }
+
+
+
     @ApiOperation("删除角色")
     @DeleteMapping("/role/{id}")
     public Object deleteRole(@PathVariable Integer id){
         return roleService.deleteRole(id);
     }
-
 
 
 

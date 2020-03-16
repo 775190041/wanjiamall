@@ -10,4 +10,6 @@ public interface RoleService {
     Object updateRole(Integer id,RoleEntity roleEntity);
 
     Object deleteRole(Integer id);
+
+    Object updateRoleStatus(Integer id,Integer status);
 }

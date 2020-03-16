@@ -40,6 +40,9 @@
         update wanjia_role set delted = 1  where id = #{id}
     </update>
 
+    <update id="updateRoleStatus">
+        update  wanjia_role set enabled = #{enabled} where id = #{id}
+    </update>
 
 
 </mapper>

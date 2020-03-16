@@ -17,4 +17,7 @@ public interface RoleDao {
 
     int deleteRole(@Param("id") Integer id);
 
+
+    int updateRoleStatus(@Param("id") Integer id,@Param("enabled") Integer status);
+
 }

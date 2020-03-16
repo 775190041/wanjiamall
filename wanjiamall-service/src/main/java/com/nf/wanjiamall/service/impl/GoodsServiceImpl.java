@@ -217,6 +217,12 @@ public class GoodsServiceImpl implements GoodsService {
             l1CatVo.setChildren(children);
             categoryList.add(l1CatVo);
         }
+
+
+
+
+
+
         //品牌查询放入CatVo类
         List<BrandEntity> list = brandDao.getAll();
         List<Map<String,Object>> brandList = new ArrayList<>(list.size());
