@@ -38,9 +38,13 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     @Override
     public Object updateAdmin(Integer id,AdminEntity adminEntity) {
-        //修改
+        //修改之前要先把
 
+
+        //修改
         Integer count = adminDao.updateAdmin(id,adminEntity);
+
+
 
 
        return ResponseUtil.ok("修改成功");

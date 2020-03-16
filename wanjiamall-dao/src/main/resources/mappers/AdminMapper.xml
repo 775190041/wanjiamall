@@ -24,4 +24,8 @@
          #{adminEntity.nickName},#{adminEntity.avatar},#{adminEntity.deletedState})
     </insert>
 
+    <update id="updateAdmin">
+
+    </update>
+
 </mapper>

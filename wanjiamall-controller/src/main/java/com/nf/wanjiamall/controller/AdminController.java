@@ -34,7 +34,7 @@ public class AdminController {
     @ApiOperation("修改用户")
     @PutMapping("/admin/{id}")
     public Object updateAdmin(@PathVariable Integer id,@RequestBody AdminEntity adminEntity){
-        return adminService.updateAdmin( id,adminEntity);
+        return adminService.updateAdmin(id,adminEntity);
     }
 
 }
