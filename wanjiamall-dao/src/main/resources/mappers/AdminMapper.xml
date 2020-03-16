@@ -56,4 +56,11 @@
          where id = #{id}
     </update>
 
+    <select id="getAdminRoleRelationByAdminId" resultType="com.nf.wanjiamall.entity.AdminRoleRelationEntity">
+        select id, admin_id, role_id from
+        wanjia_admin_role_relation where admin_id = #{adminId}
+    </select>
+
+
+
 </mapper>

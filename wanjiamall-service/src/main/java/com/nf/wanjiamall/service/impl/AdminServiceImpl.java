@@ -2,6 +2,7 @@ package com.nf.wanjiamall.service.impl;
 
 import com.nf.wanjiamall.dao.AdminDao;
 import com.nf.wanjiamall.entity.AdminEntity;
+import com.nf.wanjiamall.entity.AdminRoleRelationEntity;
 import com.nf.wanjiamall.service.AdminService;
 import com.nf.wanjiamall.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,28 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Object listAdmin(Integer pageNum, Integer pageSize, String name) {
-        return ResponseUtil.okList(adminDao.listAdmin(pageNum,pageSize,name));
+        List<AdminEntity> adminEntities = adminDao.listAdmin(pageNum,pageSize,name);
+        List<AdminEntity> adminEntities1 = null;
+        for (AdminEntity adminEntity : adminEntities) {
+            AdminEntity adminEntity1 = null;
+            List<AdminRoleRelationEntity> adminRoleRelationEntities = adminDao.getAdminRoleRelationByAdminId(adminEntity.getId());
+            List<Integer> roleIds = null;
+            for (AdminRoleRelationEntity adminRoleRelationEntity : adminRoleRelationEntities) {
+                roleIds.add(adminRoleRelationEntity.getRoleId());
+            }
+            adminEntity1.setRoleIds(roleIds);
+            adminEntity1.setId(adminEntity.getId());
+            adminEntity1.setUsername(adminEntity.getUsername());
+            adminEntity1.setPassword(adminEntity.getPassword());
+            adminEntity1.setNickName(adminEntity.getNickName());
+            adminEntity1.setAvatar(adminEntity.getAvatar());
+            adminEntity1.setLoginTime(adminEntity.getLoginTime());
+            adminEntity1.setDeletedState(adminEntity.getDeletedState());
+
+            adminEntities1.add(adminEntity1);
+        }
+
+        return ResponseUtil.okList(adminEntities1);
     }
 
     @Transactional
