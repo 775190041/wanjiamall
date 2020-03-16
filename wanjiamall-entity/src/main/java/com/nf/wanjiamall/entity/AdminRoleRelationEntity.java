@@ -9,5 +9,6 @@ public class AdminRoleRelationEntity {
 
     private Integer adminId;
 
-    private Integer roleId;
+    private Integer
+            roleId;
 }

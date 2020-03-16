@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,11 +23,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Object listAdmin(Integer pageNum, Integer pageSize, String name) {
         List<AdminEntity> adminEntities = adminDao.listAdmin(pageNum,pageSize,name);
-        List<AdminEntity> adminEntities1 = null;
+        List<AdminEntity> adminEntities1 = new ArrayList<>();
         for (AdminEntity adminEntity : adminEntities) {
-            AdminEntity adminEntity1 = null;
+            AdminEntity adminEntity1 = new AdminEntity();
             List<AdminRoleRelationEntity> adminRoleRelationEntities = adminDao.getAdminRoleRelationByAdminId(adminEntity.getId());
-            List<Integer> roleIds = null;
+            List<Integer> roleIds = new ArrayList<>();
             for (AdminRoleRelationEntity adminRoleRelationEntity : adminRoleRelationEntities) {
                 roleIds.add(adminRoleRelationEntity.getRoleId());
             }
