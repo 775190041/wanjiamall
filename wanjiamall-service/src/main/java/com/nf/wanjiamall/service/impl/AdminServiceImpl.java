@@ -20,7 +20,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Object listAdmin(Integer pageNum, Integer pageSize, String name) {
-
         return ResponseUtil.okList(adminDao.listAdmin(pageNum,pageSize,name));
     }
 
@@ -50,5 +49,10 @@ public class AdminServiceImpl implements AdminService {
             adminDao.insertAdminRoleRelation(roleId,id);
         }
        return ResponseUtil.ok("修改成功");
+    }
+
+    @Override
+    public Object updateAdminStatus(Integer id, AdminEntity adminEntity) {
+        return adminDao.updateAdminStatus(id,adminEntity);
     }
 }

@@ -10,4 +10,6 @@ public interface AdminService {
     Object insertAdmin(AdminEntity adminEntity);
 
     Object updateAdmin(Integer id,AdminEntity adminEntity);
+
+    Object updateAdminStatus(Integer id,AdminEntity adminEntity);
 }

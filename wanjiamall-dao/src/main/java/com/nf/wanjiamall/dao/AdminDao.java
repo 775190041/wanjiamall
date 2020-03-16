@@ -22,4 +22,7 @@ public interface AdminDao {
 
     int deleteAdminRoleRelationByAdminId(Integer adminId);
 
+    int updateAdminStatus(@Param("id") Integer id
+            ,@Param("adminEntity") AdminEntity adminEntity);
+
 }

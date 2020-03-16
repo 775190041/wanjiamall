@@ -2,6 +2,7 @@ package com.nf.wanjiamall.controller;
 
 
 import com.nf.wanjiamall.entity.AdminEntity;
+import com.nf.wanjiamall.entity.RoleEntity;
 import com.nf.wanjiamall.service.AdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +26,7 @@ public class AdminController {
     }
 
 
+
     @ApiOperation("添加管理员")
     @PostMapping("/admin")
     public Object insertAdmin(@RequestBody AdminEntity adminEntity){
@@ -37,9 +39,11 @@ public class AdminController {
         return adminService.updateAdmin(id,adminEntity);
     }
 
-
-
-
+    @ApiOperation("修改管理员状态状态")
+    @PutMapping("/adminStatus/{id}")
+    public Object updateAdminStatus(@PathVariable Integer id, @RequestBody AdminEntity adminEntity){
+        return adminService.updateAdminStatus(id,adminEntity);
+    }
 
 
 }

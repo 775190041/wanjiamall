@@ -50,4 +50,10 @@
         delete from wanjia_admin_role_relation where admin_id = #{adminId}
     </delete>
 
+    <update id="updateAdminStatus">
+        update wanjia_admin set
+         deleted_state = #{adminEntity.deletedState}
+         where id = #{id}
+    </update>
+
 </mapper>
