@@ -91,4 +91,9 @@ public class RoleServiceImpl implements RoleService {
 
 
     }
+
+    @Override
+    public Object getRole() {
+        return ResponseUtil.ok(roleDao.getRole());
+    }
 }
