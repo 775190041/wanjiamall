@@ -34,10 +34,10 @@
                 password = #{adminEntity.password},
             </if>
             <if test="adminEntity.nickName != null">
-                nick_name = #{adminEntity.nickName}
+                nick_name = #{adminEntity.nickName},
             </if>
             <if test="adminEntity.avatar != null">
-                avatar = #{adminEntity.avatar}
+                avatar = #{adminEntity.avatar},
             </if>
             <if test="adminEntity.deletedState != null">
                 deleted_state = #{adminEntity.deletedState}
