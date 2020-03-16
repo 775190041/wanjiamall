@@ -18,6 +18,8 @@ public interface AdminDao {
     int insertAdmin(@Param("adminEntity") AdminEntity adminEntity);
 
 
-    int updateAdmin(@Param("id") Integer id, AdminEntity adminEntity);
+    int updateAdmin(@Param("id") Integer id,@Param("adminEntity") AdminEntity adminEntity);
+
+    int deleteAdminRoleRelationByAdminId(Integer adminId);
 
 }

@@ -38,15 +38,16 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     @Override
     public Object updateAdmin(Integer id,AdminEntity adminEntity) {
-        //修改之前要先把
-
-
+        //修改之前要先把该管理的角色删除点
+        adminDao.deleteAdminRoleRelationByAdminId(id);
         //修改
         Integer count = adminDao.updateAdmin(id,adminEntity);
 
-
-
-
+        //添加管理员角色
+        List<Integer> roleIds = adminEntity.getRoleIds();
+        for (Integer roleId : roleIds) {
+            adminDao.insertAdminRoleRelation(roleId,id);
+        }
        return ResponseUtil.ok("修改成功");
     }
 }

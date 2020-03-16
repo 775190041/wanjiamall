@@ -25,7 +25,29 @@
     </insert>
 
     <update id="updateAdmin">
-
+         update wanjia_admin
+         <set>
+             <if test="adminEntity.username != null ">
+                 username = #{adminEntity.username},
+             </if>
+            <if test="adminEntity.password != null">
+                password = #{adminEntity.password},
+            </if>
+            <if test="adminEntity.nickName != null">
+                nick_name = #{adminEntity.nickName}
+            </if>
+            <if test="adminEntity.avatar != null">
+                avatar = #{adminEntity.avatar}
+            </if>
+            <if test="adminEntity.deletedState != null">
+                deleted_state = #{adminEntity.deletedState}
+            </if>
+         </set>
+         where id = #{id}
     </update>
+
+    <delete id="deleteAdminRoleRelationByAdminId">
+        delete from wanjia_admin_role_relation where admin_id = #{adminId}
+    </delete>
 
 </mapper>
