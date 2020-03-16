@@ -28,5 +28,6 @@ public interface AdminDao {
 
     List<AdminRoleRelationEntity> getAdminRoleRelationByAdminId(Integer adminId);
 
+    int deleteAdmin(@Param("id") Integer id);
 
 }

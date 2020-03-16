@@ -39,7 +39,6 @@ public class AdminServiceImpl implements AdminService {
             adminEntity1.setAvatar(adminEntity.getAvatar());
             adminEntity1.setLoginTime(adminEntity.getLoginTime());
             adminEntity1.setDeletedState(adminEntity.getDeletedState());
-
             adminEntities1.add(adminEntity1);
         }
 
@@ -77,5 +76,19 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Object updateAdminStatus(Integer id, AdminEntity adminEntity) {
         return adminDao.updateAdminStatus(id,adminEntity);
+    }
+
+    @Transactional
+    @Override
+    public Object deleteAdmin(Integer id) {
+        adminDao.deleteAdminRoleRelationByAdminId(id);
+       Integer count = adminDao.deleteAdmin(id);
+       if (count>0){
+
+           return ResponseUtil.ok("删除成功");
+       }else {
+           return ResponseUtil.fail(505,"删除失败");
+       }
+
     }
 }

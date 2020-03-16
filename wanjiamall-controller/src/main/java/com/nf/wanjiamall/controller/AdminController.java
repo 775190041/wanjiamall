@@ -46,4 +46,11 @@ public class AdminController {
     }
 
 
+    @ApiOperation("删除管理员")
+    @DeleteMapping("/admin/{id}")
+    public Object deleteAdmin(@PathVariable Integer id){
+        return adminService.deleteAdmin(id);
+    }
+
+
 }

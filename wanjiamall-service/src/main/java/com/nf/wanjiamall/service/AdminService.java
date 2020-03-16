@@ -12,4 +12,6 @@ public interface AdminService {
     Object updateAdmin(Integer id,AdminEntity adminEntity);
 
     Object updateAdminStatus(Integer id,AdminEntity adminEntity);
+
+    Object deleteAdmin(Integer id);
 }
