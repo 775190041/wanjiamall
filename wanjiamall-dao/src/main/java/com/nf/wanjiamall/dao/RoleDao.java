@@ -28,4 +28,6 @@ public interface RoleDao {
 
     int insertRoleMenuRelation(@Param("roleId") Integer roleId,@Param("menuId") Integer menuId);
 
-}
+
+    List<RoleEntity> getRole();
+ }

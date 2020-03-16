@@ -67,5 +67,8 @@ public class AdminRoleController {
             return roleService.RoleAllocationResource(roleId,menuId);
     }
 
-
+    @GetMapping("/role")
+    public Object getRole(){
+        return roleService.getRole();
+    }
 }

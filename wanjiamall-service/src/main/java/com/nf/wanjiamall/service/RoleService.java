@@ -18,4 +18,7 @@ public interface RoleService {
     Object listByIdRoleMenu(Integer id);
 
     Object RoleAllocationResource(Integer roleId, List<Integer> menuId);
+
+
+   Object getRole();
 }
