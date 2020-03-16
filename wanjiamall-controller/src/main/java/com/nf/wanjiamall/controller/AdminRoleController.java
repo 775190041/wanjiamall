@@ -67,4 +67,5 @@ public class AdminRoleController {
             return roleService.RoleAllocationResource(roleId,menuId);
     }
 
+
 }

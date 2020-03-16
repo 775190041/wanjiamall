@@ -3,9 +3,16 @@ package com.nf.wanjiamall.entity;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class AdminEntity {
+
+
+    /**
+     * 该管理员拥有几个角色
+     */
+    private List<Integer> roleId;
 
     private Integer id;
     /**
@@ -16,6 +23,7 @@ public class AdminEntity {
      * 管理员密码
      */
     private String password;
+
     /**
      * 昵称
      */
@@ -24,6 +32,9 @@ public class AdminEntity {
      * 头像图片
      */
     private String avatar;
+
+
+
     /**
      * 最近登录时间
      */

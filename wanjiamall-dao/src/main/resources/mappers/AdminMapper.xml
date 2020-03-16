@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.AdminDao">
+
+    <select id="listAdmin" resultType="com.nf.wanjiamall.entity.AdminEntity">
+        select id, username, password, nick_name, avatar, login_time
+        , deleted_state, add_time, update_time, delted from wanjia_admin
+        <where>
+            <if test="name ! = null or name ! = '' ">
+                username = #{name} or nick_name = #{name}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertAdminRoleRelation">
+        insert into wanjia_admin_role_relation (admin_id, role_id) values (#{adminId},#{roleId})
+    </insert>
+
+    <insert id="insertAdmin" useGeneratedKeys="true" keyProperty="id">
+        insert into wanjia_admin (username, password, nick_name, avatar,deleted_state)
+         values (#{adminEntity.username},#{adminEntity.password},
+         #{adminEntity.nickName},#{adminEntity.avatar},#{adminEntity.deletedState})
+    </insert>
+
+</mapper>
