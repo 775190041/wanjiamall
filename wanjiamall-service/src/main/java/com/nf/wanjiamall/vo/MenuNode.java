@@ -9,6 +9,6 @@ import java.util.List;
 public class MenuNode  {
     private Integer id;
     private String title;
-//    private Integer pid;
+    private Integer parentId;
     private List<MenuNode> children;
 }
