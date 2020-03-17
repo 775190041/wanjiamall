@@ -2,6 +2,7 @@ package com.nf.wanjiamall.service;
 
 import com.nf.wanjiamall.entity.AdminEntity;
 import com.nf.wanjiamall.vo.AdminLoginParamVo;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,4 +23,12 @@ public interface AdminService {
 
     //刷新token
     Object refreshToken(HttpServletRequest request);
+
+
+    /**
+     * 获取用户信息
+     * @param username
+     * @return
+     */
+    UserDetails loadUserByUsername(String username);
 }

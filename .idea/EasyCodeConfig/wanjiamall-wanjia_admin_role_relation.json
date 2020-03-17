@@ -1,0 +1,31 @@
+{
+  "name" : "WanjiaAdminRoleRelation",
+  "comment" : "管理员表与角色表的关系1",
+  "fullColumn" : [ {
+    "name" : "id",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "adminId",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "roleId",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  } ],
+  "pkColumn" : null,
+  "otherColumn" : null,
+  "savePackageName" : "com.nf.wanjiamall",
+  "savePath" : "./wanjiamall-entity/src/main/java/com/nf/wanjiamall",
+  "saveModelName" : "wanjiamall-entity"
+}
