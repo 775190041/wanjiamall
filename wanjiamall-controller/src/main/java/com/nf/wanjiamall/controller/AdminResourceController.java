@@ -53,4 +53,6 @@ public class AdminResourceController {
     public Object deleteResource(@PathVariable Integer id){
         return resourceService.deleteResource(id);
     }
+
+
 }

@@ -25,4 +25,8 @@ public interface ResourceDao {
 
     int deleteResource(@Param("id") Integer id);
 
+
+    //通过管理员id，获取访问资源路径
+    List<ResourceEntity> getResourceByAdminIdList(@Param("adminId") Integer adminId);
+
 }

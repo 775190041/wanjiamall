@@ -66,5 +66,19 @@
     </select>
 
 
+    <select id="getAdminByUsername" resultType="com.nf.wanjiamall.entity.AdminEntity">
+        select id, username, password, nick_name, avatar, login_time, deleted_state, add_time, update_time, delted
+         from wanjia_admin
+        <where>
+            <if test="username != null">
+                username = #{username}
+            </if>
+        </where>
+    </select>
+
+    <update id="insertLoginLog" >
+        update wanjia_admin set login_time = #{adminEntity.loginTime}
+        where username = #{adminEntity.username}
+    </update>
 
 </mapper>
