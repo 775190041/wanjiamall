@@ -66,9 +66,7 @@
     </insert>
 
     <select id="getRoleName" resultType="com.nf.wanjiamall.entity.RoleEntity">
-        select r.name as name from wanjia_admin_role_relation arr
-        left join wanjia_role r on arr.admin_id = r.id
-        where arr.admin_id = #{adminId}
+      select name from wanjia_role where EXISTS(select role_id from wanjia_admin_role_relation where admin_id = #{adminId})
     </select>
 
 
