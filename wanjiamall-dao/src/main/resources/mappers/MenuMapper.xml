@@ -54,4 +54,22 @@
         from wanjia_menu where delted = 0  and level = #{level}
     </select>
 
+<!--三级-->
+    <select id="getMenuByAdminId" resultType="com.nf.wanjiamall.entity.MenuEntity">
+         select wm.title as title,
+         wm.name as name,
+         wm.level as levle
+        from wanjia_admin_role_relation ar
+        left join wanjia_role r on ar.role_id = r.id
+        left join wanjia_role_menu_relation rmr on r.id = rmr.role_id
+        left join wanjia_menu wm on wm.id = rmr.menu_id
+        where
+        ar.admin_id = #{adminId}
+        and wm.id is not null
+        and wm.level = #{level}
+        group by wr.id
+    
+    </select>
+
+
 </mapper>

@@ -23,4 +23,11 @@ public interface MenuDao {
     List<MenuEntity> getByIdMenu(@Param("pid") Integer pid);
 
     List<MenuEntity> getByLevelMenu(@Param("level") Integer level);
+
+    //通过管理员id,获得该管理员的所有菜单
+    List<MenuEntity> getMenuByAdminId(@Param("adminId") Integer adminId ,@Param("level") Integer level);
+
+
+
+
 }

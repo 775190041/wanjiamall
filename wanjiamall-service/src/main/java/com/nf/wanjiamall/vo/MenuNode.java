@@ -10,5 +10,8 @@ public class MenuNode  {
     private Integer id;
     private String title;
     private Integer parentId;
+    private String name;
+
+    private Integer level;
     private List<MenuNode> children;
 }

@@ -1,15 +1,17 @@
 package com.nf.wanjiamall.service.impl;
 
 import com.nf.wanjiamall.dao.AdminDao;
+import com.nf.wanjiamall.dao.MenuDao;
 import com.nf.wanjiamall.dao.ResourceDao;
-import com.nf.wanjiamall.entity.AdminEntity;
-import com.nf.wanjiamall.entity.AdminRoleRelationEntity;
-import com.nf.wanjiamall.entity.ResourceEntity;
+import com.nf.wanjiamall.dao.RoleDao;
+import com.nf.wanjiamall.entity.*;
 import com.nf.wanjiamall.service.AdminService;
 import com.nf.wanjiamall.utils.JwtTokenUtil;
 import com.nf.wanjiamall.utils.ResponseUtil;
 import com.nf.wanjiamall.vo.AdminLoginParamVo;
+import com.nf.wanjiamall.vo.AdminRoleVo;
 import com.nf.wanjiamall.vo.AdminUserDetails;
+import com.nf.wanjiamall.vo.MenuNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,13 +38,17 @@ public class AdminServiceImpl implements AdminService {
     @Autowired(required = false)
     private ResourceDao resourceDao;
 
+    @Autowired(required = false)
+    private MenuDao menuDao;
+
+    @Autowired(required = false)
+    private RoleDao roleDao;
+
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
-    private List<ResourceEntity> resourceEntityList;
 
     public Integer adminId;
 
@@ -72,11 +78,70 @@ public class AdminServiceImpl implements AdminService {
         if (token == null){
             return ResponseUtil.fail(500,"用户名或密码错误");
         }
+        //返回所有菜单
+        List<MenuNode> menuNode = getMenuNode();
+        //返回角色名称和用户名
+        AdminRoleVo adminRoleVo = getAdminRoleVo();
+
         Map<String, Object> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
-        tokenMap.put("resourceEntityList",resourceEntityList);
+        //返回三级菜单的
+        tokenMap.put("menuNode",menuNode);
+        tokenMap.put("adminRoleVo",adminRoleVo);
+
+
         return ResponseUtil.ok(tokenMap);
+    }
+
+    ////返回角色名称和用户名
+    public AdminRoleVo getAdminRoleVo(){
+        //根据用户账号查询角色名称
+        AdminEntity adminEntity = adminDao.getNickByUsername(adminId);
+        List<RoleEntity> roleEntities = roleDao.getRoleName(adminId);
+        AdminRoleVo adminRoleVo = new AdminRoleVo(roleEntities,adminEntity);
+        return adminRoleVo;
+    }
+
+    public List<MenuEntity> getMenuEntities(Integer level){
+        return menuDao.getMenuByAdminId(adminId,level);
+    }
+
+    //通过adminId 差出三级菜单
+    public List<MenuNode> getMenuNode(){
+       List<MenuEntity> menuEntities = getMenuEntities(1);
+       List<MenuNode> menuNodes = new ArrayList<>(menuEntities.size());
+        for (MenuEntity menuEntity : menuEntities) {
+            MenuNode menuNode = new MenuNode();
+            menuNode.setId(menuEntity.getId());
+            menuNode.setLevel(menuEntity.getLevel());
+            menuNode.setTitle(menuEntity.getTitle());
+            menuNode.setName(menuEntity.getName());
+            List<MenuEntity> menuEntities1 = menuDao.getByIdMenu(menuEntity.getId());
+            List<MenuNode> children = new ArrayList<>(menuEntities1.size());
+            for (MenuEntity entity : menuEntities1) {
+                MenuNode menuNode1 = new MenuNode();
+                menuNode1.setId(entity.getId());
+                menuNode1.setLevel(entity.getLevel());
+                menuNode1.setTitle(entity.getTitle());
+                menuNode1.setName(entity.getName());
+                children.add(menuNode1);
+                List<MenuEntity> menuEntities2 = menuDao.getByIdMenu(entity.getId());
+                List<MenuNode> children2 = new ArrayList<>(menuEntities2.size());
+                for (MenuEntity menuEntity1 : menuEntities2) {
+                    MenuNode menuNode2 = new MenuNode();
+                    menuNode2.setId(menuEntity1.getId());
+                    menuNode2.setLevel(menuEntity1.getLevel());
+                    menuNode2.setTitle(menuEntity1.getTitle());
+                    menuNode2.setName(menuEntity1.getName());
+                    children2.add(menuNode2);
+                }
+            }
+            menuNode.setChildren(children);
+            menuNodes.add(menuNode);
+        }
+        return menuNodes;
+
     }
 
     //刷新token
@@ -94,7 +159,6 @@ public class AdminServiceImpl implements AdminService {
     }
 
 
-
     @Override
     public UserDetails loadUserByUsername(String username){
         //根据账号获取用户信息
@@ -103,7 +167,6 @@ public class AdminServiceImpl implements AdminService {
             //查询该用户所拥有的访问路径
              adminId = adminEntity.getId();
             List<ResourceEntity> resourceEntities = resourceDao.getResourceByAdminIdList(adminId);
-            resourceEntityList = resourceEntities;
             return new AdminUserDetails(adminEntity,resourceEntities);
         }
         throw new UsernameNotFoundException("用户名或密码错误");

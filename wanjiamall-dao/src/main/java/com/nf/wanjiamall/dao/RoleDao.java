@@ -30,4 +30,6 @@ public interface RoleDao {
 
 
     List<RoleEntity> getRole();
+
+    List<RoleEntity> getRoleName(@Param("adminId") Integer adminId);
  }

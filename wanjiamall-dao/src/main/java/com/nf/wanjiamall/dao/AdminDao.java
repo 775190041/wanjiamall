@@ -37,4 +37,8 @@ public interface AdminDao {
     //更改登录时间
     void insertLoginLog(@Param("adminEntity") AdminEntity adminEntity);
 
+    //通过账号查询该用户所有的信息
+    AdminEntity getNickByUsername(@Param("adminId") Integer adminId);
+
+
 }

@@ -65,5 +65,12 @@
         insert into wanjia_role_menu_relation (role_id, menu_id) values (#{roleId},#{menuId});
     </insert>
 
+    <select id="getRoleName" resultType="com.nf.wanjiamall.entity.RoleEntity">
+        select r.name as name from wanjia_admin_role_relation arr
+        left join wanjia_role r on arr.admin_id = r.id
+        where arr.admin_id = #{adminId}
+    </select>
+
+
 
 </mapper>
