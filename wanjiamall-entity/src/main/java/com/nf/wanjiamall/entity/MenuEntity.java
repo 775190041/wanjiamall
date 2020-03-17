@@ -5,7 +5,8 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class MenuEntity {
+public class
+MenuEntity {
 
 
     private Integer id;

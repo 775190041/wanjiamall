@@ -134,11 +134,15 @@ public class AdminServiceImpl implements AdminService {
                     menuNode2.setLevel(menuEntity1.getLevel());
                     menuNode2.setTitle(menuEntity1.getTitle());
                     menuNode2.setName(menuEntity1.getName());
+                    menuNode2.setChildren(children2);
                     children2.add(menuNode2);
+
                 }
+
             }
             menuNode.setChildren(children);
             menuNodes.add(menuNode);
+
         }
         return menuNodes;
 
