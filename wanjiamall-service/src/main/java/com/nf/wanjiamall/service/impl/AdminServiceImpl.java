@@ -125,6 +125,7 @@ public class AdminServiceImpl implements AdminService {
                 menuNode1.setLevel(entity.getLevel());
                 menuNode1.setTitle(entity.getTitle());
                 menuNode1.setName(entity.getName());
+                menuNode1.setChildren(children);
                 children.add(menuNode1);
                 List<MenuEntity> menuEntities2 = menuDao.getByIdMenu(entity.getId());
                 List<MenuNode> children2 = new ArrayList<>(menuEntities2.size());
