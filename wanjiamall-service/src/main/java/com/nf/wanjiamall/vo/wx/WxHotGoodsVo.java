@@ -15,15 +15,15 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class WxNewGoodsVo {
+public class WxHotGoodsVo {
     //综合
-    private List<GoodsEntity> newGoods;
+    private List<GoodsEntity> hotGoods;
     //根据价格升序
-    private List<GoodsEntity> newGoodsLowToUp;
+    private List<GoodsEntity> hotGoodsLowToUp;
     //根据价格降序
-    private List<GoodsEntity> newGoodsUpToLow;
+    private List<GoodsEntity> hotGoodsUpToLow;
     //根据分类
     private List<CategoryEntity> category;
-    private Map<String,List<GoodsEntity>> newGoodsByCateMap;
+    private Map<String,List<GoodsEntity>> hotGoodsByCateMap;
 
 }

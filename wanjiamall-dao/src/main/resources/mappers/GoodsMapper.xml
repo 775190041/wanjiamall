@@ -133,6 +133,83 @@
            where delted=0 and is_hot=1 order by add_time DESC
     </select>
 
+    <select id="hotGoodsLowToUp" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery,keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+           where delted=0 and is_hot=1 order by retail_price ASC
+    </select>
+
+    <select id="hotGoodsUpToLow" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery,keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+           where delted=0 and is_hot=1 order by retail_price DESC
+    </select>
+
+    <select id="hotGoodsByCate" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery,keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+           where delted=0 and is_hot=1 and category_id=#{cateId} order by add_time DESC
+    </select>
+
+    <select id="getByKeywords" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery, keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+        <where>
+            delted = 0
+            <if test="keywords != null">
+                and keywords like '%' #{keywords} '%'
+            </if>
+        </where>
+            order by add_time Desc
+    </select>
+
+    <select id="keywordsGoodsLowToUp" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery,keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+        <where>
+            delted = 0
+            <if test="keywords != null">
+                and keywords like '%' #{keywords} '%'
+            </if>
+        </where>
+            order by retail_price ASC
+    </select>
+
+    <select id="keywordsGoodsUpToLow" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery,keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+        <where>
+            delted = 0
+            <if test="keywords != null">
+                and keywords like '%' #{keywords} '%'
+            </if>
+        </where>
+            order by retail_price DESC
+    </select>
+
+    <select id="keywordsGoodsByCate" resultType="com.nf.wanjiamall.entity.GoodsEntity">
+        select id, goods_sn, name, category_id, brand_id, gallery,keywords,
+         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
+          detail, add_time, update_time, delted, pic_url from wanjia_goods
+        <where>
+            delted = 0
+            <if test="keywords != null">
+                and keywords like '%' #{keywords} '%'
+            </if>
+            <if test="cateId!=null">
+                and category_id=#{cateId}
+            </if>
+        </where>
+             order by add_time DESC
+    </select>
+
+
     <select id="getByCateId" resultType="com.nf.wanjiamall.entity.GoodsEntity">
         select g.id, g.goods_sn,  g.name, g.category_id, g.brand_id, g.gallery, g.keywords,
        g.brief, g.is_on_sale, g.is_new, g.is_hot, unit, g.counter_price, g.retail_price,
@@ -155,13 +232,6 @@
          brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
           detail, add_time, update_time, delted, pic_url from wanjia_goods
            where delted =0 and brand_id=#{brandId} order by add_time Desc
-    </select>
-
-    <select id="getByKeywords" resultType="com.nf.wanjiamall.entity.GoodsEntity">
-        select id, goods_sn, name, category_id, brand_id, gallery, keywords,
-         brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price,
-          detail, add_time, update_time, delted, pic_url from wanjia_goods
-           where delted = 0 and keywords=#{keyword} order by add_time Desc
     </select>
 
     <select id="GoodsById" resultMap="goodsEntityResultMap">

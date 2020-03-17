@@ -31,18 +31,24 @@ public class WxNewsServiceImpl implements WxNewsService {
     private GoodsDao goodsDao;
 
     @Override
-    public Object getNewsData(Integer pageNum, Integer pageSize, Integer cateId) {
+    public Object getNewsData(Integer pageNum, Integer pageSize) {
         List<GoodsEntity> newGoods=goodsDao.getNewGoods(pageNum, pageSize);
         List<GoodsEntity> newGoodsLowToUp=goodsDao.newGoodsLowToUp(pageNum, pageSize);
         List<GoodsEntity> newGoodsUpToLow=goodsDao.newGoodsUpToLow(pageNum, pageSize);
-//        List<CategoryEntity> category=categoryDao.
-        List<GoodsEntity> newGoodsByCate=goodsDao.newGoodsByCate(pageNum, pageSize, cateId);
+        List<CategoryEntity> category=categoryDao.getNewsCate(1, 8);
+        List<GoodsEntity> newGoodsByCate=null;
+        Map<String,List<GoodsEntity>> map=new HashMap<>();
+        for (CategoryEntity categoryEntity : category) {
+            newGoodsByCate=goodsDao.newGoodsByCate(pageNum, pageSize, categoryEntity.getId());
+            map.put(categoryEntity.getName(),newGoodsByCate);
+        }
 
         WxNewGoodsVo vo=new WxNewGoodsVo();
         vo.setNewGoods(newGoods);
         vo.setNewGoodsLowToUp(newGoodsLowToUp);
         vo.setNewGoodsUpToLow(newGoodsUpToLow);
-        vo.setNewGoodsByCate(newGoodsByCate);
+        vo.setCategory(category);
+        vo.setNewGoodsByCateMap(map);
 
         return ResponseUtil.ok(vo);
     }

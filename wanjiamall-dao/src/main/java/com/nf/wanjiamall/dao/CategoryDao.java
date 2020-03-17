@@ -56,4 +56,24 @@ public interface CategoryDao {
     Integer getProductBySecondCateCount(Integer id);
 
     void deleteById(Integer id);
+
+    /**
+     * 获取和关键字相关的类目
+     */
+    List<CategoryEntity> getKeyCate(@Param("pageNum") Integer pageNum,
+                                    @Param("pageSize") Integer pageSize,
+                                    @Param("keywords") String keywords);
+
+    /**
+     * 获取和新品推荐相关的类目
+     */
+    List<CategoryEntity> getNewsCate(@Param("pageNum") Integer pageNum,
+                                    @Param("pageSize") Integer pageSize);
+
+    /**
+     * 获取和人气推荐相关的类目
+     */
+    List<CategoryEntity> getHotCate(@Param("pageNum") Integer pageNum,
+                                     @Param("pageSize") Integer pageSize);
+
 }

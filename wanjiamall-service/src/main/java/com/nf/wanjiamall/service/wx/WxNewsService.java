@@ -4,5 +4,5 @@ package com.nf.wanjiamall.service.wx;
  * @author lzn
  */
 public interface WxNewsService {
-    Object getNewsData(Integer pageNum, Integer pageSize,Integer cateId);
+    Object getNewsData(Integer pageNum, Integer pageSize);
 }
