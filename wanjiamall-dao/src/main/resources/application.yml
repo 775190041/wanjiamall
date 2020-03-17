@@ -16,3 +16,28 @@ pagehelper:
   support-methods-arguments: true
   reasonable: true
   helper-dialect: mysql
+
+
+
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: mall-admin-secret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24)
+  tokenHead: Bearer  #JWT负载中拿到开头
+
+
+#这些路径需要放行的
+secure:
+  ignored:
+    urls:
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.ico
+      - /**/doc.html
+      - /api/admin/login  # 登录路径
+      - /api/admin/register   # 注册路径
+      - /api/admin/logout # 登出路径
+      - /api/upload    # 图片上传路径
+      - /wx/**      # 微信端访问的路径

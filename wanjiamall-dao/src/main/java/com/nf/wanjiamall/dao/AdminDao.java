@@ -30,4 +30,11 @@ public interface AdminDao {
 
     int deleteAdmin(@Param("id") Integer id);
 
+
+    //通过账号查询该用户所有的信息
+    AdminEntity getAdminByUsername(@Param("username") String username);
+
+    //更改登录时间
+    void insertLoginLog(@Param("adminEntity") AdminEntity adminEntity);
+
 }

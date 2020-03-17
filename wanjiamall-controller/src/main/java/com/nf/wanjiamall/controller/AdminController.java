@@ -4,10 +4,18 @@ package com.nf.wanjiamall.controller;
 import com.nf.wanjiamall.entity.AdminEntity;
 import com.nf.wanjiamall.entity.RoleEntity;
 import com.nf.wanjiamall.service.AdminService;
+import com.nf.wanjiamall.utils.ResponseUtil;
+import com.nf.wanjiamall.vo.AdminLoginParamVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @Api(tags = "wanjia_admin")
@@ -24,7 +32,6 @@ public class AdminController {
                            @RequestParam(value = "name",required = false,defaultValue = "") String name){
         return adminService.listAdmin(pageNum,pageSize,name);
     }
-
 
 
     @ApiOperation("添加管理员")
@@ -45,12 +52,32 @@ public class AdminController {
         return adminService.updateAdminStatus(id,adminEntity);
     }
 
-
     @ApiOperation("删除管理员")
     @DeleteMapping("/admin/{id}")
     public Object deleteAdmin(@PathVariable Integer id){
         return adminService.deleteAdmin(id);
     }
+
+
+    @ApiOperation("管理员登录")
+    @PostMapping("/admin/login")
+    public Object adminLogin(@Valid AdminLoginParamVo adminLoginParamVo, BindingResult bindingResult){
+        return adminService.adminLogin(adminLoginParamVo);
+    }
+
+
+    @ApiOperation(value = "刷新token")
+    @GetMapping("/refreshToken")
+    public Object refreshToken(HttpServletRequest request) {
+        return adminService.refreshToken(request);
+    }
+
+//    @ApiOperation(value = "登出功能")
+//    @PostMapping("/logout")
+//    @ResponseBody
+//    public Object logout() {
+//        return ResponseUtil.ok(null);
+//    }
 
 
 }
