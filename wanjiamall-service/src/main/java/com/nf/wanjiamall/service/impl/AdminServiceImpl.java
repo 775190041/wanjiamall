@@ -90,7 +90,6 @@ public class AdminServiceImpl implements AdminService {
         tokenMap.put("menuNode",menuNode);
         tokenMap.put("adminRoleVo",adminRoleVo);
 
-
         return ResponseUtil.ok(tokenMap);
     }
 
@@ -125,7 +124,6 @@ public class AdminServiceImpl implements AdminService {
                 menuNode1.setLevel(entity.getLevel());
                 menuNode1.setTitle(entity.getTitle());
                 menuNode1.setName(entity.getName());
-                menuNode1.setChildren(children);
                 children.add(menuNode1);
                 List<MenuEntity> menuEntities2 = menuDao.getByIdMenu(entity.getId());
                 List<MenuNode> children2 = new ArrayList<>(menuEntities2.size());
@@ -135,10 +133,11 @@ public class AdminServiceImpl implements AdminService {
                     menuNode2.setLevel(menuEntity1.getLevel());
                     menuNode2.setTitle(menuEntity1.getTitle());
                     menuNode2.setName(menuEntity1.getName());
-                    menuNode2.setChildren(children2);
+
                     children2.add(menuNode2);
 
                 }
+                menuNode1.setChildren(children2);
 
             }
             menuNode.setChildren(children);
