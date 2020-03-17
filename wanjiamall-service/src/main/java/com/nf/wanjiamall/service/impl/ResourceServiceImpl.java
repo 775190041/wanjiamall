@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author 黑夜
  */
@@ -67,5 +69,10 @@ public class ResourceServiceImpl implements ResourceService {
         }else {
             return ResponseUtil.fail(505,"删除失败");
         }
+    }
+
+    @Override
+    public List<ResourceEntity> getResourceByAdminIdList(Integer adminId) {
+        return resourceDao.getResourceByAdminIdList(adminId);
     }
 }

@@ -41,6 +41,8 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public Integer adminId;
+
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
@@ -88,12 +90,15 @@ public class AdminServiceImpl implements AdminService {
     }
 
 
+
+    @Override
     public UserDetails loadUserByUsername(String username){
         //根据账号获取用户信息
         AdminEntity adminEntity = getAdminByUsername(username);
         if ( adminEntity != null){
             //查询该用户所拥有的访问路径
-            List<ResourceEntity> resourceEntities = resourceDao.getResourceByAdminIdList(adminEntity.getId());
+             adminId = adminEntity.getId();
+            List<ResourceEntity> resourceEntities = resourceDao.getResourceByAdminIdList(adminId);
             return new AdminUserDetails(adminEntity,resourceEntities);
         }
         throw new UsernameNotFoundException("用户名或密码错误");

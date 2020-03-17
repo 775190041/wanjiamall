@@ -19,6 +19,8 @@ public class AdminUserDetails implements UserDetails {
     private AdminEntity adminEntity;
     private List<ResourceEntity> resourceEntities;
 
+    private Integer adminId;
+
     public AdminUserDetails(AdminEntity adminEntity,List<ResourceEntity> resourceEntities) {
         this.adminEntity = adminEntity;
         this.resourceEntities = resourceEntities;
@@ -28,7 +30,7 @@ public class AdminUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         //返回当前用户的角色
         return resourceEntities.stream()
-                .map(role ->new SimpleGrantedAuthority(role.getId()+","+role.getName()))
+                .map(role ->new SimpleGrantedAuthority(role.getId()+":"+role.getName()))
                 .collect(Collectors.toList());
     }
     //把查询的密码放入userDetails中
@@ -41,6 +43,7 @@ public class AdminUserDetails implements UserDetails {
     public String getUsername() {
         return adminEntity.getUsername();
     }
+
 
     @Override
     public boolean isAccountNonExpired() {

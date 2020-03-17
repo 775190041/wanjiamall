@@ -2,6 +2,8 @@ package com.nf.wanjiamall.service;
 
 import com.nf.wanjiamall.entity.ResourceEntity;
 
+import java.util.List;
+
 /**
  * @author 黑夜
  */
@@ -17,4 +19,6 @@ public interface ResourceService {
     Object getByIdResource(Integer id);
 
     Object deleteResource(Integer id);
+
+    List<ResourceEntity> getResourceByAdminIdList(Integer adminId);
 }
