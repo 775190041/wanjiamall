@@ -61,7 +61,7 @@ public class AdminController {
 
     @ApiOperation("管理员登录")
     @PostMapping("/admin/login")
-    public Object adminLogin(@Valid AdminLoginParamVo adminLoginParamVo, BindingResult bindingResult){
+    public Object adminLogin(@Valid @RequestBody AdminLoginParamVo adminLoginParamVo, BindingResult bindingResult){
         return adminService.adminLogin(adminLoginParamVo);
     }
 

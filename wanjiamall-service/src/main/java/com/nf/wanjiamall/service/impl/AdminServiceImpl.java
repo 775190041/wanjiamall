@@ -55,7 +55,7 @@ public class AdminServiceImpl implements AdminService {
         String token = null;
         try {
             UserDetails userDetails = loadUserByUsername(adminLoginParamVo.getUsername());
-            if (!passwordEncoder.matches(adminLoginParamVo.getUsername(),userDetails.getPassword())){
+            if (!passwordEncoder.matches(adminLoginParamVo.getPassword(),userDetails.getPassword())){
                 throw new BadCredentialsException("密码不正确");
             }
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
@@ -152,6 +152,7 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     @Override
     public Object insertAdmin(AdminEntity adminEntity) {
+        adminEntity.setPassword(passwordEncoder.encode(adminEntity.getPassword()));
         Integer count = adminDao.insertAdmin(adminEntity);
         List<Integer> roleIds = adminEntity.getRoleIds();
         Integer adminId = adminEntity.getId();
