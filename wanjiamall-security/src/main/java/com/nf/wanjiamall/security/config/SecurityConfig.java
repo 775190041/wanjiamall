@@ -34,9 +34,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         for (String url : ignoreUrlsConfig().getUrls()) {
             registry.antMatchers(url).permitAll();
         }
+
+
+        //该用户拥有的访问url，，
+        dynamicSecurityMetadataSource().getAttributes(httpSecurity.authorizeRequests());
+
+
         //允许跨域请求的OPTIONS请求
         registry.antMatchers(HttpMethod.OPTIONS)
                 .permitAll();
+
         // 任何请求需要身份认证
         registry.and()
                 .authorizeRequests()

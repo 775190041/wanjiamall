@@ -1,7 +1,9 @@
 package com.nf.wanjiamall.security.component;
 
 
+import cn.hutool.json.JSONUtil;
 import com.nf.wanjiamall.utils.JwtTokenUtil;
+import com.nf.wanjiamall.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,9 +52,11 @@ public class JwtAuthenticationTokenFilter  extends OncePerRequestFilter {
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     log.info("authenticated user:{}", username);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
+                    chain.doFilter(request, response);
                 }
             }
+        }else {
+            response.getWriter().println(JSONUtil.parse(ResponseUtil.fail(403,"没有权限访问")));
         }
-        chain.doFilter(request, response);
     }
 }
