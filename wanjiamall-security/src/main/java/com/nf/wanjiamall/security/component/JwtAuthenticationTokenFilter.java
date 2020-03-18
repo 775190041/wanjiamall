@@ -52,11 +52,10 @@ public class JwtAuthenticationTokenFilter  extends OncePerRequestFilter {
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     log.info("authenticated user:{}", username);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
-                    chain.doFilter(request, response);
+
                 }
             }
-        }else {
-            response.getWriter().println(JSONUtil.parse(ResponseUtil.fail(403,"没有权限访问")));
         }
+        chain.doFilter(request, response);
     }
 }
