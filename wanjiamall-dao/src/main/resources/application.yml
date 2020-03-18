@@ -31,7 +31,6 @@ jwt:
 secure:
   ignored:
     urls:
-      - /**
       - /**/*.js
       - /**/*.css
       - /**/*.png

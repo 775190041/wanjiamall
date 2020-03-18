@@ -30,7 +30,7 @@ public class AdminUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         //返回当前用户的角色
         return resourceEntities.stream()
-                .map(role ->new SimpleGrantedAuthority(role.getId()+":"+role.getName()))
+                .map(role ->new SimpleGrantedAuthority(role.getUrl()))
                 .collect(Collectors.toList());
     }
     //把查询的密码放入userDetails中

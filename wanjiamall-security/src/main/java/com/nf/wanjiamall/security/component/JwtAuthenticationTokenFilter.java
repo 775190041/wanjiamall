@@ -2,6 +2,7 @@ package com.nf.wanjiamall.security.component;
 
 
 import cn.hutool.json.JSONUtil;
+import com.nf.wanjiamall.service.AdminService;
 import com.nf.wanjiamall.utils.JwtTokenUtil;
 import com.nf.wanjiamall.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,7 @@ import java.io.IOException;
 @Slf4j
 public class JwtAuthenticationTokenFilter  extends OncePerRequestFilter {
     @Autowired
-    private UserDetailsService userDetailsService;
+    private AdminService userDetailsService;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @Value("${jwt.tokenHeader}")
@@ -45,7 +46,7 @@ public class JwtAuthenticationTokenFilter  extends OncePerRequestFilter {
             String username = jwtTokenUtil.getUserNameFromToken(authToken);
             log.info("checking username:{}", username);
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                 if (jwtTokenUtil.validateToken(authToken, userDetails)) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
