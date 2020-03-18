@@ -36,8 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         }
 
 
-        //该用户拥有的访问url，，
-        dynamicSecurityMetadataSource().getAttributes(httpSecurity.authorizeRequests());
+
 
 
         //允许跨域请求的OPTIONS请求
