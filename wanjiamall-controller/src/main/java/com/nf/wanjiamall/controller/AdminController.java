@@ -66,18 +66,12 @@ public class AdminController {
     }
 
 
+
     @ApiOperation(value = "刷新token")
     @GetMapping("/refreshToken")
     public Object refreshToken(HttpServletRequest request) {
         return adminService.refreshToken(request);
     }
-
-//    @ApiOperation(value = "登出功能")
-//    @PostMapping("/logout")
-//    @ResponseBody
-//    public Object logout() {
-//        return ResponseUtil.ok(null);
-//    }
 
 
 }

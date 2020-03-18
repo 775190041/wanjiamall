@@ -49,6 +49,7 @@ public class WanjiaSecurityConfig extends SecurityConfig {
                 AdminServiceImpl adminService = new AdminServiceImpl();
                 Integer adminId = adminService.adminId;
                 List<ResourceEntity> resourceList = resourceService.getResourceByAdminIdList(adminId);
+
                 for (ResourceEntity resource : resourceList) {
                     map.put(resource.getUrl(), new org.springframework.security.access.SecurityConfig(resource.getId() + ":" + resource.getName()));
                 }

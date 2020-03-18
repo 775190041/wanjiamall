@@ -225,28 +225,36 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Object insertAdmin(AdminEntity adminEntity) {
         adminEntity.setPassword(passwordEncoder.encode(adminEntity.getPassword()));
-        Integer count = adminDao.insertAdmin(adminEntity);
-        List<Integer> roleIds = adminEntity.getRoleIds();
+        adminDao.insertAdmin(adminEntity);
         Integer adminId = adminEntity.getId();
-        for (Integer roleId : roleIds) {
-            adminDao.insertAdminRoleRelation(roleId,adminId);
+        List<Integer> roleIds = adminEntity.getRoleIds();
+        if (roleIds.size() != 0){
+            for (Integer roleId : roleIds) {
+                adminDao.insertAdminRoleRelation(roleId,adminId);
+            }
         }
         return ResponseUtil.ok("添加成功");
     }
+
+
 
     @Transactional
     @Override
     public Object updateAdmin(Integer id,AdminEntity adminEntity) {
         //修改之前要先把该管理的角色删除点
         adminDao.deleteAdminRoleRelationByAdminId(id);
+        //修改之前要把传过来的密码加密
+        adminEntity.setPassword(passwordEncoder.encode(adminEntity.getPassword()));
         //修改
-        Integer count = adminDao.updateAdmin(id,adminEntity);
-
+        adminDao.updateAdmin(id,adminEntity);
         //添加管理员角色
         List<Integer> roleIds = adminEntity.getRoleIds();
-        for (Integer roleId : roleIds) {
-            adminDao.insertAdminRoleRelation(roleId,id);
+        if (roleIds.size() != 0){
+            for (Integer roleId : roleIds) {
+                adminDao.insertAdminRoleRelation(roleId,id);
+            }
         }
+
        return ResponseUtil.ok("修改成功");
     }
 
