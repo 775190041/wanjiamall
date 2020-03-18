@@ -52,6 +52,8 @@
         select id, category_id, create_time, name, url, description, add_time, update_time, delted from wanjia_resource where id = #{id}
     </select>
 
+
+
     <update id="deleteResource" >
         update wanjia_resource set delted = 1  where id = #{id}
     </update>
