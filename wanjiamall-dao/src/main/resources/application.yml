@@ -38,7 +38,5 @@ secure:
       - /**/*.ico
       - /**/doc.html
       - /api/admin/login  # 登录路径
-      - /api/admin/register   # 注册路径
-      - /api/admin/logout # 登出路径
       - /api/upload    # 图片上传路径
       - /wx/**      # 微信端访问的路径
