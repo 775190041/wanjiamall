@@ -176,6 +176,11 @@ public class AdminServiceImpl implements AdminService {
         throw new UsernameNotFoundException("用户名或密码错误");
     }
 
+    @Override
+    public Object adminLogout(HttpServletRequest request) {
+        return ResponseUtil.ok();
+    }
+
     public AdminEntity getAdminByUsername(String username){
             return adminDao.getAdminByUsername(username);
     }

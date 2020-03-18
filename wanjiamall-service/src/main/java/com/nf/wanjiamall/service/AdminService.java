@@ -31,4 +31,6 @@ public interface AdminService {
      * @return
      */
     UserDetails loadUserByUsername(String username);
+
+    Object adminLogout(HttpServletRequest request);
 }

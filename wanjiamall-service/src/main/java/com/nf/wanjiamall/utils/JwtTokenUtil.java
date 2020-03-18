@@ -99,6 +99,7 @@ public class JwtTokenUtil {
      */
     private Date getExpiredDateFromToken(String token) {
         Claims claims = getClaimsFromToken(token);
+
         return claims.getExpiration();
     }
 

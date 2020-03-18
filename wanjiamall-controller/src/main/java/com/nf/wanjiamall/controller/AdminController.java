@@ -72,12 +72,11 @@ public class AdminController {
         return adminService.refreshToken(request);
     }
 
-//    @ApiOperation(value = "登出功能")
-//    @PostMapping("/logout")
-//    @ResponseBody
-//    public Object logout() {
-//        return ResponseUtil.ok(null);
-//    }
+    @ApiOperation(value = "登出功能")
+    @GetMapping("/admin/logout")
+    public Object logout(HttpServletRequest request) {
+        return adminService.adminLogout(request);
+    }
 
 
 }
