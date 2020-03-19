@@ -66,7 +66,7 @@ public class AdminController {
     }
 
 
-    @ApiOperation(value = "刷新token")
+    @ApiOperation(value = "刷新 token")
     @GetMapping("/refreshToken")
     public Object refreshToken(HttpServletRequest request) {
         return adminService.refreshToken(request);
