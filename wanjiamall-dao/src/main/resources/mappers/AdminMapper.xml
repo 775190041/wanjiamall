@@ -82,7 +82,7 @@
     </update>
 
     <select id="getNickByUsername" resultType="com.nf.wanjiamall.entity.AdminEntity">
-        select username from wanjia_admin where id = #{adminId}
+        select  username, password, nick_name, avatar from wanjia_admin where id = #{adminId}
     </select>
 
 </mapper>
