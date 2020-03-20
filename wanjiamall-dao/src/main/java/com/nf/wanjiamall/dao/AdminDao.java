@@ -14,6 +14,7 @@ public interface AdminDao {
 
 
 
+
     int insertAdminRoleRelation(@Param("roleId") Integer roleId,@Param("adminId") Integer adminId);
 
     int insertAdmin(@Param("adminEntity") AdminEntity adminEntity);
