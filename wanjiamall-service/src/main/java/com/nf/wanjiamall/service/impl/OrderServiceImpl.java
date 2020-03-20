@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Object insertExpressMessage(Integer id, String shipChannel, String shipSn) {
-        Integer count = orderDao.insertExpressMessage(id,shipChannel,shipSn);
+        Date shipTime= new Date();
+        Integer count = orderDao.insertExpressMessage(id,shipChannel,shipSn,shipTime);
         if (count > 0 ){
             orderDao.updateOrderStatus(id);
             return ResponseUtil.ok("发货成功");

@@ -44,7 +44,10 @@
                 ship_channel = #{shipChannel},
             </if>
             <if test="shipSn != null">
-                ship_sn = #{shipSn}
+                ship_sn = #{shipSn},
+            </if>
+            <if test="shipTime != null">
+                ship_time = #{shipTime}
             </if>
         </set>
         where id = #{id}

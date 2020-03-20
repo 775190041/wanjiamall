@@ -3,6 +3,7 @@ package com.nf.wanjiamall.dao;
 import com.nf.wanjiamall.entity.OrderEntity;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface OrderDao {
@@ -17,7 +18,8 @@ public interface OrderDao {
 
     int insertExpressMessage(@Param("id") Integer id,
                              @Param("shipChannel") String shipChannel,
-                             @Param("shipSn") String shipSn);
+                             @Param("shipSn") String shipSn,
+                            @Param("shipTime") Date shipTime);
 
     //通过id改订单的状态值
     int updateOrderStatus(@Param("id") Integer id);
