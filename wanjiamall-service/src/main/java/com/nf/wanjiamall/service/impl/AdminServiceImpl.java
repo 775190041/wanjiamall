@@ -249,7 +249,7 @@ public class AdminServiceImpl implements AdminService {
         //修改之前要先把该管理的角色删除点
         adminDao.deleteAdminRoleRelationByAdminId(id);
         //修改之前要把传过来的密码加密
-        adminEntity.setPassword(passwordEncoder.encode(adminEntity.getPassword()));
+        adminEntity.setPassword(null);
         //修改
         adminDao.updateAdmin(id,adminEntity);
         //添加管理员角色
