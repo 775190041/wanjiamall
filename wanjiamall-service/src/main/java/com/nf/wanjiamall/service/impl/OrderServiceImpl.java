@@ -61,5 +61,17 @@ public class OrderServiceImpl implements OrderService {
         return ResponseUtil.ok(date);
     }
 
+    @Override
+    public Object insertExpressMessage(Integer id, String shipChannel, String shipSn) {
+        Integer count = orderDao.insertExpressMessage(id,shipChannel,shipSn);
+        if (count > 0 ){
+            orderDao.updateOrderStatus(id);
+            return ResponseUtil.ok("发货成功");
+        }else {
+            return ResponseUtil.fail(505,"发货失败");
+        }
+
+    }
+
 }
 

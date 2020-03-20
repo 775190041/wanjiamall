@@ -14,4 +14,12 @@ public interface OrderDao {
                                    @Param("orderSn") String orderSn);
 
     OrderEntity getById(@Param("id") Integer id);
+
+    int insertExpressMessage(@Param("id") Integer id,
+                             @Param("shipChannel") String shipChannel,
+                             @Param("shipSn") String shipSn);
+
+    //通过id改订单的状态值
+    int updateOrderStatus(@Param("id") Integer id);
+
 }

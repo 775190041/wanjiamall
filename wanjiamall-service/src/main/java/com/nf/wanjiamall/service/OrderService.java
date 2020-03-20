@@ -10,4 +10,6 @@ public interface OrderService {
                         String orderSn);
 
     Object getOrderDetail(Integer id);
+
+    Object insertExpressMessage(Integer id,String shipChannel,String shipSn);
 }

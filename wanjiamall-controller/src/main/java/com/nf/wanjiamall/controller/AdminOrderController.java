@@ -35,6 +35,17 @@ public class AdminOrderController {
     public Object getOrderDetail(@PathVariable Integer id){
             return orderService.getOrderDetail(id);
     }
+
+
+    @ApiOperation("订单发货,传订单id过来,并且把物流公司和订单号传过来")
+    @PostMapping("/order/{id}")
+    public Object insertExpressMessage(@PathVariable Integer id,
+                                 @RequestParam(value = "shipChannel",required = false,defaultValue = "") String shipChannel,
+                                 @RequestParam(value = "shipSn",required = false,defaultValue = "") String shipSn){
+       return orderService.insertExpressMessage(id,shipChannel,shipSn);
+    }
+
+
     /**
      * 查询物流公司
      *
@@ -44,6 +55,5 @@ public class AdminOrderController {
     public Object channel() {
         return ResponseUtil.ok(expressService.getVendors());
     }
-
 
 }

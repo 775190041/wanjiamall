@@ -35,12 +35,11 @@ public class ExpressInfo {
     private boolean Success;
     @JsonProperty("Reason")
     private String Reason;
-
     @JsonProperty("OrderCode")
     private String OrderCode;
-
     @JsonProperty("ShipperName")
     private String ShipperName;
+
 
 
 }
