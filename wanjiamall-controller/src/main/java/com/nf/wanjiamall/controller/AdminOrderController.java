@@ -1,5 +1,6 @@
 package com.nf.wanjiamall.controller;
 
+import com.nf.wanjiamall.entity.OrderEntity;
 import com.nf.wanjiamall.service.OrderService;
 import com.nf.wanjiamall.service.impl.ExpressService;
 import com.nf.wanjiamall.utils.ResponseUtil;
@@ -24,7 +25,7 @@ public class AdminOrderController {
     @GetMapping("/order/{pageNum}/{pageSize}")
     public Object getOrderList(@PathVariable Integer pageNum,
                                @PathVariable Integer pageSize,
-                               @RequestParam(value = "orderStatus" ,required = false,defaultValue = "") List<Integer> orderStatus,
+                               @RequestParam(value = "orderStatusArray" ,required = false,defaultValue = "") List<Integer> orderStatus,
                                @RequestParam(value = "userId" ,required = false,defaultValue = "") Integer userId,
                                @RequestParam(value = "orderSn" ,required = false,defaultValue = "") String orderSn){
         return orderService.getOrderList(pageNum,pageSize,orderStatus,userId,orderSn);
@@ -38,11 +39,10 @@ public class AdminOrderController {
 
 
     @ApiOperation("订单发货,传订单id过来,并且把物流公司和订单号传过来")
-    @PostMapping("/order/{id}")
+    @PutMapping("/order/{id}")
     public Object insertExpressMessage(@PathVariable Integer id,
-                                 @RequestParam(value = "shipChannel",required = false,defaultValue = "") String shipChannel,
-                                 @RequestParam(value = "shipSn",required = false,defaultValue = "") String shipSn){
-       return orderService.insertExpressMessage(id,shipChannel,shipSn);
+                                       @RequestBody OrderEntity orderEntity){
+       return orderService.insertExpressMessage(id,orderEntity.getShipChannel(),orderEntity.getShipSn());
     }
 
 
@@ -51,7 +51,7 @@ public class AdminOrderController {
      *
      * @return
      */
-    @GetMapping("/channel")
+    @GetMapping("/order/channel")
     public Object channel() {
         return ResponseUtil.ok(expressService.getVendors());
     }

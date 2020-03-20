@@ -18,10 +18,10 @@
             <if test="orderSn != null and orderSn != '' ">
                 order_sn = #{orderSn},
             </if>
-            <if test="orderStatus != null">
+            <if test="orderStatus.size > 0 ">
                 order_status in
-                <foreach item="item" collection="orderStatus" separator="," open="(" close=")" index="">
-                  #{item, jdbcType=INTEGER}
+                <foreach item="item" collection="orderStatus" separator="," open="(" close=")" >
+                  #{item}
                 </foreach>
             </if>
          </where>

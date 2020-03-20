@@ -56,9 +56,9 @@ public class OrderServiceImpl implements OrderService {
         //查询该该订单用户信息
         UserEntity userEntity = userDao.getById(orderEntity.getUserId());
         Map<String,Object> date = new HashMap<>();
-        date.put("orderEntity",orderEntity);
-        date.put("orderGoodsEntities",orderGoodsEntities);
-        date.put("userEntity",userEntity);
+        date.put("order",orderEntity);
+        date.put("orderGoods",orderGoodsEntities);
+        date.put("user",userEntity);
         return ResponseUtil.ok(date);
     }
 
