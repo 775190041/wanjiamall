@@ -16,14 +16,5 @@ public class WxExpressController {
     public ExpressInfo getExpress(@PathVariable Integer id)  {
         return expressService.getExpressInfo("ZTO","123456");
     }
-    /**
-     * 查询物流公司
-     *
-     * @return
-     */
-    @GetMapping("/channel")
 
-    public Object channel() {
-        return ResponseUtil.ok(expressService.getVendors());
-    }
 }
