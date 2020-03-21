@@ -9,14 +9,15 @@
         type, reason, amount, pictures, status,
         handle_time, add_time, update_time, deleted from wanjia_aftersale
         <where>
-            <if test="aftersaleSn != null">
-                aftersale_sn = #{aftersaleSn},
+            deleted = 0
+            <if test="aftersaleSn != null and aftersaleSn != '' ">
+                and aftersale_sn = #{aftersaleSn}
             </if>
-            <if test="orderId != null">
-                order_id = #{orderId},
+            <if test="orderId != null and orderId != ''">
+                and order_id = #{orderId}
             </if>
-            <if test="status != null">
-                status = #{status},
+            <if test="status != null and status != ''">
+                and status = #{status}
             </if>
         </where>
     </select>
