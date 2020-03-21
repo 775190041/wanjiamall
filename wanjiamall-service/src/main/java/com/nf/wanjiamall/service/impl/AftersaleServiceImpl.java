@@ -27,13 +27,15 @@ public class AftersaleServiceImpl implements AftersaleService {
 
     @Override
     public Object batchAudit(List<Integer> ids, Integer status) {
+
         if (ids.size()>0){
             for (Integer id : ids) {
                 AftersaleEntity aftersaleEntity = aftersaleDao.getById(id);
-                if (aftersaleEntity.getStatus() == 3){
+                //跳过通过与拒绝
+                if (aftersaleEntity.getStatus() == 3||aftersaleEntity.getStatus()==5) {
                     continue;
-                }else {
-                    aftersaleDao.batchAudit(id,status);
+                } else {
+                    aftersaleDao.batchAudit(id, status);
                 }
             }
             return ResponseUtil.ok("批量修改成功");

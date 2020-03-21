@@ -28,7 +28,7 @@ public class AdminAftersaleController {
     }
 
     @ApiOperation("批量拒绝与批量通过")
-    @PostMapping("/aftersale/batch")
+    @GetMapping("/aftersale/batch")
     public Object batchAudit(@RequestParam(value = "ids" ,required = false,defaultValue = "")List<Integer> ids,
                             @RequestParam(value = "status" ,required = false,defaultValue = "") Integer status){
         return aftersaleService.batchAudit(ids,status);
