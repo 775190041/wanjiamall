@@ -86,11 +86,15 @@ public class AftersaleServiceImpl implements AftersaleService {
     public Object refundAftersale(Integer id) {
         AftersaleEntity aftersaleEntity = aftersaleDao.getById(id);
         if (aftersaleEntity.getStatus() == 2){
+            aftersaleDao.batchAudit(id,3);
+            //这里需要判断用户是否已经收到货才退款 ，如果是 ，则退款成功后需要
+            //把该该商品的数量加上去
+            if (aftersaleEntity.getType() == 2){
 
+            }
+            return ResponseUtil.ok("退款成功");
         }else {
             return ResponseUtil.fail(500,"此商品不能退款");
         }
-
-        return null;
     }
 }
