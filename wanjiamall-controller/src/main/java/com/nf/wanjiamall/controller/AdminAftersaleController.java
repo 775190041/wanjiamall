@@ -40,5 +40,10 @@ public class AdminAftersaleController {
         return aftersaleService.getAftersaleDetail(id);
     }
 
+    @ApiOperation("退款,传售后id过来")
+    @PutMapping("/aftersale/{id}")
+    public Object refundAftersale(@PathVariable Integer id){
+        return aftersaleService.refundAftersale(id);
+    }
 
 }

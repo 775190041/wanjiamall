@@ -76,4 +76,21 @@ public class AftersaleServiceImpl implements AftersaleService {
         date.put("aftersaleEntity",aftersaleEntity);
         return ResponseUtil.ok(date);
     }
+
+    /**
+     * 这里写的是模拟退款，
+     * @param id
+     * @return
+     */
+    @Override
+    public Object refundAftersale(Integer id) {
+        AftersaleEntity aftersaleEntity = aftersaleDao.getById(id);
+        if (aftersaleEntity.getStatus() == 2){
+
+        }else {
+            return ResponseUtil.fail(500,"此商品不能退款");
+        }
+
+        return null;
+    }
 }

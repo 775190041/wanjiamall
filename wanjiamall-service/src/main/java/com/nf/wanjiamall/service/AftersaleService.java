@@ -13,4 +13,6 @@ public interface AftersaleService {
 
 
     Object getAftersaleDetail(Integer id);
+
+    Object refundAftersale(Integer id);
 }
