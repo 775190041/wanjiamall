@@ -12,4 +12,5 @@ public interface AftersaleService {
     Object batchAudit(List<Integer> ids,Integer status);
 
 
+    Object getAftersaleDetail(Integer id);
 }

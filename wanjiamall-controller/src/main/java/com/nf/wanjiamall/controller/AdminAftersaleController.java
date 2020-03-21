@@ -35,11 +35,9 @@ public class AdminAftersaleController {
     }
 
     @ApiOperation("售后详情,传一个订单id过来")
-    @PostMapping("/aftersale/{id}")
+    @GetMapping("/aftersale/{id}")
     public Object getAftersaleDetail(@PathVariable Integer id){
-
-        return null;
-
+        return aftersaleService.getAftersaleDetail(id);
     }
 
 

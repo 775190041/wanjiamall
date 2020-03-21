@@ -31,4 +31,8 @@
          pictures, status, handle_time, add_time, update_time, deleted from wanjia_aftersale where id = #{id}
     </select>
 
+    <select id="getByOrderId" resultType="com.nf.wanjiamall.entity.AftersaleEntity">
+        select id, aftersale_sn, order_id, user_id, type, reason, amount, pictures, status, handle_time, add_time, update_time, deleted from wanjia_aftersale where order_id = #{orderId}
+    </select>
+
 </mapper>

@@ -18,4 +18,6 @@ public interface AftersaleDao {
 
     AftersaleEntity getById(@Param("id") Integer id);
 
+    AftersaleEntity getByOrderId(@Param("orderId") Integer orderId);
+
 }
