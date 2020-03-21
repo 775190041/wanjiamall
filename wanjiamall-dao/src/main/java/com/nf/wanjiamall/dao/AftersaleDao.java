@@ -14,4 +14,7 @@ public interface AftersaleDao {
                                           @Param("status") Integer status);
 
 
+    int batchAudit(@Param("id") Integer id,@Param("status") Integer status);
+
+
 }

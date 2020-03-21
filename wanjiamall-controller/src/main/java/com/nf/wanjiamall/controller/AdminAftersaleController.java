@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Api(tags = "wanjia_aftersale")
 @RequestMapping("/api")
@@ -25,6 +27,12 @@ public class AdminAftersaleController {
             return aftersaleService.getAftersaleList(pageNum,pageSize,aftersaleSn,orderId,status);
     }
 
+    @ApiOperation("批量拒绝与批量通过")
+    @PostMapping("/aftersale/batch")
+    public Object batchAudit(@RequestParam(value = "ids" ,required = false,defaultValue = "")List<Integer> ids,
+                            @RequestParam(value = "status" ,required = false,defaultValue = "") Integer status){
+        return aftersaleService.batchAudit(ids,status);
+    }
 
 
 
