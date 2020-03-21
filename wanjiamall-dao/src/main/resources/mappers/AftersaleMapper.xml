@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.AftersaleDao">
+
+    <select id="getAftersaleList" resultType="com.nf.wanjiamall.entity.AftersaleEntity">
+        select id, aftersale_sn, order_id, user_id,
+        type, reason, amount, pictures, status,
+        handle_time, add_time, update_time, deleted from wanjia_aftersale
+        <where>
+            <if test="aftersaleSn != null">
+                aftersale_sn = #{aftersaleSn},
+            </if>
+            <if test="orderId != null">
+                order_id = #{orderId},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </where>
+    </select>
+
+</mapper>

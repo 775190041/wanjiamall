@@ -37,15 +37,12 @@ public class AdminOrderController {
             return orderService.getOrderDetail(id);
     }
 
-
     @ApiOperation("订单发货,传订单id过来,并且把物流公司和订单号传过来")
     @PutMapping("/order/{id}")
     public Object insertExpressMessage(@PathVariable Integer id,
                                        @RequestBody OrderEntity orderEntity){
        return orderService.insertExpressMessage(id,orderEntity.getShipChannel(),orderEntity.getShipSn());
     }
-
-
     /**
      * 查询物流公司
      *
