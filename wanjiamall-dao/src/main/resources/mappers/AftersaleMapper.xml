@@ -26,4 +26,9 @@
         update wanjia_aftersale set status = #{status} where id = #{id}
     </update>
 
+    <select id="getById" resultType="com.nf.wanjiamall.entity.AftersaleEntity">
+        select id, aftersale_sn, order_id, user_id, type, reason, amount,
+         pictures, status, handle_time, add_time, update_time, deleted from wanjia_aftersale where id = #{id}
+    </select>
+
 </mapper>

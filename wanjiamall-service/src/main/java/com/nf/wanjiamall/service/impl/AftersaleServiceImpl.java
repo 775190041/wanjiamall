@@ -1,6 +1,7 @@
 package com.nf.wanjiamall.service.impl;
 
 import com.nf.wanjiamall.dao.AftersaleDao;
+import com.nf.wanjiamall.entity.AftersaleEntity;
 import com.nf.wanjiamall.service.AftersaleService;
 import com.nf.wanjiamall.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,12 @@ public class AftersaleServiceImpl implements AftersaleService {
     public Object batchAudit(List<Integer> ids, Integer status) {
         if (ids.size()>0){
             for (Integer id : ids) {
-                aftersaleDao.batchAudit(id,status);
+                AftersaleEntity aftersaleEntity = aftersaleDao.getById(id);
+                if (aftersaleEntity.getStatus() == 3){
+                    continue;
+                }else {
+                    aftersaleDao.batchAudit(id,status);
+                }
             }
             return ResponseUtil.ok("批量修改成功");
         }else {
