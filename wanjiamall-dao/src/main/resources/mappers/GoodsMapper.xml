@@ -213,8 +213,7 @@
     <select id="getByCateId" resultType="com.nf.wanjiamall.entity.GoodsEntity">
         select g.id, g.goods_sn,  g.name, g.category_id, g.brand_id, g.gallery, g.keywords,
        g.brief, g.is_on_sale, g.is_new, g.is_hot, unit, g.counter_price, g.retail_price,
-       g.detail, g.add_time, g.update_time, g.delted, p.url from wanjia_goods g
-       join wanjia_goods_product p on g.id=p.goods_id
+       g.detail, g.add_time, g.update_time, g.delted, g.pic_url from wanjia_goods g
        join wanjiamall_category c on g.category_id=c.id
         where c.pid=#{cateId} order by g.add_time DESC
     </select>
@@ -222,8 +221,7 @@
     <select id="getGoodsById" resultType="com.nf.wanjiamall.entity.GoodsEntity">
         select g.id, g.goods_sn,  g.name, g.category_id, g.brand_id, g.gallery, g.keywords,
        g.brief, g.is_on_sale, g.is_new, g.is_hot, unit, g.counter_price, g.retail_price,
-       g.detail, g.add_time, g.update_time, g.delted, p.url from wanjia_goods g
-       join wanjia_goods_product p on g.id=p.goods_id
+       g.detail, g.add_time, g.update_time, g.delted ,g.pic_url from wanjia_goods g
         where g.category_id=#{cateId} order by g.add_time DESC
     </select>
 

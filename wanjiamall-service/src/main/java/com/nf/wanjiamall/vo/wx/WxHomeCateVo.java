@@ -21,5 +21,5 @@ public class WxHomeCateVo {
     //二级类目
     private List<CategoryEntity> secondCate;
     //根据当前id获得当前目录的详细信息
-    private List<CategoryEntity> cateEntities;
+    private CategoryEntity cateEntities;
 }
