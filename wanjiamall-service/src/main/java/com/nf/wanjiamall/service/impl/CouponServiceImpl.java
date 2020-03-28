@@ -145,4 +145,9 @@ public class CouponServiceImpl implements CouponService {
         couponDao.deletedCouponId(id);
         return ResponseUtil.ok();
     }
+
+    @Override
+    public Object getCouponIdQuery(Integer couponId) {
+        return couponDao.getCouponById(couponId);
+    }
 }

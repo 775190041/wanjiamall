@@ -16,55 +16,46 @@ public class WxCartController {
     @Autowired
     private WxCartService wxCartService;
 
-    @GetMapping("/aa")
-    public Object getSS(){
-        KdniaoTrackQueryAPI api = new KdniaoTrackQueryAPI();
-        String result = null;
-        try {
-            result = api.getOrderTracesByJson("ANE", "210001633605");
-            System.out.print(result);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ResponseUtil.ok(result);
-    }
-
-    @ApiOperation("根据用户Id查询用户足迹的所有信息")
+    @ApiOperation("根据用户Id查询购物车所有商品信息与计算选中商品的金额")
     @GetMapping("/cart/{userId}")
     public Object getUserIdQueryCart(@PathVariable("userId") Integer userId){
-        return wxCartService.getUserIdQueryCart(userId);
-    }
-
-    @ApiOperation("根据用户Id和购物车Id批量删除")
-    @DeleteMapping("/cart/{userId}/{ids}")
-    public Object deleteBatchUserIdRoCartId(@PathVariable("userId")Integer userId,@PathVariable("ids")Integer[] ids){
-        return wxCartService.deleteBatchUserIdRoCartId(userId, ids);
-    }
-
-    @ApiOperation("根据购物车商品Id批量修改商品的勾选状态")
-    @PutMapping("/cart/{checked}/{ids}")
-    public Object updateBatchCartChecked(@PathVariable("checked")Integer checked,@PathVariable("ids")Integer[] ids){
-        return  wxCartService.updateBatchCartChecked(checked,ids);
-    }
-
-    @ApiOperation("查询购物车勾选中的的物品数量并进行价格计算")
-    @GetMapping("/cart")
-    public Object getCartPriceSum(){
-        return wxCartService.getCartPriceSum();
-    }
-
-    @ApiOperation("查询购物车勾选中的的物品数量并进行价格计算")
-    @PutMapping("/cart/{userId}/{number}/{id}")
-    public Object updateNumber(@PathVariable("userId")Integer userId,
-                               @PathVariable("number")Integer number,
-                               @PathVariable("id")Integer id){
-        return wxCartService.updateNumber(userId, number, id);
+        return wxCartService.getUserIdQueryCartAll(userId);
     }
 
     @ApiOperation("加入购物车(购物车实体类添加)")
-    @PostMapping("/cart")
-    public Object InsertCart(@RequestParam CartEntity cartEntity){
-        return wxCartService.insertCart(cartEntity);
+    @PostMapping("/cart/{userId}")
+    public Object InsertCart(@PathVariable("userId")Integer userId,@RequestParam CartEntity cartEntity){
+        return wxCartService.insertCart(userId,cartEntity);
     }
+
+    @ApiOperation("商品立即购买")
+    @PostMapping("/cart/buyImmediately/{userId}")
+    public Object buyImmediately(@PathVariable("userId") Integer userId,@RequestBody CartEntity cartEntity){
+        return wxCartService.buyImmediately(userId, cartEntity);
+    }
+
+    @ApiOperation("修改购物车商品货品数量")
+    @PutMapping("/cart/{userId}")
+    public Object updateByGoodsAndProductNumber(@PathVariable("userId") Integer userId, @RequestBody CartEntity cartEntity){
+        return wxCartService.updateByGoodsAndProductNumber(userId,cartEntity);
+    }
+
+    @ApiOperation("购物车商品货品勾选状态")
+    @PostMapping("/cart/checked/{userId}")
+    public Object checked(@PathVariable("userId") Integer userId, @RequestBody String body) {
+        return wxCartService.checked(userId,body);
+    }
+
+    @ApiOperation("购物车商品删除")
+    @DeleteMapping("/cart/checked/{userId}")
+    public Object delete(@PathVariable("userId") Integer userId,@RequestBody  String body){
+        return wxCartService.delete(userId, body);
+    }
+
+    @ApiOperation("商品下单")
+    @GetMapping("/cart/cartOrders")
+     private Object cartOrders( Integer userId, Integer cartId,Integer addressId,Integer couponId,Integer userCouponId,Integer couponRulesId) {
+         return wxCartService.cartOrders(userId, cartId, addressId, couponId, userCouponId, couponRulesId);
+
+     }
 }

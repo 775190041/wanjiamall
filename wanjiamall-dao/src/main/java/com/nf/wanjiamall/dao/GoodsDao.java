@@ -23,12 +23,6 @@ public interface GoodsDao {
 
     /**
      * 查询全部商品
-     * @param pageNum
-     * @param pageSize
-     * @param id
-     * @param goodsSn
-     * @param name
-     * @return
      */
     List<GoodsEntity> listGoods(@Param("pageNum") int pageNum,@Param("pageSize") int pageSize,@Param("id") Integer id,@Param("goodsSn") String goodsSn, @Param("name") String name);
 
@@ -38,5 +32,7 @@ public interface GoodsDao {
      * 根据商品id查询商品信息
      */
     GoodsEntity GoodsById(@Param("id") int id);
+
+    GoodsEntity getGoodById(@Param("goodsId") String goodsId);
 
 }

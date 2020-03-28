@@ -20,6 +20,11 @@
         </if>
     </select>
 
+    <select id="getCouponById" resultType="com.nf.wanjiamall.entity.CouponEntity" >
+        select id, name, coupon_desc, tag, total, discount, "min", coupon_limit, type, status, goods_type, goods_value, code, time_type, days, start_time, end_time, add_time, update_time, deleted
+         from wanjia_coupon where deleted = 0 and id = #{couponRulesId}
+    </select>
+
     <insert id="insertCouponDay">
         insert into wanjia_coupon(name,coupon_desc,tag,total,discount,min,coupon_limit,type,status,goods_type,time_type,days,deleted)
         value (#{coupon.name},#{coupon.couponDesc},#{coupon.tag},#{coupon.total},#{coupon.discount},

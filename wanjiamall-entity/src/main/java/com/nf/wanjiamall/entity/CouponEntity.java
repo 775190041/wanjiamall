@@ -11,25 +11,26 @@ import java.sql.Timestamp;
  */
 @Data
 public class CouponEntity {
-    Integer id;
-    String name;
-    String couponDesc;
-    String tag;
-    Integer total;
-    BigDecimal discount;
-    BigDecimal min;
-    Integer couponLimit;
-    Integer type;
-    Integer status;
-    Integer goodsType;
-    String goodsValue;
-    String code;
-    Integer timeType;
-    Integer days;
-    Date startTime;
-    Date endTime;
-    Integer enabled;
-    Timestamp addTime;
-    Timestamp updateTime;
-    Integer deleted;
+   private  Integer id;
+    private String name;
+    private String couponDesc;
+    private String tag;
+    private  Integer total;
+    private  BigDecimal discount;
+    private  BigDecimal min;
+    private  Integer couponLimit;
+    private  Integer type;
+    private  Integer status;
+    private  Integer goodsType;
+    private  String goodsValue;
+    private String code;
+    private  Integer timeType;
+    private Integer days;
+    private Date startTime;
+    private  Date endTime;
+    private  Integer enabled;
+    private Timestamp addTime;
+    private Timestamp updateTime;
+    private Integer deleted;
+
 }

@@ -37,4 +37,9 @@
         </set>
         where key_name = #{systemEntity.keyName}
     </update>
+
+    <select id="getFreight" resultMap="BaseResultMap">
+        select id, key_name, key_value, add_time, update_time, delted from wanjia_system
+        where  delted = 0 and key_name = #{keyName}
+    </select>
 </mapper>

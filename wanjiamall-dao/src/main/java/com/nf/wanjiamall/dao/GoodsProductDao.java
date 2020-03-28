@@ -24,6 +24,11 @@ public interface GoodsProductDao {
     /**
      * 根据商品id查询
      */
-
     List<GoodsProductEntity> listByGoodsId(@Param("id") int id);
+
+    /**
+     * 根据商品id查询
+     */
+    GoodsProductEntity  getProductByGoodsId(@Param("productId") Integer productId);
+
 }

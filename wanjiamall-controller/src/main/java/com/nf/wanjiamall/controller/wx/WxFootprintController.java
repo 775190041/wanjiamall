@@ -18,14 +18,11 @@ public class WxFootprintController {
     @Autowired
     private WxFootprintService wxFootprintService;
 
-
     @ApiOperation("根据用户Id查询用户足迹的所有信息")
     @GetMapping("/footprint/{userId}")
     public Object getUserIdSelectUserFootprint(@PathVariable("userId") Integer userId){
         return  wxFootprintService.getUserIdSelectUserFootprint(userId);
     }
-
-
 
     @ApiOperation("根据用户Id批量删除用户足迹表Id")
     @DeleteMapping("/footprint/{userId}/{ids}")
