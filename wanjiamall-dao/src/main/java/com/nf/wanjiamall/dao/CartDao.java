@@ -11,33 +11,49 @@ import java.util.List;
 public interface CartDao {
 
     /**
-     * 根据用户Id查询购物车信息
+     *根据用户Id查询购物车所有商品信息
      */
-    List<CartEntity> getUserIdQueryCart(@Param("userId") Integer userId);
+    List<CartEntity> getUserIdQueryCartAll(@Param("userId") Integer userId);
 
     /**
-     * 根据用户Id和购物车Id批量删除
+     *根据用户Id与商品id查询购物车信息
      */
-    int deleteBatchUserIdRoCartId(@Param("userId") Integer userId,@Param("ids") Integer[] ids);
+    CartEntity getUserIdAndGoodsIduQueryCart(@Param("userId") Integer userId,@Param("id")Integer id);
 
     /**
-     * 批量修改商品的勾选状态
+     * 根据用户Id查询商品信息
      */
-    int updateBatchCartChecked(@Param("checked")Integer checked,@Param("ids") Integer[] ids);
-
-    /**
-     * 查询购物车勾选中的的物品数量并进行价格计算
-     */
-    List<CartEntity> getCartPriceSum();
-
-    /**
-     * 修改购物车物品的数量
-     */
-    int updateNumber(@Param("number")Integer number,@Param("id")Integer id);
+    CartEntity getUserIdQueryCart(@Param("userId")Integer userId);
 
     /**
      * 加入购物车(购物车实体类添加)
      */
     int insertCart(@Param("cartEntity") CartEntity cartEntity);
+
+    /**
+     * 查询购物车中是否存在此规格商品
+     */
+    CartEntity getExist(@Param("userId") Integer userId,@Param("goodsId")String goodsId, @Param("productId") Integer productId);
+
+    /**
+     * 修改购物车的商品信息
+     * @param cartEntity
+     */
+    int updateById(@Param("cartEntity") CartEntity cartEntity);
+
+    /**
+     * 根据id批量删除购物车商品
+    */
+    int deleteById(@Param("id")Integer id);
+
+    /**
+     * 购物车商品货品勾选状态
+     */
+    int updateCheck(@Param("productIds")List<Integer> productIds,@Param("checked")Integer checked);
+
+    /**
+     * 删除购物车商品
+     */
+    int delete(@Param("productIds")List<Integer> productIds , @Param("userId")Integer userId);
 
 }

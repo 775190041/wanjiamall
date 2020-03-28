@@ -17,26 +17,21 @@ public class CartEntity {
      * 用户表的用户ID
      */
     private Integer userId;
-
-    /**
-     * 商品表的商品ID
-     */
-    private Integer goodsId;
-
+    
     /**
      * 商品编号
      */
-    private String goods_sn;
+    private String goodsSn;
 
     /**
      * 商品名称
      */
-    private String goods_name;
+    private String goodsName;
 
     /**
      * 商品货品表的货品ID
      */
-     private Integer product_id;
+     private Integer productId;
 
     /**
      * 商品货品的价格
@@ -51,7 +46,7 @@ public class CartEntity {
     /**
      * 商品规格值列表，采用JSON数组格式
      */
-    private String specifications;
+    private String[] specifications;
 
     /**
      * 购物车中商品是否选择状态

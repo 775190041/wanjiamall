@@ -12,5 +12,7 @@ public interface SystemDao {
 
     int updateAll(@Param("systemEntity") SystemEntity systemEntity);
 
+    SystemEntity getFreight(@Param("keyName")String keyName);
+
 }
 

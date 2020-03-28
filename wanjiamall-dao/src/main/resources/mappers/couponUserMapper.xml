@@ -28,4 +28,21 @@
         select * from wanjia_coupon_user where deleted = 0
         and id = #{id}
     </select>
+
+    <!--根据用户Id查询用户优惠卷所有信息-->
+    <select id="getUserIdCouponUserAll"  resultType="com.nf.wanjiamall.entity.CouponUserEntity">
+        select from wanjia_coupon_user where deleted = 0
+        and user_id = #{userId}
+    </select>
+
+    <!--根据用户优惠卷Id查询该优惠卷-->
+    <select id="getCouponUserIdOrUesrId"  resultType="com.nf.wanjiamall.entity.CouponUserEntity">
+        select from wanjia_coupon_user where deleted = 0
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="userId != null">
+            and user_id = #{userid}
+        </if>
+    </select>
 </mapper>
