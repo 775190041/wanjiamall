@@ -33,7 +33,10 @@ public class AdminController {
         return adminService.listAdmin(pageNum,pageSize,name);
     }
 
-
+    @GetMapping("/admin")
+    public Object getAll(){
+        return adminService.getAll();
+    }
     @ApiOperation("添加管理员")
     @PostMapping("/admin")
     public Object insertAdmin(@RequestBody AdminEntity adminEntity){

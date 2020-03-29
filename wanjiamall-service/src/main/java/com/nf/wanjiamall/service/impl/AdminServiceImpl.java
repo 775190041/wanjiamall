@@ -181,6 +181,11 @@ public class AdminServiceImpl implements AdminService {
         return ResponseUtil.ok();
     }
 
+    @Override
+    public Object getAll() {
+        return ResponseUtil.ok(adminDao.getAll());
+    }
+
     public AdminEntity getAdminByUsername(String username){
             return adminDao.getAdminByUsername(username);
     }

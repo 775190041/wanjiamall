@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://47.104.17.145:3306/wanjiamall?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
-    username: wanjiamall
-    password: wanjiamall
+    url: jdbc:mysql://localhost:3306/wanjiamall?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: root
 #    driver-class-name: com.mysql.jdbc.Driver
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -31,6 +31,7 @@ jwt:
 secure:
   ignored:
     urls:
+      - /chat/**
       - /**/*.js
       - /**/*.css
       - /**/*.png

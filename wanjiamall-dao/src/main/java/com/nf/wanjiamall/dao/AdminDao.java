@@ -41,5 +41,9 @@ public interface AdminDao {
     //通过账号查询该用户所有的信息
     AdminEntity getNickByUsername(@Param("adminId") Integer adminId);
 
-
+    /**
+     * 查询所有的管理员
+     * @return
+     */
+    List<AdminEntity> getAll();
 }

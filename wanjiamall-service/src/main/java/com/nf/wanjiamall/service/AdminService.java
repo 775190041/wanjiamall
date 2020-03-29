@@ -5,6 +5,7 @@ import com.nf.wanjiamall.vo.AdminLoginParamVo;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public interface AdminService {
 
@@ -33,4 +34,10 @@ public interface AdminService {
     UserDetails loadUserByUsername(String username);
 
     Object adminLogout(HttpServletRequest request);
+
+    /**
+     * 获取所有管理员信息
+     * @return
+     */
+    Object getAll();
 }

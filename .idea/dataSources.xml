@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://47.104.17.145:3306/wanjiamall</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="wanjiamall@localhost" uuid="4d84322a-eceb-41d8-9a83-08009394999a">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/wanjiamall</jdbc-url>
+    </data-source>
   </component>
 </project>

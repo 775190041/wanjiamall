@@ -84,5 +84,8 @@
     <select id="getNickByUsername" resultType="com.nf.wanjiamall.entity.AdminEntity">
         select  username, nick_name, avatar from wanjia_admin where id = #{adminId}
     </select>
+    <select id="getAll" resultType="com.nf.wanjiamall.entity.AdminEntity">
+         select  username, nick_name, avatar from wanjia_admin
+    </select>
 
 </mapper>
