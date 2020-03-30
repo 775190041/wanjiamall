@@ -12,15 +12,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.*;
 
 /**
  * @author lrc
@@ -36,7 +31,6 @@ public class WxUserServiceImpl implements WxUserService {
 
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxb2d02e2e5e9cbd4f" +
                 "&secret=493c4f274ca8c9a51f737ab3e33d68f7&js_code="+code+"&grant_type=authorization_code";
-
         JSONObject jsonObject =doGetJson(url);
         String openid = jsonObject.getString("openid");
         String openId = openid.substring(0,16);
