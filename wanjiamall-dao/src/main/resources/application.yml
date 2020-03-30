@@ -75,3 +75,5 @@ wanjiamall:
 #        name: "FEDEX联邦(国内件)"
 #      - code: "FEDEX_GJ"
 #        name: "FEDEX联邦(国际件)"
+server:
+  port: 8082
