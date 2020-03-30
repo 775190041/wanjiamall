@@ -15,4 +15,9 @@ public interface UserDao {
     int userUpdate(@Param("id") int id, UserEntity userEntity);
 
     UserEntity getById(@Param("id") Integer id);
+    UserEntity getOpenId(@Param("openId")String openid);
+
+    int userInsert(@Param("openid")String openid);
+
+
 }

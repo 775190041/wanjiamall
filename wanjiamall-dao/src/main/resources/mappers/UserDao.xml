@@ -29,15 +29,28 @@
         <where>
             deleted = 0
             <if test="username != ''">
-            <bind name="pattern" value="'%'+_parameter.username+'%'"/>
+                <bind name="pattern" value="'%'+_parameter.username+'%'"/>
                 and username like  #{pattern}
             </if>
-                <if test="mobile != ''">
+            <if test="mobile != ''">
                 <bind name="pattern2" value="'%'+_parameter.mobile+'%'"/>
                 and mobile like #{pattern2}
             </if>
         </where>
     </select>
+
+    <select id="getOpenId" resultMap="userResultMap">
+        select id,username,password,birthday,last_login_time,
+        last_login_ip,user_level,nickname,mobile,avatar,weixin_openid,
+        session_key,status,add_time,update_time,deleted from wanjia_user
+        <where>
+            deleted = 0 and weixin_openid = #{openId}
+        </where>
+    </select>
+
+    <insert id="userInsert">
+        insert into wanjia_user(weixin_openid) values (#{openid})
+    </insert>
 
     <update id="userUpdate">
         update wanjia_user set status = #{userEntity.status}
