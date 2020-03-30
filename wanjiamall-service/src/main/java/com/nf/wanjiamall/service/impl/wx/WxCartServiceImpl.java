@@ -1,6 +1,4 @@
 package com.nf.wanjiamall.service.impl.wx;
-
-import com.github.pagehelper.PageHelper;
 import com.nf.wanjiamall.dao.*;
 import com.nf.wanjiamall.entity.*;
 import com.nf.wanjiamall.service.wx.WxCartService;
@@ -15,11 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.*;
 
 /**
@@ -272,7 +268,7 @@ public class WxCartServiceImpl implements WxCartService {
     /**
      * 修改购物车商品货品数量
      * @param userId 用户ID
-     * @param cartEntity   购物车商品信息， { id: xxx, goodsId: xxx, productId: xxx, number: xxx }
+     * @param cartEntity   购物车商品信息， { id: xxx, goodsSn: xxx, productId: xxx, number: xxx }
      * @return 修改结果
      */
     @Override
@@ -384,6 +380,7 @@ public class WxCartServiceImpl implements WxCartService {
         cartDao.delete(productIds, userId);
         return getUserIdQueryCartAll(userId);
     }
+
 
     /**
      * 购物车下单
@@ -565,10 +562,11 @@ public class WxCartServiceImpl implements WxCartService {
         Integer days = coupon.getDays();
         LocalDateTime date = LocalDateTime.now();
         if (timeType.equals(1)) {
+
             ZoneId zoneId = ZoneId.systemDefault();
             ZonedDateTime zdt = date.atZone(zoneId);
             Date dates = Date.from(zdt.toInstant());
-            //优惠卷有效时间限制在这之前或者在这时间之后
+
             if (dates.before(coupon.getStartTime()) && dates.after((coupon.getAddTime()))) {
                 return coupon;
             }

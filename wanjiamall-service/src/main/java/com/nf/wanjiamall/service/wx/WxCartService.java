@@ -1,7 +1,6 @@
 package com.nf.wanjiamall.service.wx;
 
 import com.nf.wanjiamall.entity.CartEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * 购物车 服务

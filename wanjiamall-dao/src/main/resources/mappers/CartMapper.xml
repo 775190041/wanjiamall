@@ -21,7 +21,8 @@
         from
             wanjia_cart c left join wanjia_user u
             on c.user_id = u.id
-        where delted = 0 and  c.user_id = #{userId}  and c.id = #{id}
+        where delted = 0 and  c.user_id = #{userId}  and c.goods_sn = #{id}
+
     </select>
 
     <!-- 根据用户Id查询购物车信息 -->
@@ -99,6 +100,7 @@
         <if test="cartEntity.number != null">
             `number`,
         </if>
+
         <if test="cartEntity.specification != null">
             specification,
         </if>

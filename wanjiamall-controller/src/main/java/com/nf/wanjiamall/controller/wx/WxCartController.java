@@ -24,7 +24,7 @@ public class WxCartController {
 
     @ApiOperation("加入购物车(购物车实体类添加)")
     @PostMapping("/cart/{userId}")
-    public Object InsertCart(@PathVariable("userId")Integer userId,CartEntity cartEntity){
+    public Object InsertCart(@PathVariable("userId")Integer userId, CartEntity cartEntity){
         return wxCartService.insertCart(userId,cartEntity);
     }
 

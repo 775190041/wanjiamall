@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nf.wanjiamall.dao.CouponDao">
+
     <select id="getAll" resultType="com.nf.wanjiamall.entity.CouponEntity">
         select * from wanjia_coupon where deleted = 0
     </select>

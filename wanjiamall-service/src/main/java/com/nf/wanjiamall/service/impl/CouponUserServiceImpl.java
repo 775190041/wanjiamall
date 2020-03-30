@@ -6,7 +6,6 @@ import com.nf.wanjiamall.entity.CouponEntity;
 import com.nf.wanjiamall.entity.CouponUserEntity;
 import com.nf.wanjiamall.service.CouponUserService;
 import com.nf.wanjiamall.utils.ResponseUtil;
-import com.nf.wanjiamall.vo.CouponVO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
