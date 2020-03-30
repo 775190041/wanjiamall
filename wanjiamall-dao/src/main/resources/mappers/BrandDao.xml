@@ -55,4 +55,8 @@
         update wanjia_brand set delted=1 where delted=0 and id=#{id}
     </delete>
 
+    <select id="checkExistByName" resultType="integer">
+        select count(*) from wanjia_brand where name = #{name}
+    </select>
+
 </mapper>

@@ -1,14 +1,12 @@
 package com.nf.wanjiamall.service.impl;
 
-import com.nf.wanjiamall.dao.AftersaleDao;
-import com.nf.wanjiamall.dao.OrderDao;
-import com.nf.wanjiamall.dao.OrderGoodsDao;
-import com.nf.wanjiamall.dao.UserDao;
+import com.nf.wanjiamall.dao.*;
 import com.nf.wanjiamall.entity.AftersaleEntity;
 import com.nf.wanjiamall.entity.OrderEntity;
 import com.nf.wanjiamall.entity.OrderGoodsEntity;
 import com.nf.wanjiamall.entity.UserEntity;
 import com.nf.wanjiamall.service.AftersaleService;
+import com.nf.wanjiamall.utils.AftersaleConstant;
 import com.nf.wanjiamall.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +25,10 @@ public class AftersaleServiceImpl implements AftersaleService {
     private OrderDao orderDao;
     @Autowired(required = false)
     private OrderGoodsDao orderGoodsDao;
-
     @Autowired(required = false)
     private UserDao userDao;
+    @Autowired(required = false)
+    private GoodsProductDao goodsProductDao;
 
     @Override
     public Object getAftersaleList(Integer pageNum,
@@ -42,12 +41,11 @@ public class AftersaleServiceImpl implements AftersaleService {
 
     @Override
     public Object batchAudit(List<Integer> ids, Integer status) {
-
-        if (ids.size()>0){
+        if (ids.size() > 0){
             for (Integer id : ids) {
                 AftersaleEntity aftersaleEntity = aftersaleDao.getById(id);
                 //跳过通过与拒绝
-                if (aftersaleEntity.getStatus() == 3||aftersaleEntity.getStatus()==5) {
+                if (aftersaleEntity.getStatus() == AftersaleConstant.STATUS_REFUND ||aftersaleEntity.getStatus() == AftersaleConstant.STATUS_CANCEL) {
                     continue;
                 } else {
                     aftersaleDao.batchAudit(id, status);
@@ -55,7 +53,7 @@ public class AftersaleServiceImpl implements AftersaleService {
             }
             return ResponseUtil.ok("批量修改成功");
         }else {
-            return ResponseUtil.fail(505,"没有勾选");
+            return ResponseUtil.updateDataFailed();
         }
     }
 
@@ -85,16 +83,23 @@ public class AftersaleServiceImpl implements AftersaleService {
     @Override
     public Object refundAftersale(Integer id) {
         AftersaleEntity aftersaleEntity = aftersaleDao.getById(id);
-        if (aftersaleEntity.getStatus() == 2){
-            aftersaleDao.batchAudit(id,3);
+        //判断该订单是否通过审核
+        if (aftersaleEntity.getStatus() == AftersaleConstant.STATUS_RECEPT){
+            aftersaleDao.batchAudit(id,AftersaleConstant.STATUS_REFUND);
             //这里需要判断用户是否已经收到货才退款 ，如果是 ，则退款成功后需要
             //把该该商品的数量加上去
-            if (aftersaleEntity.getType() == 2){
-
+            if (aftersaleEntity.getType() == AftersaleConstant.TYPE_GOODS_REQUIRED){
+                //查询出该订单的商品
+               List<OrderGoodsEntity> orderGoodsEntities = orderGoodsDao.getByOrderId(aftersaleEntity.getOrderId());
+                for (OrderGoodsEntity orderGoodsEntity : orderGoodsEntities) {
+                    //把退回来的商品加入到库存里面去
+                    goodsProductDao.addStock(orderGoodsEntity.getProductId(),orderGoodsEntity.getNumber());
+                }
+                
             }
             return ResponseUtil.ok("退款成功");
         }else {
-            return ResponseUtil.fail(500,"此商品不能退款");
+            return ResponseUtil.refundFailure();
         }
     }
 }

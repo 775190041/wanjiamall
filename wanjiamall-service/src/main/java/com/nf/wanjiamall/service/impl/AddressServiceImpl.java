@@ -17,12 +17,11 @@ import java.util.List;
 @Slf4j
 public class AddressServiceImpl implements AddressService {
 
-    @Autowired
+    @Autowired(required = false)
     private AddressDao addressDao;
 
     @Override
     public Object getAddressList(Integer pageNum, Integer pageSize, AddressEntity addressEntity) {
-        List<AddressEntity> addressEntities = addressDao.getAddressList(pageNum,pageSize,addressEntity);
-        return ResponseUtil.okList(addressEntities);
+        return ResponseUtil.okList(addressDao.getAddressList(pageNum,pageSize,addressEntity));
     }
 }

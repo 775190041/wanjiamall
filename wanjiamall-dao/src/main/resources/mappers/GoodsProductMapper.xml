@@ -53,4 +53,14 @@
         where delted = 0 and goods_id = #{id}
     </select>
 
+    <update id="addStock" >
+        update wanjia_goods_product
+        <set>
+            <if test="number != null">
+                number = number + #{number}
+            </if>
+        </set>
+      where id = #{productId}
+    </update>
+
 </mapper>

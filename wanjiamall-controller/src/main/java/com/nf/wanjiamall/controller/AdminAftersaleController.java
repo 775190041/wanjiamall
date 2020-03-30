@@ -13,7 +13,6 @@ import java.util.List;
 @Api(tags = "wanjia_aftersale")
 @RequestMapping("/api")
 public class AdminAftersaleController {
-
     @Autowired
     private AftersaleService aftersaleService;
 
