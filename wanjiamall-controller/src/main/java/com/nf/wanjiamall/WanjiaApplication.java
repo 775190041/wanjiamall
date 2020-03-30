@@ -11,5 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class WanjiaApplication {
     public static void main(String[] args) {
        SpringApplication.run(WanjiaApplication.class, args);
+
+
     }
 }
