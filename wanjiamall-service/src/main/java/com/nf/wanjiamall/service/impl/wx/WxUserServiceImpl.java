@@ -12,8 +12,12 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.*;
@@ -35,14 +39,16 @@ public class WxUserServiceImpl implements WxUserService {
 
         JSONObject jsonObject =doGetJson(url);
         String openid = jsonObject.getString("openid");
-        String token = jsonObject.getString("access_token");
-        String infoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + token + "&openid=" + openid
-                + "&lang=zh_CN";
-        JSONObject userInfo = doGetJson(infoUrl);
+        System.out.println("openid = " + openid);
+//        String token = jsonObject.getString("access_token");
+//        String infoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + token + "&openid=" + openid
+//                + "&lang=zh_CN";
+//        JSONObject userInfo = doGetJson(infoUrl);
         UserEntity userEntity  = userDao.getOpenId(openid);
-        if( userInfo != null){
+        if( jsonObject != null){
             if (userEntity == null){
-                if (userDao.userInsert(openid) > 0){
+
+                if (userDao.userInsert(UUID.randomUUID().toString(),openid) > 0){
                     return ResponseUtil.ok();
                 }else {
                     return ResponseUtil.fail(505,"添加失败");
@@ -67,6 +73,7 @@ public class WxUserServiceImpl implements WxUserService {
         httpGet.releaseConnection();
         return jsonObject;
     }
+
 
     
 
