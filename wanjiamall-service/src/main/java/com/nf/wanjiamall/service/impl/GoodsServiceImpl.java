@@ -100,12 +100,7 @@ public class GoodsServiceImpl implements GoodsService {
         String gallery = ArrayUtils.addDouble(goodsEntity.getGallery());
         goodsEntity.setGallerys(gallery);
 
-        //判断该商品是否存在和商品编号是否存在
-        String goodsSn = goodsEntity.getGoodsSn();
-        String name = goodsEntity.getName();
-        if (goodsDao.checkExistByNameOrGoodsSn(goodsSn,name) >0){
-            return ResponseUtil.fail(611,"商品或编号存在,修改失败");
-        }
+
         //商品基本信息表
         goodsDao.update(goodsEntity);
         //商品规格表

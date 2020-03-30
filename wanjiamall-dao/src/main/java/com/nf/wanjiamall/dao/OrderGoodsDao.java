@@ -8,4 +8,6 @@ import java.util.List;
 public interface OrderGoodsDao {
     List<OrderGoodsEntity> getByOrderId(@Param("orderId") Integer orderId);
 
+
+
 }

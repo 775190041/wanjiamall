@@ -16,8 +16,9 @@ import java.util.List;
 @Service
 @Slf4j
 public class BrandServiceImpl implements BrandService {
-    @Autowired
+    @Autowired(required = false)
     private BrandDao brandDao;
+
 
     @Override
     public Object getByConditions(int pageNum, int pageSize, BrandEntity brandEntity) {
@@ -27,41 +28,44 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Object insert(BrandEntity brandEntity) {
-        List<BrandEntity> getBrandNames=brandDao.getAll();
-        if (brandDao.insert(brandEntity)>0){
-            for (BrandEntity getBrandName : getBrandNames) {
-                if (brandEntity.getName().equals(getBrandName.getName())){
-                    return ResponseUtil.fail(505,"已存在该品牌名，添加失败！");
-                }
-            }
-            return ResponseUtil.ok();
+        //添加之前查询是否有改品牌名称
+        if (brandDao.checkExistByName(brandEntity.getName()) > 0 ){
+            return ResponseUtil.existBrandFailure();
         }else {
-            return ResponseUtil.fail(505,"添加失败！");
+            if (brandDao.insert(brandEntity)>0){
+                return ResponseUtil.ok("添加成功");
+            }else {
+                return ResponseUtil.insertDataFailed();
+            }
         }
     }
 
     @Override
     public Object updateById(BrandEntity brandEntity, Integer id) {
-        Integer count = brandDao.updateById(brandEntity,id);
-        if (count >0 ){
-            return ResponseUtil.ok();
+        //修改之前判断是否存在改品牌
+        if (brandDao.checkExistByName(brandEntity.getName()) > 0 ){
+            return ResponseUtil.existBrandFailure();
         }else {
-            return ResponseUtil.fail(505,"修改失败");
+            Integer count = brandDao.updateById(brandEntity,id);
+            if (count >0 ){
+                return ResponseUtil.ok("修改成功");
+            }else {
+                return ResponseUtil.updateDataFailed();
+            }
         }
     }
 
     @Override
     public Object deleteById(Integer id) {
-        Integer num=brandDao.getProductByBrandCount(id);
-        if (num==0){
-            Integer count = brandDao.deleteById(id);
-            if (count > 0 ){
-                return ResponseUtil.ok();
-            }else {
-                return ResponseUtil.fail(505,"删除失败");
-            }
-        }else {
-            return ResponseUtil.fail(505,"有商品绑定，无法删除");
-        }
+        //判断是否有商品绑定该品牌，如果有则无法删除
+         if (brandDao.getProductByBrandCount(id) > 0){
+             return ResponseUtil.deleteBrandFailure();
+         }else {
+             if (brandDao.deleteById(id) > 0){
+                 return ResponseUtil.ok("删除成功");
+             }else {
+                 return ResponseUtil.deleteDataFailed();
+             }
+         }
     }
 }
