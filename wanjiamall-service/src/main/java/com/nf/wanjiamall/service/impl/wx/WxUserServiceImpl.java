@@ -39,16 +39,11 @@ public class WxUserServiceImpl implements WxUserService {
 
         JSONObject jsonObject =doGetJson(url);
         String openid = jsonObject.getString("openid");
-        System.out.println("openid = " + openid);
-//        String token = jsonObject.getString("access_token");
-//        String infoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + token + "&openid=" + openid
-//                + "&lang=zh_CN";
-//        JSONObject userInfo = doGetJson(infoUrl);
-        UserEntity userEntity  = userDao.getOpenId(openid);
+        String openId = openid.substring(0,16);
+        UserEntity userEntity  = userDao.getOpenId(openId);
         if( jsonObject != null){
             if (userEntity == null){
-
-                if (userDao.userInsert(UUID.randomUUID().toString(),openid) > 0){
+                if (userDao.userInsert(openId) > 0){
                     return ResponseUtil.ok();
                 }else {
                     return ResponseUtil.fail(505,"添加失败");

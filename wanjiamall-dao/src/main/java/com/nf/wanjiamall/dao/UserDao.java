@@ -17,7 +17,7 @@ public interface UserDao {
     UserEntity getById(@Param("id") Integer id);
     UserEntity getOpenId(@Param("openId")String openid);
 
-    int userInsert(@Param("username") String username, @Param("openid")String openid);
+    int userInsert(@Param("openid")String openid);
 
 
 }
