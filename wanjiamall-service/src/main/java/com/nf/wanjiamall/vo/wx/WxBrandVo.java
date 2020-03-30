@@ -18,6 +18,4 @@ import java.util.Map;
 public class WxBrandVo {
     //品牌信息
     private List<BrandEntity> brands;
-    //该品牌下的商品信息
-    private Map<String,List<GoodsEntity>> goodsMap;
 }

@@ -4,7 +4,7 @@
     <data-source source="LOCAL" name="wanjiamall@localhost" uuid="bd94c42c-a405-4f96-880c-a8f5abf93905">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/wanjiamall</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
@@ -14,12 +14,6 @@
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
       </driver-properties>
-    </data-source>
-    <data-source source="LOCAL" name="wanjiamall@localhost" uuid="4d84322a-eceb-41d8-9a83-08009394999a">
-      <driver-ref>mysql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/wanjiamall</jdbc-url>
     </data-source>
   </component>
 </project>
