@@ -30,15 +30,18 @@ public class WxUserServiceImpl implements WxUserService {
     public Object getWxUserOpenid(String code) throws IOException {
 
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxb2d02e2e5e9cbd4f" +
-                "&secret=493c4f274ca8c9a51f737ab3e33d68f7&js_code="+code+"&grant_type=authorization_code";
-        JSONObject jsonObject =doGetJson(url);
+                "&secret=493c4f274ca8c9a51f737ab3e33d68f7&js_code=" + code + "&grant_type=authorization_code";
+        JSONObject jsonObject = doGetJson(url);
         String openid = jsonObject.getString("openid");
-        String openId = openid.substring(0,16);
-        UserEntity userEntity  = userDao.getOpenId(openId);
+        String openId = openid.substring(0, 16);
+        UserEntity userEntity = userDao.getOpenId(openId);
         if( jsonObject != null){
             if (userEntity == null){
                 if (userDao.userInsert(openId) > 0){
-                    return ResponseUtil.ok();
+                    userEntity.setUsername(openId);
+                    userEntity.setPassword(openId);
+                    userEntity.setWeixinOpenid(openId);
+                    return ResponseUtil.ok(userEntity);
                 }else {
                     return ResponseUtil.fail(505,"添加失败");
                 }
@@ -49,7 +52,7 @@ public class WxUserServiceImpl implements WxUserService {
         }
     }
 
-    public  JSONObject doGetJson(String url) throws IOException {
+    public JSONObject doGetJson(String url) throws IOException {
         JSONObject jsonObject = null;
         DefaultHttpClient client = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(url);
@@ -63,8 +66,7 @@ public class WxUserServiceImpl implements WxUserService {
         return jsonObject;
     }
 
-
-    
+}
 
 
 }
