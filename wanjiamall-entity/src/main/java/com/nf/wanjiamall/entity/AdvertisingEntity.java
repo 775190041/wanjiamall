@@ -2,10 +2,10 @@ package com.nf.wanjiamall.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Date;
+
 
 /**
  * @author lrc

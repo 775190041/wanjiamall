@@ -13,4 +13,11 @@ public interface UserDao {
     List<UserEntity> getUserList(@Param("pageNum") Integer pageNum,@Param("pageSize") Integer pageSize,
                                  @Param("username") String username,@Param("mobile") String mobile);
     int userUpdate(@Param("id") int id, UserEntity userEntity);
+
+    UserEntity getById(@Param("id") Integer id);
+    UserEntity getOpenId(@Param("openId")String openid);
+
+    int userInsert(@Param("openid")String openid);
+
+
 }

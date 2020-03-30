@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.RoleDao">
+
+    <select id="listRole" resultType="com.nf.wanjiamall.entity.RoleEntity">
+        select id, name, description, enabled, add_time, update_time, delted from wanjia_role
+        <where>
+            delted = 0
+            <if test="name != null and name != '' ">
+                and name = #{name}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertRole">
+        insert into wanjia_role (name, description,enabled)
+        values (#{roleEntity.name},#{roleEntity.description},#{roleEntity.enabled})
+    </insert>
+
+    <update id="updateRole">
+        update wanjia_role
+        <set>
+            <if test="roleEntity.name != null">
+                    name = #{roleEntity.name},
+            </if>
+            <if test="roleEntity.description != null">
+                description  = #{roleEntity.description},
+            </if>
+            <if test="roleEntity.enabled != null">
+                enabled = #{roleEntity.enabled}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="deleteRole" >
+        update wanjia_role set delted = 1  where id = #{id}
+    </update>
+
+    <update id="updateRoleStatus">
+        update  wanjia_role set enabled = #{enabled} where id = #{id}
+    </update>
+
+    <select id="listByIdRoleMenu" resultType="com.nf.wanjiamall.entity.MenuEntity">
+        select wm.id as id,
+        wm.parent_id as parentId
+        from wanjia_role_menu_relation wrmr left join
+        wanjia_menu wm on wrmr.menu_id = wm.id
+        where wrmr.role_id = #{id} and wm.id is not null
+        group by wm.id
+
+    </select>
+    <select id="getRole" resultType="com.nf.wanjiamall.entity.RoleEntity">
+        select id, name, description, enabled, add_time, update_time, delted from wanjia_role where enabled=1 and delted =0
+    </select>
+
+    <delete id="deleteRoleMenuByRoleId">
+        delete from wanjia_role_menu_relation where role_id = #{roleId}
+    </delete>
+
+    <insert id="insertRoleMenuRelation" >
+        insert into wanjia_role_menu_relation (role_id, menu_id) values (#{roleId},#{menuId});
+    </insert>
+
+    <select id="getRoleName" resultType="com.nf.wanjiamall.entity.RoleEntity">
+      select name from wanjia_role where EXISTS(select role_id from wanjia_admin_role_relation where admin_id = #{adminId})
+    </select>
+
+
+
+</mapper>

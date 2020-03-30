@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.OrderGoodsDao">
+
+    <select id="getByOrderId" resultType="com.nf.wanjiamall.entity.OrderGoodsEntity">
+        select id, order_id, goods_id, goods_name, goods_sn, product_id, number, price, specifications, pic_url, comment, add_time, update_time, deleted
+         from wanjia_order_goods where order_id = #{orderId}
+    </select>
+
+
+</mapper>
