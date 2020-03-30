@@ -31,7 +31,7 @@ public interface WxCartService {
     /**
      * 购物车商品货品勾选状态
      */
-    Object checked(Integer userId, String body) ;
+    Object  checked(Integer userId, String body) ;
 
     /**
      * 购物车商品删除
@@ -41,6 +41,6 @@ public interface WxCartService {
     /**
      * 购物车下单
      */
-    Object cartOrders(Integer userId, Integer cartId, Integer addressId, Integer couponId, Integer userCouponId, Integer grouponRulesId) ;
+    Object cartOrders(Integer userId, Integer cartId, Integer addressId, Integer couponId, Integer userCouponId) ;
 
 }

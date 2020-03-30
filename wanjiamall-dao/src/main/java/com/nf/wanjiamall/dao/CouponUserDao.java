@@ -26,5 +26,5 @@ public interface CouponUserDao {
     /**
      * 根据用户优惠卷Id查询该优惠卷
      */
-    CouponUserEntity getCouponUserIdOrUesrId(@Param("id")Integer id,@Param("userId")Integer userId);
+    CouponUserEntity getUserCouponIdOrUesrId(@Param("userCouponId")Integer userCouponId,@Param("userId")Integer userId);
 }

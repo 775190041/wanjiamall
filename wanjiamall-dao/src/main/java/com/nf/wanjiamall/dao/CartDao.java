@@ -33,7 +33,7 @@ public interface CartDao {
     /**
      * 查询购物车中是否存在此规格商品
      */
-    CartEntity getExist(@Param("userId") Integer userId,@Param("goodsId")String goodsId, @Param("productId") Integer productId);
+    CartEntity getExist(@Param("userId") Integer userId,@Param("goodsId")Integer goodsId, @Param("productId") Integer productId);
 
     /**
      * 修改购物车的商品信息

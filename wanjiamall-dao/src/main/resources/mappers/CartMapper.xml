@@ -21,7 +21,7 @@
         from
             wanjia_cart c left join wanjia_user u
             on c.user_id = u.id
-        where delted = 0 and  c.user_id = #{userId}  and c.goods_sn = #{id}
+        where delted = 0 and  c.user_id = #{userId}  and c.id = #{id}
     </select>
 
     <!-- 根据用户Id查询购物车信息 -->
@@ -41,9 +41,6 @@
             <if test="cartEntity.userId != null">
                 user_id = #{cartEntity.userId},
             </if>
-            <if test="cartEntity.goodsId != null">
-                goods_id = #{cartEntity.goodsId},
-            </if>
             <if test="cartEntity.goodsSn != null">
                 goods_sn = #{cartEntity.goodsSn},
             </if>
@@ -59,37 +56,33 @@
             <if test="cartEntity.number != null">
                 `number` = #{cartEntity.number},
             </if>
-            <if test="specifications != null">
-                specifications = #{cartEntity.specifications,typeHandler=org.linlinjava.litemall.db.mybatis.JsonStringArrayTypeHandler},
+            <if test="cartEntity.specifications != null">
+                specifications = #{cartEntity.specifications},
             </if>
-            <if test="checked != null">
+            <if test="cartEntity.checked != null">
                 `checked` = #{cartEntity.checked},
             </if>
-            <if test="picUrl != null">
+            <if test="cartEntity.picUrl != null">
                 pic_url = #{cartEntity.picUrl},
             </if>
-            <if test="addTime != null">
+            <if test="cartEntity.addTime != null">
                 add_time = #{cartEntity.addTime},
             </if>
             <if test="cartEntity.updateTime != null">
                 update_time = #{cartEntity.updateTime},
             </if>
             <if test="cartEntity.delted != null">
-                deleted = #{cartEntity.delted},
+                delted = #{cartEntity.delted},
             </if>
         </set>
         where id = #{cartEntity.id}
     </update>
-
 
     <insert id="insertCart">
     insert into wanjia_cart
     <trim prefix="(" suffix=")" suffixOverrides=",">
         <if test="cartEntity.userId != null">
             user_id,
-        </if>
-        <if test="cartEntity.goodsId != null">
-            goods_id,
         </if>
         <if test="cartEntity.goodsSn != null">
             goods_sn,
@@ -106,8 +99,8 @@
         <if test="cartEntity.number != null">
             `number`,
         </if>
-        <if test="cartEntity.specifications != null">
-            specifications,
+        <if test="cartEntity.specification != null">
+            specification,
         </if>
         <if test="cartEntity.checked != null">
             `checked`,
@@ -129,9 +122,6 @@
         <if test="cartEntity.userId != null">
             #{cartEntity.userId},
         </if>
-        <if test="cartEntity.goodsId != null">
-            #{cartEntity.goodsId},
-        </if>
         <if test="cartEntity.goodsSn != null">
             #{cartEntity.goodsSn},
         </if>
@@ -147,8 +137,8 @@
         <if test="cartEntity.number != null">
             #{cartEntity.number},
         </if>
-        <if test="cartEntity.specifications != null">
-            #{cartEntity.specifications typeHandler=org.linlinjava.litemall.db.mybatis.JsonStringArrayTypeHandler},
+        <if test="cartEntity.specification != null">
+            #{cartEntity.specification},
         </if>
         <if test="cartEntity.checked != null">
             #{cartEntity.checked},
@@ -170,14 +160,14 @@
 
     <select id="getExist" resultType="com.nf.wanjiamall.entity.CartEntity">
         select  id, user_id, goods_sn, goods_name, product_id, price, number, checked, pic_url, delted from wanjia_cart
-        where user_id = #{userId} or goodsId = #{goodsId} or productId = #{productId}
+        where delted = 0 and user_id = #{userId} and goods_sn = #{goodsId} and product_id = #{productId}
     </select>
 
     <!--根据用户Id删除-->
     <delete id="deleteById">
       update wanjia_cart set
         delted = 1
-        where id = #{id}
+        where delted = 0 and id = #{id}
     </delete>
 
     <!--批量修改商品的勾选状态 -->
@@ -186,7 +176,7 @@
         <if test="checked != null ">
             checked = #{checked}
         </if>
-        where id in
+        where delted = 0 and id in
         <foreach collection="productIds" item="item" index="index" open="(" close=")" separator=",">
             #{item}
         </foreach>
@@ -194,8 +184,7 @@
 
     <update id="delete">
         update wanjia_cart set
-        delted = 1
-        where user_id = #{userId} or id in
+        delted = 1  where delted = 0 and user_id = #{userId} and id in
         <foreach collection="productIds" item="item" index="index" open="(" close=")" separator=",">
             #{item}
         </foreach>

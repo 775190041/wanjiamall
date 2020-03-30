@@ -24,19 +24,19 @@ public class WxCartController {
 
     @ApiOperation("加入购物车(购物车实体类添加)")
     @PostMapping("/cart/{userId}")
-    public Object InsertCart(@PathVariable("userId")Integer userId,@RequestParam CartEntity cartEntity){
+    public Object InsertCart(@PathVariable("userId")Integer userId,CartEntity cartEntity){
         return wxCartService.insertCart(userId,cartEntity);
     }
 
     @ApiOperation("商品立即购买")
     @PostMapping("/cart/buyImmediately/{userId}")
-    public Object buyImmediately(@PathVariable("userId") Integer userId,@RequestBody CartEntity cartEntity){
+    public Object buyImmediately(@PathVariable("userId") Integer userId, CartEntity cartEntity){
         return wxCartService.buyImmediately(userId, cartEntity);
     }
 
     @ApiOperation("修改购物车商品货品数量")
     @PutMapping("/cart/{userId}")
-    public Object updateByGoodsAndProductNumber(@PathVariable("userId") Integer userId, @RequestBody CartEntity cartEntity){
+    public Object updateByGoodsAndProductNumber(@PathVariable("userId") Integer userId,CartEntity cartEntity){
         return wxCartService.updateByGoodsAndProductNumber(userId,cartEntity);
     }
 
@@ -53,9 +53,12 @@ public class WxCartController {
     }
 
     @ApiOperation("商品下单")
-    @GetMapping("/cart/cartOrders")
-     private Object cartOrders( Integer userId, Integer cartId,Integer addressId,Integer couponId,Integer userCouponId,Integer couponRulesId) {
-         return wxCartService.cartOrders(userId, cartId, addressId, couponId, userCouponId, couponRulesId);
-
+    @GetMapping("/cart/cartOrders/{userId}/{cartId}/{addressId}/{couponId}/{userCouponId}")
+     public Object cartOrders(@PathVariable("userId")  Integer userId,
+                              @PathVariable("cartId") Integer cartId,
+                              @PathVariable("addressId") Integer addressId,
+                              @PathVariable("couponId") Integer couponId,
+                              @PathVariable("userCouponId") Integer userCouponId) {
+         return wxCartService.cartOrders(userId, cartId, addressId, couponId, userCouponId);
      }
 }

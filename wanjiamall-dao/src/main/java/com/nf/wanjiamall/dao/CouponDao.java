@@ -14,7 +14,7 @@ public interface CouponDao {
     List<CouponEntity> getAll();
     List<CouponEntity> getCouponAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,@Param("coupon") CouponEntity couponEntity);
 
-    CouponEntity getCouponById(@Param("id")Integer couponRulesId);
+    CouponEntity getCouponById(@Param("couponId") Integer couponId);
 
 
     Integer insertCouponDay(@Param("coupon") CouponEntity couponEntity);

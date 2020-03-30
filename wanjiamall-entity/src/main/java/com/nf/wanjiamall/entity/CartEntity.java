@@ -48,6 +48,8 @@ public class CartEntity {
      */
     private String[] specifications;
 
+    private String specification;
+
     /**
      * 购物车中商品是否选择状态
      */

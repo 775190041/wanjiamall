@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.chrono.ChronoLocalDateTime;
 import java.util.*;
 
@@ -125,7 +128,7 @@ public class WxCartServiceImpl implements WxCartService {
         //获取数据
         Integer productId = cartEntity.getProductId();
         Integer number = cartEntity.getNumber();
-        String goodsId = cartEntity.getGoodsSn();
+        Integer goodsId = Integer.valueOf(cartEntity.getGoodsSn());
         //判断参数是否为空
         if (!ObjectUtils.allNotNull(productId, number , goodsId)) {
             return ResponseUtil.badArgument();
@@ -134,7 +137,7 @@ public class WxCartServiceImpl implements WxCartService {
             return ResponseUtil.badArgument();
         }
         //判断商品是否可以购买
-        GoodsEntity goods = goodsDao.getGoodById(goodsId);
+        GoodsEntity goods = goodsDao.getGoodById(goodsId.toString());
         if (goods == null || !goods.getIsOnSale()) {
             return ResponseUtil.fail(710, "商品已下架");
         }
@@ -157,7 +160,8 @@ public class WxCartServiceImpl implements WxCartService {
                 cartEntity.setPicUrl(product.getUrl());
             }
             cartEntity.setPrice(new BigDecimal(product.getPrice()));
-            cartEntity.setSpecifications(product.getSpecifications());
+            cartEntity.setSpecification( Arrays.toString(product.getSpecifications()));
+            System.out.println("cartEntity = " + cartEntity.getSpecification());
             cartEntity.setUserId(userId);
             cartEntity.setChecked(0);
             cartDao.insertCart(cartEntity);
@@ -215,7 +219,7 @@ public class WxCartServiceImpl implements WxCartService {
         }
         Integer productId = cartEntity.getProductId();
         Integer number = cartEntity.getNumber();
-        String goodsId = cartEntity.getGoodsSn();
+        Integer goodsId = Integer.valueOf(cartEntity.getGoodsSn());
         if (!ObjectUtils.allNotNull(productId, number, goodsId)) {
             return ResponseUtil.badArgument();
         }
@@ -223,7 +227,7 @@ public class WxCartServiceImpl implements WxCartService {
             return ResponseUtil.badArgument();
         }
         //判断商品是否可以购买
-        GoodsEntity goods = goodsDao.getGoodById(goodsId);
+        GoodsEntity goods = goodsDao.getGoodById(goodsId.toString());
         if (goods == null || !goods.getIsOnSale()) {
             return ResponseUtil.fail(711, "商品已下架");
         }
@@ -246,7 +250,7 @@ public class WxCartServiceImpl implements WxCartService {
                 cartEntity.setPicUrl(product.getUrl());
             }
             cartEntity.setPrice(new BigDecimal(product.getPrice()));
-            cartEntity.setSpecifications(product.getSpecifications());
+            cartEntity.setSpecification(Arrays.toString(product.getSpecifications()));
             cartEntity.setUserId(userId);
             cartEntity.setChecked(0);
             cartDao.insertCart(cartEntity);
@@ -280,7 +284,7 @@ public class WxCartServiceImpl implements WxCartService {
             return ResponseUtil.badArgument();
         }
         Integer id = cartEntity.getId();
-        String goodsId = cartEntity.getGoodsSn();
+        Integer goodsId = Integer.valueOf(cartEntity.getGoodsSn());
         Integer productId = cartEntity.getProductId();
         Integer number = cartEntity.getNumber();
         if (!ObjectUtils.allNotNull(id,goodsId,productId,number)) {
@@ -291,12 +295,12 @@ public class WxCartServiceImpl implements WxCartService {
         }
         //判断是否存在该订单
         // 如果不存在，直接返回错误
-        CartEntity existCart = cartDao.getUserIdAndGoodsIduQueryCart(userId,id);
+        CartEntity existCart = cartDao.getUserIdAndGoodsIduQueryCart(userId,goodsId);
         if (existCart == null) {
             return ResponseUtil.badArgumentValue();
         }
         // 判断goodsId和productId是否与当前cart里的值一致
-        if (!existCart.getGoodsSn().equals(goodsId)) {
+        if (!existCart.getGoodsSn().equals(goodsId.toString())) {
             return ResponseUtil.badArgumentValue();
         }
         if (!existCart.getProductId().equals(productId)) {
@@ -304,7 +308,7 @@ public class WxCartServiceImpl implements WxCartService {
         }
 
         //判断商品是否可以购买
-        GoodsEntity goods = goodsDao.getGoodById(goodsId);
+        GoodsEntity goods = goodsDao.getGoodById(goodsId.toString());
         if (goods == null || !goods.getIsOnSale()) {
             return ResponseUtil.fail(711, "商品已下架");
         }
@@ -394,7 +398,7 @@ public class WxCartServiceImpl implements WxCartService {
      * @return 购物车操作结果
      */
     @Override
-    public Object cartOrders(Integer userId, Integer cartId, Integer addressId, Integer couponId, Integer userCouponId, Integer couponRulesId) {
+    public Object cartOrders(Integer userId, Integer cartId, Integer addressId, Integer couponId, Integer userCouponId) {
         if (userId == null) {
             return ResponseUtil.unlogin();
         }
@@ -444,7 +448,7 @@ public class WxCartServiceImpl implements WxCartService {
         BigDecimal checkedGoodsPrice = new BigDecimal(0.00);
         for (CartEntity cart : checkedGoodsList) {
             //商品价格 * 商品数量
-                checkedGoodsPrice = checkedGoodsPrice.add(cart.getPrice().multiply(new BigDecimal(cart.getNumber())));
+            checkedGoodsPrice = checkedGoodsPrice.add(cart.getPrice().multiply(new BigDecimal(cart.getNumber())));
         }
 
         // 计算优惠券可用情况
@@ -507,20 +511,23 @@ public class WxCartServiceImpl implements WxCartService {
             }
         }
         // 根据订单商品总价计算运费，满88则免运费，否则8元；
-        SystemEntity system =  systemDao.getFreight("litemall_express_freight_min");
+        SystemEntity system =  systemDao.getFreight("wanjia_express_freight_min");
        //得到运费价格
-        String freightPrice = system.getKeyValue();
-        // 可以使用的其他钱，例如用户积分
-        BigDecimal integralPrice = new BigDecimal(0.00);
+        BigDecimal freightPrice =  new BigDecimal(system.getKeyValue());
+        //商品总价比运费价格大
+        if (checkedGoodsPrice.compareTo(freightPrice) == 1){
+            //则免运费
+            freightPrice = new BigDecimal(0.0);
+        }else{
+            freightPrice = new BigDecimal(8);
+        }
         // 订单费用
-        BigDecimal orderTotalPrice = checkedGoodsPrice.add(new BigDecimal(freightPrice)).subtract(couponPrice).max(new BigDecimal(0.00));
-        BigDecimal actualPrice = orderTotalPrice.subtract(integralPrice);
+        BigDecimal orderTotalPrice = checkedGoodsPrice.add(freightPrice).subtract(couponPrice).max(new BigDecimal(0.00));
         Map<String, Object> data = new HashMap<>();
         data.put("addressId", addressId);
         data.put("couponId", couponId);
         data.put("userCouponId", userCouponId);
         data.put("cartId", cartId);
-        data.put("couponRulesId", couponRulesId);
         data.put("couponPrice", couponPrice);
         data.put("checkedAddress", checkedAddress);
         data.put("availableCouponLength", availableCouponLength);
@@ -528,7 +535,6 @@ public class WxCartServiceImpl implements WxCartService {
         data.put("freightPrice", freightPrice);
         data.put("couponPrice", couponPrice);
         data.put("orderTotalPrice", orderTotalPrice);
-        data.put("actualPrice", actualPrice);
         data.put("checkedGoodsList", checkedGoodsList);
         return ResponseUtil.ok(data);
     }
@@ -546,7 +552,7 @@ public class WxCartServiceImpl implements WxCartService {
             return null;
         }
         //查看用户优惠卷是否存在
-       CouponUserEntity couponUser = couponUserDao.getCouponUserIdOrUesrId(userCouponId,userId);
+       CouponUserEntity couponUser = couponUserDao.getUserCouponIdOrUesrId(userCouponId,userId);
         if (couponUser == null) {
             return null;
         }
@@ -559,18 +565,21 @@ public class WxCartServiceImpl implements WxCartService {
         Integer days = coupon.getDays();
         LocalDateTime date = LocalDateTime.now();
         if (timeType.equals(1)) {
+            ZoneId zoneId = ZoneId.systemDefault();
+            ZonedDateTime zdt = date.atZone(zoneId);
+            Date dates = Date.from(zdt.toInstant());
             //优惠卷有效时间限制在这之前或者在这时间之后
-            if (date.isBefore(ChronoLocalDateTime.from(coupon.getStartTime().toLocalDate())) || date.isBefore(ChronoLocalDateTime.from(coupon.getEndTime().toLocalDate()))) {
-                return null;
+            if (dates.before(coupon.getStartTime()) && dates.after((coupon.getAddTime()))) {
+                return coupon;
             }
         }
         //有效时限制是0
         else if(timeType.equals(0)) {
             //把基于时间的有效天数加到时间中
             LocalDateTime now = couponUser.getAddTime().toLocalDateTime().plusDays(days);
-            //
-            if (date.isAfter(now)) {
-                return null;
+            System.out.println("now = " + now);
+            if (date.isBefore(now)) {
+                return coupon;
             }
         }
         else {
