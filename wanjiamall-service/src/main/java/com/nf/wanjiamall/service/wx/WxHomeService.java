@@ -8,6 +8,4 @@ public interface WxHomeService {
     Object getHomeData(Integer pageNum,Integer pageSize);
 
 
-
-
 }
