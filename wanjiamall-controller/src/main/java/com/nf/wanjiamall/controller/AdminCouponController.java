@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Api(tags = "优惠卷管理")
 @RequestMapping("/api")
-public class AdminCouponController {
+public class  AdminCouponController {
     @Autowired
     private CouponService couponService;
 

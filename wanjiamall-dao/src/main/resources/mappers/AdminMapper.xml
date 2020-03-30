@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.AdminDao">
+
+    <select id="listAdmin" resultType="com.nf.wanjiamall.entity.AdminEntity">
+        select id, username, password, nick_name, avatar, login_time
+        , deleted_state, add_time, update_time, delted from wanjia_admin
+        <where>
+            <if test="name != null and name != '' ">
+                username = #{name}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertAdminRoleRelation">
+        insert into wanjia_admin_role_relation (admin_id, role_id) values (#{adminId},#{roleId})
+    </insert>
+
+    <insert id="insertAdmin" useGeneratedKeys="true" keyProperty="id">
+        insert into wanjia_admin (username, password, nick_name, avatar,deleted_state)
+         values (#{adminEntity.username},#{adminEntity.password},
+         #{adminEntity.nickName},#{adminEntity.avatar},#{adminEntity.deletedState})
+    </insert>
+
+    <update id="updateAdmin">
+         update wanjia_admin
+         <set>
+             <if test="adminEntity.username != null ">
+                 username = #{adminEntity.username},
+             </if>
+            <if test="adminEntity.password != null">
+                password = #{adminEntity.password},
+            </if>
+            <if test="adminEntity.nickName != null">
+                nick_name = #{adminEntity.nickName},
+            </if>
+            <if test="adminEntity.avatar != null">
+                avatar = #{adminEntity.avatar},
+            </if>
+            <if test="adminEntity.deletedState != null">
+                deleted_state = #{adminEntity.deletedState}
+            </if>
+         </set>
+         where id = #{id}
+    </update>
+
+    <delete id="deleteAdminRoleRelationByAdminId">
+        delete from wanjia_admin_role_relation where admin_id = #{adminId}
+    </delete>
+
+    <delete id="deleteAdmin">
+        delete from wanjia_admin where id = #{id}
+    </delete>
+
+    <update id="updateAdminStatus">
+        update wanjia_admin set
+         deleted_state = #{adminEntity.deletedState}
+         where id = #{id}
+    </update>
+
+    <select id="getAdminRoleRelationByAdminId" resultType="com.nf.wanjiamall.entity.AdminRoleRelationEntity">
+        select id, admin_id, role_id from
+        wanjia_admin_role_relation where admin_id = #{adminId}
+    </select>
+
+
+    <select id="getAdminByUsername" resultType="com.nf.wanjiamall.entity.AdminEntity">
+        select id, username, password, nick_name, avatar, login_time, deleted_state, add_time, update_time, delted
+         from wanjia_admin
+        <where>
+            <if test="username != null">
+                username = #{username}
+            </if>
+        </where>
+    </select>
+
+    <update id="insertLoginLog" >
+        update wanjia_admin set login_time = #{adminEntity.loginTime}
+        where username = #{adminEntity.username}
+    </update>
+
+    <select id="getNickByUsername" resultType="com.nf.wanjiamall.entity.AdminEntity">
+        select  username, nick_name, avatar from wanjia_admin where id = #{adminId}
+    </select>
+    <select id="getAll" resultType="com.nf.wanjiamall.entity.AdminEntity">
+         select  username, nick_name, avatar from wanjia_admin
+    </select>
+
+</mapper>

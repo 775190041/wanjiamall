@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.OrderDao">
+    <select id="getOrderList" resultType="com.nf.wanjiamall.entity.OrderEntity">
+        select id, user_id, order_sn, order_status, aftersale_status,
+         consignee, mobile, address, message, goods_price,
+         freight_price, coupon_price, order_price, actual_price,
+         pay_id, pay_time, ship_sn, ship_channel, ship_time, refund_amount,
+         refund_type, refund_content, refund_time, confirm_time, comments, end_time,
+         add_time, update_time, deleted
+         from wanjia_order
+         <where>
+             <if test="userId != null and userId != ''">
+                 user_id = #{userId},
+             </if>
+            <if test="orderSn != null and orderSn != '' ">
+                order_sn = #{orderSn},
+            </if>
+            <if test="orderStatus.size > 0 ">
+                order_status in
+                <foreach item="item" collection="orderStatus" separator="," open="(" close=")" >
+                  #{item}
+                </foreach>
+            </if>
+         </where>
+    </select>
+
+    <select id="getById" resultType="com.nf.wanjiamall.entity.OrderEntity">
+        select id, user_id, order_sn, order_status, aftersale_status, consignee,
+        mobile, address, message, goods_price,
+        freight_price, coupon_price, order_price,
+         actual_price, pay_id, pay_time, ship_sn, ship_channel, ship_time,
+          refund_amount, refund_type, refund_content, refund_time, confirm_time,
+          comments, end_time, add_time, update_time, deleted
+         from wanjia_order where id = #{id}
+    </select>
+
+    <update id="insertExpressMessage">
+        update wanjia_order
+        <set>
+            <if test="shipChannel != null">
+                ship_channel = #{shipChannel},
+            </if>
+            <if test="shipSn != null">
+                ship_sn = #{shipSn},
+            </if>
+            <if test="shipTime != null">
+                ship_time = #{shipTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateOrderStatus">
+        update wanjia_order set order_status = 301 where id = #{id}
+    </update>
+
+</mapper>

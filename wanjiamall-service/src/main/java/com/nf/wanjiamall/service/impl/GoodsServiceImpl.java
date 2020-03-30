@@ -100,12 +100,7 @@ public class GoodsServiceImpl implements GoodsService {
         String gallery = ArrayUtils.addDouble(goodsEntity.getGallery());
         goodsEntity.setGallerys(gallery);
 
-        //判断该商品是否存在和商品编号是否存在
-        String goodsSn = goodsEntity.getGoodsSn();
-        String name = goodsEntity.getName();
-        if (goodsDao.checkExistByNameOrGoodsSn(goodsSn,name) >0){
-            return ResponseUtil.fail(611,"商品或编号存在,修改失败");
-        }
+
         //商品基本信息表
         goodsDao.update(goodsEntity);
         //商品规格表
@@ -190,6 +185,7 @@ public class GoodsServiceImpl implements GoodsService {
         return ResponseUtil.ok(data);
     }
 
+
     /**
      * 查询品牌商品和类目
      * @return
@@ -216,6 +212,12 @@ public class GoodsServiceImpl implements GoodsService {
             l1CatVo.setChildren(children);
             categoryList.add(l1CatVo);
         }
+
+
+
+
+
+
         //品牌查询放入CatVo类
         List<BrandEntity> list = brandDao.getAll();
         List<Map<String,Object>> brandList = new ArrayList<>(list.size());
