@@ -25,19 +25,19 @@ import java.util.*;
 @Slf4j
 public class WxCartServiceImpl implements WxCartService {
 
-    @Autowired
+    @Autowired(required = false)
     private CartDao cartDao;
-    @Autowired
+    @Autowired(required = false)
     private GoodsDao goodsDao;
-    @Autowired
+    @Autowired(required = false)
     private GoodsProductDao goodsProductDao;
-    @Autowired
+    @Autowired(required = false)
     private AddressDao addressDao;
-    @Autowired
+    @Autowired(required = false)
     private CouponDao couponDao;
-    @Autowired
+    @Autowired(required = false)
     private CouponUserDao couponUserDao;
-    @Autowired
+    @Autowired(required = false)
     private SystemDao systemDao;
 
     /**
@@ -170,7 +170,7 @@ public class WxCartServiceImpl implements WxCartService {
             }
             existCart.setNumber(num);
             if (cartDao.updateById(existCart) == 0) {
-                return ResponseUtil.updatedDataFailed();
+                return ResponseUtil.updateDataFailed();
             }
         }
         //购物车商品货品数量
@@ -259,7 +259,7 @@ public class WxCartServiceImpl implements WxCartService {
             }
             existCart.setNumber(num);
             if (cartDao.updateById(existCart) == 0) {
-                return ResponseUtil.updatedDataFailed();
+                return ResponseUtil.updateDataFailed();
             }
         }
         return ResponseUtil.ok(existCart != null ? existCart.getId() : cartEntity.getId());
@@ -316,7 +316,7 @@ public class WxCartServiceImpl implements WxCartService {
         }
         existCart.setNumber(number);
         if (cartDao.updateById(existCart) == 0) {
-            return ResponseUtil.updatedDataFailed();
+            return ResponseUtil.updateDataFailed();
         }
         return ResponseUtil.ok();
     }
