@@ -33,13 +33,10 @@ public class WxUserServiceImpl implements WxUserService {
                 "&secret=493c4f274ca8c9a51f737ab3e33d68f7&js_code=" + code + "&grant_type=authorization_code";
         JSONObject jsonObject = doGetJson(url);
         String openid = jsonObject.getString("openid");
-        String openId = openid.substring(0, 16);
-        UserEntity userEntity = userDao.getOpenId(openId);
+        UserEntity userEntity = userDao.getOpenId(openid);
         if( jsonObject != null){
             if (userEntity == null){
-                if (userDao.userInsert(openId,openid) > 0){
-                    userEntity.setUsername(openId);
-                    userEntity.setPassword(openId);
+                if (userDao.userInsert(openid) > 0){
                     userEntity.setWeixinOpenid(openid);
                     return ResponseUtil.ok(userEntity);
                 }else {

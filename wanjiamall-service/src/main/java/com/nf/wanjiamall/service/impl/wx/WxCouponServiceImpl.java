@@ -30,26 +30,16 @@ public class WxCouponServiceImpl implements WxCouponService {
     }
 
     @Override
-    public Object getCouponById(Integer pageNum, Integer pageSize, String username, Integer id) {
-        List<CouponUserEntity> list = couponUserDao.getCouponUserGet(pageNum, pageSize, username);
-        if (list !=null){
-            for (CouponUserEntity couponUserEntity : list) {
-                if (id.equals(couponUserEntity.getCouponId())){
-                    return ResponseUtil.ok(true);
-                }else {
-                    if (couponUserDao.insertCouponUser(username,id)>0){
-                        return ResponseUtil.ok(false);
-                    }else {
-                        return ResponseUtil.fail(505,"领取失败！");
-                    }
-                }
+    public Object getCouponById(Integer userId,Integer couponId) {
+        CouponUserEntity couponUserEntity = couponUserDao.getCouponUserGet(userId,couponId);
+        if (couponUserEntity !=null){
+            return ResponseUtil.ok(true);
+        }else{
+            if (couponUserDao.insertCouponUser(couponId)>0){
+                return ResponseUtil.ok(false);
+            }else {
+                return ResponseUtil.fail(505,"领取失败！");
             }
         }
-        if (couponUserDao.insertCouponUser(username,id)>0){
-            return ResponseUtil.ok(false);
-        }else {
-            return ResponseUtil.fail(505,"领取失败！");
-        }
-
     }
 }

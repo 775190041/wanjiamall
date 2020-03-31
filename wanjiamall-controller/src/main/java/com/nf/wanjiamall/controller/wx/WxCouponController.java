@@ -29,10 +29,9 @@ public class WxCouponController {
         return couponService.getCouponAll(pageNum, pageSize,couponEntity);
     }
 
-    @ApiOperation("判断该优惠卷是否已领取")
-    @GetMapping("/coupon/{username}/{id}")
-    public Object getCouponById(@RequestParam(name = "pageNum",required = false,defaultValue = "1")Integer pageNum,
-                                @RequestParam(name = "pageSize",required = false,defaultValue = "10")Integer pageSize,@PathVariable String username,@PathVariable Integer id){
-        return couponService.getCouponById(pageNum,pageSize,username,id);
+    @ApiOperation("领取优惠券并判断该优惠卷是否已领取")
+    @GetMapping("/coupon/{userId}/{couponId}")
+    public Object getCouponById(@PathVariable Integer userId,@PathVariable Integer couponId){
+        return couponService.getCouponById(userId,couponId);
     }
 }

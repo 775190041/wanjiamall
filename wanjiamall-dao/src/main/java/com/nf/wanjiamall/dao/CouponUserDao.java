@@ -25,20 +25,17 @@ public interface CouponUserDao {
 
     /**
      * 根据用户查询该用户领了什么优惠卷
-     * @param pageNum
-     * @param pageSize
-     * @param username
+     * @param userId
+     * @param couponId
      * @return
      */
-    List<CouponUserEntity> getCouponUserGet(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,
-                                            @Param("username") String username);
+    CouponUserEntity getCouponUserGet(@Param("userId") Integer userId,@Param("couponId")Integer couponId);
 
 
     /**
      * 该用户领取了其优惠卷
-     * @param username
      * @param coupon_id
      * @return
      */
-    Integer insertCouponUser(@Param("username") String username,@Param("coupon_id") Integer coupon_id);
+    Integer insertCouponUser(@Param("coupon_id") Integer coupon_id);
 }

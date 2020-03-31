@@ -49,7 +49,7 @@
     </select>
 
     <insert id="userInsert">
-        insert into wanjia_user(username,password,weixin_openid) values (#{user},#{user},#{openid})
+        insert into wanjia_user(weixin_openid) values (#{openid})
     </insert>
 
     <update id="userUpdate">
