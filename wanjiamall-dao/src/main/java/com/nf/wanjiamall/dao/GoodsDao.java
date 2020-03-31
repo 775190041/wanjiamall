@@ -78,5 +78,5 @@ public interface GoodsDao {
      */
     Integer checkExistByNameOrGoodsSn(@Param("goodsSn") String goodsSn,@Param("name") String Name);
 
-    GoodsEntity getGoodById(@Param("goodsId") String goodsId)
+    GoodsEntity getGoodById(@Param("goodsId") String goodsId);
 }
