@@ -11,9 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author lzn
@@ -31,12 +29,19 @@ public class WxKeywordsServiceImpl implements WxKeywordsService {
         List<GoodsEntity> keywordsGoods=goodsDao.getByKeywords(pageNum,pageSize,keywords);
         List<GoodsEntity> keywordsGoodsLowToUp=goodsDao.keywordsGoodsLowToUp(pageNum, pageSize, keywords);
         List<GoodsEntity> keywordsGoodsUpToLow=goodsDao.keywordsGoodsUpToLow(pageNum, pageSize, keywords);
-        List<CategoryEntity> category=categoryDao.getKeyCate(1,8,keywords);
+        List<CategoryEntity> categoryEntities=categoryDao.getKeyCate(1,8,keywords);
+        Set<CategoryEntity> category=new HashSet<>();
         List<GoodsEntity> keywordsGoodsByCate=null;
-        Map<String,List<GoodsEntity>> map=new HashMap<>();
-        for (CategoryEntity categoryEntity : category) {
-            keywordsGoodsByCate=goodsDao.keywordsGoodsByCate(pageNum, pageSize, keywords, categoryEntity.getId());
-            map.put(categoryEntity.getName(),keywordsGoodsByCate);
+
+        for (CategoryEntity categoryEntity : categoryEntities) {
+            category.add(categoryEntity);
+        }
+        Object[][] obj  = new Object[category.size()][];
+        int i=0;
+        for (CategoryEntity cate : category) {
+            keywordsGoodsByCate=goodsDao.keywordsGoodsByCate(pageNum, pageSize, keywords, cate.getId());
+            obj[i]= keywordsGoodsByCate.toArray();
+            i++;
         }
 
         WxKeywordsGoodsVo vo=new WxKeywordsGoodsVo();
@@ -44,7 +49,7 @@ public class WxKeywordsServiceImpl implements WxKeywordsService {
         vo.setKeywordsGoodsLowToUp(keywordsGoodsLowToUp);
         vo.setKeywordsGoodsUpToLow(keywordsGoodsUpToLow);
         vo.setCategory(category);
-        vo.setKeywordsGoodsByCateMap(map);
+        vo.setKeywordsGoodsByCateMap(obj);
 
         return ResponseUtil.ok(vo);
     }

@@ -30,20 +30,22 @@ public class WxNewsServiceImpl implements WxNewsService {
         List<GoodsEntity> newGoodsLowToUp=goodsDao.newGoodsLowToUp(pageNum, pageSize);
         List<GoodsEntity> newGoodsUpToLow=goodsDao.newGoodsUpToLow(pageNum, pageSize);
         List<CategoryEntity> categoryEntities=categoryDao.getNewsCate(1, 8);
-        Set<String> category=new HashSet<>();
+        Set<CategoryEntity> category=new HashSet<>();
         List<GoodsEntity> newGoodsByCate=null;
 //        Map<String,List<GoodsEntity>> map=new HashMap<>();
 //        for (CategoryEntity categoryEntity : categoryEntities) {
 //            category.add(categoryEntity.getName());
 //            newGoodsByCate=goodsDao.newGoodsByCate(pageNum, pageSize, categoryEntity.getId());
 //            map.put(categoryEntity.getName(),newGoodsByCate);
-//        }
+//        \
 
-        Object[][] obj  = new Object[categoryEntities.size()][];
-        int i=0;
         for (CategoryEntity categoryEntity : categoryEntities) {
-            category.add(categoryEntity.getName());
-            newGoodsByCate=goodsDao.newGoodsByCate(pageNum, pageSize, categoryEntity.getId());
+            category.add(categoryEntity);
+        }
+        Object[][] obj  = new Object[category.size()][];
+        int i=0;
+        for (CategoryEntity cate : category) {
+            newGoodsByCate=goodsDao.newGoodsByCate(pageNum, pageSize, cate.getId());
             obj[i]= newGoodsByCate.toArray();
             i++;
         }
@@ -53,7 +55,6 @@ public class WxNewsServiceImpl implements WxNewsService {
         vo.setNewGoodsLowToUp(newGoodsLowToUp);
         vo.setNewGoodsUpToLow(newGoodsUpToLow);
         vo.setCategory(category);
-//        vo.setNewGoodsByCateMap(getMapKeyValue(map));
         vo.setNewGoodsByCateMap(obj);
 
         return ResponseUtil.ok(vo);

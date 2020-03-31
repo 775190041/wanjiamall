@@ -24,7 +24,7 @@ public class WxNewGoodsVo {
     //根据价格降序
     private List<GoodsEntity> newGoodsUpToLow;
     //根据分类
-    private Set<String> category;
+    private Set<CategoryEntity> category;
     private Object[][] newGoodsByCateMap;
 
 }
