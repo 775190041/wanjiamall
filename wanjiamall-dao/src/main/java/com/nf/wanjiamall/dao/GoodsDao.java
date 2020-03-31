@@ -23,16 +23,60 @@ public interface GoodsDao {
 
     /**
      * 查询全部商品
+     * @param pageNum
+     * @param pageSize
+     * @param id
+     * @param goodsSn
+     * @param name
+     * @return
      */
     List<GoodsEntity> listGoods(@Param("pageNum") int pageNum,@Param("pageSize") int pageSize,@Param("id") Integer id,@Param("goodsSn") String goodsSn, @Param("name") String name);
 
-    List<GoodsEntity> getAll();
+    /**
+     *  新品
+     */
+    List<GoodsEntity> getNewGoods(@Param("pageNum") Integer pageNum,
+                                  @Param("pageSize") Integer pageSize);
+
+    /**
+     *  人气
+     */
+    List<GoodsEntity> getHotGoods(@Param("pageNum") Integer pageNum,
+                                  @Param("pageSize") Integer pageSize);
+
+    /**
+     * 获取一级类目下的所有商品信息
+     * @param pageNum
+     * @param pageSize
+     * @param cateId
+     * @return
+     */
+    List<GoodsEntity> getByCateId(@Param("pageNum") Integer pageNum,
+                                  @Param("pageSize") Integer pageSize,
+                                  @Param("cateId") Integer cateId);
+
+    /**
+     * 获取二级类目下的所有商品信息
+     * @param pageNum
+     * @param pageSize
+     * @param cateId
+     * @return
+     */
+    List<GoodsEntity> getGoodsById(@Param("pageNum") Integer pageNum,
+                                   @Param("pageSize") Integer pageSize,
+                                   @Param("cateId") Integer cateId);
+
 
     /**
      * 根据商品id查询商品信息
      */
     GoodsEntity GoodsById(@Param("id") int id);
 
-    GoodsEntity getGoodById(@Param("goodsId") String goodsId);
 
+    /**
+     * 判断商品编号和商品名称是否存在
+     */
+    Integer checkExistByNameOrGoodsSn(@Param("goodsSn") String goodsSn,@Param("name") String Name);
+
+    GoodsEntity getGoodById(@Param("goodsId") String goodsId)
 }

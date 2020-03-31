@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.ResourceDao">
+
+
+    <select id="listResource" resultType="com.nf.wanjiamall.entity.ResourceEntity">
+        select id, category_id, name, url, description, add_time, update_time, delted
+        from wanjia_resource
+        <where>
+            delted = 0
+            <if test="categoryId != null ">
+                and category_id = #{categoryId}
+            </if>
+            <if test="name != null and name!='' ">
+                and name = #{name}
+            </if>
+            <if test="url != null and url!='' ">
+                and url = #{url}
+            </if>
+        </where>
+    </select>
+
+
+    <update id="updateResource" >
+        update wanjia_resource
+        <set>
+            <if test="resourceEntity.categoryId != null">
+                category_id = #{resourceEntity.categoryId},
+            </if>
+            <if test="resourceEntity.name != null">
+                name = #{resourceEntity.name},
+            </if>
+            <if test="resourceEntity.url != null">
+                url = #{resourceEntity.url},
+            </if>
+            <if test="resourceEntity.description != null">
+                description = #{resourceEntity.description}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <insert id="insertResource" >
+        insert into wanjia_resource (category_id, name, url, description)
+        values (#{resourceEntity.categoryId},#{resourceEntity.name}
+        ,#{resourceEntity.url},#{resourceEntity.description})
+    </insert>
+
+    <select id="getByIdResource" resultType="com.nf.wanjiamall.entity.ResourceEntity">
+        select id, category_id, create_time, name, url, description, add_time, update_time, delted from wanjia_resource where id = #{id}
+    </select>
+
+
+
+    <update id="deleteResource" >
+        update wanjia_resource set delted = 1  where id = #{id}
+    </update>
+
+    <select id="getResourceByAdminIdList" resultType="com.nf.wanjiamall.entity.ResourceEntity">
+    select wr.id as id
+         ,wr.url as url
+         ,wr.name as name
+         ,wr.description as description
+    from wanjia_admin_role_relation ar
+        left join wanjia_role r on ar.role_id = r.id
+        left join wanjia_role_menu_relation rmr on r.id = rmr.role_id
+        left join wanjia_menu m on m.id = rmr.menu_id
+        left join wanjia_resource wr on wr.category_id = m.id
+    where
+        ar.admin_id = #{adminId} and wr.id is not null
+    group by wr.id
+    </select>
+
+
+</mapper>

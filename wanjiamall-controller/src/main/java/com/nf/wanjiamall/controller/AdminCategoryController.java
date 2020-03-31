@@ -27,8 +27,9 @@ public class AdminCategoryController {
 
     @ApiOperation("查询商品类目信息")
     @GetMapping("/category")
-    public Object getAllCategory() {
-       return categoryService.getAllCategory();
+    public Object getAllCategory(@RequestParam(name = "pageNum",required = false,defaultValue = "1")Integer pageNum,
+                                 @RequestParam(name = "pageSize",required = false,defaultValue = Integer.MAX_VALUE+"")Integer pageSize) {
+       return categoryService.getAllCategory(pageNum, pageSize);
     }
 
 
@@ -46,7 +47,7 @@ public class AdminCategoryController {
 
     @ApiOperation("添加商品类目表信息")
     @PostMapping("/category")
-    public Object insertCategory(CategoryEntity categoryEntity) {
+    public Object insertCategory(@RequestBody CategoryEntity categoryEntity) {
         return categoryService.insertByLevel(categoryEntity);
     }
 
@@ -63,7 +64,7 @@ public class AdminCategoryController {
 
     @ApiOperation("修改商品类目表信息")
     @PutMapping("/category/{id}")
-    public Object updateCategory(@PathVariable Integer id,CategoryEntity categoryEntity) {
+    public Object updateCategory(@PathVariable Integer id,@RequestBody CategoryEntity categoryEntity) {
         return categoryService.updateById(categoryEntity,id);
 
     }
@@ -83,8 +84,9 @@ public class AdminCategoryController {
     })
     @ApiOperation("查询所有一级目录")
     @GetMapping("/category/l1")
-    public Object getDemandCategory() {
-        return categoryService.getDemandCategory();
+    public Object getDemandCategory(@RequestParam(name = "pageNum",required = false,defaultValue = "1")Integer pageNum,
+                                    @RequestParam(name = "pageSize",required = false,defaultValue = Integer.MAX_VALUE+"")Integer pageSize) {
+        return categoryService.getDemandCategory(pageNum, pageSize);
     }
 
 }

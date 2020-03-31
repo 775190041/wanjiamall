@@ -18,15 +18,15 @@ import java.util.UUID;
 @Slf4j
 public class OssUtil {
     //外网地址
-    private static String ENDPOINI = "oss-cn-beijing.aliyuncs.com";
+    private static String ENDPOINI = "oss-cn-huhehaote.aliyuncs.com";
     // 密钥
     private static String ACCESSKEYID = "LTAI4FdUENiw5u8Pe6AnHexK";
     //密钥密码
     private static String ACCESSKEYSECRET = "E8uyx08AHeQPIw5s16BcI2dGxYMX1A";
     //仓库名称
-    private static String BUKETNSME = "killbug";
+    private static String BUKETNSME = "wanjiamall";
     //上传成功后返回URL
-    private static String SUFFER_URL = "http://killbug.oss-cn-beijing.aliyuncs.com/";
+    private static String SUFFER_URL = "http://wanjiamall.oss-cn-huhehaote.aliyuncs.com/";
 
     private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-");
     /**

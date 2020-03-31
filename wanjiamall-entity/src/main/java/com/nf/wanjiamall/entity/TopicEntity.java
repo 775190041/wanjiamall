@@ -3,8 +3,7 @@ package com.nf.wanjiamall.entity;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * @author lrc
@@ -19,9 +18,11 @@ public class TopicEntity {
     Integer readCount;
     String picUrl;
     Integer sortOrder;
-    String goods;
-    Timestamp addTime;
-    Timestamp updateTime;
+    String[] goods;
+    String goodes;
+    Date addTime;
+    Date updateTime;
     Boolean deleted;
     Integer sort;
+
 }

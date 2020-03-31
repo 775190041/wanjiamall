@@ -40,6 +40,8 @@ public class AdminGoodsController {
     }
 
 
+
+
     @ApiOperation("查询所有商品数据,")
     @GetMapping("/goods/{pageNum}/{pageSize}")
     public Object listGoods(@PathVariable(required = false) int pageNum,
@@ -49,6 +51,8 @@ public class AdminGoodsController {
                             @RequestParam(value = "name",required = false,defaultValue = "") String name){
             return goodsService.listGoods(pageNum,pageSize,id,goodsSn,name);
     }
+
+
 
     
 
@@ -70,5 +74,12 @@ public class AdminGoodsController {
         return  goodsService.listBrandCategory();
     }
 
+
+    @ApiOperation("删除参数")
+    @DeleteMapping("/attribute/{id}")
+    public Object deleteAttribute(@PathVariable Integer id){
+        return goodsService.deleteAttribute(id);
+
+    }
 
 }

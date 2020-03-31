@@ -1,6 +1,7 @@
 package com.nf.wanjiamall.service;
 
 import com.nf.wanjiamall.entity.KeywordEntity;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

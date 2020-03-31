@@ -19,43 +19,41 @@ import java.util.List;
 @Slf4j
 @Service
 public class AdvertisingServiceImpl implements AdvertisingService {
-
-    @Autowired
+    @Autowired(required = false)
     private AdvertisingDao advertisingDao;
 
     @Override
     public Object getAdAll(Integer pageNum ,Integer pageSize,AdvertisingEntity advertisingEntity) {
-        List<AdvertisingEntity> list =  advertisingDao.getAdAll(pageNum,pageSize,advertisingEntity);
-        return ResponseUtil.okList(list);
+        return ResponseUtil.okList(advertisingDao.getAdAll(pageNum,pageSize,advertisingEntity));
     }
 
     @Override
     public Object insertAd(AdvertisingEntity advertisingEntity) {
-        Integer count=advertisingDao.insertAd(advertisingEntity);
+        Integer count = advertisingDao.insertAd(advertisingEntity);
         if (count>0){
-            return ResponseUtil.ok();
+            return ResponseUtil.ok("添加成功");
         }else {
-            return ResponseUtil.fail(505,"添加失败");
+            return ResponseUtil.insertDataFailed();
         }
     }
 
     @Override
     public Object updateAd(AdvertisingEntity advertisingEntity, Integer id) {
-        Integer count=advertisingDao.updateAd(advertisingEntity,id);
+        Integer count = advertisingDao.updateAd(advertisingEntity,id);
         if (count>0){
-            return ResponseUtil.ok();
+            return ResponseUtil.ok("修改成功");
         }else {
-            return ResponseUtil.fail(505,"修改失败");
+            return ResponseUtil.updateDataFailed();
         }
     }
 
     @Override
     public Object deletedAdId(Integer id) {
-        Integer count=advertisingDao.deletedAdId(id);
+        Integer count = advertisingDao.deletedAdId(id);
         if (count>0){
-            return ResponseUtil.ok();
+            return ResponseUtil.ok("删除成功");
         }else {
-            return ResponseUtil.fail(505,"删除失败");
+            return ResponseUtil.deleteDataFailed();
         }
     }
 

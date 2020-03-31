@@ -5,7 +5,7 @@
 <mapper namespace="com.nf.wanjiamall.dao.BrandDao">
     <select id="getAll" resultType="com.nf.wanjiamall.entity.BrandEntity">
         select id, name, brand_desc, pic_url, floor_price, add_time, update_time,
-        delted from wanjia_brand where delted=0
+        delted from wanjia_brand where delted=0 order by add_time desc
     </select>
 
     <select id="getByConditions" resultType="com.nf.wanjiamall.entity.BrandEntity">
@@ -16,7 +16,8 @@
             and id=#{brand.id}
         </if>
         <if test="brand.name!=null and brand.name!='' ">
-            and name=#{brand.name}
+            <bind name="name" value="'%'+_parameter.brand.name+'%'"/>
+            and name like #{name}
         </if>
         order by add_time desc
     </select>
@@ -53,5 +54,9 @@
     <delete id="deleteById">
         update wanjia_brand set delted=1 where delted=0 and id=#{id}
     </delete>
+
+    <select id="checkExistByName" resultType="integer">
+        select count(*) from wanjia_brand where name = #{name}
+    </select>
 
 </mapper>

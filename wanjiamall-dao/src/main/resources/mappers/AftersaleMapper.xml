@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.AftersaleDao">
+
+    <select id="getAftersaleList" resultType="com.nf.wanjiamall.entity.AftersaleEntity">
+        select id, aftersale_sn, order_id, user_id,
+        type, reason, amount, pictures, status,
+        handle_time, add_time, update_time, deleted from wanjia_aftersale
+        <where>
+            deleted = 0
+            <if test="aftersaleSn != null and aftersaleSn != '' ">
+                and aftersale_sn = #{aftersaleSn}
+            </if>
+            <if test="orderId != null and orderId != ''">
+                and order_id = #{orderId}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <update id="batchAudit">
+        update wanjia_aftersale set status = #{status} where id = #{id}
+    </update>
+
+    <select id="getById" resultType="com.nf.wanjiamall.entity.AftersaleEntity">
+        select id, aftersale_sn, order_id, user_id, type, reason, amount,
+         pictures, status, handle_time, add_time, update_time, deleted from wanjia_aftersale where id = #{id}
+    </select>
+
+    <select id="getByOrderId" resultType="com.nf.wanjiamall.entity.AftersaleEntity">
+        select id, aftersale_sn, order_id, user_id, type, reason, amount, pictures, status, handle_time, add_time, update_time, deleted from wanjia_aftersale where order_id = #{orderId}
+    </select>
+
+</mapper>

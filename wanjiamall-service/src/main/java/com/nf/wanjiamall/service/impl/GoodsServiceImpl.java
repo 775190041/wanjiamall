@@ -45,7 +45,23 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsAttributeEntity[] goodsAttributeEntities = addGoodsVo.getGoodsAttributeEntity();
         //把数组转变为字符串加双引号
         String gallery = ArrayUtils.addDouble( goodsEntity.getGallery());
-         goodsEntity.setGallerys(gallery);
+        goodsEntity.setGallerys(gallery);
+         //判断该商品是否存在和商品编号是否存在
+         String goodsSn = goodsEntity.getGoodsSn();
+         String name = goodsEntity.getName();
+        if (goodsDao.checkExistByNameOrGoodsSn(goodsSn,name) >0){
+            return ResponseUtil.fail(611,"商品或编号存在");
+        }
+        //取产品的最低价格录入到零售价格去
+        Double retailPrice = new Double(Integer.MAX_VALUE);
+        for (GoodsProductEntity goodsProductEntity : goodsProductEntities) {
+                Double price = goodsProductEntity.getPrice();
+                if (retailPrice.compareTo(price) ==1){
+                    retailPrice = price;
+                }
+        }
+        //把最低的零售价格放进去
+        goodsEntity.setRetailPrice(retailPrice);
         //商品基本信息表
         goodsDao.insert(goodsEntity);
         //商品规格表
@@ -83,6 +99,8 @@ public class GoodsServiceImpl implements GoodsService {
         //把数组转变为字符串
         String gallery = ArrayUtils.addDouble(goodsEntity.getGallery());
         goodsEntity.setGallerys(gallery);
+
+
         //商品基本信息表
         goodsDao.update(goodsEntity);
         //商品规格表
@@ -166,6 +184,7 @@ public class GoodsServiceImpl implements GoodsService {
         return ResponseUtil.ok(data);
     }
 
+
     /**
      * 查询品牌商品和类目
      * @return
@@ -173,7 +192,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Object listBrandCategory() {
         //类目查询放入CatVo类
-        List<CategoryEntity> l1categoryEntities =categoryDao.getFirstCate();
+        List<CategoryEntity> l1categoryEntities =categoryDao.getFirstCate(1,Integer.MAX_VALUE);
         List<CatVo> categoryList = new ArrayList<>(l1categoryEntities.size());
         for (CategoryEntity categoryEntity : l1categoryEntities) {
             CatVo l1CatVo = new CatVo();
@@ -192,6 +211,12 @@ public class GoodsServiceImpl implements GoodsService {
             l1CatVo.setChildren(children);
             categoryList.add(l1CatVo);
         }
+
+
+
+
+
+
         //品牌查询放入CatVo类
         List<BrandEntity> list = brandDao.getAll();
         List<Map<String,Object>> brandList = new ArrayList<>(list.size());
@@ -206,5 +231,16 @@ public class GoodsServiceImpl implements GoodsService {
         date.put("categoryList",categoryList);
         date.put("brandList",brandList);
         return ResponseUtil.ok(date);
+    }
+
+    @Override
+    public Object deleteAttribute(Integer id) {
+        Integer count = goodsAttributeDao.deleteAttribute(id);
+        if (count>0){
+            return ResponseUtil.ok();
+        }else {
+            return ResponseUtil.fail(505,"参数删除失败");
+        }
+
     }
 }

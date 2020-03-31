@@ -25,7 +25,6 @@
         </set>
         where id = #{goodsAttr.id}
     </update>
-
     <update id="delete" >
         update wanjia_goods_attribute set delted = 1 where id = #{id}
     </update>
@@ -34,6 +33,10 @@
         select id, goods_id, attribute, attribute_value, add_time, update_time, delted from wanjia_goods_attribute
         where delted = 0 and goods_id = #{id}
     </select>
+
+    <update id="deleteAttribute">
+        update wanjia_goods_attribute set delted = 1 where id = #{id}
+    </update>
 
 
 </mapper>

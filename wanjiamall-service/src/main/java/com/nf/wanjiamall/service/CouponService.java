@@ -12,6 +12,8 @@ public interface CouponService {
     Object getCouponAll(Integer pageNum, Integer pageSize,
                         CouponEntity couponEntity);
 
+    Object getCouponById(Integer pageNum,Integer pageSize,Integer id,CouponUserEntity couponUserEntity);
+
     Object insertCoupon(CouponEntity couponEntity);
 
     Object updateCoupon(CouponEntity couponEntity, Integer id);

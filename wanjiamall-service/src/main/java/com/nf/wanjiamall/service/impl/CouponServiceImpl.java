@@ -28,15 +28,20 @@ public class CouponServiceImpl implements CouponService {
     @Override
     public Object getCouponAll(Integer pageNum, Integer pageSize, CouponEntity couponEntity) {
         List<CouponEntity> list = couponDao.getCouponAll(pageNum,pageSize,couponEntity);
-        List<CouponUserEntity> couponUserEntities = null;
-        for (CouponEntity entity : list) {
-            couponUserEntities = couponUserDao.getCouponUserAll(pageNum,pageSize,entity.getId());
-        }
-        CouponVO vo = new CouponVO();
-        vo.setCoupon(ResponseUtil.okList(list));
-        vo.setCouponUser(couponUserEntities);
-        return ResponseUtil.ok(vo);
+        return ResponseUtil.okList(list);
     }
+
+    @Override
+    public Object getCouponById(Integer pageNum, Integer pageSize, Integer id,CouponUserEntity couponUserEntity) {
+        CouponEntity couponEntity = couponDao.getCouponById(id);
+        List<CouponUserEntity> couponUserEntities =
+                couponUserDao.getCouponUserByAll(pageNum,pageSize,couponUserEntity,id);
+        CouponVO vo = new CouponVO();
+        vo.setCoupon(couponEntity);
+        vo.setCouponUser(ResponseUtil.okList(couponUserEntities));
+        return vo;
+    }
+
 
 
     @Override

@@ -30,6 +30,7 @@
                 and wg.name like #{pattern}
             </if>
         </if>
+        order by add_time desc
     </select>
 
     <select id="getUserIdSelectUserFootprint" resultType="com.nf.wanjiamall.entity.vo.FootprintGoodsVo">

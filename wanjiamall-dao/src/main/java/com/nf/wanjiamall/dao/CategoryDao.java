@@ -12,7 +12,10 @@ public interface CategoryDao {
     /**
      * 获取父类目的信息
      */
-    List<CategoryEntity> getFirstCate();
+    List<CategoryEntity> getFirstCate(@Param("pageNum") Integer pageNum,
+                                      @Param("pageSize") Integer pageSize);
+
+    List<CategoryEntity> cateEntity(Integer id);
 
     /**
      * 获取选中的父类目的二级类目信息
