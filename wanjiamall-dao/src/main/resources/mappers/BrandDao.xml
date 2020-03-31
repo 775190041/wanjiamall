@@ -22,6 +22,12 @@
         order by add_time desc
     </select>
 
+    <select id="getById" resultType="com.nf.wanjiamall.entity.BrandEntity">
+        select id, name, brand_desc, pic_url, floor_price, add_time, update_time,
+        delted from wanjia_brand where delted=0 and id=#{brandId}
+         order by add_time desc
+    </select>
+
     <insert id="insert">
         insert into wanjia_brand(name, brand_desc, pic_url, floor_price, add_time,
         update_time, delted) values (#{name},#{brandDesc},#{picUrl},#{floorPrice},
@@ -57,6 +63,14 @@
 
     <select id="checkExistByName" resultType="integer">
         select count(*) from wanjia_brand where name = #{name}
+    </select>
+
+    <select id="getByGoodId" resultType="com.nf.wanjiamall.entity.BrandEntity">
+        select b.id, b.name, b.brand_desc, b.pic_url, b.floor_price, b.add_time,
+         b.update_time,b.delted from wanjia_brand b
+          join wanjia_goods g on b.id=g.brand_id
+           where b.delted=0 and g.id=#{goodId}
+            order by b.add_time desc
     </select>
 
 </mapper>

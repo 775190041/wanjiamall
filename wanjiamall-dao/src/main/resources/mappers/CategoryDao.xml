@@ -78,4 +78,29 @@
         update wanjiamall_category set delted=1 where delted=0 and id=#{id}
     </delete>
 
+    <select id="getKeyCate" resultType="com.nf.wanjiamall.entity.CategoryEntity">
+        select c.id,c.name from wanjiamall_category c
+            join wanjia_goods g on c.id=g.category_id
+            join wanjia_keyword k on g.keywords=k.id
+        <where>
+            c.delted=0
+            <if test="keywords != null">
+                and keywords like '%' #{keywords} '%'
+            </if>
+        </where>
+        order by c.id
+    </select>
+
+    <select id="getNewsCate" resultType="com.nf.wanjiamall.entity.CategoryEntity">
+        select c.id,c.name from wanjiamall_category c
+             join wanjia_goods g on c.id=g.category_id
+        where c.delted=0 and g.is_new=1 order by c.id
+    </select>
+
+    <select id="getHotCate" resultType="com.nf.wanjiamall.entity.CategoryEntity">
+        select c.id,c.name from wanjiamall_category c
+              join wanjia_goods g on c.id=g.category_id
+        where c.delted=0 and g.is_hot=1 order by c.id
+    </select>
+
 </mapper>

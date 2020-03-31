@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author lzn
+ * @author lzn123
  */
 @Service
 @Slf4j
@@ -25,7 +25,7 @@ public class WxHomeCateServiceImpl implements WxHomeCateService {
     public Object getCateData(Integer pageNum,Integer pageSize,Integer firstCateId) {
         List<CategoryEntity> firstCate= categoryDao.getFirstCate(1,8);
         List<CategoryEntity> secondCate= categoryDao.getSecondCate(firstCateId);
-        List<CategoryEntity> cateEntities=categoryDao.cateEntity(firstCateId);
+        CategoryEntity cateEntities=categoryDao.cateEntity(firstCateId);
 
 
         WxHomeCateVo vo =new WxHomeCateVo();

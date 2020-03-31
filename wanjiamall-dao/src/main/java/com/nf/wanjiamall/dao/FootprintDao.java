@@ -24,4 +24,8 @@ public interface FootprintDao {
      */
     int deleteBatchUserFootprint (Integer userId, Integer[] ids);
 
+    /**
+     * 添加足迹
+     */
+    void insert(FootprintEntity footprintEntity);
 }

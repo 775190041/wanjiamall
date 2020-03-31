@@ -32,5 +32,9 @@
     order by add_time desc
 </select>
 
+    <select id="getCount" resultType="integer">
+        select count(*) from wanjia_collect
+         where deleted=0 and goods_id=#{goodId} and user_id=#{userId}
+    </select>
 
 </mapper>

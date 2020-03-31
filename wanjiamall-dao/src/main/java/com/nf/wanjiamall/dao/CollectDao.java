@@ -12,4 +12,6 @@ import java.util.List;
 public interface CollectDao{
     List<CollectEntity> getCollectList(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,
                                        @Param("collectEntity") CollectEntity collectEntity);
+
+    Integer getCount(@Param("goodId") Integer goodId,@Param("userId") Integer userId);
 }

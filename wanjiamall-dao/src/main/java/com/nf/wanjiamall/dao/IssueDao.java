@@ -15,4 +15,6 @@ public interface IssueDao {
     int issueInsert(@Param("issueEntity") IssueEntity issueEntity);
     int issueUpdate(@Param("id") int id,IssueEntity issueEntity);
     int issueDelete(int id);
+
+    List<IssueEntity> getAll();
 }
