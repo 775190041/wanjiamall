@@ -32,11 +32,20 @@ public class WxNewsServiceImpl implements WxNewsService {
         List<CategoryEntity> categoryEntities=categoryDao.getNewsCate(1, 8);
         Set<String> category=new HashSet<>();
         List<GoodsEntity> newGoodsByCate=null;
-        Map<String,List<GoodsEntity>> map=new HashMap<>();
+//        Map<String,List<GoodsEntity>> map=new HashMap<>();
+//        for (CategoryEntity categoryEntity : categoryEntities) {
+//            category.add(categoryEntity.getName());
+//            newGoodsByCate=goodsDao.newGoodsByCate(pageNum, pageSize, categoryEntity.getId());
+//            map.put(categoryEntity.getName(),newGoodsByCate);
+//        }
+
+        Object[][] obj  = new Object[categoryEntities.size()][];
+        int i=0;
         for (CategoryEntity categoryEntity : categoryEntities) {
             category.add(categoryEntity.getName());
             newGoodsByCate=goodsDao.newGoodsByCate(pageNum, pageSize, categoryEntity.getId());
-            map.put(categoryEntity.getName(),newGoodsByCate);
+            obj[i]= newGoodsByCate.toArray();
+            i++;
         }
 
         WxNewGoodsVo vo=new WxNewGoodsVo();
@@ -44,32 +53,26 @@ public class WxNewsServiceImpl implements WxNewsService {
         vo.setNewGoodsLowToUp(newGoodsLowToUp);
         vo.setNewGoodsUpToLow(newGoodsUpToLow);
         vo.setCategory(category);
-        vo.setNewGoodsByCateMap(getMapKeyValue(map));
-//        for(int i=0;i<vo.getNewGoodsByCateMap().length;i++) {//s.length表示行数
-//            System.out.print("{");
-//            for(int j=0;j<vo.getNewGoodsByCateMap()[i].length;j++) {//s[i].length表示列数
-//                System.out.print(vo.getNewGoodsByCateMap()[i][j]+" ");
-//            }
-//            System.out.print("}");
-//            System.out.println();
-//        }
+//        vo.setNewGoodsByCateMap(getMapKeyValue(map));
+        vo.setNewGoodsByCateMap(obj);
+
         return ResponseUtil.ok(vo);
     }
 
-    public  Object[][] getMapKeyValue(Map map) {
-        Object[][] object = null;
-        if ((map != null) && (!map.isEmpty())) {
-            int size = map.size();
-            object = new Object[size][1];
-            Iterator iterator = map.entrySet().iterator();
-            for (int i = 0; i < size; i++) {
-                Map.Entry entry = (Map.Entry) iterator.next();
-                Object key = entry.getKey();
-                Object value = entry.getValue();
-//                object[i][0] = key;
-                object[i][0] = value;
-            }
-        }
-        return object;
-    }
+//    public  Object[] getMapKeyValue(Map map) {
+//        Object[] object = null;
+//        if ((map != null) && (!map.isEmpty())) {
+//            int size = map.size();
+//            object = new Object[size];
+//            Iterator iterator = map.entrySet().iterator();
+//            for (int i = 0; i < size; i++) {
+//                Map.Entry entry = (Map.Entry) iterator.next();
+//                Object key = entry.getKey();
+//                Object value = entry.getValue();
+////                object[i][0] = key;
+//                object[i] = value;
+//            }
+//        }
+//        return object;
+//    }
 }
