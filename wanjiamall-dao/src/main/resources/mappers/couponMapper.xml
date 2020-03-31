@@ -22,9 +22,9 @@
         order by add_time desc
     </select>
 
-    <select id="getCouponById" resultType="com.nf.wanjiamall.entity.CouponEntity">
-        select * from wanjia_coupon where deleted = 0 and id = #{id}
-    </select>
+<!--    <select id="getCouponById" resultType="com.nf.wanjiamall.entity.CouponEntity">-->
+<!--        select * from wanjia_coupon where deleted = 0 and id = #{id}-->
+<!--    </select>-->
 
     <select id="getCouponById" resultType="com.nf.wanjiamall.entity.CouponEntity" >
         select id, name, coupon_desc, tag, total, discount, min, coupon_limit, type, status, goods_type, goods_value, code, time_type, days, start_time, end_time, add_time, update_time, deleted
