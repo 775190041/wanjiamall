@@ -24,4 +24,12 @@
         and id = #{id} order by add_time desc
     </select>
 
+    <select id="getCouponUserGet" resultType="com.nf.wanjiamall.entity.CouponUserEntity">
+        select coupon_id from wanjia_coupon_user where deleted = 0
+            and user_id = #{username} order by add_time desc
+    </select>
+
+    <insert id="insertCouponUser">
+        insert into wanjia_coupon_user(user_id,coupon_id) values (#{username},#{coupon_id})
+    </insert>
 </mapper>

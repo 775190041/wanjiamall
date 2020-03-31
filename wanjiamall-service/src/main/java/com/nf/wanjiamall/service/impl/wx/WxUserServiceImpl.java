@@ -37,10 +37,10 @@ public class WxUserServiceImpl implements WxUserService {
         UserEntity userEntity = userDao.getOpenId(openId);
         if( jsonObject != null){
             if (userEntity == null){
-                if (userDao.userInsert(openId) > 0){
+                if (userDao.userInsert(openId,openid) > 0){
                     userEntity.setUsername(openId);
                     userEntity.setPassword(openId);
-                    userEntity.setWeixinOpenid(openId);
+                    userEntity.setWeixinOpenid(openid);
                     return ResponseUtil.ok(userEntity);
                 }else {
                     return ResponseUtil.fail(505,"添加失败");
@@ -69,4 +69,3 @@ public class WxUserServiceImpl implements WxUserService {
 }
 
 
-}
