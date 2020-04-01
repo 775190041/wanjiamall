@@ -15,6 +15,12 @@ public interface UserDao {
     int userUpdate(@Param("id") int id, UserEntity userEntity);
 
     UserEntity getById(@Param("id") Integer id);
+
+    /**
+     * 通过openId查出相对应的用户信息
+     * @param openid
+     * @return
+     */
     UserEntity getOpenId(@Param("openId")String openid);
 
     int userInsert(@Param("openid")String openid);

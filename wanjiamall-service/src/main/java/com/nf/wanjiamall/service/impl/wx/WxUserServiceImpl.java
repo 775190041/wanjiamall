@@ -37,8 +37,10 @@ public class WxUserServiceImpl implements WxUserService {
         if( jsonObject != null){
             if (userEntity == null){
                 if (userDao.userInsert(openid) > 0){
-                    userEntity.setWeixinOpenid(openid);
-                    return ResponseUtil.ok(userEntity);
+                    UserEntity user = new UserEntity();
+                    user.setWeixinOpenid(openid);
+                    UserEntity users = userDao.getOpenId(user.getWeixinOpenid());
+                    return ResponseUtil.ok(users);
                 }else {
                     return ResponseUtil.fail(505,"添加失败");
                 }
