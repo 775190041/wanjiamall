@@ -50,7 +50,6 @@ public class TopicServiceImpl implements TopicService {
         String  goods = ArrayUtils.addDouble(topicEntity.getGoods());
         topicEntity.setGoodes(goods);
         topicEntity.setId(id);
-        Date date = new Date();
         topicEntity.setUpdateTime(new Date());
         Integer count = topicDao.updateTopic(topicEntity,id);
         if (count>0){

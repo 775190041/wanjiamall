@@ -45,4 +45,13 @@
             and user_id = #{userId}
         </if>
     </select>
+
+    <select id="getCouponUserGet">
+        select coupon_id from wanjia_coupon_user where deleted = 0
+            and user_id = #{userId}  and coupon_id = #{couponId}
+    </select>
+
+    <insert id="insertCouponUser">
+        insert into wanjia_coupon_user(user_id,coupon_id) values (#{username},#{coupon_id})
+    </insert>
 </mapper>

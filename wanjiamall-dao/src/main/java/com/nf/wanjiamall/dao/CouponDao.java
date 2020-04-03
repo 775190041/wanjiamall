@@ -27,5 +27,6 @@ public interface CouponDao {
     Integer updateCouponCodeDay(@Param("coupon") CouponEntity couponEntity, @Param("id") Integer id);
     Integer updateCouponCodeTime(@Param("coupon") CouponEntity couponEntity, @Param("id") Integer id);
 
+
     Integer deletedCouponId(@Param("id") Integer id);
 }

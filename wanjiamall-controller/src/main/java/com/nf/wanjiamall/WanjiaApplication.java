@@ -13,5 +13,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class WanjiaApplication {
     public static void main(String[] args) {
        SpringApplication.run(WanjiaApplication.class, args);
+
+
+
+
+
     }
 }

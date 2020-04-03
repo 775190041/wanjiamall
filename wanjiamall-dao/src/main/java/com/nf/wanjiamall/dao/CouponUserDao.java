@@ -11,11 +11,25 @@ import java.util.List;
  */
 
 public interface CouponUserDao {
-
+    /**
+     * 查询该优惠卷有什么用户领取了
+     * @param pageNum
+     * @param pageSize
+     * @param couponUserEntity
+     * @param id
+     * @return
+     */
     List<CouponUserEntity> getCouponUserByAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,
                                               @Param("couponUser") CouponUserEntity couponUserEntity,
                                               @Param("id") Integer id);
 
+    /**
+     * 根据用户查询该用户领了什么优惠卷
+     * @param userId
+     * @param couponId
+     * @return
+     */
+    CouponUserEntity getCouponUserGet(@Param("userId") Integer userId,@Param("couponId")Integer couponId);
     List<CouponUserEntity> getCouponUserAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize, @Param("id") Integer id);
 
     /**
@@ -28,4 +42,11 @@ public interface CouponUserDao {
      */
     CouponUserEntity getUserCouponIdOrUesrId(@Param("userCouponId") Integer userCouponId, @Param("userId") Integer userId);
 
+
+    /**
+     * 该用户领取了其优惠卷
+     * @param coupon_id
+     * @return
+     */
+    Integer insertCouponUser(@Param("coupon_id") Integer coupon_id);
 }
