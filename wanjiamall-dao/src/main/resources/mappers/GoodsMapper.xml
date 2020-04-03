@@ -242,4 +242,16 @@
     select id, goods_sn, name, category_id, brand_id, pic_url,gallery, keywords,brief, is_on_sale, is_new, is_hot, unit, counter_price, retail_price, detail, add_time, update_time, delted from wanjia_goods
     where delted = 0 and id = #{goodsId}
     </select>
+    <select id="checkExistByNameOrGoodsSn" resultType="integer">
+    select count(*) from wanjia_goods
+    <where>
+        <if test="name != null">
+            name = #{name} or
+        </if>
+        <if test="goodsSn != null">
+            goods_sn = #{goodsSn}
+        </if>
+    </where>
+    </select>
+
 </mapper>
