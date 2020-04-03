@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nf.wanjiamall.dao.CouponDao">
+
     <select id="getAll" resultType="com.nf.wanjiamall.entity.CouponEntity">
         select * from wanjia_coupon where deleted = 0 order by add_time desc
     </select>
@@ -21,8 +22,13 @@
         order by add_time desc
     </select>
 
-    <select id="getCouponById" resultType="com.nf.wanjiamall.entity.CouponEntity">
-        select * from wanjia_coupon where deleted = 0 and id = #{id}
+<!--    <select id="getCouponById" resultType="com.nf.wanjiamall.entity.CouponEntity">-->
+<!--        select * from wanjia_coupon where deleted = 0 and id = #{id}-->
+<!--    </select>-->
+
+    <select id="getCouponById" resultType="com.nf.wanjiamall.entity.CouponEntity" >
+        select id, name, coupon_desc, tag, total, discount, min, coupon_limit, type, status, goods_type, goods_value, code, time_type, days, start_time, end_time, add_time, update_time, deleted
+         from wanjia_coupon where deleted = 0 and id = #{couponId}
     </select>
 
     <insert id="insertCouponDay">

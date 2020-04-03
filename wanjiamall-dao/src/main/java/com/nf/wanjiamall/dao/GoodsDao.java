@@ -103,8 +103,8 @@ public interface GoodsDao {
      * @return1
      */
     List<GoodsEntity> getGoodsById(@Param("pageNum") Integer pageNum,
-                                  @Param("pageSize") Integer pageSize,
-                                  @Param("cateId") Integer cateId);
+                                   @Param("pageSize") Integer pageSize,
+                                   @Param("cateId") Integer cateId);
 
     /**
      * 获取品牌的商品
@@ -130,4 +130,5 @@ public interface GoodsDao {
      */
     Integer checkExistByNameOrGoodsSn(@Param("goodsSn") String goodsSn,@Param("name") String Name);
 
+    GoodsEntity getGoodById(@Param("goodsId") String goodsId);
 }

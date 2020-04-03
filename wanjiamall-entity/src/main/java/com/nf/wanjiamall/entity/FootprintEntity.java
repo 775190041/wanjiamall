@@ -10,6 +10,7 @@ import java.util.List;
  */
 @Data
 public class FootprintEntity {
+
     /**
      * 主键id
      */

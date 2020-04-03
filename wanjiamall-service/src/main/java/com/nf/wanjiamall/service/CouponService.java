@@ -19,4 +19,6 @@ public interface CouponService {
     Object updateCoupon(CouponEntity couponEntity, Integer id);
 
     Object deletedCouponId(Integer id);
+
+    Object getCouponIdQuery(Integer couponId);
 }

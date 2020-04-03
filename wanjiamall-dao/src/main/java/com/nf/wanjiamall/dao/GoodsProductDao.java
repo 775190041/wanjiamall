@@ -32,4 +32,11 @@ public interface GoodsProductDao {
      * 添加库存
      */
     int addStock(@Param("productId") Integer productId,@Param("number") Integer number);
+
+    /**
+     * 根据商品id查询
+     */
+    GoodsProductEntity  getProductByGoodsId(@Param("productId") Integer productId);
+
+
 }

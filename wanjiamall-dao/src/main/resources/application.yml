@@ -31,6 +31,7 @@ jwt:
 secure:
   ignored:
     urls:
+      - /**
       - /chat/**
       - /**/*.js
       - /**/*.css

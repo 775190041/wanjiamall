@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author lrc
@@ -149,5 +148,10 @@ public class CouponServiceImpl implements CouponService {
     public Object deletedCouponId(Integer id) {
         couponDao.deletedCouponId(id);
         return ResponseUtil.ok();
+    }
+
+    @Override
+    public Object getCouponIdQuery(Integer couponId) {
+        return couponDao.getCouponById(couponId);
     }
 }

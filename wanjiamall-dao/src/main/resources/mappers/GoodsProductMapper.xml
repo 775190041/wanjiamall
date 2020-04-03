@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nf.wanjiamall.dao.GoodsProductDao">
 
-<!--    商品货物表添加-->
+    <!--    商品货物表添加-->
     <insert id="insert">
         insert into wanjia_goods_product(goods_id, specifications, price, number,
         url, add_time, update_time, delted) values
         (#{goodsProductEntity.goodsId},#{goodsProductEntity.specification},#{goodsProductEntity.price}
         ,#{goodsProductEntity.number},#{goodsProductEntity.url},default,default,default)
     </insert>
-<!--    商品货物修改-->
+    <!--    商品货物修改-->
     <update id="update">
         update wanjia_goods_product
         <set>
@@ -28,13 +28,13 @@
                 url = #{goodsProductEntity.url},
             </if>
         </set>
-            where id = #{goodsProductEntity.id}
+        where id = #{goodsProductEntity.id}
     </update>
 
 
 
 
-<!--    商品货物删除-->
+    <!--    商品货物删除-->
     <update id="delete">
         update wanjia_goods_product set delted = 1 where goods_id = #{id}
     </update>
@@ -47,7 +47,7 @@
     </resultMap>
 
 
-<!--    根据商品id查询-->
+    <!--    根据商品id查询-->
     <select id="listByGoodsId" resultMap="GoodsProductEntityMap">
         select id, goods_id, specifications, price, number, url, add_time, update_time, delted from wanjia_goods_product
         where delted = 0 and goods_id = #{id}
@@ -60,7 +60,11 @@
                 number = number + #{number}
             </if>
         </set>
-      where id = #{productId}
+        where id = #{productId}
     </update>
 
+    <select id="getProductByGoodsId" resultMap="GoodsProductEntityMap">
+        select id, goods_id, specifications, price, number, url, add_time, update_time, delted from wanjia_goods_product
+        where delted = 0 and id = #{productId}
+    </select>
 </mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.wanjiamall.dao.CommentDao">
+
+    <select id="getCommentAll" resultType="com.nf.wanjiamall.entity.CommentEntity">
+    select id, value_id, type, content, admin_content, user_id, star, pic_urls, add_time, update_time, delted
+    from wanjia_comment
+        where delted = 0
+        <if test="CommentEntity.userId != null">
+            and user_id = #{CommentEntity.userId}
+        </if>
+        <if test="CommentEntity.valueId != null">
+           and value_id = #{CommentEntity.valueId}
+        </if>
+     order by id
+     </select>
+
+    <update id="deleteCommentId">
+        update wanjia_comment set delted = 1
+        where delted=0 and id = #{commentId}
+    </update>
+
+</mapper>

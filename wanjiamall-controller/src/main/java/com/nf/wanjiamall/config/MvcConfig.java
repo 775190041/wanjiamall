@@ -38,8 +38,6 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new org.springframework.format.datetime.DateFormatter("yyyy-MM-dd HH:mm:ss"));
     }
-
-
 //    @Bean
 //    public ConversionService getConversionService(DateConverterConfig dateConverter){
 //        ConversionServiceFactoryBean factoryBean = new ConversionServiceFactoryBean();

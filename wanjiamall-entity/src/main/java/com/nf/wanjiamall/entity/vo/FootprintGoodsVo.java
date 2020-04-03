@@ -1,6 +1,7 @@
 package com.nf.wanjiamall.entity.vo;
 
 import lombok.Data;
+import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
 
@@ -17,11 +18,11 @@ public class FootprintGoodsVo {
      */
     private Integer goodsId;
 
+
     /**
      * 创建时间
      */
     private Date addTime;
-
 
 
     /**

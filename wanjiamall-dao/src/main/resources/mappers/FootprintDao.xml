@@ -43,8 +43,12 @@
     </select>
 
     <delete id="deleteBatchUserFootprint">
-        delete f  from wanjia_footprint f left join wanjia_user u
-        on  f.user_id = u.id  where u.id = #{userId}  or f.id in
+        delete f from
+            wanjia_footprint as f
+        inner join
+            (select id from wanjia_user where id =#{userId} ) as u
+            on f.user_id = u.id
+        where f.id in
         <foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
             #{item}
         </foreach>

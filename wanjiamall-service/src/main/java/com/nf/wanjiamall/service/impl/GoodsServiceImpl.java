@@ -135,7 +135,6 @@ public class GoodsServiceImpl implements GoodsService {
     @Transactional
     @Override
     public Object delete(int id) {
-
         goodsDao.delete(id);
         goodsSpecificationDao.delete(id);
         goodsProductDao.delete(id);

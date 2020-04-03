@@ -21,7 +21,37 @@
         <if test="couponUser.status == 3">
             and status = 3
         </if>
-        and id = #{id} order by add_time desc
+        and id = #{id}
     </select>
 
+    <select id="getCouponUserAll" resultType="com.nf.wanjiamall.entity.CouponUserEntity">
+        select * from wanjia_coupon_user where deleted = 0
+        and id = #{id}
+    </select>
+
+    <!--根据用户Id查询用户优惠卷所有信息-->
+    <select id="getUserIdCouponUserAll"  resultType="com.nf.wanjiamall.entity.CouponUserEntity">
+        select id, user_id, coupon_id, status, user_time, start_time, end_time, order_id, add_time, update_time, deleted from wanjia_coupon_user where deleted = 0
+        and user_id = #{userId}
+    </select>
+
+    <!--根据用户优惠卷Id查询该优惠卷-->
+    <select id="getUserCouponIdOrUesrId"  resultType="com.nf.wanjiamall.entity.CouponUserEntity">
+        select id, user_id, coupon_id, status, user_time, start_time, end_time, order_id, add_time, update_time, deleted from wanjia_coupon_user where deleted = 0
+        <if test="userCouponId != null">
+            and id = #{userCouponId}
+        </if>
+        <if test="userId != null">
+            and user_id = #{userId}
+        </if>
+    </select>
+
+    <select id="getCouponUserGet">
+        select coupon_id from wanjia_coupon_user where deleted = 0
+            and user_id = #{userId}  and coupon_id = #{couponId}
+    </select>
+
+    <insert id="insertCouponUser">
+        insert into wanjia_coupon_user(user_id,coupon_id) values (#{username},#{coupon_id})
+    </insert>
 </mapper>

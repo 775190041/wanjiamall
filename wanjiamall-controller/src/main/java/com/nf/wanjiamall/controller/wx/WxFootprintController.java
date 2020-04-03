@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,6 @@ public class WxFootprintController {
 
     @Autowired
     private WxFootprintService wxFootprintService;
-
 
     @ApiOperation("根据用户Id查询用户足迹的所有信息")
     @GetMapping("/footprint/{userId}")

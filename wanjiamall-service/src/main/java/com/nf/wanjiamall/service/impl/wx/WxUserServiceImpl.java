@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.*;
 
 /**
  * @author lrc
@@ -31,19 +30,15 @@ public class WxUserServiceImpl implements WxUserService {
     public Object getWxUserOpenid(String code) throws IOException {
 
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxb2d02e2e5e9cbd4f" +
-                "&secret=493c4f274ca8c9a51f737ab3e33d68f7&js_code="+code+"&grant_type=authorization_code";
-
-        JSONObject jsonObject =doGetJson(url);
+                "&secret=493c4f274ca8c9a51f737ab3e33d68f7&js_code=" + code + "&grant_type=authorization_code";
+        JSONObject jsonObject = doGetJson(url);
         String openid = jsonObject.getString("openid");
-        String token = jsonObject.getString("access_token");
-        String infoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + token + "&openid=" + openid
-                + "&lang=zh_CN";
-        JSONObject userInfo = doGetJson(infoUrl);
-        UserEntity userEntity  = userDao.getOpenId(openid);
-        if( userInfo != null){
+        UserEntity userEntity = userDao.getOpenId(openid);
+        if( jsonObject != null){
             if (userEntity == null){
                 if (userDao.userInsert(openid) > 0){
-                    return ResponseUtil.ok();
+                    UserEntity user = userDao.getOpenId(openid);
+                    return ResponseUtil.ok(user);
                 }else {
                     return ResponseUtil.fail(505,"添加失败");
                 }
@@ -54,7 +49,7 @@ public class WxUserServiceImpl implements WxUserService {
         }
     }
 
-    public  JSONObject doGetJson(String url) throws IOException {
+    public JSONObject doGetJson(String url) throws IOException {
         JSONObject jsonObject = null;
         DefaultHttpClient client = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(url);
@@ -68,7 +63,6 @@ public class WxUserServiceImpl implements WxUserService {
         return jsonObject;
     }
 
-    
-
-
 }
+
+

@@ -72,7 +72,6 @@ public class JacksonUtil {
         try {
             node = mapper.readTree(body);
             JsonNode leaf = node.get(field);
-
             if (leaf != null)
             {
                 return mapper.convertValue(leaf, new TypeReference<List<Integer>>() {

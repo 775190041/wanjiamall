@@ -34,4 +34,20 @@
         </if>
     </select>
 
+    <!--用户默认地址-->
+    <select id="getAddressDefault" resultMap="addressResultMap">
+        select id, name, user_id, province, city, county, address_detail, area_code, postal_code, tel, is_default, add_time, update_time, deleted
+        from wanjia_address
+        where  user_id = #{userId}
+        and is_default = 1
+    </select>
+
+    <!--根据用户id与地址id查询地址信息-->
+    <select id="getAddressIdAndUserIdQuery" resultMap="addressResultMap">
+        select  id, name, user_id, province, city, county, address_detail, area_code, postal_code, tel, is_default, add_time, update_time, deleted
+         from wanjia_address where deleted = 0 and user_id = #{userId}
+         <if test="addressId != null">
+             and id = #{addressId}
+         </if>
+    </select>
 </mapper>
