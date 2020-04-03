@@ -16,5 +16,5 @@ public class WxCateGoodsVo {
 
     private List<CategoryEntity> second;
 
-    private Map<String,List<GoodsEntity>> goodsMap;
+    private Object[][] goodsMap;
 }

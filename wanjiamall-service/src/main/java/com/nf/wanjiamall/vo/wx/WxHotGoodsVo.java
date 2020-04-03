@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author lzn
@@ -23,7 +24,7 @@ public class WxHotGoodsVo {
     //根据价格降序
     private List<GoodsEntity> hotGoodsUpToLow;
     //根据分类
-    private List<CategoryEntity> category;
-    private Map<String,List<GoodsEntity>> hotGoodsByCateMap;
+    private Set<CategoryEntity> category;
+    private Object[][] hotGoodsByCateMap;
 
 }

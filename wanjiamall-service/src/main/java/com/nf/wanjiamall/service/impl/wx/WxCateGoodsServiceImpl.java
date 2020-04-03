@@ -33,16 +33,19 @@ public class WxCateGoodsServiceImpl implements WxCateGoodsService {
         CategoryEntity firstCate= categoryDao.cateEntity(firstCateId);
         List<CategoryEntity> secondCate= categoryDao.getSecondCate(firstCateId);
         List<GoodsEntity> goodsEntities=null;
-        Map<String,List<GoodsEntity>> goodsMap=new HashMap<>();
+
+        Object[][] obj  = new Object[secondCate.size()][];
+        int i=0;
         for (CategoryEntity second : secondCate) {
-            goodsEntities=goodsDao.getGoodsById(pageNum, pageSize,second.getId());
-            goodsMap.put(second.getName(),goodsEntities);
+            goodsEntities=goodsDao.getGoodsById(pageNum, pageSize, second.getId());
+            obj[i]= goodsEntities.toArray();
+            i++;
         }
 
         WxCateGoodsVo vo =new WxCateGoodsVo();
         vo.setFirst(firstCate);
         vo.setSecond(secondCate);
-        vo.setGoodsMap(goodsMap);
+        vo.setGoodsMap(obj);
         return ResponseUtil.ok(vo);
     }
 

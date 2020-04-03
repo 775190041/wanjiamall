@@ -13,9 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author lzn
@@ -33,12 +31,19 @@ public class WxHotServiceImpl implements WxHotService {
         List<GoodsEntity> hotGoods=goodsDao.getHotGoods(pageNum, pageSize);
         List<GoodsEntity> hotGoodsLowToUp=goodsDao.hotGoodsLowToUp(pageNum, pageSize);
         List<GoodsEntity> hotGoodsUpToLow=goodsDao.hotGoodsUpToLow(pageNum, pageSize);
-        List<CategoryEntity> category=categoryDao.getHotCate(1,8);
+        List<CategoryEntity> categoryEntities=categoryDao.getHotCate(1,8);
+        Set<CategoryEntity> category=new HashSet<>();
         List<GoodsEntity> hotGoodsByCate=null;
-        Map<String,List<GoodsEntity>> map=new HashMap<>();
-        for (CategoryEntity categoryEntity : category) {
-            hotGoodsByCate=goodsDao.hotGoodsByCate(pageNum, pageSize, categoryEntity.getId());
-            map.put(categoryEntity.getName(),hotGoodsByCate);
+
+        for (CategoryEntity categoryEntity : categoryEntities) {
+            category.add(categoryEntity);
+        }
+        Object[][] obj  = new Object[category.size()][];
+        int i=0;
+        for (CategoryEntity cate : category) {
+            hotGoodsByCate=goodsDao.hotGoodsByCate(pageNum, pageSize, cate.getId());
+            obj[i]= hotGoodsByCate.toArray();
+            i++;
         }
 
         WxHotGoodsVo vo=new WxHotGoodsVo();
@@ -46,7 +51,7 @@ public class WxHotServiceImpl implements WxHotService {
         vo.setHotGoodsLowToUp(hotGoodsLowToUp);
         vo.setHotGoodsUpToLow(hotGoodsUpToLow);
         vo.setCategory(category);
-        vo.setHotGoodsByCateMap(map);
+        vo.setHotGoodsByCateMap(obj);
 
         return ResponseUtil.ok(vo);
     }
