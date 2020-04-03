@@ -7,7 +7,7 @@
     <!-- 根据用户Id查询购物车信息 -->
     <select id="getUserIdQueryCartAll" resultType="com.nf.wanjiamall.entity.CartEntity">
         select
-            c.id, c.user_id, c.goods_sn,c.goods_name, c.product_id, c.price, c.number, c.checked, c.delted
+             c.id, c.user_id, c.goods_sn,c.goods_name, c.product_id, c.price, c.number, c.specification, c.checked, c.pic_url, c.add_time, c.update_time, c.delted
         from
             wanjia_cart c left join wanjia_user u
             on c.user_id = u.id

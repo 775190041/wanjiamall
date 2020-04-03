@@ -117,11 +117,10 @@ public interface GoodsDao {
                                    @Param("pageSize") Integer pageSize,
                                    @Param("brandId") Integer brandId);
 
-    /**s
+    /**
      * 根据商品id查询商品信息
      */
     GoodsEntity GoodsById(@Param("id") int id);
-
 
     /**
      * 判断商品编号和商品名称是否存在

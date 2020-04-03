@@ -46,7 +46,7 @@
         </if>
     </select>
 
-    <select id="getCouponUserGet">
+    <select id="getCouponUserGet" resultType="com.nf.wanjiamall.entity.CouponUserEntity">
         select coupon_id from wanjia_coupon_user where deleted = 0
             and user_id = #{userId}  and coupon_id = #{couponId}
     </select>
