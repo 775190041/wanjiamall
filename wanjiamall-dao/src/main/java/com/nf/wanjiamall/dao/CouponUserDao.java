@@ -37,5 +37,5 @@ public interface CouponUserDao {
      * @param coupon_id
      * @return
      */
-    Integer insertCouponUser(@Param("coupon_id") Integer coupon_id);
+    Integer insertCouponUser(@Param("user_id") Integer user_id, @Param("coupon_id") Integer coupon_id);
 }

@@ -30,6 +30,6 @@
     </select>
 
     <insert id="insertCouponUser">
-        insert into wanjia_coupon_user(user_id,coupon_id) values (#{username},#{coupon_id})
+        insert into wanjia_coupon_user(user_id,coupon_id) values (#{user_id},#{coupon_id})
     </insert>
 </mapper>

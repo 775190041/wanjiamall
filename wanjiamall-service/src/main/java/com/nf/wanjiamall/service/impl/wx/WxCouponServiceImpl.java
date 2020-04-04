@@ -35,7 +35,7 @@ public class WxCouponServiceImpl implements WxCouponService {
         if (couponUserEntity !=null){
             return ResponseUtil.ok(true);
         }else{
-            if (couponUserDao.insertCouponUser(couponId)>0){
+            if (couponUserDao.insertCouponUser(userId,couponId)>0){
                 return ResponseUtil.ok(false);
             }else {
                 return ResponseUtil.fail(505,"领取失败！");
