@@ -33,7 +33,7 @@ public class WxCouponServiceImpl implements WxCouponService {
     public Object getCouponById(Integer userId,Integer couponId) {
         Integer coupon_id = couponUserDao.getCouponUserGetByCouponId(userId,couponId);
         if (coupon_id !=null){
-            return ResponseUtil.ok(true);
+            return ResponseUtil.fail(400,"该优惠券已被领取");
         }else{
             if (couponUserDao.insertCouponUser(userId,couponId)>0){
                 return ResponseUtil.ok(false);
