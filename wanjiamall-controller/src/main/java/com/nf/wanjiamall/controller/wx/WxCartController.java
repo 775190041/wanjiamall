@@ -41,7 +41,7 @@ public class WxCartController {
     }
 
     @ApiOperation("购物车商品货品勾选状态")
-    @PostMapping("/cart/checked/{userId}")
+    @PutMapping("/cart/checked/{userId}")
     public Object checked(@PathVariable("userId") Integer userId, @RequestBody String body) {
         return wxCartService.checked(userId,body);
     }

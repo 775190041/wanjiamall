@@ -49,11 +49,11 @@ public interface CartDao {
     /**
      * 购物车商品货品勾选状态
      */
-    int updateCheck(@Param("productIds")List<Integer> productIds,@Param("checked")Integer checked);
+    int updateCheck(@Param("cartIds")List<Integer> cartIds,@Param("checked")Integer checked);
 
     /**
      * 删除购物车商品
      */
-    int delete(@Param("productIds")List<Integer> productIds , @Param("userId")Integer userId);
+    int delete(@Param("cartIds")List<Integer> cartIds , @Param("userId")Integer userId);
 
 }

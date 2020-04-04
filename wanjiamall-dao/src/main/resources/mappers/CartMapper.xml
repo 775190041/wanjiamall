@@ -179,7 +179,7 @@
             checked = #{checked}
         </if>
         where delted = 0 and id in
-        <foreach collection="productIds" item="item" index="index" open="(" close=")" separator=",">
+        <foreach collection="cartIds" item="item" index="index" open="(" close=")" separator=",">
             #{item}
         </foreach>
     </update>
@@ -187,7 +187,7 @@
     <update id="delete">
         update wanjia_cart set
         delted = 1  where delted = 0 and user_id = #{userId} and id in
-        <foreach collection="productIds" item="item" index="index" open="(" close=")" separator=",">
+        <foreach collection="cartIds" item="item" index="index" open="(" close=")" separator=",">
             #{item}
         </foreach>
     </update>

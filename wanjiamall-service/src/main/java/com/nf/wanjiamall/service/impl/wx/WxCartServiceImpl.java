@@ -340,8 +340,8 @@ public class WxCartServiceImpl implements WxCartService {
          if (checkValue == null) {
              return ResponseUtil.badArgument();
          }
-         List<Integer> productIds = JacksonUtil.parseIntegerList(body, "productIds");
-         if (productIds == null) {
+         List<Integer> cartIds = JacksonUtil.parseIntegerList(body, "cartIds");
+         if (cartIds == null) {
              return ResponseUtil.badArgument();
          }
          Boolean isChecked = (checkValue == 1);
@@ -350,7 +350,7 @@ public class WxCartServiceImpl implements WxCartService {
          } else {
              checkValue = 0;
          }
-         cartDao.updateCheck(productIds,checkValue);
+         cartDao.updateCheck(cartIds,checkValue);
          return getUserIdQueryCartAll(userId);
      }
 
@@ -373,11 +373,11 @@ public class WxCartServiceImpl implements WxCartService {
         if (body == null) {
             return ResponseUtil.badArgument();
         }
-        List<Integer> productIds = JacksonUtil.parseIntegerList(body, "productIds");
-        if (productIds == null || productIds.size() == 0) {
+        List<Integer> cartIds = JacksonUtil.parseIntegerList(body, "cartIds");
+        if (cartIds == null || cartIds.size() == 0) {
             return ResponseUtil.badArgument();
         }
-        cartDao.delete(productIds, userId);
+        cartDao.delete(cartIds, userId);
         return getUserIdQueryCartAll(userId);
     }
 
