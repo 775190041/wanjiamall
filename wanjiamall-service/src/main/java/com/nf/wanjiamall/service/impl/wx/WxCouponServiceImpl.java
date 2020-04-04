@@ -31,8 +31,8 @@ public class WxCouponServiceImpl implements WxCouponService {
 
     @Override
     public Object getCouponById(Integer userId,Integer couponId) {
-        CouponUserEntity couponUserEntity = couponUserDao.getCouponUserGet(userId,couponId);
-        if (couponUserEntity !=null){
+        Integer coupon_id = couponUserDao.getCouponUserGetByCouponId(userId,couponId);
+        if (coupon_id !=null){
             return ResponseUtil.ok(true);
         }else{
             if (couponUserDao.insertCouponUser(userId,couponId)>0){

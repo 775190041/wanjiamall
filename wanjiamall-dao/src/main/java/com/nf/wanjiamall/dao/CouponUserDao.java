@@ -24,12 +24,12 @@ public interface CouponUserDao {
                                               @Param("id") Integer id);
 
     /**
-     * 根据用户查询该用户领了什么优惠卷
+     * 根据用户,优惠卷ID查询该用户是否有这条优惠卷
      * @param userId
      * @param couponId
      * @return
      */
-    CouponUserEntity getCouponUserGet(@Param("userId") Integer userId,@Param("couponId")Integer couponId);
+    Integer getCouponUserGetByCouponId(@Param("userId") Integer userId,@Param("couponId")Integer couponId);
 
 
     /**

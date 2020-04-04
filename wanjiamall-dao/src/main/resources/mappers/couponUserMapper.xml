@@ -24,7 +24,7 @@
         and id = #{id} order by add_time desc
     </select>
 
-    <select id="getCouponUserGet">
+    <select id="getCouponUserGet" resultType="Integer">
         select coupon_id from wanjia_coupon_user where deleted = 0
             and user_id = #{userId}  and coupon_id = #{couponId}
     </select>
