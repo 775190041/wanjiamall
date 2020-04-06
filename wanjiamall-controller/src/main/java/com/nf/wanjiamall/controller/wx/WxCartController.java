@@ -52,13 +52,13 @@ public class WxCartController {
         return wxCartService.delete(userId, body);
     }
 
-    @ApiOperation("商品下单")
-    @GetMapping("/cart/cartOrders/{userId}/{cartId}/{addressId}/{couponId}/{userCouponId}")
-     public Object cartOrders(@PathVariable("userId")  Integer userId,
-                              @PathVariable("cartId") Integer cartId,
-                              @PathVariable("addressId") Integer addressId,
-                              @PathVariable("couponId") Integer couponId,
-                              @PathVariable("userCouponId") Integer userCouponId) {
-         return wxCartService.cartOrders(userId, cartId, addressId, couponId, userCouponId);
+    @ApiOperation("商品确认下单")
+    @GetMapping("/cart/cartOrders/{userId}")
+     public Object cartOrder(@PathVariable("userId") Integer userId,
+                                         @RequestParam(required = false , defaultValue = "0") Integer cartId,
+                                         @RequestParam(required = false , defaultValue = "0") Integer addressId,
+                                         @RequestParam(required = false , defaultValue = "0")Integer couponId,
+                                         @RequestParam(required = false , defaultValue = "0")Integer userCouponId) {
+         return wxCartService.cartOrder(userId, cartId, addressId, couponId, userCouponId);
      }
 }

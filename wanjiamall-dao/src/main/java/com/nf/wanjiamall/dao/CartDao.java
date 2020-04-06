@@ -16,6 +16,11 @@ public interface CartDao {
     List<CartEntity> getUserIdQueryCartAll(@Param("userId") Integer userId);
 
     /**
+     * 根据用户Id查询购物车所有勾选得商品
+     */
+    List<CartEntity> getUserIdQueryCartCheckedGoodsAll(@Param("userId") Integer userId);
+
+    /**
      *根据用户Id与商品id查询购物车信息
      */
     CartEntity getUserIdAndGoodsIduQueryCart(@Param("userId") Integer userId,@Param("id")Integer id);
