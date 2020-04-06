@@ -425,6 +425,7 @@ public class WxCartServiceImpl implements WxCartService {
                 return ResponseUtil.badArgumentValue();
             }
         }
+
         // 选中的商品
         List<CartEntity> checkedGoodsList = null;
         //购物车id等于空时或者等于0时
@@ -441,14 +442,12 @@ public class WxCartServiceImpl implements WxCartService {
             //此商品添加到集合中
             checkedGoodsList.add(cart);
         }
-
         //选中的商品的价格
         BigDecimal checkedGoodsPrice = new BigDecimal(0.00);
         for (CartEntity cart : checkedGoodsList) {
             //商品价格 * 商品数量
             checkedGoodsPrice = checkedGoodsPrice.add(cart.getPrice().multiply(new BigDecimal(cart.getNumber())));
         }
-
         // 计算优惠券可用情况
         BigDecimal tmpCouponPrice = new BigDecimal(0.00);
         Integer tmpCouponId = 0;
