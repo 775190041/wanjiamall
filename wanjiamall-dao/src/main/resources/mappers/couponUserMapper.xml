@@ -25,6 +25,8 @@
     </select>
 
 
+    ----
+
     <select id="getCouponUserGetByCouponId" resultType="Integer">
     <!--根据用户Id查询用户优惠卷所有信息-->
     <select id="getUserIdCouponUserAll"  resultType="com.nf.wanjiamall.entity.CouponUserEntity">
