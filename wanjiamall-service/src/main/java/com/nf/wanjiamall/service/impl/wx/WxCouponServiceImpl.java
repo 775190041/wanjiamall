@@ -31,11 +31,11 @@ public class WxCouponServiceImpl implements WxCouponService {
 
     @Override
     public Object getCouponById(Integer userId,Integer couponId) {
-        CouponUserEntity couponUserEntity = couponUserDao.getCouponUserGet(userId,couponId);
-        if (couponUserEntity !=null){
-            return ResponseUtil.ok(true);
+        Integer coupon_id = couponUserDao.getCouponUserGetByCouponId(userId,couponId);
+        if (coupon_id !=null){
+            return ResponseUtil.fail(400,"该优惠券已被领取");
         }else{
-            if (couponUserDao.insertCouponUser(couponId)>0){
+            if (couponUserDao.insertCouponUser(userId,couponId)>0){
                 return ResponseUtil.ok(false);
             }else {
                 return ResponseUtil.fail(505,"领取失败！");
