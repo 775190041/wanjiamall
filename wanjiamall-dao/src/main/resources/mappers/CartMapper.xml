@@ -11,7 +11,16 @@
         from
             wanjia_cart c left join wanjia_user u
             on c.user_id = u.id
-        where delted = 0 and  c.user_id = #{userId}
+        where delted = 0 and checked = 1 and  c.user_id = #{userId}
+    </select>
+
+    <select id="getUserIdQueryCartCheckedGoodsAll" resultType="com.nf.wanjiamall.entity.CartEntity">
+        select
+        c.id, c.user_id, c.goods_sn,c.goods_name, c.product_id, c.price, c.number, c.specification, c.checked, c.pic_url, c.add_time, c.update_time, c.delted
+        from
+            wanjia_cart c left join wanjia_user u
+        on c.user_id = u.id
+        where c.delted = 0 and  c.user_id =1 and c.checked = 1
     </select>
 
     <!-- 根据用户Id商品id查询购物车信息 -->

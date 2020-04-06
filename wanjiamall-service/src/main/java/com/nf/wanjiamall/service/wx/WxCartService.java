@@ -36,10 +36,9 @@ public interface WxCartService {
      * 购物车商品删除
      */
     Object delete(Integer userId, String body);
-
     /**
-     * 购物车下单
+     * 购物车确认下单
      */
-    Object cartOrders(Integer userId, Integer cartId, Integer addressId, Integer couponId, Integer userCouponId) ;
+    Object cartOrder(Integer userId, Integer cartId, Integer addressId, Integer couponId, Integer userCouponId) ;
 
 }

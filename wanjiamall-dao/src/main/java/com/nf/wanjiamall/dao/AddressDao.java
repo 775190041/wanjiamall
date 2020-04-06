@@ -22,4 +22,9 @@ public interface AddressDao {
      * 根据用户id与地址id查询地址信息
      */
     AddressEntity getAddressIdAndUserIdQuery(@Param("userId")Integer userId,@Param("addressId")Integer addressId);
+
+    /**
+     * 根据用户Id查询该用户所有地址
+     */
+    List<AddressEntity> getUserIdAddressAll(@Param("userId")Integer userId);
 }

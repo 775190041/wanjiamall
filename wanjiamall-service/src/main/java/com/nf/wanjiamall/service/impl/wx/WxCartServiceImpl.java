@@ -383,7 +383,7 @@ public class WxCartServiceImpl implements WxCartService {
 
 
     /**
-     * 购物车下单
+     * 购物车确认下单
      * @param userId    用户ID
      * @param cartId    购物车商品ID：
      *                  如果购物车商品ID是空，则下单当前用户所有购物车商品；
@@ -395,10 +395,12 @@ public class WxCartServiceImpl implements WxCartService {
      * @return 购物车操作结果
      */
     @Override
-    public Object cartOrders(Integer userId, Integer cartId, Integer addressId, Integer couponId, Integer userCouponId) {
+    public Object cartOrder(Integer userId, Integer cartId, Integer addressId, Integer couponId, Integer userCouponId) {
         if (userId == null) {
             return ResponseUtil.unlogin();
         }
+        //所有收货地址
+        List<AddressEntity> addressList = addressDao.getUserIdAddressAll(userId);
         // 收货地址
         AddressEntity checkedAddress = null;
         //等于空或者等于0
@@ -423,13 +425,12 @@ public class WxCartServiceImpl implements WxCartService {
                 return ResponseUtil.badArgumentValue();
             }
         }
-
         // 选中的商品
         List<CartEntity> checkedGoodsList = null;
         //购物车id等于空时或者等于0时
         if (cartId == null || cartId.equals(0)) {
-            //查询购物车所有商品信息
-            checkedGoodsList = cartDao.getUserIdQueryCartAll(userId);
+            //查询购物车所有勾选商品信息
+            checkedGoodsList = cartDao.getUserIdQueryCartCheckedGoodsAll(userId);
         } else {
             //购物车id不等于空时 查询购物车购物的id
             CartEntity cart = cartDao.getUserIdAndGoodsIduQueryCart(userId, cartId);
@@ -455,26 +456,32 @@ public class WxCartServiceImpl implements WxCartService {
         int tmpCouponLength = 0;
         //查询该用户所有优惠券
         List<CouponUserEntity> couponUserList = couponUserDao.getUserIdCouponUserAll(userId);
+        //可用优惠卷信息
+        CouponEntity availableCoupon = null;
+        //得到用户自选得优惠券信息
+        CouponEntity optionalCoupon = null;
         //遍历优惠券信息
         for(CouponUserEntity couponUser : couponUserList){
             //得到该用户的优惠券id
             tmpUserCouponId = couponUser.getId();
             //查看优惠券是否可用
-            CouponEntity coupon = checkCoupon(userId, couponUser.getCouponId(), tmpUserCouponId);
-            if(coupon == null){
+            availableCoupon = checkCoupon(userId, couponUser.getCouponId(), tmpUserCouponId);
+            if(availableCoupon == null){
                 continue;
             }
             //coupon如果不为空 则优惠券可用数量+
             tmpCouponLength ++;
-            //如果指定的coupon.getDiscount()数小于tmpCouponPrice 参数返回 -1。
-            if(tmpCouponPrice.compareTo(coupon.getDiscount()) == -1){
-                //得到优惠券金额
-                tmpCouponPrice = coupon.getDiscount();
-                //得到优惠券id
-                tmpCouponId = coupon.getId();
+            //如果指定的availableCoupon.getDiscount()数小于tmpCouponPrice 参数返回 -1。
+            if(tmpCouponPrice.compareTo(availableCoupon.getDiscount()) == -1){
+                //availableCoupon.getMin() < checkedGoodsPrice, 返回-1()
+                if (availableCoupon.getMin().compareTo(checkedGoodsPrice) == -1 ){
+                    //得到优惠券金额
+                    tmpCouponPrice = availableCoupon.getDiscount();
+                    //得到优惠券id
+                    tmpCouponId = availableCoupon.getId();
+                }
             }
         }
-
         // 获取优惠券减免金额，优惠券可用数量
         int availableCouponLength = tmpCouponLength;
         BigDecimal couponPrice = new BigDecimal(0);
@@ -495,16 +502,16 @@ public class WxCartServiceImpl implements WxCartService {
             userCouponId = tmpUserCouponId;
         }else {
             //测试优惠卷是否合适
-            CouponEntity coupon = checkCoupon(userId, couponId, userCouponId);
+            optionalCoupon = checkCoupon(userId, couponId, userCouponId);
             // 用户选择的优惠券有问题，则选择合适优惠券，否则使用用户选择的优惠券
-            if(coupon == null){
+            if(optionalCoupon == null){
                 couponPrice = tmpCouponPrice;
                 couponId = tmpCouponId;
                 userCouponId = tmpUserCouponId;
             }
             else {
                 //优惠卷没有问题就得到优惠券金额
-                couponPrice = coupon.getDiscount();
+                couponPrice = optionalCoupon.getDiscount();
             }
         }
         // 根据订单商品总价计算运费，满88则免运费，否则8元；
@@ -521,17 +528,35 @@ public class WxCartServiceImpl implements WxCartService {
         // 订单费用
         BigDecimal orderTotalPrice = checkedGoodsPrice.add(freightPrice).subtract(couponPrice).max(new BigDecimal(0.00));
         Map<String, Object> data = new HashMap<>();
+        //收货地址Id
         data.put("addressId", addressId);
+        //优惠券Id
         data.put("couponId", couponId);
+        //用户优惠卷Id
         data.put("userCouponId", userCouponId);
+        //购物车Id
         data.put("cartId", cartId);
+        //优惠券可用金额
         data.put("couponPrice", couponPrice);
+        //收货地址信息
         data.put("checkedAddress", checkedAddress);
+        //所有收货地址
+        data.put("addressList",addressList);
+        //用户所有优惠券信息
+        data.put("couponUserList",couponUserList);
+        //用户可用优惠券可用
+        data.put("availableCoupon",availableCoupon);
+        //用户自选优惠券信息
+        data.put("optionalCoupon",optionalCoupon);
+        //用户优惠券可用数量
         data.put("availableCouponLength", availableCouponLength);
+        //选中得商品价格
         data.put("goodsTotalPrice", checkedGoodsPrice);
+        //运费价格
         data.put("freightPrice", freightPrice);
-        data.put("couponPrice", couponPrice);
+        //订单费用
         data.put("orderTotalPrice", orderTotalPrice);
+        //选中的商品（展现在下面）
         data.put("checkedGoodsList", checkedGoodsList);
         return ResponseUtil.ok(data);
     }
@@ -562,11 +587,9 @@ public class WxCartServiceImpl implements WxCartService {
         Integer days = coupon.getDays();
         LocalDateTime date = LocalDateTime.now();
         if (timeType.equals(1)) {
-
             ZoneId zoneId = ZoneId.systemDefault();
             ZonedDateTime zdt = date.atZone(zoneId);
             Date dates = Date.from(zdt.toInstant());
-
             if (dates.before(coupon.getStartTime()) && dates.after((coupon.getAddTime()))) {
                 return coupon;
             }
