@@ -525,6 +525,7 @@ public class WxCartServiceImpl implements WxCartService {
         }else{
             freightPrice = new BigDecimal(8);
         }
+
         // 订单费用
         BigDecimal orderTotalPrice = checkedGoodsPrice.add(freightPrice).subtract(couponPrice).max(new BigDecimal(0.00));
         Map<String, Object> data = new HashMap<>();
@@ -558,6 +559,7 @@ public class WxCartServiceImpl implements WxCartService {
         data.put("orderTotalPrice", orderTotalPrice);
         //选中的商品（展现在下面）
         data.put("checkedGoodsList", checkedGoodsList);
+
         return ResponseUtil.ok(data);
     }
 

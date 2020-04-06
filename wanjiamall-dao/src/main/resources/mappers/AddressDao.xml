@@ -35,7 +35,6 @@
     </select>
 
     <select id="getAddressByUserId" resultMap="addressResultMap">
-
         select wa.id, wa.name, wa.user_id,
         a.name as province,b.name as city,c.name as county,wa.address_detail, wa.area_code,
         wa.postal_code,wa.tel,wa.is_default,wa.add_time,wa.update_time,wa.deleted
@@ -51,11 +50,18 @@
     </select>
 
     <select id="getAddressByIdAndUserId" resultMap="addressResultMap">
-        select id, name, user_id, province, city, county, address_detail, area_code, postal_code, tel, is_default, add_time, update_time, deleted
-        from wanjia_address
-        where deleted = 0
-        and id = #{id}
-        and user_id = #{userId}
+        select wa.id, wa.name, wa.user_id,
+            a.name as province,b.name as city,c.name as county,wa.address_detail, wa.area_code,
+            wa.postal_code,wa.tel,wa.is_default,wa.add_time,wa.update_time,wa.deleted
+        from wanjia_address wa join wanjia_region as a
+            on wa.province = a.id
+        left join wanjia_region as b
+            on a.id = b.pid
+        left join wanjia_region as  c
+            on b.id = c.pid
+        where c.id = wa.county
+            and wa.user_id = #{userId}
+            and wa.deleted = 0
     </select>
 
 
@@ -111,25 +117,53 @@
     </update>
     <!--用户默认地址-->
     <select id="getAddressDefault" resultMap="addressResultMap">
-        select id, name, user_id, province, city, county, address_detail, area_code, postal_code, tel, is_default, add_time, update_time
-        from wanjia_address
-        where  user_id = #{userId}
-        and is_default = 1
+
+        select wa.id, wa.name, wa.user_id,
+            a.name as province,b.name as city,c.name as county,wa.address_detail, wa.area_code,
+            wa.postal_code,wa.tel,wa.is_default,wa.add_time,wa.update_time,wa.deleted
+        from wanjia_address wa join wanjia_region as a
+            on wa.province = a.id
+        left join wanjia_region as b
+            on a.id = b.pid
+        left join wanjia_region as  c
+            on b.id = c.pid
+        where c.id = wa.county
+            and wa.user_id = #{userId}
+            and wa.is_default = 1
+            and wa.deleted = 0
+
     </select>
 
     <!--根据用户id与地址id查询地址信息-->
     <select id="getAddressIdAndUserIdQuery" resultMap="addressResultMap">
-        select  id, name, user_id, province, city, county, address_detail, area_code, postal_code, tel, is_default, add_time, update_time
-         from wanjia_address where deleted = 0 and user_id = #{userId}
-         <if test="addressId != null">
-             and id = #{addressId}
-         </if>
+        select wa.id, wa.name, wa.user_id,
+            a.name as province,b.name as city,c.name as county,wa.address_detail, wa.area_code,
+            wa.postal_code,wa.tel,wa.is_default,wa.add_time,wa.update_time,wa.deleted
+        from wanjia_address wa join wanjia_region as a
+            on wa.province = a.id
+        left join wanjia_region as b
+            on a.id = b.pid
+        left join wanjia_region as  c
+            on b.id = c.pid
+        where c.id = wa.county
+            and wa.user_id = #{userId}
+            and wa.id = #{addressId}
+            and wa.deleted = 0
     </select>
 
     <!--根据用户Id查询该用户所有地址-->
     <select id="getUserIdAddressAll"  resultMap="addressResultMap">
-        select id, name, user_id, province, city, county, address_detail, area_code, postal_code, tel, is_default
-        from wanjia_address
-        where deleted = 0 and user_id = #{userId}
+        select wa.id, wa.name, wa.user_id,
+            a.name as province,b.name as city,c.name as county,wa.address_detail, wa.area_code,
+            wa.postal_code,wa.tel,wa.is_default,wa.add_time,wa.update_time,wa.deleted
+        from wanjia_address wa join wanjia_region as a
+            on wa.province = a.id
+        left join wanjia_region as b
+            on a.id = b.pid
+        left join wanjia_region as  c
+            on b.id = c.pid
+        where c.id = wa.county
+            and wa.user_id = #{userId}
+            and wa.deleted = 0
     </select>
 </mapper>

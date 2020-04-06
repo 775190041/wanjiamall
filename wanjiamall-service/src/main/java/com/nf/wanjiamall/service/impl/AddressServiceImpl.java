@@ -28,6 +28,9 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Object getAddressByUserId(Integer pageNum, Integer pageSize,  Integer userId) {
         List<AddressEntity> addressEntities = addressDao.getAddressByUserId(pageNum,pageSize,userId);
+       for (AddressEntity addressEntity : addressEntities){
+           System.err.println("addressEntity = " + addressEntity);
+       }
         return ResponseUtil.okList(addressEntities);
     }
 

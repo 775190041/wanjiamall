@@ -25,7 +25,6 @@ public class WxAddressController {
             @ApiImplicitParam(name = "pageSize", dataType = "Integer", value = "分页大小，必须", required = false),
             @ApiImplicitParam(name = "userId", dataType = "Integer", value = "用户id,必须", required = false)
     })
-
     @GetMapping("/address/{pageNum}/{pageSize}")
     @ApiOperation("按用户id查询该用户所有收货地址")
     public Object getAddressByUserId(@PathVariable(required = false) Integer pageNum,
@@ -34,12 +33,10 @@ public class WxAddressController {
         return addressService.getAddressByUserId(pageNum,pageSize,userId);
     }
 
-
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", dataType = "Integer", value = "id,必须", required = false),
             @ApiImplicitParam(name = "userId", dataType = "Integer", value = "用户id,必须", required = false)
     })
-
     @GetMapping("/address")
     @ApiOperation("按用户id和收货地址id查询详细地址")
     public Object getAddressByIdAndUserId(@RequestParam("id") Integer id,
