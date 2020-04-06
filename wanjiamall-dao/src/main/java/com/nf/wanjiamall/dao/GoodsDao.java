@@ -11,6 +11,10 @@ public interface GoodsDao {
      */
     int insert(@Param("goodsEntity") GoodsEntity goodsEntity);
 
+
+//    -----
+
+
     /**
      * 修改商品
      */
