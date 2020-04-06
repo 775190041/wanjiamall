@@ -31,7 +31,6 @@ public interface CouponUserDao {
      */
     Integer getCouponUserGetByCouponId(@Param("userId") Integer userId,@Param("couponId")Integer couponId);
 
-    List<CouponUserEntity> getCouponUserAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize, @Param("id") Integer id);
 
     /**
      * 根据用户Id查询用户优惠卷所有信息
