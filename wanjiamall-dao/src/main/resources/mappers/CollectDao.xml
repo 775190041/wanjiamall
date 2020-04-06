@@ -37,4 +37,33 @@
          where deleted=0 and goods_id=#{goodId} and user_id=#{userId}
     </select>
 
+    <select id="getCollectByUserId" resultMap="collectResultMap">
+        select wc.id,wc.user_id,wc.goods_id,wc.add_time,
+        wc.update_time,wc.deleted,wg.name
+        from wanjia_collect wc join wanjia_goods wg where
+        wc.deleted = 0 and wc.goods_id = wg.id
+
+         <if test="userId != null and userId != ''">
+                and wc.user_id = #{userId}
+         </if>
+
+    </select>
+
+    <select id="getCollectInsertAndDelete" resultMap="collectResultMap">
+        select wc.id,wc.user_id,wc.goods_id,wc.add_time,
+        wc.update_time,wc.deleted,wg.name
+        from wanjia_collect wc join wanjia_goods wg where
+        wc.deleted = 0 and wc.goods_id = wg.id
+        and wc.user_id = #{userId}
+        and wc.goods_id = #{goodsId}
+    </select>
+
+    <insert id="collectInsert">
+        insert into wanjia_collect(user_id, goods_id, add_time, update_time, deleted) values
+        (#{userId},#{goodsId},default,default,default)
+    </insert>
+
+    <delete id="collectDelete" parameterType="int">
+        delete from wanjia_collect where user_id = #{userId} and goods_id = #{goodsId}
+    </delete>
 </mapper>

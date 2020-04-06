@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @Api(tags = "wanjia_keyword,wanjia_search_history")
-@RequestMapping("/api")
+@RequestMapping("/wx")
 public class WxSearchController {
     @Autowired
     private KeywordService keywordService;
@@ -31,7 +31,7 @@ public class WxSearchController {
 
     })
     @ApiOperation("微信端:查询关键字表")
-    @GetMapping("/wx_keyword/{pageNum}/{pageSize}")
+    @GetMapping("/keyword/{pageNum}/{pageSize}")
     public Object getKeywordList(@PathVariable(required = false) int pageNum,
                                  @PathVariable(required = false) int pageSize,
                                  @RequestParam(value = "keyword",required = false,defaultValue = "") String keyword){
@@ -45,7 +45,7 @@ public class WxSearchController {
             @ApiImplicitParam(name = "userId", dataType = "Integer", value = "搜索历史表的用户id，必须", required = false)
     })
     @ApiOperation("微信端:按用户id查询搜索历史表")
-    @GetMapping("/wx_searchHistory/{pageNum}/{pageSize}")
+    @GetMapping("/searchHistory/{pageNum}/{pageSize}")
     public Object getSearchHistoryByUserId(@PathVariable(required = false) int pageNum,
                                @PathVariable(required = false) int pageSize,
                                @RequestParam("userId") int userId){
@@ -56,7 +56,7 @@ public class WxSearchController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", dataType = "Integer", value = "搜索历史表的用户id，必须", required = true)
     })
-    @DeleteMapping("/wx_searchHistory/{userId}")
+    @DeleteMapping("/searchHistory/{userId}")
     @ApiOperation("微信端:按用户id删除搜索历史表")
     public Object searchHistoryDelete(@PathVariable("userId") Integer userId){
         return searchHistoryService.searchHistoryDelete(userId);

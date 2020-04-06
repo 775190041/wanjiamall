@@ -24,4 +24,43 @@ public class AddressServiceImpl implements AddressService {
     public Object getAddressList(Integer pageNum, Integer pageSize, AddressEntity addressEntity) {
         return ResponseUtil.okList(addressDao.getAddressList(pageNum,pageSize,addressEntity));
     }
+
+    @Override
+    public Object getAddressByUserId(Integer pageNum, Integer pageSize,  Integer userId) {
+        List<AddressEntity> addressEntities = addressDao.getAddressByUserId(pageNum,pageSize,userId);
+        return ResponseUtil.okList(addressEntities);
+    }
+
+    @Override
+    public Object getAddressByIdAndUserId(Integer id, Integer userId) {
+        AddressEntity addressEntity = addressDao.getAddressByIdAndUserId(id, userId);
+        return ResponseUtil.ok(addressEntity);
+    }
+
+    @Override
+    public Object addressInsert(AddressEntity addressEntity) {
+        if (addressDao.addressInsert(addressEntity) > 0){
+            return ResponseUtil.ok();
+        }else {
+            return ResponseUtil.fail(505,"添加失败");
+        }
+    }
+
+    @Override
+    public Object addressUpdate(Integer id, Integer userId, AddressEntity addressEntity) {
+        if (addressDao.addressUpdate(id, userId, addressEntity) > 0){
+            return ResponseUtil.ok();
+        }else {
+            return ResponseUtil.fail(505,"修改失败");
+        }
+    }
+
+    @Override
+    public Object addressDelete(Integer id, Integer userId) {
+        if (addressDao.addressDelete(id, userId) > 0){
+            return ResponseUtil.ok();
+        }else {
+            return ResponseUtil.fail(505,"删除失败");
+        }
+    }
 }
