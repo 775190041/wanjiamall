@@ -32,6 +32,7 @@ public interface CouponUserDao {
     Integer getCouponUserGetByCouponId(@Param("userId") Integer userId,@Param("couponId")Integer couponId);
 
 
+
     /**
      * 根据用户Id查询用户优惠卷所有信息
      */
