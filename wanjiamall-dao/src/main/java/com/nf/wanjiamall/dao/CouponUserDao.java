@@ -24,12 +24,13 @@ public interface CouponUserDao {
                                               @Param("id") Integer id);
 
     /**
-     * 根据用户查询该用户领了什么优惠卷
+     * 根据用户,优惠卷ID查询该用户是否有这条优惠卷
      * @param userId
      * @param couponId
      * @return
      */
-    CouponUserEntity getCouponUserGet(@Param("userId") Integer userId,@Param("couponId")Integer couponId);
+    Integer getCouponUserGetByCouponId(@Param("userId") Integer userId,@Param("couponId")Integer couponId);
+
     List<CouponUserEntity> getCouponUserAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize, @Param("id") Integer id);
 
     /**
@@ -48,5 +49,5 @@ public interface CouponUserDao {
      * @param coupon_id
      * @return
      */
-    Integer insertCouponUser(@Param("coupon_id") Integer coupon_id);
+    Integer insertCouponUser(@Param("user_id") Integer user_id, @Param("coupon_id") Integer coupon_id);
 }

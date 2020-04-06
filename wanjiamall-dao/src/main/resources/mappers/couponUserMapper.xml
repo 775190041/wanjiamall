@@ -21,14 +21,11 @@
         <if test="couponUser.status == 3">
             and status = 3
         </if>
-        and id = #{id}
+        and id = #{id} order by add_time desc
     </select>
 
-    <select id="getCouponUserAll" resultType="com.nf.wanjiamall.entity.CouponUserEntity">
-        select * from wanjia_coupon_user where deleted = 0
-        and id = #{id}
-    </select>
 
+    <select id="getCouponUserGetByCouponId" resultType="Integer">
     <!--根据用户Id查询用户优惠卷所有信息-->
     <select id="getUserIdCouponUserAll"  resultType="com.nf.wanjiamall.entity.CouponUserEntity">
         select id, user_id, coupon_id, status, user_time, start_time, end_time, order_id, add_time, update_time, deleted from wanjia_coupon_user
@@ -46,10 +43,7 @@
         </if>
     </select>
 
-    <select id="getCouponUserGet" resultType="com.nf.wanjiamall.entity.CouponUserEntity">
-        select coupon_id from wanjia_coupon_user where deleted = 0
-            and user_id = #{userId}  and coupon_id = #{couponId}
-    </select>
+
 
     <insert id="insertCouponUser">
         insert into wanjia_coupon_user(user_id,coupon_id) values (#{username},#{coupon_id})
