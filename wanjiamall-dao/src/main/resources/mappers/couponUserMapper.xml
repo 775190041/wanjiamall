@@ -24,8 +24,8 @@
         and id = #{id} order by add_time desc
     </select>
 
-
-    <select id="getCouponUserGetByCouponId" resultType="Integer">-----
+-----
+    <select id="getCouponUserGetByCouponId" resultType="Integer">
     <!--根据用户Id查询用户优惠卷所有信息-->
     <select id="getUserIdCouponUserAll"  resultType="com.nf.wanjiamall.entity.CouponUserEntity">
         select id, user_id, coupon_id, status, user_time, start_time, end_time, order_id, add_time, update_time, deleted from wanjia_coupon_user
