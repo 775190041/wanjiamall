@@ -30,7 +30,7 @@ public class WxCartController {
 
     @ApiOperation("商品立即购买")
     @PostMapping("/cart/buyImmediately/{userId}")
-    public Object buyImmediately(@PathVariable("userId") Integer userId,@RequestBody CartEntity cartEntity){
+    public Object buyImmediately(@PathVariable("userId") Integer userId,CartEntity cartEntity){
         return wxCartService.buyImmediately(userId, cartEntity);
     }
 

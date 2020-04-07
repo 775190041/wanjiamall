@@ -253,7 +253,7 @@ public class WxCartServiceImpl implements WxCartService {
         }else {
             //存在就增加商品数量
             //取得规格的信息,判断规格库存
-            int num = existCart.getNumber() + number;
+            int num = number;
             if (num > product.getNumber()) {
                 return ResponseUtil.fail(711, "库存不足");
             }

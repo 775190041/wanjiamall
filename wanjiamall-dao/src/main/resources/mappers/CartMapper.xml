@@ -30,7 +30,7 @@
         from
             wanjia_cart c left join wanjia_user u
             on c.user_id = u.id
-        where delted = 0 and  c.user_id = #{userId}  and c.goods_sn = #{id}
+        where delted = 0 and  c.user_id = #{userId}  and c.id = #{id}
 
     </select>
 
