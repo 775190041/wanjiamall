@@ -12,4 +12,5 @@ public interface OrderService {
     Object getOrderDetail(Integer id);
 
     Object insertExpressMessage(Integer id,String shipChannel,String shipSn);
+
 }

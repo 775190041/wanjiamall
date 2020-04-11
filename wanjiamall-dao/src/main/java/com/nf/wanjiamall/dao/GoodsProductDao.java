@@ -38,5 +38,9 @@ public interface GoodsProductDao {
      */
     GoodsProductEntity  getProductByGoodsId(@Param("productId") Integer productId);
 
+    /**
+     * 修改货品数量
+     */
+    int updateNumber(@Param("id")Integer id , @Param("num") Integer num);
 
 }

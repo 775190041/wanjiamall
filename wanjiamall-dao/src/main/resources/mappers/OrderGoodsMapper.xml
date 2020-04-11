@@ -9,5 +9,91 @@
          from wanjia_order_goods where order_id = #{orderId}
     </select>
 
+    <!--订单商品添加-->
+    <insert id="insertOrderGoods">
+        insert into wanjia_order_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderGoodsEntity.orderId != null">
+                order_id,
+            </if>
+            <if test="orderGoodsEntity.goodsId != null">
+                goods_id,
+            </if>
+            <if test="orderGoodsEntity.goodsName != null">
+                goods_name,
+            </if>
+            <if test="orderGoodsEntity.goodsSn != null">
+                goods_sn,
+            </if>
+            <if test="orderGoodsEntity.productId != null">
+                product_id,
+            </if>
+            <if test="orderGoodsEntity.number != null">
+                `number`,
+            </if>
+            <if test="orderGoodsEntity.price != null">
+                price,
+            </if>
+            <if test="orderGoodsEntity.specifications != null">
+                specifications,
+            </if>
+            <if test="orderGoodsEntity.picUrl != null">
+                pic_url,
+            </if>
+            <if test="orderGoodsEntity.comment != null">
+                `comment`,
+            </if>
+            <if test="orderGoodsEntity.addTime != null">
+                add_time,
+            </if>
+            <if test="orderGoodsEntity.updateTime != null">
+                update_time,
+            </if>
+            <if test="orderGoodsEntity.deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderGoodsEntity.orderId != null">
+                #{orderGoodsEntity.orderId},
+            </if>
+            <if test="orderGoodsEntity.goodsId != null">
+                #{orderGoodsEntity.goodsId},
+            </if>
+            <if test="orderGoodsEntity.goodsName != null">
+                #{orderGoodsEntity.goodsName},
+            </if>
+            <if test="orderGoodsEntity.goodsSn != null">
+                #{orderGoodsEntity.goodsSn},
+            </if>
+            <if test="orderGoodsEntity.productId != null">
+                #{orderGoodsEntity.productId},
+            </if>
+            <if test="orderGoodsEntity.number != null">
+                #{orderGoodsEntity.number},
+            </if>
+            <if test="orderGoodsEntity.price != null">
+                #{orderGoodsEntity.price},
+            </if>
+            <if test="orderGoodsEntity.specifications != null">
+                #{orderGoodsEntity.specifications},
+            </if>
+            <if test="orderGoodsEntity.picUrl != null">
+                #{orderGoodsEntity.picUrl},
+            </if>
+            <if test="orderGoodsEntity.comment != null">
+                #{orderGoodsEntity.comment},
+            </if>
+            <if test="orderGoodsEntity.addTime != null">
+                #{orderGoodsEntity.addTime},
+            </if>
+            <if test="orderGoodsEntity.updateTime != null">
+                #{orderGoodsEntity.updateTime},
+            </if>
+            <if test="orderGoodsEntity.deleted != null">
+                #{orderGoodsEntity.deleted},
+            </if>
+        </trim>
+    </insert>
 
 </mapper>

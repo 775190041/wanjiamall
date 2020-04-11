@@ -1,7 +1,10 @@
 package com.nf.wanjiamall.service.impl.wx;
 import com.nf.wanjiamall.dao.*;
 import com.nf.wanjiamall.entity.*;
+import com.nf.wanjiamall.service.CouponService;
 import com.nf.wanjiamall.service.wx.WxCartService;
+import com.nf.wanjiamall.service.wx.WxCouponService;
+import com.nf.wanjiamall.utils.AftersaleConstant;
 import com.nf.wanjiamall.utils.JacksonUtil;
 import com.nf.wanjiamall.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +42,8 @@ public class WxCartServiceImpl implements WxCartService {
     private CouponUserDao couponUserDao;
     @Autowired(required = false)
     private SystemDao systemDao;
+    @Autowired(required = false)
+    private WxCouponService wxCouponService;
 
     /**
      * 根据用户Id查询购物车信息与计算选中商品的金额
@@ -464,7 +469,7 @@ public class WxCartServiceImpl implements WxCartService {
             //得到该用户的优惠券id
             tmpUserCouponId = couponUser.getId();
             //查看优惠券是否可用
-            availableCoupon = checkCoupon(userId, couponUser.getCouponId(), tmpUserCouponId);
+            availableCoupon = wxCouponService.checkCoupon(userId, couponUser.getCouponId(), tmpUserCouponId,checkedGoodsPrice);
             if(availableCoupon == null){
                 continue;
             }
@@ -501,7 +506,7 @@ public class WxCartServiceImpl implements WxCartService {
             userCouponId = tmpUserCouponId;
         }else {
             //测试优惠卷是否合适
-            optionalCoupon = checkCoupon(userId, couponId, userCouponId);
+            optionalCoupon = wxCouponService.checkCoupon(userId, couponId, userCouponId,checkedGoodsPrice);
             // 用户选择的优惠券有问题，则选择合适优惠券，否则使用用户选择的优惠券
             if(optionalCoupon == null){
                 couponPrice = tmpCouponPrice;
@@ -560,65 +565,6 @@ public class WxCartServiceImpl implements WxCartService {
         data.put("checkedGoodsList", checkedGoodsList);
 
         return ResponseUtil.ok(data);
-    }
-
-    /**
-     * 检测优惠券是否适合
-     * @param userId
-     * @param couponId
-     * @return
-     */
-    public CouponEntity checkCoupon(Integer userId, Integer couponId, Integer userCouponId) {
-        //查看优惠券是否存在
-        CouponEntity coupon = couponDao.getCouponById(couponId);
-        if (coupon == null) {
-            return null;
-        }
-        //查看用户优惠卷是否存在
-       CouponUserEntity couponUser = couponUserDao.getUserCouponIdOrUesrId(userCouponId,userId);
-        if (couponUser == null) {
-            return null;
-        }
-        //判断优惠券与用户优惠是否相同
-        if (!couponId.equals(couponUser.getCouponId())) {
-            return null;
-        }
-        // 检查是否超期
-        Integer timeType = coupon.getTimeType();
-        Integer days = coupon.getDays();
-        LocalDateTime date = LocalDateTime.now();
-        if (timeType.equals(1)) {
-            ZoneId zoneId = ZoneId.systemDefault();
-            ZonedDateTime zdt = date.atZone(zoneId);
-            Date dates = Date.from(zdt.toInstant());
-            if (dates.before(coupon.getStartTime()) && dates.after((coupon.getAddTime()))) {
-                return coupon;
-            }
-        }
-        //有效时限制是0
-        else if(timeType.equals(0)) {
-            //把基于时间的有效天数加到时间中
-            LocalDateTime now = couponUser.getAddTime().toLocalDateTime().plusDays(days);
-            System.out.println("now = " + now);
-            if (date.isBefore(now)) {
-                return coupon;
-            }
-        }
-        else {
-            return null;
-        }
-
-        // 检测商品是否符合
-        Integer goodType = coupon.getGoodsType();
-        if (!goodType.equals(0)){
-            return null;
-        }
-        // 检测订单状态
-        Integer status = coupon.getStatus();
-        if (!status.equals(0)) {
-            return null;
-        }
-        return coupon;
     }
 }
 

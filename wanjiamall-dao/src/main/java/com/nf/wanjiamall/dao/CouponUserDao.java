@@ -50,4 +50,11 @@ public interface CouponUserDao {
      * @return
      */
     Integer insertCouponUser(@Param("user_id") Integer user_id, @Param("coupon_id") Integer coupon_id);
+
+    /**
+     * 可选参数修改
+     */
+    Integer optionalChange(@Param("couponUser") CouponUserEntity couponUser);
+
+
 }

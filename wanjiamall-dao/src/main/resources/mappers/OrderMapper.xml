@@ -57,4 +57,186 @@
         update wanjia_order set order_status = 301 where id = #{id}
     </update>
 
+    <!--wx 订单号查询订单Id-->
+    <select id="numberQueryOrderId" resultType="com.nf.wanjiamall.entity.OrderEntity">
+        select id from wanjia_order where  deleted = 0 and order_sn = #{orderSn}
+    </select>
+
+    <!-- wx 订单添加 -->
+    <insert id="insertOrders">
+        insert into wanjia_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderEntity.userId != null">
+                user_id,
+            </if>
+            <if test="orderEntity.orderSn != null">
+                order_sn,
+            </if>
+            <if test="orderEntity.orderStatus != null">
+                order_status,
+            </if>
+            <if test="orderEntity.aftersaleStatus != null">
+                aftersale_status,
+            </if>
+            <if test="orderEntity.consignee != null">
+                consignee,
+            </if>
+            <if test="orderEntity.mobile != null">
+                mobile,
+            </if>
+            <if test="orderEntity.address != null">
+                address,
+            </if>
+            <if test="orderEntity.message != null">
+                message,
+            </if>
+            <if test="orderEntity.goodsPrice != null">
+                goods_price,
+            </if>
+            <if test="orderEntity.freightPrice != null">
+                freight_price,
+            </if>
+            <if test="orderEntity.couponPrice != null">
+                coupon_price,
+            </if>
+            <if test="orderEntity.orderPrice != null">
+                order_price,
+            </if>
+            <if test="orderEntity.actualPrice != null">
+                actual_price,
+            </if>
+            <if test="orderEntity.payId != null">
+                pay_id,
+            </if>
+            <if test="orderEntity.payTime != null">
+                pay_time,
+            </if>
+            <if test="orderEntity.shipSn != null">
+                ship_sn,
+            </if>
+            <if test="orderEntity.shipChannel != null">
+                ship_channel,
+            </if>
+            <if test="orderEntity.shipTime != null">
+                ship_time,
+            </if>
+            <if test="orderEntity.refundAmount != null">
+                refund_amount,
+            </if>
+            <if test="orderEntity.refundType != null">
+                refund_type,
+            </if>
+            <if test="orderEntity.refundContent != null">
+                refund_content,
+            </if>
+            <if test="orderEntity.refundTime != null">
+                refund_time,
+            </if>
+            <if test="orderEntity.confirmTime != null">
+                confirm_time,
+            </if>
+            <if test="orderEntity.comments != null">
+                comments,
+            </if>
+            <if test="orderEntity.endTime != null">
+                end_time,
+            </if>
+            <if test="orderEntity.addTime != null">
+                add_time,
+            </if>
+            <if test="orderEntity.updateTime != null">
+                update_time,
+            </if>
+            <if test="orderEntity.deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderEntity.userId != null">
+                #{orderEntity.userId},
+            </if>
+            <if test="orderEntity.orderSn != null">
+                #{orderEntity.orderSn},
+            </if>
+            <if test="orderEntity.orderStatus != null">
+                #{orderEntity.orderStatus},
+            </if>
+            <if test="orderEntity.aftersaleStatus != null">
+                #{orderEntity.aftersaleStatus},
+            </if>
+            <if test="orderEntity.consignee != null">
+                #{orderEntity.consignee},
+            </if>
+            <if test="orderEntity.mobile != null">
+                #{orderEntity.mobile},
+            </if>
+            <if test="orderEntity.address != null">
+                #{orderEntity.address},
+            </if>
+            <if test="orderEntity.message != null">
+                #{orderEntity.message},
+            </if>
+            <if test="orderEntity.goodsPrice != null">
+                #{orderEntity.goodsPrice},
+            </if>
+            <if test="orderEntity.freightPrice != null">
+                #{orderEntity.freightPrice},
+            </if>
+            <if test="orderEntity.couponPrice != null">
+                coupon_price,
+            </if>
+            <if test="orderEntity.orderPrice != null">
+                #{orderEntity.orderPrice},
+            </if>
+            <if test="orderEntity.actualPrice != null">
+                #{orderEntity.actualPrice},
+            </if>
+            <if test="orderEntity.payId != null">
+                #{orderEntity.payId},
+            </if>
+            <if test="orderEntity.payTime != null">
+                #{orderEntity.payTime},
+            </if>
+            <if test="orderEntity.shipSn != null">
+                #{orderEntity.shipSn},
+            </if>
+            <if test="orderEntity.shipChannel != null">
+                #{orderEntity.shipChannel},
+            </if>
+            <if test="orderEntity.shipTime != null">
+                #{orderEntity.shipTime},
+            </if>
+            <if test="orderEntity.refundAmount != null">
+                #{orderEntity.refundAmount},
+            </if>
+            <if test="orderEntity.refundType != null">
+                #{orderEntity.refundType},
+            </if>
+            <if test="orderEntity.refundContent != null">
+                #{orderEntity.refundContent},
+            </if>
+            <if test="orderEntity.refundTime != null">
+                #{orderEntity.refundTime},
+            </if>
+            <if test="orderEntity.confirmTime != null">
+                #{orderEntity.confirmTime},
+            </if>
+            <if test="orderEntity.comments != null">
+                #{orderEntity.comments},
+            </if>
+            <if test="orderEntity.endTime != null">
+                #{orderEntity.endTime},
+            </if>
+            <if test="orderEntity.addTime != null">
+                #{orderEntity.addTime},
+            </if>
+            <if test="orderEntity.updateTime != null">
+                #{orderEntity.updateTime},
+            </if>
+            <if test="orderEntity.deleted != null">
+                #{orderEntity.deleted},
+            </if>
+        </trim>
+    </insert>
+
 </mapper>

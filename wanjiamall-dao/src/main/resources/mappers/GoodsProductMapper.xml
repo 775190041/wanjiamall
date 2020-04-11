@@ -67,4 +67,10 @@
         select id, goods_id, specifications, price, number, url, add_time, update_time, delted from wanjia_goods_product
         where delted = 0 and id = #{productId}
     </select>
+
+    <update id="updateNumber">
+        update wanjia_goods_product
+            set number = number - #{num}, update_time = default
+        where id = #{id} and number >= #{num}
+    </update>
 </mapper>

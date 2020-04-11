@@ -45,9 +45,44 @@
         </if>
     </select>
 
-
-
     <insert id="insertCouponUser">
         insert into wanjia_coupon_user(user_id,coupon_id) values (#{username},#{coupon_id})
     </insert>
+
+    <update id="optionalChange">
+        update wanjia_coupon_user
+        <set>
+            <if test="couponUser.userId != null">
+                user_id = #{couponUser.userId},
+            </if>
+            <if test="couponUser.couponId != null">
+                coupon_id = #{couponUser.couponId},
+            </if>
+            <if test="couponUser.status != null">
+                `status` = #{couponUser.status},
+            </if>
+            <if test="couponUser.usedTime != null">
+                used_time = #{couponUser.usedTime},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="couponUser.endTime != null">
+                end_time = #{couponUser.endTime},
+            </if>
+            <if test="couponUser.orderId != null">
+                order_id = #{couponUser.orderId},
+            </if>
+            <if test="couponUser.addTime != null">
+                add_time = #{couponUser.addTime},
+            </if>
+            <if test="couponUser.updateTime != null">
+                update_time = #{couponUser.updateTime},
+            </if>
+            <if test="couponUser.deleted != null">
+                deleted = #{couponUser.deleted},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

@@ -29,4 +29,5 @@ public interface CouponDao {
 
 
     Integer deletedCouponId(@Param("id") Integer id);
+
 }

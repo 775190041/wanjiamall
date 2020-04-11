@@ -177,7 +177,7 @@
     <!--根据用户Id删除-->
     <delete id="deleteById">
       update wanjia_cart set
-        delted = 1
+        delted = 1 , update_time = default
         where delted = 0 and id = #{id}
     </delete>
 
@@ -185,7 +185,7 @@
     <update id="updateCheck">
         update wanjia_cart set
         <if test="checked != null ">
-            checked = #{checked}
+            checked = #{checked} , update_time = default
         </if>
         where delted = 0 and id in
         <foreach collection="cartIds" item="item" index="index" open="(" close=")" separator=",">
@@ -195,7 +195,8 @@
 
     <update id="delete">
         update wanjia_cart set
-        delted = 1  where delted = 0 and user_id = #{userId} and id in
+            delted = 1 ,update_time =default
+        where delted = 0 and user_id = #{userId} and id in
         <foreach collection="cartIds" item="item" index="index" open="(" close=")" separator=",">
             #{item}
         </foreach>

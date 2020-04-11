@@ -2,8 +2,8 @@ package com.nf.wanjiamall.entity;
 
 import lombok.Data;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * @author lrc
