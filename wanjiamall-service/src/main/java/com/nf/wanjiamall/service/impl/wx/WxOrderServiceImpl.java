@@ -69,6 +69,9 @@ public class WxOrderServiceImpl  implements WxOrdersService {
             return ResponseUtil.badArgument();
         }
         Integer cartId = JacksonUtil.parseInteger(body, "cartId");
+        if (cartId == null ){
+            cartId = 0;
+        }
         Integer addressId = JacksonUtil.parseInteger(body, "addressId");
         Integer couponId = JacksonUtil.parseInteger(body, "couponId");
         Integer userCouponId = JacksonUtil.parseInteger(body, "userCouponId");

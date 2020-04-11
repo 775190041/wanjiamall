@@ -19,7 +19,5 @@ public class WxOrderController {
     @PostMapping("/order/submit/{userId}")
     public Object submit(@PathVariable("userId") Integer userId,@RequestBody String body){
         return wxOrderService.orderSubmit(userId, body);
-
-
     }
 }
