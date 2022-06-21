@@ -28,7 +28,7 @@
     <properties>
         <validator.version>6.1.0.Final</validator.version>
         <druid.version>1.1.17</druid.version>
-        <mysql-connector.version>5.1.47</mysql-connector.version>
+        <mysql-connector.version>8.0.28</mysql-connector.version>
         <mybatis-spring>2.1.1</mybatis-spring>
         <pagehelper.version>1.2.3</pagehelper.version>
         <swagger2.version>2.9.2</swagger2.version>
